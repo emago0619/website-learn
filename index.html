@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社内スタッフ向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>社内スタッフ向け Webサイト構築ガイド</h1>
+            <p>ChatGPT、Cursor、GitHubを使った計画重視型の開発ワークフロー</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html" class="active">ホーム</a></li>
+                <li><a href="pages/setup.html">準備編</a></li>
+                <li><a href="pages/basics.html">基礎知識編</a></li>
+                <li><a href="pages/practice.html">実践編</a></li>
+                <li><a href="pages/faq.html">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>このガイドについて</h2>
+                <p>
+                    このガイドは、社内スタッフがAIツールを活用して、効率的かつ安全にWebサイトの構築・修正ができるようになることを目指しています。
+                </p>
+                <p>
+                    <strong>「いきなりコードを書かない」</strong>というのが、私たちの基本方針です。
+                    まず<strong>ChatGPT</strong>で要件を整理し、<strong>Cursorのプランモード</strong>で実装計画を立ててから、実装に入ります。
+                    この流れを習得することで、ミスを減らし、品質の高い成果物を作れるようになります。
+                </p>
+            </section>
+
+            <section>
+                <h2>💭 なぜ「計画重視型」なのか？</h2>
+                <div class="card">
+                    <p><strong>Q：「計画を立てるより、直接コードを書いた方が早くない？」</strong></p>
+                    <p>
+                        A：確かに、小さな修正ならそうかもしれません。しかし、以下のような問題が起こりがちです：
+                    </p>
+                    <ul>
+                        <li>「あれ、何を修正すればいいんだっけ？」と迷う</li>
+                        <li>修正箇所を見落として、後で不具合が発覚</li>
+                        <li>他の人が見たときに「なぜこうしたのか」が分からない</li>
+                        <li>途中で別の案が出てきて、また最初からやり直し</li>
+                    </ul>
+                    <p>
+                        <strong>計画を立ててから実装すると：</strong>
+                    </p>
+                    <ul>
+                        <li>✅ 何をすべきか明確になる</li>
+                        <li>✅ 見落としを防げる</li>
+                        <li>✅ チームでレビューしやすい</li>
+                        <li>✅ 後から振り返りやすい</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>対象読者</h2>
+                <p>このガイドは、以下のような社内スタッフを対象としています：</p>
+                <ul>
+                    <li>プログラミング経験が少ないが、Webサイトの作成・修正を担当する方</li>
+                    <li>AIツール（ChatGPT、Cursor）を業務で活用したい方</li>
+                    <li>既存のWebサイトを安全に修正したい方</li>
+                    <li>チームで開発する際の標準的なワークフローを学びたい方</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>前提知識：</strong> パソコンの基本操作（ファイル作成、フォルダ操作など）ができれば大丈夫です。
+                    プログラミングの知識は不要です。
+                </div>
+            </section>
+
+            <section>
+                <h2>このガイドで学べること</h2>
+                <div class="card">
+                    <h3>1. 準備編</h3>
+                    <p>開発に必要なツールの準備方法を学びます。</p>
+                    <ul>
+                        <li>GitHubアカウントの作成</li>
+                        <li>Cursorのインストールと設定</li>
+                        <li>ChatGPTの活用準備（オプション）</li>
+                        <li>各ツールの初期設定</li>
+                    </ul>
+                    <a href="pages/setup.html" class="btn">準備編を読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>2. 基礎知識編</h3>
+                    <p>各ツールと技術の基本的な概念を理解します。</p>
+                    <ul>
+                        <li>GitとGitHubの基礎</li>
+                        <li>Cursorの特徴とAI機能</li>
+                        <li>静的サイト vs 動的サイト</li>
+                        <li>Next.js、React、Supabaseなどモダンな技術</li>
+                        <li>基本的な用語集</li>
+                    </ul>
+                    <a href="pages/basics.html" class="btn">基礎知識編を読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>3. 実践編（最重要）</h3>
+                    <p><strong>計画重視型</strong>のワークフローを実践します。</p>
+                    <ul>
+                        <li><strong>ステップ1：</strong> ChatGPTで要件を整理</li>
+                        <li><strong>ステップ2：</strong> Cursorプランモードで実装計画</li>
+                        <li><strong>ステップ3：</strong> プランに基づいて実装</li>
+                        <li>Cursorの内蔵ブラウザで効率的に修正</li>
+                        <li>様々なデプロイ方法</li>
+                    </ul>
+                    <a href="pages/practice.html" class="btn">実践編を読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>4. FAQ</h3>
+                    <p>よくある質問とトラブルシューティングをまとめています。</p>
+                    <ul>
+                        <li>プランモード関連のFAQ</li>
+                        <li>ChatGPT活用のコツ</li>
+                        <li>エラーメッセージの対処法</li>
+                        <li>参考リンク集</li>
+                    </ul>
+                    <a href="pages/faq.html" class="btn">FAQを読む</a>
+                </div>
+            </section>
+
+            <section>
+                <h2>推奨される開発フロー</h2>
+                <ol class="steps">
+                    <li>
+                        <strong>要件を整理する（ChatGPT活用）</strong><br>
+                        「何を作るのか」「何を修正するのか」をChatGPTと対話しながら明確にします。
+                        漠然としたアイデアを、具体的な要件に落とし込みます。
+                    </li>
+                    <li>
+                        <strong>実装計画を立てる（Cursorプランモード）</strong><br>
+                        Cursorのプランモードで、「どのファイルを」「どう修正するか」の計画を立てます。
+                        AIが提案する計画をレビューし、必要に応じて調整します。
+                    </li>
+                    <li>
+                        <strong>プランを確認・承認する</strong><br>
+                        計画が妥当か確認します。必要に応じてチームメンバーにレビューを依頼します。
+                    </li>
+                    <li>
+                        <strong>実装する</strong><br>
+                        承認された計画に基づいて、実装を進めます。
+                        Cursorの内蔵ブラウザで随時確認しながら作業します。
+                    </li>
+                    <li>
+                        <strong>テスト・デプロイ</strong><br>
+                        動作を確認してから、本番環境にデプロイします。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>ポイント：</strong> 「いきなり実装」ではなく、「要件定義 → プラン → 実装」の流れを守ることで、
+                    ミスを減らし、品質の高い成果物を作れます。
+                </div>
+            </section>
+
+            <section>
+                <h2>💭 実際の作業イメージ</h2>
+                <div class="card">
+                    <p><strong>Q：「具体的にどんな感じで進めるの？」</strong></p>
+                    <p>A：例えば、「トップページに新しいセクションを追加したい」という場合：</p>
+                    <ol>
+                        <li>
+                            <strong>ChatGPTで要件整理：</strong><br>
+                            「トップページに『お客様の声』セクションを追加したい。3件の声を表示して、画像付きにしたい」
+                            → ChatGPTが具体的な要件を整理してくれます
+                        </li>
+                        <li>
+                            <strong>Cursorプランモード：</strong><br>
+                            要件をCursorに貼り付けて、プランモードで計画を立ててもらいます
+                            → 「index.htmlにセクション追加、styles.cssにスタイル追加、images/フォルダに画像配置」といった計画が出てきます
+                        </li>
+                        <li>
+                            <strong>計画をレビュー：</strong><br>
+                            「この計画で良さそう」と判断したら、実装開始
+                        </li>
+                        <li>
+                            <strong>実装：</strong><br>
+                            プランに従って、Cursorが自動でコードを生成・修正してくれます
+                        </li>
+                        <li>
+                            <strong>確認：</strong><br>
+                            内蔵ブラウザで表示を確認して、完成！
+                        </li>
+                    </ol>
+                    <p>
+                        このように、<strong>「何をするか明確」→「計画あり」→「迷わず実装」</strong>という流れで進められます。
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>必要な環境</h2>
+                <ul>
+                    <li>パソコン（Windows、Mac、Linuxのいずれか）</li>
+                    <li>インターネット接続</li>
+                    <li>GitHubアカウント</li>
+                    <li>Cursorエディタ</li>
+                    <li>ChatGPT（無料版でもOK、Plus推奨）</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>補足：</strong> Cursorの有料プラン（Pro）があると、より高度なAI機能が使えて便利ですが、
+                    まずは無料版で十分学べます。
+                </div>
+            </section>
+
+            <section>
+                <h2>次のステップ</h2>
+                <p>
+                    準備ができたら、<a href="pages/setup.html">準備編</a>から始めましょう。
+                    各ページは順番に読み進めることをおすすめしますが、必要に応じて特定のセクションだけを読むこともできます。
+                </p>
+                <a href="pages/setup.html" class="btn">準備編を始める →</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 社内スタッフ向け Webサイト構築ガイド. 社内教育用資料として作成されています。</p>
+        </div>
+    </footer>
+</body>
+</html>
+

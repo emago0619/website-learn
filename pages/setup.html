@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>準備編 - 非エンジニア向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>準備編：必要なツールの準備</h1>
+            <p>Webサイト作成に必要なツールをインストールして、環境を整えましょう</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="setup.html" class="active">準備編</a></li>
+                <li><a href="basics.html">基礎知識編</a></li>
+                <li><a href="practice.html">実践編</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>このページで学ぶこと</h2>
+                <p>
+                    このページでは、Webサイトを作成・修正するために必要な3つのツールを準備します。
+                    それぞれのツールの役割と、インストール方法を順番に説明します。
+                </p>
+                <ul>
+                    <li><strong>GitHub</strong>：コードを保存・共有するためのサービス</li>
+                    <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
+                    <li><strong>CodexCLI</strong>：コマンドラインで操作するためのツール</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>1. GitHubアカウントの作成</h2>
+                <p>
+                    GitHubは、コードを保存・管理するためのサービスです。
+                    無料でアカウントを作成でき、Webサイトのファイルを保存したり、変更履歴を管理したりできます。
+                </p>
+
+                <h3>手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>GitHubの公式サイトにアクセス</strong><br>
+                        ブラウザで <a href="https://github.com" target="_blank">https://github.com</a> を開きます。
+                    </li>
+                    <li>
+                        <strong>アカウント作成</strong><br>
+                        「Sign up」ボタンをクリックし、以下の情報を入力します：
+                        <ul>
+                            <li>ユーザー名（英数字とハイフンのみ）</li>
+                            <li>メールアドレス</li>
+                            <li>パスワード（8文字以上、英数字と記号を含む）</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>メール認証</strong><br>
+                        登録したメールアドレスに認証メールが届きます。
+                        メール内のリンクをクリックして認証を完了させましょう。
+                    </li>
+                    <li>
+                        <strong>初期設定</strong><br>
+                        初回ログイン時、いくつかの質問に答えますが、後で変更できるので、まずは「Skip」でスキップしても問題ありません。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>完了！</strong> GitHubアカウントの作成が完了しました。
+                    次はCursorのインストールに進みましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>2. Cursorのインストール</h2>
+                <p>
+                    Cursorは、AI機能が搭載されたコードエディタです。
+                    通常のエディタと違い、AIのサポートを受けながらコードを書くことができます。
+                    非エンジニアの方でも、AIの助けを借りて簡単にWebサイトを作成・修正できます。
+                </p>
+
+                <h3>手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cursorの公式サイトにアクセス</strong><br>
+                        ブラウザで <a href="https://cursor.sh" target="_blank">https://cursor.sh</a> を開きます。
+                    </li>
+                    <li>
+                        <strong>ダウンロード</strong><br>
+                        「Download」ボタンをクリックし、お使いのOS（Windows、Mac、Linux）に合わせてダウンロードします。
+                    </li>
+                    <li>
+                        <strong>インストール</strong><br>
+                        ダウンロードしたファイルを実行し、インストールウィザードに従ってインストールします。
+                        <ul>
+                            <li><strong>Windows：</strong> ダウンロードした.exeファイルをダブルクリック</li>
+                            <li><strong>Mac：</strong> ダウンロードした.dmgファイルを開き、アプリケーションフォルダにドラッグ</li>
+                            <li><strong>Linux：</strong> ダウンロードしたファイルを解凍し、適切な場所に配置</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>初回起動</strong><br>
+                        Cursorを起動すると、初期設定画面が表示されます。
+                        必要に応じて設定を変更できますが、デフォルトのままで問題ありません。
+                    </li>
+                    <li>
+                        <strong>GitHubアカウントとの連携（推奨）</strong><br>
+                        Cursorの設定から、GitHubアカウントと連携すると、より便利に使えます。
+                        設定 > Accounts > GitHub から連携できます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>ヒント：</strong> Cursorは無料で使用できますが、高度なAI機能を使う場合は有料プランが必要な場合があります。
+                    基本的な機能は無料で使えるので、まずは無料版で試してみましょう。
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>完了！</strong> Cursorのインストールが完了しました。
+                    次はCodexCLIのインストールに進みましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>3. CodexCLIのインストール</h2>
+                <p>
+                    CodexCLIは、コマンドライン（ターミナル）からGitHubやGitの操作を行うためのツールです。
+                    初心者の方には少し難しいかもしれませんが、このガイドに従えば問題なく使えるようになります。
+                </p>
+
+                <h3>CodexCLIとは</h3>
+                <p>
+                    CodexCLIは、GitHubの操作を簡単にするためのコマンドラインツールです。
+                    ファイルのアップロード、変更の保存、Webサイトの公開など、多くの操作をコマンドで実行できます。
+                </p>
+
+                <h3>手順（Mac / Linuxの場合）</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ターミナルを開く</strong><br>
+                        Macの場合は「ターミナル」アプリ、Linuxの場合は「Terminal」を開きます。
+                    </li>
+                    <li>
+                        <strong>CodexCLIをインストール</strong><br>
+                        ターミナルに以下のコマンドを入力してEnterキーを押します：
+                        <pre><code>curl -fsSL https://codexcli.com/install.sh | sh</code></pre>
+                    </li>
+                    <li>
+                        <strong>インストール確認</strong><br>
+                        以下のコマンドでインストールが成功したか確認します：
+                        <pre><code>codex --version</code></pre>
+                        バージョン番号が表示されれば成功です。
+                    </li>
+                    <li>
+                        <strong>GitHubアカウントとの連携</strong><br>
+                        以下のコマンドでGitHubアカウントと連携します：
+                        <pre><code>codex auth login</code></pre>
+                        ブラウザが開くので、GitHubアカウントでログインして認証を完了させます。
+                    </li>
+                </ol>
+
+                <h3>手順（Windowsの場合）</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>PowerShellを開く</strong><br>
+                        Windowsキーを押して「PowerShell」と入力し、PowerShellを開きます。
+                    </li>
+                    <li>
+                        <strong>CodexCLIをインストール</strong><br>
+                        PowerShellに以下のコマンドを入力してEnterキーを押します：
+                        <pre><code>iwr -useb https://codexcli.com/install.ps1 | iex</code></pre>
+                    </li>
+                    <li>
+                        <strong>インストール確認</strong><br>
+                        以下のコマンドでインストールが成功したか確認します：
+                        <pre><code>codex --version</code></pre>
+                        バージョン番号が表示されれば成功です。
+                    </li>
+                    <li>
+                        <strong>GitHubアカウントとの連携</strong><br>
+                        以下のコマンドでGitHubアカウントと連携します：
+                        <pre><code>codex auth login</code></pre>
+                        ブラウザが開くので、GitHubアカウントでログインして認証を完了させます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-warning">
+                    <strong>注意：</strong> CodexCLIのインストールでエラーが出る場合は、
+                    <a href="faq.html">FAQページ</a>のトラブルシューティングセクションを確認してください。
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>完了！</strong> CodexCLIのインストールが完了しました。
+                    これで準備は完了です。次は基礎知識編に進みましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>4. インストール確認</h2>
+                <p>
+                    すべてのツールが正しくインストールされているか確認しましょう。
+                </p>
+
+                <h3>確認チェックリスト</h3>
+                <ul>
+                    <li>□ GitHubアカウントにログインできる</li>
+                    <li>□ Cursorが起動できる</li>
+                    <li>□ CodexCLIがインストールされている（<code>codex --version</code>で確認）</li>
+                    <li>□ CodexCLIとGitHubが連携されている（<code>codex auth status</code>で確認）</li>
+                </ul>
+
+                <div class="alert alert-info">
+                    <strong>次のステップ：</strong> すべてのチェックが完了したら、
+                    <a href="basics.html">基礎知識編</a>に進んで、各ツールの基本的な使い方を学びましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>まとめ</h2>
+                <p>
+                    このページでは、以下の3つのツールを準備しました：
+                </p>
+                <ol>
+                    <li><strong>GitHub</strong>：コードを保存・管理するサービス</li>
+                    <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
+                    <li><strong>CodexCLI</strong>：コマンドライン操作ツール</li>
+                </ol>
+                <p>
+                    準備が整ったら、次は<a href="basics.html">基礎知識編</a>で各ツールの基本的な概念と使い方を学びましょう。
+                </p>
+                <a href="basics.html" class="btn">基礎知識編へ進む →</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 社内スタッフ向け Webサイト構築ガイド. 社内教育用資料として作成されています。</p>
+        </div>
+    </footer>
+</body>
+</html>
+

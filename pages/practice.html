@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>実践編 - 非エンジニア向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>実践編：実際にWebサイトを作成してみよう</h1>
+            <p>ステップバイステップで、実際にWebサイトを作成・修正する方法を学びます</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="setup.html">準備編</a></li>
+                <li><a href="basics.html">基礎知識編</a></li>
+                <li><a href="practice.html" class="active">実践編</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>このページで学ぶこと</h2>
+                <p>
+                    このページでは、<strong>計画重視型の開発ワークフロー</strong>を実践します。
+                    「いきなりコードを書く」のではなく、「要件を整理 → 計画を立てる → 実装する」という流れで進めます。
+                </p>
+                <div class="alert alert-success">
+                    <strong>重要：</strong> 社内では、<strong>必ず要件定義とプラン作成を行ってから実装</strong>してください。
+                    この流れを守ることで、ミスを減らし、品質の高い成果物を作れます。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート0：開発フロー全体像</h2>
+                
+                <p>
+                    まず、社内で推奨している開発フローの全体像を理解しましょう。
+                </p>
+
+                <h3>推奨される開発フロー</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ChatGPTで要件を整理</strong><br>
+                        漠然としたアイデアを、具体的な要件に落とし込みます
+                    </li>
+                    <li>
+                        <strong>Cursorプランモードで実装計画を立てる</strong><br>
+                        どのファイルをどう修正するかの計画をAIに提案してもらいます
+                    </li>
+                    <li>
+                        <strong>計画をレビュー・承認</strong><br>
+                        提案された計画が妥当か確認し、必要に応じて調整します
+                    </li>
+                    <li>
+                        <strong>実装</strong><br>
+                        承認された計画に基づいて実装を進めます
+                    </li>
+                    <li>
+                        <strong>テスト・デプロイ</strong><br>
+                        動作を確認してから本番環境にデプロイします
+                    </li>
+                </ol>
+
+                <h3>💭 なぜこの流れが重要なのか</h3>
+                <div class="card">
+                    <p><strong>Q：「面倒くさそう…直接コード書いちゃダメ？」</strong></p>
+                    <p>A：小さな修正なら問題ありませんが、以下のような問題が起きがちです：</p>
+                    <ul>
+                        <li>修正箇所を見落として、後で不具合が発覚</li>
+                        <li>「あれ、何を修正しようとしてたんだっけ？」と迷走</li>
+                        <li>影響範囲が把握できず、予期せぬバグを生む</li>
+                        <li>他の人が見たときに「なぜこうしたのか」が分からない</li>
+                    </ul>
+                    <p>
+                        <strong>計画を立てることで：</strong>
+                    </p>
+                    <ul>
+                        <li>✅ やるべきことが明確になる</li>
+                        <li>✅ 見落としを防げる</li>
+                        <li>✅ チームでレビューできる</li>
+                        <li>✅ トラブルが起きても振り返りやすい</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>パート1：ChatGPTで要件を整理する</h2>
+                
+                <p>
+                    実装を始める前に、まずChatGPTを使って「何を作るのか」「何を修正するのか」を明確にします。
+                </p>
+
+                <h3>ChatGPTでの要件整理の流れ</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>漠然としたアイデアを伝える</strong><br>
+                        「トップページに新しいセクションを追加したい」などと伝えます
+                    </li>
+                    <li>
+                        <strong>ChatGPTが質問してくる</strong><br>
+                        「どんな内容を表示しますか？」「デザインのイメージは？」など
+                    </li>
+                    <li>
+                        <strong>対話しながら具体化</strong><br>
+                        質問に答えながら、要件を具体的にしていきます
+                    </li>
+                    <li>
+                        <strong>要件定義書を生成</strong><br>
+                        ChatGPTに「要件定義書を作成して」と依頼します
+                    </li>
+                </ol>
+
+                <h3>実例：お客様の声セクションを追加する場合</h3>
+                <div class="card">
+                    <h4>あなた：</h4>
+                    <p>
+                        「Webサイトのトップページに、お客様の声を表示するセクションを追加したいです。
+                        どういう情報が必要か整理してもらえますか？」
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>ChatGPT：</h4>
+                    <p>
+                        承知しました。お客様の声セクションを追加するにあたり、以下の点を確認させてください：
+                    </p>
+                    <ol>
+                        <li>表示する声の件数は何件ですか？</li>
+                        <li>各声にはどのような情報を含めますか？（名前、会社名、顔写真、コメントなど）</li>
+                        <li>レイアウトはどのような形式が良いですか？（横並び、縦並び、スライダーなど）</li>
+                        <li>既存のデザインと統一感を持たせたいですか？</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>あなた：</h4>
+                    <p>
+                        1. 3件表示したいです<br>
+                        2. 顔写真、名前、会社名、コメントを表示<br>
+                        3. 横並び（3カラム）で<br>
+                        4. はい、既存のデザインに合わせたいです
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>ChatGPT：</h4>
+                    <p>
+                        ありがとうございます。以下のように要件をまとめました：
+                    </p>
+                    <h5>要件定義</h5>
+                    <ul>
+                        <li><strong>機能：</strong>お客様の声セクション</li>
+                        <li><strong>表示件数：</strong>3件</li>
+                        <li><strong>レイアウト：</strong>3カラム（横並び）</li>
+                        <li><strong>表示項目：</strong>
+                            <ul>
+                                <li>顔写真（円形、150×150px）</li>
+                                <li>お客様の名前</li>
+                                <li>会社名</li>
+                                <li>コメント（200文字程度）</li>
+                            </ul>
+                        </li>
+                        <li><strong>デザイン：</strong>既存サイトのスタイルに統一</li>
+                        <li><strong>必要なファイル：</strong>
+                            <ul>
+                                <li>index.html（セクション追加）</li>
+                                <li>styles.css（スタイル定義）</li>
+                                <li>顔写真3枚（images/フォルダ）</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>💭 ChatGPTでの要件整理のコツ</h3>
+                <div class="card">
+                    <p><strong>Q：「どこまで詳しく伝えればいいの？」</strong></p>
+                    <p>A：最初は漠然としていて大丈夫です！ChatGPTが質問してくれるので、対話しながら具体化していきましょう。</p>
+                    <p><strong>良い例：</strong></p>
+                    <ul>
+                        <li>「トップページに新しいセクションを追加したい」</li>
+                        <li>「問い合わせフォームを作りたい」</li>
+                        <li>「既存のボタンのデザインを変更したい」</li>
+                    </ul>
+                    <p>ChatGPTが「何件表示しますか？」「どんなデザインが良いですか？」と聞いてくれるので、それに答えていけばOKです。</p>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>プロのTips：</strong> 要件が固まったら、ChatGPTに「この要件をMarkdown形式で保存用にまとめて」と依頼すると、
+                    次のステップ（CodexCLIまたはCursorプランモード）がさらにスムーズになります。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート2：CodexCLIで初期構築（クレジット節約術）</h2>
+                
+                <p>
+                    ChatGPTで要件をまとめたら、次の選択肢が2つあります：
+                </p>
+                <ol>
+                    <li><strong>CodexCLIで初期構築</strong>（クレジット節約・推奨）</li>
+                    <li><strong>Cursorプランモードで実装</strong>（次のパートで説明）</li>
+                </ol>
+                <p>
+                    ここでは、<strong>Cursorのクレジットを節約する方法</strong>として、CodexCLIで初期構築する手法を紹介します。
+                </p>
+
+                <h3>💭 なぜCodexCLIで初期構築するのか？</h3>
+                <div class="card">
+                    <p><strong>Q：「全部Cursorでやればいいのでは？」</strong></p>
+                    <p>A：Cursorは強力ですが、以下の理由でクレジットを多く消費します：</p>
+                    <ul>
+                        <li>大量のコード生成にクレジットを使う</li>
+                        <li>プランモードも有料機能</li>
+                        <li>細かい修正のたびにクレジットが減る</li>
+                    </ul>
+                    <p><strong>CodexCLIを使うメリット：</strong></p>
+                    <ul>
+                        <li>✅ 初期構築は無料（またはCursorより安価）</li>
+                        <li>✅ 要件定義ファイルを参照させるだけ</li>
+                        <li>✅ 80%の骨組みをCodexCLIで作り、残り20%の調整をCursorで</li>
+                        <li>✅ 結果的にCursorのクレジット消費を大幅削減</li>
+                    </ul>
+                    <p>
+                        特に、<strong>社内で複数のプロジェクトを扱う場合</strong>、この方法でクレジット管理が楽になります。
+                    </p>
+                </div>
+
+                <h3>手順：要件定義MDファイルの作成</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ChatGPTで要件をMarkdown形式にまとめる</strong><br>
+                        ChatGPTに「この要件をMarkdown形式でファイルに保存できる形にまとめて」と依頼します
+                    </li>
+                    <li>
+                        <strong>MDファイルとして保存</strong><br>
+                        プロジェクトフォルダに <code>requirements.md</code> として保存します
+                    </li>
+                </ol>
+
+                <h3>要件定義MDファイルの例</h3>
+                <div class="card">
+                    <h4>requirements.md</h4>
+                    <pre><code># Webサイト要件定義書
+
+## プロジェクト概要
+企業の公式Webサイトを作成する
+
+## 必要なページ
+1. トップページ（index.html）
+2. 会社概要ページ（about.html）
+3. お問い合わせページ（contact.html）
+
+## トップページの要件
+
+### ヘッダー
+- ロゴ（左上）
+- ナビゲーションメニュー（右上）
+  - ホーム
+  - 会社概要
+  - お問い合わせ
+
+### メインビジュアル
+- 背景画像（フルスクリーン）
+- キャッチコピー：「未来を創る、テクノロジーカンパニー」
+- CTAボタン：「詳しく見る」
+
+### お客様の声セクション
+- 3件の声を表示
+- 各声に含める情報：
+  - 顔写真（円形、150×150px）
+  - 名前
+  - 会社名
+  - コメント（200文字程度）
+- レイアウト：3カラム（横並び）
+
+### フッター
+- コピーライト表示
+- SNSリンク
+
+## デザイン指針
+- カラースキーム：青系（#2563eb）
+- フォント：ゴシック体
+- レスポンシブ対応（スマホ・タブレット）
+
+## 技術仕様
+- HTML5 + CSS3
+- 静的サイト
+- GitHub Pagesで公開予定</code></pre>
+                </div>
+
+                <h3>CodexCLIでの初期構築</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cursorでプロジェクトを開く</strong><br>
+                        プロジェクトフォルダをCursorで開き、<code>requirements.md</code> が含まれていることを確認します
+                    </li>
+                    <li>
+                        <strong>Cursor Composerを起動</strong><br>
+                        Cmd + I（WindowsはCtrl + I）を押してAIチャットを開き、
+                        「Composer」モードを選択します
+                    </li>
+                    <li>
+                        <strong>要件定義を参照させる</strong><br>
+                        以下のように指示します：
+                        <pre><code>@requirements.md を参照して、このWebサイトの初期構築を行ってください。
+必要なHTMLファイル、CSSファイル、フォルダ構造をすべて作成してください。</code></pre>
+                    </li>
+                    <li>
+                        <strong>生成を待つ</strong><br>
+                        CodexCLI（Cursor Composer）が自動的にファイルを生成します。
+                        数分待つと、プロジェクトの骨組みが完成します
+                    </li>
+                    <li>
+                        <strong>生成されたファイルを確認</strong><br>
+                        以下のようなファイルが生成されているはずです：
+                        <ul>
+                            <li>index.html</li>
+                            <li>about.html</li>
+                            <li>contact.html</li>
+                            <li>css/styles.css</li>
+                            <li>images/（フォルダ）</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>💭 CodexCLI初期構築のコツ</h3>
+                <div class="card">
+                    <p><strong>Q：「CodexCLIで作ったものは完璧じゃないのでは？」</strong></p>
+                    <p>A：その通りです！でもそれで良いのです。</p>
+                    <p><strong>CodexCLIの役割：</strong></p>
+                    <ul>
+                        <li>80%の骨組みを作る</li>
+                        <li>基本的な構造とスタイルを生成</li>
+                        <li>ファイル構成を整える</li>
+                    </ul>
+                    <p><strong>Cursorの役割：</strong></p>
+                    <ul>
+                        <li>残り20%の細かい調整</li>
+                        <li>デザインの微調整</li>
+                        <li>バグ修正</li>
+                    </ul>
+                    <p>
+                        この分担により、<strong>Cursorのクレジット消費を70-80%削減</strong>できます。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p><strong>Q：「requirements.mdに書く内容はどこまで詳しく？」</strong></p>
+                    <p>A：以下の情報があれば十分です：</p>
+                    <ul>
+                        <li>✅ 必要なページ一覧</li>
+                        <li>✅ 各ページに含めるセクション</li>
+                        <li>✅ 表示する情報（テキスト、画像など）</li>
+                        <li>✅ レイアウトの方針</li>
+                        <li>✅ デザインの方向性</li>
+                    </ul>
+                    <p>
+                        細かいピクセル単位の指定は不要です。大枠が決まっていれば、CodexCLIが適切に判断して生成してくれます。
+                    </p>
+                </div>
+
+                <h3>初期構築後の修正フロー</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ブラウザで確認</strong><br>
+                        生成されたindex.htmlをブラウザで開いて確認します
+                    </li>
+                    <li>
+                        <strong>修正箇所をリストアップ</strong><br>
+                        「ここの色を変えたい」「このテキストを修正したい」など、修正箇所をメモします
+                    </li>
+                    <li>
+                        <strong>Cursorで修正</strong><br>
+                        Cursorの内蔵ブラウザ + 要素選択機能を使って、効率的に修正します（パート8で詳しく説明）
+                    </li>
+                    <li>
+                        <strong>完成</strong><br>
+                        細かい調整が完了したら、GitHubにプッシュして公開します
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>推奨ワークフロー：</strong>
+                    <ol>
+                        <li>ChatGPTで要件整理 → <code>requirements.md</code> 作成</li>
+                        <li>CodexCLI（Cursor Composer）で初期構築（80%完成）</li>
+                        <li>Cursorで細かい修正（残り20%）</li>
+                    </ol>
+                    この流れで、<strong>クレジットを節約しながら高品質なWebサイト</strong>が作れます。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート3：Cursorプランモードで実装計画を立てる（代替手法）</h2>
+                
+                <p>
+                    パート2のCodexCLI手法が使えない場合、または最初から細かい計画を立てたい場合は、
+                    Cursorのプランモードを使います。
+                </p>
+                
+                <div class="alert alert-info">
+                    <strong>使い分けのポイント：</strong><br>
+                    - <strong>新規プロジェクト（ゼロから作る）</strong>：CodexCLIで初期構築がおすすめ<br>
+                    - <strong>既存プロジェクトの修正</strong>：Cursorプランモードがおすすめ<br>
+                    - <strong>複雑な修正</strong>：Cursorプランモードでしっかり計画
+                </div>
+                
+                <p>
+                    要件が整理できたら、次はCursorのプランモードで実装計画を立てます。
+                </p>
+
+                <h3>Cursorプランモードとは</h3>
+                <p>
+                    プランモードは、Cursorの強力な機能の一つです。
+                    <strong>実際にコードを書く前に、「何をどう修正するか」の計画を立ててくれます</strong>。
+                </p>
+                <p>
+                    メリット：
+                </p>
+                <ul>
+                    <li>実装前に全体像が見える</li>
+                    <li>修正箇所の見落としを防げる</li>
+                    <li>チームでレビューしやすい</li>
+                    <li>計画に納得してから実装できる</li>
+                </ul>
+
+                <h3>プランモードの使い方</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cursorでプロジェクトを開く</strong><br>
+                        修正したいプロジェクトをCursorで開きます
+                    </li>
+                    <li>
+                        <strong>プランモードを起動</strong><br>
+                        Cmd + I（WindowsはCtrl + I）を押してAIチャットを開き、
+                        左上の「Plan」ボタンをクリックします
+                    </li>
+                    <li>
+                        <strong>要件を入力</strong><br>
+                        ChatGPTで整理した要件を貼り付けます。
+                        例：「トップページに『お客様の声』セクションを追加してください。3件の声を横並び（3カラム）で表示。
+                        各声には顔写真、名前、会社名、コメントを含める」
+                    </li>
+                    <li>
+                        <strong>AIが計画を提案</strong><br>
+                        数秒〜数十秒待つと、AIが実装計画を提案してくれます
+                    </li>
+                    <li>
+                        <strong>計画をレビュー</strong><br>
+                        提案された計画を確認します。修正が必要なら、追加の指示を出します
+                    </li>
+                    <li>
+                        <strong>承認して実装</strong><br>
+                        計画に納得したら、「Implement Plan」ボタンをクリックして実装を開始します
+                    </li>
+                </ol>
+
+                <h3>プランモードの実例</h3>
+                <div class="card">
+                    <h4>あなたが入力：</h4>
+                    <pre><code>トップページに「お客様の声」セクションを追加してください。
+
+【要件】
+- 3件の声を表示
+- レイアウト：3カラム（横並び）
+- 各声に含める情報：
+  - 顔写真（円形、150×150px）
+  - 名前
+  - 会社名
+  - コメント（200文字程度）
+- 既存のデザインスタイルに統一</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>Cursorの計画：</h4>
+                    <pre><code>## 実装計画
+
+### 1. index.html に新しいセクションを追加
+- location: &lt;main&gt; 内の適切な位置
+- 内容: お客様の声セクション
+  - セクションタイトル
+  - 3つのカード（voice-card）
+  - 各カードに: 画像、名前、会社名、コメント
+
+### 2. styles.css にスタイルを追加
+- .testimonials セクションのスタイル
+- .voice-card のスタイル（3カラムレイアウト）
+- レスポンシブ対応（モバイルでは1カラム）
+
+### 3. images/フォルダに画像を配置
+- customer1.jpg
+- customer2.jpg  
+- customer3.jpg
+
+この計画で進めてよろしいですか？</code></pre>
+                </div>
+
+                <h3>💭 プランモードの活用術</h3>
+                <div class="card">
+                    <p><strong>Q：「計画が気に入らない場合はどうすれば？」</strong></p>
+                    <p>A：遠慮なく追加の指示を出してください！例えば：</p>
+                    <ul>
+                        <li>「もっとシンプルなデザインにして」</li>
+                        <li>「アニメーション効果も追加して」</li>
+                        <li>「CSS は別ファイル（testimonials.css）に分けて」</li>
+                    </ul>
+                    <p>
+                        AIが再度計画を立て直してくれます。納得いくまで何度でも調整できます。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <p><strong>Q：「プランをチームでレビューしたい場合は？」</strong></p>
+                    <p>A：プランの内容をコピーして、Slackやメールで共有しましょう。</p>
+                    <p>
+                        チームメンバーから「ここはこうした方がいい」とフィードバックをもらったら、
+                        Cursorに追加の指示を出して計画を修正できます。
+                    </p>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>重要：</strong> プランに納得してから「Implement Plan」をクリックしてください。
+                    一度実装が始まると、自動的にコードが書き換えられます。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート4：新規Webサイトの作成</h2>
+                
+                <div class="alert alert-info">
+                    <strong>補足：</strong> この パート では従来の方法（手動でファイルを作成）を説明しますが、
+                    実際の業務では<strong>パート2のCodexCLI手法</strong>を使うことを推奨します。
+                    ここでの説明は、基本的な仕組みを理解するための学習用です。
+                </div>
+                
+                <h3>ステップ1：プロジェクトフォルダの作成</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>作業用フォルダを作成</strong><br>
+                        デスクトップやドキュメントフォルダに、新しいフォルダを作成します。
+                        名前は「my-website」など、わかりやすいものにしましょう。
+                    </li>
+                    <li>
+                        <strong>フォルダを開く</strong><br>
+                        作成したフォルダをCursorで開きます。
+                        Cursorを起動し、「File」>「Open Folder」からフォルダを選択します。
+                    </li>
+                </ol>
+
+                <h3>ステップ2：GitHubリポジトリの作成</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ターミナルを開く</strong><br>
+                        Cursor内でターミナルを開きます。
+                        「Terminal」>「New Terminal」を選択するか、Ctrl + `（MacはCmd + `）を押します。
+                    </li>
+                    <li>
+                        <strong>プロジェクトを初期化</strong><br>
+                        ターミナルで、プロジェクトフォルダに移動していることを確認し、
+                        以下のコマンドを実行します：
+                        <pre><code>codex init</code></pre>
+                    </li>
+                    <li>
+                        <strong>GitHubリポジトリを作成</strong><br>
+                        以下のコマンドで、GitHubに新しいリポジトリを作成します：
+                        <pre><code>codex create repo my-website</code></pre>
+                        「my-website」の部分は、好きな名前に変更できます。
+                    </li>
+                    <li>
+                        <strong>確認</strong><br>
+                        GitHubのウェブサイトにアクセスし、新しいリポジトリが作成されているか確認します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>ヒント：</strong> リポジトリ名は、英数字とハイフン（-）のみ使用できます。
+                    スペースは使えないので注意してください。
+                </div>
+
+                <h3>ステップ3：HTMLファイルの作成</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>新しいファイルを作成</strong><br>
+                        Cursorの左側のファイル一覧で、プロジェクトフォルダを右クリックし、
+                        「New File」を選択します。
+                    </li>
+                    <li>
+                        <strong>ファイル名を入力</strong><br>
+                        「index.html」という名前でファイルを作成します。
+                        index.htmlは、Webサイトのトップページとして使われます。
+                    </li>
+                    <li>
+                        <strong>基本的なHTMLコードを書く</strong><br>
+                        以下のコードを入力します：
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;私のWebサイト&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;ようこそ、私のWebサイトへ！&lt;/h1&gt;
+    &lt;p&gt;これは私が作成した最初のWebサイトです。&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </li>
+                    <li>
+                        <strong>保存する</strong><br>
+                        Ctrl + S（MacはCmd + S）でファイルを保存します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>AIの活用：</strong> CursorのAI機能を使うと、より簡単にコードを生成できます。
+                    Ctrl + K（MacはCmd + K）を押して、「シンプルなWebサイトのHTMLを作成して」と入力してみましょう。
+                </div>
+
+                <h3>ステップ4：CSSファイルの作成（オプション）</h3>
+                <p>
+                    Webサイトをより見やすくするために、CSSファイルを作成しましょう。
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>CSSフォルダを作成</strong><br>
+                        プロジェクトフォルダ内に「css」という名前のフォルダを作成します。
+                    </li>
+                    <li>
+                        <strong>CSSファイルを作成</strong><br>
+                        cssフォルダ内に「styles.css」というファイルを作成します。
+                    </li>
+                    <li>
+                        <strong>CSSコードを書く</strong><br>
+                        以下のコードを入力します：
+                        <pre><code>body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    color: #666;
+    line-height: 1.6;
+}</code></pre>
+                    </li>
+                    <li>
+                        <strong>HTMLにCSSをリンク</strong><br>
+                        index.htmlの&lt;head&gt;セクションに、以下の行を追加します：
+                        <pre><code>&lt;link rel="stylesheet" href="css/styles.css"&gt;</code></pre>
+                    </li>
+                </ol>
+
+                <h3>ステップ5：変更をGitHubにアップロード</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>変更を確認</strong><br>
+                        ターミナルで以下のコマンドを実行し、変更内容を確認します：
+                        <pre><code>codex status</code></pre>
+                    </li>
+                    <li>
+                        <strong>変更をコミット</strong><br>
+                        以下のコマンドで変更をコミット（保存）します：
+                        <pre><code>codex commit -m "最初のWebサイトを作成"</code></pre>
+                        「最初のWebサイトを作成」の部分は、変更内容を説明するメッセージです。
+                    </li>
+                    <li>
+                        <strong>GitHubにプッシュ</strong><br>
+                        以下のコマンドで、変更をGitHubにアップロードします：
+                        <pre><code>codex push</code></pre>
+                    </li>
+                    <li>
+                        <strong>確認</strong><br>
+                        GitHubのウェブサイトで、ファイルがアップロードされているか確認します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>完了！</strong> これで基本的なWebサイトが作成できました。
+                    次は、GitHub PagesでWebサイトを公開してみましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート5：GitHub PagesでWebサイトを公開</h2>
+                
+                <p>
+                    GitHub Pagesを使うと、作成したWebサイトを無料でインターネット上に公開できます。
+                </p>
+
+                <h3>手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>GitHubのリポジトリページを開く</strong><br>
+                        ブラウザでGitHubにアクセスし、作成したリポジトリを開きます。
+                    </li>
+                    <li>
+                        <strong>Settingsを開く</strong><br>
+                        リポジトリページの上部にある「Settings」タブをクリックします。
+                    </li>
+                    <li>
+                        <strong>Pages設定を開く</strong><br>
+                        左側のメニューから「Pages」を選択します。
+                    </li>
+                    <li>
+                        <strong>公開設定</strong><br>
+                        「Source」セクションで「Deploy from a branch」を選択し、
+                        「main」ブランチと「/ (root)」を選択します。
+                    </li>
+                    <li>
+                        <strong>保存</strong><br>
+                        「Save」ボタンをクリックします。
+                    </li>
+                    <li>
+                        <strong>公開URLを確認</strong><br>
+                        数分待つと、ページ上部に「Your site is live at」というメッセージとURLが表示されます。
+                        このURLが、あなたのWebサイトのアドレスです。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>ヒント：</strong> GitHub PagesのURLは、通常以下の形式です：
+                    <code>https://[ユーザー名].github.io/[リポジトリ名]</code>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>完了！</strong> Webサイトが公開されました。
+                    ブラウザでURLを開いて、作成したWebサイトを確認してみましょう。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート6：既存Webサイトの修正</h2>
+                
+                <p>
+                    既に存在するWebサイトを修正する方法を学びます。
+                    他の人が作成したWebサイトや、以前に作成したWebサイトを修正する際に使います。
+                </p>
+
+                <h3>ステップ1：リポジトリをクローン</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>GitHubでリポジトリを開く</strong><br>
+                        修正したいWebサイトのGitHubリポジトリページを開きます。
+                    </li>
+                    <li>
+                        <strong>リポジトリのURLをコピー</strong><br>
+                        リポジトリページの右上にある「Code」ボタンをクリックし、
+                        URLをコピーします（例：https://github.com/username/repository.git）。
+                    </li>
+                    <li>
+                        <strong>ターミナルでクローン</strong><br>
+                        ターミナルで、作業したいフォルダに移動し、以下のコマンドを実行します：
+                        <pre><code>codex clone https://github.com/username/repository.git</code></pre>
+                        URLの部分は、コピーしたURLに置き換えます。
+                    </li>
+                    <li>
+                        <strong>フォルダを開く</strong><br>
+                        クローンが完了すると、リポジトリ名と同じ名前のフォルダが作成されます。
+                        Cursorでこのフォルダを開きます。
+                    </li>
+                </ol>
+
+                <h3>ステップ2：ファイルを編集</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>ファイルを開く</strong><br>
+                        Cursorで、修正したいファイルを開きます。
+                    </li>
+                    <li>
+                        <strong>編集する</strong><br>
+                        ファイルの内容を編集します。
+                        AI機能を使うと、より簡単に修正できます。
+                    </li>
+                    <li>
+                        <strong>保存する</strong><br>
+                        Ctrl + S（MacはCmd + S）でファイルを保存します。
+                    </li>
+                </ol>
+
+                <h3>ステップ3：変更をアップロード</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>変更を確認</strong><br>
+                        ターミナルで以下のコマンドを実行します：
+                        <pre><code>codex status</code></pre>
+                    </li>
+                    <li>
+                        <strong>変更をコミット</strong><br>
+                        以下のコマンドで変更をコミットします：
+                        <pre><code>codex commit -m "変更内容の説明"</code></pre>
+                    </li>
+                    <li>
+                        <strong>GitHubにプッシュ</strong><br>
+                        以下のコマンドで変更をアップロードします：
+                        <pre><code>codex push</code></pre>
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>ヒント：</strong> コミットメッセージは、何を変更したかがわかるように、
+                    具体的に書くことをおすすめします。
+                    例：「トップページのタイトルを変更」「新しいセクションを追加」など。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート7：より高度なWebサイトの作成</h2>
+                
+                <p>
+                    基本的なWebサイトが作成できたら、より高度な機能を追加してみましょう。
+                </p>
+
+                <h3>複数ページの作成</h3>
+                <p>
+                    Webサイトに複数のページを追加する方法：
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>新しいHTMLファイルを作成</strong><br>
+                        「about.html」「contact.html」など、新しいページのHTMLファイルを作成します。
+                    </li>
+                    <li>
+                        <strong>ナビゲーションメニューを追加</strong><br>
+                        各ページに、他のページへのリンクを追加します：
+                        <pre><code>&lt;nav&gt;
+    &lt;a href="index.html"&gt;ホーム&lt;/a&gt;
+    &lt;a href="about.html"&gt;About&lt;/a&gt;
+    &lt;a href="contact.html"&gt;お問い合わせ&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+                    </li>
+                </ol>
+
+                <h3>画像の追加</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>画像フォルダを作成</strong><br>
+                        プロジェクトフォルダ内に「images」フォルダを作成します。
+                    </li>
+                    <li>
+                        <strong>画像を配置</strong><br>
+                        使用したい画像をimagesフォルダにコピーします。
+                    </li>
+                    <li>
+                        <strong>HTMLに画像を追加</strong><br>
+                        HTMLファイルに以下のコードを追加します：
+                        <pre><code>&lt;img src="images/photo.jpg" alt="説明文"&gt;</code></pre>
+                    </li>
+                </ol>
+
+                <h3>JavaScriptの追加（オプション）</h3>
+                <p>
+                    Webサイトに動きをつけるために、JavaScriptを追加できます。
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>JavaScriptファイルを作成</strong><br>
+                        「js」フォルダを作成し、その中に「script.js」ファイルを作成します。
+                    </li>
+                    <li>
+                        <strong>基本的なJavaScriptコードを書く</strong><br>
+                        例：ボタンをクリックしたときにアラートを表示する：
+                        <pre><code>document.getElementById('myButton').addEventListener('click', function() {
+    alert('ボタンがクリックされました！');
+});</code></pre>
+                    </li>
+                    <li>
+                        <strong>HTMLにJavaScriptをリンク</strong><br>
+                        HTMLファイルの&lt;/body&gt;の前に、以下の行を追加します：
+                        <pre><code>&lt;script src="js/script.js"&gt;&lt;/script&gt;</code></pre>
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>AIの活用：</strong> CursorのAI機能を使うと、
+                    「ボタンをクリックしたときにメッセージを表示する機能を追加して」と伝えるだけで、
+                    JavaScriptコードを生成してくれます。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート8：様々なデプロイ方法</h2>
+                
+                <p>
+                    Webサイトを公開する方法は、GitHub Pages以外にもいくつかあります。
+                    それぞれの特徴を理解して、自分に合った方法を選びましょう。
+                </p>
+
+                <h3>方法1：GitHub Pages（おすすめ）</h3>
+                <p>
+                    すでに説明した方法ですが、最も簡単で無料です。
+                </p>
+                <div class="card">
+                    <h4>メリット</h4>
+                    <ul>
+                        <li>完全無料</li>
+                        <li>設定が簡単</li>
+                        <li>GitHubと統合されている</li>
+                        <li>自動デプロイ（pushするだけで公開）</li>
+                        <li>独自ドメインも設定可能</li>
+                    </ul>
+                    <h4>デメリット</h4>
+                    <ul>
+                        <li>静的サイトのみ（PHPなどは使えない）</li>
+                        <li>パブリックリポジトリの場合、コードが公開される</li>
+                    </ul>
+                </div>
+
+                <h3>方法2：Netlify（超簡単）</h3>
+                <p>
+                    Netlifyは、静的サイトのホスティングに特化したサービスです。
+                    初心者にも非常におすすめです。
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>Netlifyにアクセス</strong><br>
+                        <a href="https://www.netlify.com" target="_blank">https://www.netlify.com</a> を開きます。
+                    </li>
+                    <li>
+                        <strong>アカウント作成</strong><br>
+                        GitHubアカウントでログインできます。
+                    </li>
+                    <li>
+                        <strong>リポジトリを連携</strong><br>
+                        「New site from Git」をクリックし、GitHubリポジトリを選択します。
+                    </li>
+                    <li>
+                        <strong>デプロイ</strong><br>
+                        設定を確認して「Deploy site」をクリックするだけ。数秒で公開されます。
+                    </li>
+                </ol>
+                <div class="card">
+                    <h4>メリット</h4>
+                    <ul>
+                        <li>無料プランが充実</li>
+                        <li>デプロイが超高速</li>
+                        <li>自動でHTTPS対応</li>
+                        <li>フォームやサーバーレス関数が使える</li>
+                        <li>独自ドメイン無料</li>
+                    </ul>
+                    <h4>デメリット</h4>
+                    <ul>
+                        <li>無料プランには帯域制限がある</li>
+                    </ul>
+                </div>
+
+                <h3>方法3：Vercel（Next.jsに最適）</h3>
+                <p>
+                    Vercelは、Next.jsを開発した会社が提供するホスティングサービスです。
+                    ReactやNext.jsを使う場合に特におすすめです。
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>Vercelにアクセス</strong><br>
+                        <a href="https://vercel.com" target="_blank">https://vercel.com</a> を開きます。
+                    </li>
+                    <li>
+                        <strong>アカウント作成</strong><br>
+                        GitHubアカウントでログインします。
+                    </li>
+                    <li>
+                        <strong>リポジトリをインポート</strong><br>
+                        「Import Project」からGitHubリポジトリを選択します。
+                    </li>
+                    <li>
+                        <strong>デプロイ</strong><br>
+                        自動で設定を検出し、デプロイしてくれます。
+                    </li>
+                </ol>
+                <div class="card">
+                    <h4>メリット</h4>
+                    <ul>
+                        <li>Next.js、Reactに最適化</li>
+                        <li>デプロイが超高速</li>
+                        <li>プレビュー環境が自動生成</li>
+                        <li>無料プランが充実</li>
+                    </ul>
+                    <h4>デメリット</h4>
+                    <ul>
+                        <li>従来型のHTMLサイトには少しオーバースペック</li>
+                    </ul>
+                </div>
+
+                <h3>方法4：FTPでアップロード（従来型）</h3>
+                <p>
+                    FTPは、ファイルをサーバーに直接アップロードする従来の方法です。
+                    レンタルサーバーを契約している場合に使います。
+                </p>
+
+                <h4>必要なもの</h4>
+                <ul>
+                    <li>レンタルサーバー（さくら、ロリポップ、Xserverなど）</li>
+                    <li>FTPクライアントソフト（FileZilla、Cyberduckなど）</li>
+                    <li>FTP接続情報（ホスト名、ユーザー名、パスワード）</li>
+                </ul>
+
+                <h4>手順（FileZillaの場合）</h4>
+                <ol class="steps">
+                    <li>
+                        <strong>FileZillaをダウンロード</strong><br>
+                        <a href="https://filezilla-project.org" target="_blank">https://filezilla-project.org</a> からダウンロードしてインストールします。
+                    </li>
+                    <li>
+                        <strong>接続情報を入力</strong><br>
+                        サーバー契約時に送られてきたFTP情報（ホスト、ユーザー名、パスワード）を入力します。
+                    </li>
+                    <li>
+                        <strong>接続</strong><br>
+                        「クイック接続」ボタンをクリックして、サーバーに接続します。
+                    </li>
+                    <li>
+                        <strong>ファイルをアップロード</strong><br>
+                        左側（ローカル）から右側（サーバー）にファイルをドラッグ&ドロップします。
+                    </li>
+                    <li>
+                        <strong>確認</strong><br>
+                        ブラウザでサーバーのURLを開いて、正しく表示されるか確認します。
+                    </li>
+                </ol>
+
+                <div class="card">
+                    <h4>メリット</h4>
+                    <ul>
+                        <li>PHPやデータベースが使える</li>
+                        <li>完全なコントロールが可能</li>
+                        <li>独自ドメインが使える</li>
+                    </ul>
+                    <h4>デメリット</h4>
+                    <ul>
+                        <li>サーバー費用がかかる（月500円〜）</li>
+                        <li>手動でアップロードする必要がある</li>
+                        <li>設定が複雑</li>
+                        <li>セキュリティ管理が必要</li>
+                    </ul>
+                </div>
+
+                <h3>デプロイ方法の比較表</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>方法</th>
+                            <th>費用</th>
+                            <th>難易度</th>
+                            <th>おすすめ度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GitHub Pages</td>
+                            <td>無料</td>
+                            <td>★☆☆</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>Netlify</td>
+                            <td>無料〜</td>
+                            <td>★☆☆</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td>Vercel</td>
+                            <td>無料〜</td>
+                            <td>★☆☆</td>
+                            <td>★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td>FTP</td>
+                            <td>有料</td>
+                            <td>★★★</td>
+                            <td>★★☆☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-info">
+                    <strong>初心者へのアドバイス：</strong> まずはGitHub PagesかNetlifyから始めることをおすすめします。
+                    どちらも無料で、設定が簡単です。FTPは、PHPやデータベースが必要になったときに検討すれば十分です。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート9：Cursorの内蔵ブラウザで効率的に修正する</h2>
+                
+                <p>
+                    Cursor 2.0には、内蔵ブラウザという革命的な機能があります。
+                    この機能を使うと、エディタとブラウザを行き来する手間が大幅に削減され、
+                    開発効率が飛躍的に向上します。
+                </p>
+
+                <h3>内蔵ブラウザとは</h3>
+                <p>
+                    内蔵ブラウザは、Cursorのエディタ内に表示されるWebブラウザです。
+                    通常は、コードを書いて→ブラウザで確認して→また戻って修正、という流れですが、
+                    内蔵ブラウザを使えば、すべてCursor内で完結します。
+                </p>
+
+                <h3>内蔵ブラウザの開き方</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cursorでプロジェクトを開く</strong><br>
+                        修正したいWebサイトのプロジェクトフォルダをCursorで開きます。
+                    </li>
+                    <li>
+                        <strong>Agentsタブを開く</strong><br>
+                        Cursorの左側のサイドバーから「Agents」タブを選択します。
+                    </li>
+                    <li>
+                        <strong>Browser Tabを選択</strong><br>
+                        「Browser Tab」オプションをクリックします。
+                    </li>
+                    <li>
+                        <strong>URLを入力</strong><br>
+                        localhostのURL（例：http://localhost:3000）を入力して開きます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>注意：</strong> 内蔵ブラウザを使う前に、ローカルサーバーを起動しておく必要があります。
+                    HTMLファイルを直接開く場合は、Live Serverなどの拡張機能を使いましょう。
+                </div>
+
+                <h3>要素選択機能の使い方</h3>
+                <p>
+                    内蔵ブラウザの最も強力な機能が「要素選択（Select element）」です。
+                    この機能を使うと、画面上の要素をクリックするだけで、そのコードを特定し、修正できます。
+                </p>
+
+                <ol class="steps">
+                    <li>
+                        <strong>Select elementをクリック</strong><br>
+                        内蔵ブラウザの上部にある「Select element」ボタンをクリックします。
+                    </li>
+                    <li>
+                        <strong>修正したい要素を選択</strong><br>
+                        マウスを動かすと、要素がハイライトされます。
+                        修正したい要素（ボタン、テキスト、画像など）をクリックします。
+                    </li>
+                    <li>
+                        <strong>AIに修正を依頼</strong><br>
+                        選択した要素に関するコードが自動で特定されます。
+                        AIチャットで「この要素の背景色を青にして」などと指示します。
+                    </li>
+                    <li>
+                        <strong>修正を適用</strong><br>
+                        AIが提案したコードを確認し、適用します。
+                        すぐに内蔵ブラウザに反映されます。
+                    </li>
+                </ol>
+
+                <h3>実際の修正例</h3>
+                <div class="card">
+                    <h4>例1：ボタンの色を変更</h4>
+                    <ol>
+                        <li>Select elementでボタンを選択</li>
+                        <li>AIに「このボタンの背景色を緑にして」と指示</li>
+                        <li>提案されたCSSコードを適用</li>
+                        <li>即座に反映を確認</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>例2：テキストのサイズを変更</h4>
+                    <ol>
+                        <li>Select elementでテキストを選択</li>
+                        <li>AIに「このテキストを大きくして」と指示</li>
+                        <li>提案されたスタイルを適用</li>
+                        <li>サイズの変更を確認</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>例3：レイアウトの調整</h4>
+                    <ol>
+                        <li>Select elementでセクションを選択</li>
+                        <li>AIに「この要素を中央寄せにして」と指示</li>
+                        <li>提案されたCSSを適用</li>
+                        <li>レイアウトの変更を確認</li>
+                    </ol>
+                </div>
+
+                <h3>内蔵ブラウザのメリット</h3>
+                <ul>
+                    <li>
+                        <strong>時間の節約</strong><br>
+                        エディタとブラウザを切り替える時間がゼロになります。
+                    </li>
+                    <li>
+                        <strong>正確な修正</strong><br>
+                        どのコードを修正すればいいか、AIが自動で特定してくれます。
+                    </li>
+                    <li>
+                        <strong>即座の確認</strong><br>
+                        修正が即座に反映されるので、試行錯誤が簡単です。
+                    </li>
+                    <li>
+                        <strong>デザイナーでも使える</strong><br>
+                        コードを読めなくても、視覚的に修正できます。
+                    </li>
+                </ul>
+
+                <h3>より効率的に使うコツ</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>具体的に指示する</strong><br>
+                        「この部分を修正して」ではなく、「このボタンの背景色を#2563ebに変更して」のように具体的に伝えましょう。
+                    </li>
+                    <li>
+                        <strong>複数の要素を一度に修正</strong><br>
+                        「このセクション全体の背景色を変更して、テキストを中央寄せにして」のように、複数の修正を一度に依頼できます。
+                    </li>
+                    <li>
+                        <strong>DevToolsと併用</strong><br>
+                        内蔵ブラウザにもDeveloper Toolsがあります。
+                        詳細な確認が必要なときは、DevToolsを開きましょう。
+                    </li>
+                    <li>
+                        <strong>レスポンシブ確認</strong><br>
+                        DevToolsのDevice Emulationで、スマホ表示も確認できます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>開発効率が3倍に！</strong> 内蔵ブラウザと要素選択機能を使うことで、
+                    従来の開発フローと比べて、開発効率が大幅に向上します。
+                    ぜひ、実際に使ってその便利さを体験してください。
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>参考記事：</strong> より詳しい使い方は、
+                    <a href="https://unikoukokun.jp/n/n989acace3e78" target="_blank">こちらの記事</a>
+                    で解説されています。実際の画面キャプチャ付きで、わかりやすく説明されています。
+                </div>
+            </section>
+
+            <section>
+                <h2>まとめ</h2>
+                <p>
+                    このページでは、以下のことを学びました：
+                </p>
+                <ul>
+                    <li>新規Webサイトの作成方法</li>
+                    <li>GitHub Pagesでの公開方法</li>
+                    <li>既存Webサイトの修正方法</li>
+                    <li>より高度な機能の追加方法</li>
+                    <li>様々なデプロイ方法（Netlify、Vercel、FTP）</li>
+                    <li>Cursorの内蔵ブラウザによる効率的な開発</li>
+                </ul>
+                <p>
+                    実際に手を動かしながら学ぶことで、理解が深まります。
+                    わからないことがあれば、<a href="faq.html">FAQページ</a>を確認してください。
+                </p>
+                <div class="alert alert-success">
+                    <strong>おめでとうございます！</strong> これで、GitHub、Cursor、CodexCLIを使って
+                    Webサイトを作成・修正できるようになりました。
+                    今後は、この知識を活かして、自分だけのWebサイトを作成してみてください。
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 社内スタッフ向け Webサイト構築ガイド. 社内教育用資料として作成されています。</p>
+        </div>
+    </footer>
+</body>
+</html>
+

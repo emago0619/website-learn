@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - 非エンジニア向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FAQ：よくある質問とトラブルシューティング</h1>
+            <p>よくある質問とエラー対処法をまとめています</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="setup.html">準備編</a></li>
+                <li><a href="basics.html">基礎知識編</a></li>
+                <li><a href="practice.html">実践編</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>よくある質問（FAQ）</h2>
+                
+                <div class="card">
+                    <h3>Q1. GitHubアカウントを作成するのに費用はかかりますか？</h3>
+                    <p>
+                        <strong>A：</strong> いいえ、GitHubの基本機能は無料で使用できます。
+                        個人用のリポジトリは無制限に作成でき、GitHub Pagesも無料で利用できます。
+                        有料プランもありますが、基本的なWebサイト作成には不要です。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Q2. Cursorは無料で使えますか？</h3>
+                    <p>
+                        <strong>A：</strong> Cursorには無料版と有料版があります。
+                        基本的な編集機能とAI機能の一部は無料で使えますが、
+                        高度なAI機能を使う場合は有料プランが必要な場合があります。
+                        まずは無料版で試してみることをおすすめします。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Q3. CodexCLIがインストールできない</h3>
+                    <p>
+                        <strong>A：</strong> 以下の点を確認してください：
+                    </p>
+                    <ul>
+                        <li>インターネット接続が正常か確認する</li>
+                        <li>ターミナル（PowerShell）を管理者権限で実行する</li>
+                        <li>公式サイトの最新のインストール手順を確認する</li>
+                        <li>エラーメッセージをよく読んで、指示に従う</li>
+                    </ul>
+                    <p>
+                        それでも解決しない場合は、CodexCLIの公式ドキュメントやサポートフォーラムを確認してください。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Q4. コマンドを入力してもエラーが出る</h3>
+                    <p>
+                        <strong>A：</strong> よくある原因と対処法：
+                    </p>
+                    <ul>
+                        <li><strong>タイプミス：</strong> コマンドのスペルを確認してください。大文字と小文字も正確に入力する必要があります。</li>
+                        <li><strong>パスの問題：</strong> 正しいフォルダにいるか確認してください。プロジェクトフォルダに移動してからコマンドを実行しましょう。</li>
+                        <li><strong>権限の問題：</strong> 管理者権限が必要な場合があります。ターミナルを管理者権限で実行してみてください。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Q5. GitHub PagesでWebサイトが表示されない</h3>
+                    <p>
+                        <strong>A：</strong> 以下の点を確認してください：
+                    </p>
+                    <ul>
+                        <li>index.htmlファイルがリポジトリのルート（最上位）にあるか確認する</li>
+                        <li>GitHub Pagesの設定が正しいか確認する（Settings > Pages）</li>
+                        <li>公開まで数分かかる場合があるので、少し待ってから再度確認する</li>
+                        <li>ブラウザのキャッシュをクリアしてから再度アクセスする</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Q6. CursorのAI機能がうまく使えない</h3>
+                    <p>
+                        <strong>A：</strong> 以下の点を試してみてください：
+                    </p>
+                    <ul>
+                        <li>Ctrl + K（MacはCmd + K）でAIチャットを開く</li>
+                        <li>具体的で明確な指示を出す（例：「シンプルなHTMLページを作成して」）</li>
+                        <li>エディタ内でコードを選択してからAIに質問する</li>
+                        <li>Cursorの設定でAI機能が有効になっているか確認する</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Q7. ファイルを編集したのに変更が反映されない</h3>
+                    <p>
+                        <strong>A：</strong> 以下の手順を確認してください：
+                    </p>
+                    <ol>
+                        <li>ファイルを保存したか確認（Ctrl + S / Cmd + S）</li>
+                        <li>変更をコミットしたか確認（<code>codex commit -m "メッセージ"</code>）</li>
+                        <li>GitHubにプッシュしたか確認（<code>codex push</code>）</li>
+                        <li>GitHub Pagesを使っている場合、数分待ってから再度確認</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>Q8. 他の人のWebサイトを修正したい</h3>
+                    <p>
+                        <strong>A：</strong> 以下の方法があります：
+                    </p>
+                    <ul>
+                        <li><strong>フォーク（Fork）：</strong> GitHubでリポジトリをフォークすると、自分のアカウントにコピーが作成されます。それを修正して、元の作者に変更を提案（プルリクエスト）できます。</li>
+                        <li><strong>クローン（Clone）：</strong> リポジトリをクローンして、自分のパソコンで編集できます。ただし、元のリポジトリに直接変更を加えるには権限が必要です。</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Q9. Webサイトのデザインを変更したい</h3>
+                    <p>
+                        <strong>A：</strong> CSSファイルを編集することで、デザインを変更できます。
+                        CursorのAI機能を使って、「背景色を青に変更して」などと指示すると、
+                        適切なCSSコードを生成してくれます。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Q10. プログラミングの知識がなくても大丈夫ですか？</h3>
+                    <p>
+                        <strong>A：</strong> はい、大丈夫です。このガイドは、プログラミングの経験がない方を対象にしています。
+                        CursorのAI機能を使えば、自然言語で指示するだけでコードを生成できます。
+                        ただし、基本的なパソコン操作（ファイルの作成、フォルダの操作など）は理解している必要があります。
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2>トラブルシューティング</h2>
+                
+                <h3>エラーメッセージの対処法</h3>
+                
+                <div class="card">
+                    <h4>"command not found" エラー</h4>
+                    <p>
+                        <strong>原因：</strong> コマンドが見つからない、またはパスが通っていない
+                    </p>
+                    <p>
+                        <strong>対処法：</strong>
+                    </p>
+                    <ul>
+                        <li>コマンドのスペルを確認する</li>
+                        <li>CodexCLIが正しくインストールされているか確認（<code>codex --version</code>）</li>
+                        <li>ターミナルを再起動する</li>
+                        <li>環境変数（PATH）が正しく設定されているか確認する</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>"permission denied" エラー</h4>
+                    <p>
+                        <strong>原因：</strong> ファイルやフォルダへのアクセス権限がない
+                    </p>
+                    <p>
+                        <strong>対処法：</strong>
+                    </p>
+                    <ul>
+                        <li>ターミナルを管理者権限で実行する</li>
+                        <li>ファイルやフォルダの権限を確認する</li>
+                        <li>別の場所で試してみる</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>"repository not found" エラー</h4>
+                    <p>
+                        <strong>原因：</strong> リポジトリが見つからない、またはアクセス権限がない
+                    </p>
+                    <p>
+                        <strong>対処法：</strong>
+                    </p>
+                    <ul>
+                        <li>リポジトリ名が正しいか確認する</li>
+                        <li>GitHubアカウントが正しく認証されているか確認（<code>codex auth status</code>）</li>
+                        <li>リポジトリが存在するか、GitHubのウェブサイトで確認する</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>"failed to push" エラー</h4>
+                    <p>
+                        <strong>原因：</strong> GitHubへのアップロードに失敗した
+                    </p>
+                    <p>
+                        <strong>対処法：</strong>
+                    </p>
+                    <ul>
+                        <li>インターネット接続を確認する</li>
+                        <li>GitHubアカウントが正しく認証されているか確認する</li>
+                        <li>リポジトリへの書き込み権限があるか確認する</li>
+                        <li>先に最新の変更をプルする（<code>codex pull</code>）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>参考リンク集</h2>
+                
+                <div class="card">
+                    <h3>公式ドキュメント</h3>
+                    <ul>
+                        <li><a href="https://docs.github.com/ja" target="_blank">GitHub公式ドキュメント（日本語）</a></li>
+                        <li><a href="https://cursor.sh/docs" target="_blank">Cursor公式ドキュメント</a></li>
+                        <li><a href="https://codexcli.com/docs" target="_blank">CodexCLI公式ドキュメント</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>学習リソース</h3>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/ja/docs/Web/HTML" target="_blank">MDN Web Docs - HTML</a></li>
+                        <li><a href="https://developer.mozilla.org/ja/docs/Web/CSS" target="_blank">MDN Web Docs - CSS</a></li>
+                        <li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" target="_blank">MDN Web Docs - JavaScript</a></li>
+                        <li><a href="https://docs.github.com/ja/pages" target="_blank">GitHub Pages ガイド</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>コミュニティ</h3>
+                    <ul>
+                        <li><a href="https://github.com/explore" target="_blank">GitHub Explore</a> - 他の人のプロジェクトを探す</li>
+                        <li><a href="https://stackoverflow.com/questions/tagged/github" target="_blank">Stack Overflow - GitHub</a> - 技術的な質問</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>まだ解決しない場合</h2>
+                <p>
+                    このFAQページで解決しない問題がある場合は、以下の方法を試してみてください：
+                </p>
+                <ul>
+                    <li>エラーメッセージをそのまま検索エンジンで検索する</li>
+                    <li>公式ドキュメントやフォーラムを確認する</li>
+                    <li>GitHubのIssuesセクションで類似の問題を探す</li>
+                    <li>コミュニティフォーラムで質問する</li>
+                </ul>
+                <div class="alert alert-info">
+                    <strong>ヒント：</strong> エラーメッセージは、問題の原因を特定するための重要な手がかりです。
+                    エラーメッセージをコピーして検索すると、解決方法が見つかることが多いです。
+                </div>
+            </section>
+
+            <section>
+                <h2>まとめ</h2>
+                <p>
+                    このFAQページでは、よくある質問とトラブルシューティングの方法をまとめました。
+                    問題に遭遇したときは、まずこのページを確認してみてください。
+                </p>
+                <p>
+                    他のページに戻る場合は、上部のナビゲーションメニューから選択してください。
+                </p>
+                <a href="../index.html" class="btn">ホームに戻る</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 社内スタッフ向け Webサイト構築ガイド. 社内教育用資料として作成されています。</p>
+        </div>
+    </footer>
+</body>
+</html>
+
