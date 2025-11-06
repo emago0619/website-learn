@@ -82,6 +82,60 @@
                 </div>
             </section>
 
+            <!-- SVGイラスト -->
+            <div class="hero-illustration">
+                <svg class="browser-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="browserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="10" stdDeviation="20" flood-opacity="0.3"/>
+                        </filter>
+                    </defs>
+
+                    <!-- ブラウザウィンドウ -->
+                    <g filter="url(#shadow)">
+                        <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" opacity="0.95"/>
+                        <rect x="50" y="50" width="700" height="40" rx="10" fill="url(#browserGrad)"/>
+
+                        <!-- ドットボタン -->
+                        <circle cx="70" cy="70" r="6" fill="#ff5f57">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="90" cy="70" r="6" fill="#ffbd2e">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="110" cy="70" r="6" fill="#28ca42">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+                        </circle>
+
+                        <!-- コンテンツ領域 -->
+                        <rect x="70" y="110" width="660" height="30" rx="5" fill="#e0e7ff">
+                            <animate attributeName="width" values="660;600;660" dur="4s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="70" y="160" width="400" height="15" rx="3" fill="#c7d2fe"/>
+                        <rect x="70" y="185" width="500" height="15" rx="3" fill="#c7d2fe"/>
+                        <rect x="70" y="210" width="450" height="15" rx="3" fill="#c7d2fe"/>
+
+                        <!-- カード -->
+                        <g class="card-group">
+                            <rect x="70" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff" stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="290" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff" stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" begin="0.5s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="510" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff" stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" begin="1s" repeatCount="indefinite"/>
+                            </rect>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
             <section>
                 <h2>対象読者</h2>
                 <p>このガイドは、以下のような方を対象としています：</p>
@@ -250,7 +304,42 @@
             <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
         </div>
     </footer>
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
 </body>
 </html>
 
