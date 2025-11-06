@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Google Stitch活用ガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Google Stitch活用ガイド</h1>
+            <p>AIでデザインを生成して実装まで進める実践的ワークフロー</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="setup.html">準備編</a></li>
+                <li><a href="basics.html">基礎知識編</a></li>
+                <li><a href="practice.html">実践編</a></li>
+                <li><a href="stitch-workflow.html" class="active">Stitch活用</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <div class="main-content">
+                <section>
+                    <h2 id="what-is-stitch">Google Stitchとは？</h2>
+                    <p>
+                        <strong>Google Stitch</strong>は、Googleが2025年5月のGoogle I/Oで発表したAI駆動のUI生成サービスです。
+                        テキストや画像からWebサイトやアプリのデザインを自動生成し、HTML/CSSコードやFigmaファイルとして出力できます。
+                    </p>
+
+                    <div class="card">
+                        <h3>✨ Stitchの主な機能</h3>
+                        <ul>
+                            <li><strong>テキストからUI生成</strong>：自然言語で説明するだけでデザインが完成</li>
+                            <li><strong>画像からUI生成</strong>：手書きスケッチやスクリーンショットから生成</li>
+                            <li><strong>Figmaエクスポート</strong>：デザインをFigmaに直接貼り付け可能</li>
+                            <li><strong>コード生成</strong>：HTML/CSSコードを自動生成</li>
+                            <li><strong>レスポンシブ対応</strong>：スマホ・タブレット・PC対応デザイン</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>アクセス方法：</strong> <a href="https://stitch.withgoogle.com" target="_blank" rel="noopener">https://stitch.withgoogle.com</a> にGoogleアカウントでログイン（18歳以上、現在は無料）
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="why-use-stitch">なぜStitchを使うのか？</h2>
+
+                    <div class="card">
+                        <h3>💭 従来の方法との違い</h3>
+
+                        <h4>❌ 従来の方法（デザインなしで実装）</h4>
+                        <ol>
+                            <li>いきなりコードを書き始める</li>
+                            <li>「何となく」でレイアウトを決める</li>
+                            <li>デザインが統一されず、後で大幅修正</li>
+                            <li>レスポンシブ対応を後から追加して苦労</li>
+                        </ol>
+
+                        <h4>✅ Stitchを使った方法</h4>
+                        <ol>
+                            <li><strong>デザインを先に確定</strong>：実装前にビジュアルで確認</li>
+                            <li><strong>統一感のあるデザイン</strong>：AIが適切な配色・余白を提案</li>
+                            <li><strong>レスポンシブ対応済み</strong>：最初から全デバイス対応</li>
+                            <li><strong>実装の叩き台</strong>：生成コードを元に効率的に実装</li>
+                        </ol>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>ポイント：</strong> Stitchは「デザイン確定 → 実装」という正しい順序を、初心者でも実現できるツールです。
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="workflow">完全なワークフロー</h2>
+
+                    <p>Stitchを使ったWebページ制作の完全な流れを、実例を交えて解説します。</p>
+
+                    <div class="card">
+                        <h3>📋 フェーズ1: 要件定義</h3>
+                        <p>まず、<strong>何を作るのか</strong>を明確にします。この段階でChatGPTを活用すると効果的です。</p>
+
+                        <h4>ChatGPTでの整理例</h4>
+                        <div class="code-block">
+                            <p><strong>あなた：</strong></p>
+                            <p>「学習サイトのレッスン一覧ページを作りたいです。どんな要素が必要ですか？」</p>
+
+                            <p><strong>ChatGPT：</strong></p>
+                            <p>「レッスン一覧ページには以下の要素が推奨されます：</p>
+                            <ul>
+                                <li>ヘッダー（サイト名、ナビゲーション）</li>
+                                <li>検索・フィルター機能</li>
+                                <li>レッスンカード（画像、タイトル、説明、価格、ボタン）</li>
+                                <li>カテゴリー別フィルター</li>
+                                <li>ページネーション</li>
+                                <li>フッター</li>
+                            </ul>
+                            <p>これらを含めた要件定義書を作成しましょう。」</p>
+                        </div>
+
+                        <h4>要件定義書テンプレート</h4>
+                        <div class="code-block">
+<pre><code># 要件定義書：レッスン一覧ページ
+
+## 目的
+ユーザーが利用可能なレッスンを見つけやすく、申し込みまでスムーズに行える
+
+## 必要な要素
+1. ヘッダー
+   - サイトロゴ
+   - ナビゲーション（ホーム、レッスン、マイページ、お問い合わせ）
+
+2. フィルターバー
+   - カテゴリー選択（プログラミング、デザイン、ビジネス、全て）
+   - 価格帯フィルター
+
+3. レッスンカード（グリッド表示）
+   - サムネイル画像
+   - カテゴリーラベル
+   - レッスンタイトル
+   - 短い説明文（2行程度）
+   - 価格表示
+   - 「詳細を見る」ボタン
+
+4. フッター
+   - コピーライト
+   - リンク集
+
+## デザイン要件
+- カラーパレット：
+  - プライマリー: #007bff (青)
+  - セカンダリー: #6c757d (グレー)
+  - 背景: #f8f9fa (ライトグレー)
+  - テキスト: #212529 (ダークグレー)
+
+- タイポグラフィ：
+  - フォント: 'Noto Sans JP'
+  - 見出し: 24px / 600
+  - 本文: 16px / 400
+
+- レイアウト：
+  - デスクトップ: 3列グリッド
+  - タブレット: 2列グリッド
+  - スマホ: 1列スタック
+
+- スペーシング：
+  - カード間隔: 32px
+  - カード内余白: 24px
+  - セクション間: 48px</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎨 フェーズ2: Stitchでデザイン生成</h3>
+
+                        <h4>ステップ2-1: プロンプトの作成</h4>
+                        <p>要件定義を元に、Stitch用の英語プロンプトを作成します。</p>
+
+                        <div class="alert alert-warning">
+                            <strong>ヒント：</strong> Stitchは英語での指示が最も精度が高いです。ChatGPTに日本語の要件定義を英語プロンプトに変換してもらうと便利です。
+                        </div>
+
+                        <div class="code-block">
+                            <p><strong>ChatGPTへの依頼：</strong></p>
+                            <p>「上記の要件定義を、Google Stitch用の英語プロンプトに変換してください。」</p>
+                        </div>
+
+                        <h4>生成された英語プロンプト例</h4>
+                        <div class="code-block">
+<pre><code>Create a modern lesson listing page for an online learning platform.
+
+Layout and Structure:
+- Header with logo and horizontal navigation (Home, Lessons, My Page, Contact)
+- Category filter bar with chips/pills (Programming, Design, Business, All)
+- Grid layout of lesson cards
+- Footer with copyright and links
+
+Lesson Cards (grid of 3 columns on desktop):
+Each card should include:
+- Thumbnail image at the top (16:9 ratio)
+- Category label badge (top-right corner)
+- Lesson title (h3, 20px)
+- Short description (2 lines, 14px)
+- Price tag
+- "View Details" button
+
+Design Style:
+- Modern, clean, and minimal
+- Card-based design with subtle shadows
+- Rounded corners (8px)
+- Smooth hover effects on cards
+
+Color Palette:
+- Primary: #007bff (blue)
+- Secondary: #6c757d (gray)
+- Background: #f8f9fa (light gray)
+- Text: #212529 (dark gray)
+- Card background: white
+
+Typography:
+- Font: 'Noto Sans JP' or similar sans-serif
+- Headings: 24px, weight 600
+- Body text: 16px, weight 400
+- Line height: 1.6
+
+Responsive Layout:
+- Desktop (1200px+): 3-column grid
+- Tablet (768px-1199px): 2-column grid
+- Mobile (<768px): 1-column stack
+
+Spacing:
+- Card gap: 32px
+- Card padding: 24px
+- Section spacing: 48px
+
+Interactive Elements:
+- Hover effect on cards (slight lift + shadow increase)
+- Button hover state (darker blue)
+- Filter chips active state</code></pre>
+                        </div>
+
+                        <h4>ステップ2-2: Stitchで生成</h4>
+                        <ol>
+                            <li>
+                                <a href="https://stitch.withgoogle.com" target="_blank" rel="noopener">https://stitch.withgoogle.com</a> にアクセス
+                            </li>
+                            <li>上記のプロンプトを入力フィールドに貼り付け</li>
+                            <li>「Generate」ボタンをクリック</li>
+                            <li>約20秒〜1分でデザインが生成されます</li>
+                        </ol>
+
+                        <h4>ステップ2-3: デザインの確認と調整</h4>
+                        <p>生成されたデザインを確認し、必要に応じて調整します。</p>
+
+                        <div class="alert alert-info">
+                            <strong>チェックポイント：</strong>
+                            <ul>
+                                <li>✅ 要件定義の全要素が含まれているか</li>
+                                <li>✅ 色使いが指定通りか</li>
+                                <li>✅ レイアウトが適切か</li>
+                                <li>✅ テキストサイズが読みやすいか</li>
+                                <li>✅ ボタンやリンクが明確か</li>
+                            </ul>
+                        </div>
+
+                        <p><strong>修正が必要な場合：</strong></p>
+                        <div class="code-block">
+<pre><code>The design looks good! Please make these adjustments:
+
+1. Increase card padding from 16px to 24px
+2. Make the "View Details" button larger and more prominent
+3. Add more spacing between the category filter and lesson grid (from 24px to 40px)
+4. Make card shadows more subtle
+5. Change category badge position from top-right to top-left</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>💾 フェーズ3: デザインとコードの取得</h3>
+
+                        <h4>方法1: Figmaにエクスポート（推奨）</h4>
+                        <ol>
+                            <li>Stitchで「Export to Figma」ボタンをクリック</li>
+                            <li>Figmaが開き、デザインが自動的に配置される</li>
+                            <li>Figmaで細かい調整（色の微調整、フォント変更など）</li>
+                            <li>デザインのスクリーンショットを撮影（後でCursorに渡す用）</li>
+                        </ol>
+
+                        <div class="alert alert-success">
+                            <strong>メリット：</strong> Figmaで調整することで、デザインを完璧に仕上げてから実装に移れます。
+                        </div>
+
+                        <h4>方法2: コードを直接取得</h4>
+                        <ol>
+                            <li>Stitchで「Get Code」または「Export Code」をクリック</li>
+                            <li>HTML/CSSコードがコピーされる</li>
+                            <li>コードをテキストファイルに保存</li>
+                        </ol>
+
+                        <p><strong>生成されるコードの例：</strong></p>
+                        <div class="code-block">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;レッスン一覧&lt;/title&gt;
+  &lt;style&gt;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+    .header {
+      background: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding: 48px 0;
+    }
+    .lesson-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .lesson-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    /* ... 他のスタイル ... */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;!-- HTMLコンテンツ --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🔧 フェーズ4: Cursorで実装</h3>
+
+                        <p>いよいよ実装フェーズです。Stitchで生成したデザインとコードを元に、実際のWebサイトに組み込みます。</p>
+
+                        <h4>ステップ4-1: プロジェクトの準備</h4>
+                        <div class="code-block">
+<pre><code># 1. 新しいブランチを作成（Gitを使用している場合）
+git checkout -b feature/lesson-listing
+
+# 2. 既存のプロジェクト構造を確認
+# 例：
+# project/
+# ├── index.html
+# ├── css/
+# │   └── styles.css
+# ├── js/
+# │   └── script.js
+# └── pages/
+#     └── lessons.html  ← 新しく作成するファイル</code></pre>
+                        </div>
+
+                        <h4>ステップ4-2: Cursorプランモードで実装計画</h4>
+                        <p>Cursorのプランモードを開き、以下のプロンプトを入力します：</p>
+
+                        <div class="code-block">
+<pre><code>Google Stitchで生成したデザインを元に、レッスン一覧ページを実装したい。
+
+## 実装内容
+1. pages/lessons.html を新規作成
+2. Stitchから取得したHTML構造をベースに実装
+3. CSSは既存のcss/styles.cssに追加（または新規にcss/lessons.cssを作成）
+4. レスポンシブ対応（モバイル、タブレット、デスクトップ）
+5. JavaScriptでフィルター機能を実装
+
+## デザイン仕様
+- 添付のスクリーンショット（Figmaから取得）を参照
+- または、以下のStitchコードを参考に：
+[Stitchから取得したコードをここに貼り付け]
+
+## 既存プロジェクトとの統合
+- 既存のヘッダー・フッターのスタイルを維持
+- 既存のナビゲーションからリンクできるようにする
+- 既存のcss/styles.cssの変数（色定義など）を使用
+
+実装計画を立ててください。</code></pre>
+                        </div>
+
+                        <h4>ステップ4-3: プランのレビュー</h4>
+                        <p>Cursorが提案した実装計画を確認します。</p>
+
+                        <div class="alert alert-info">
+                            <strong>確認ポイント：</strong>
+                            <ul>
+                                <li>既存ファイルを壊さないか</li>
+                                <li>新規ファイルの配置場所は適切か</li>
+                                <li>Stitchのデザインが正しく反映されるか</li>
+                                <li>レスポンシブ対応が含まれているか</li>
+                            </ul>
+                        </div>
+
+                        <h4>ステップ4-4: 実装の実行</h4>
+                        <ol>
+                            <li>プランを承認して実装を開始</li>
+                            <li>Cursorが自動的にファイルを作成・編集</li>
+                            <li>Cursor内蔵ブラウザで随時確認</li>
+                            <li>デザインと比較しながら微調整</li>
+                        </ol>
+
+                        <h4>ステップ4-5: 動的機能の追加</h4>
+                        <p>Stitchは静的なデザインを生成するため、インタラクティブな機能はJavaScriptで追加します。</p>
+
+                        <div class="code-block">
+<pre><code>// js/lessons.js
+
+// レッスンデータ（実際はAPIから取得）
+const lessons = [
+  {
+    id: 1,
+    title: 'HTML基礎コース',
+    description: 'Webページの基本構造を学びます',
+    price: '無料',
+    category: 'programming',
+    image: 'images/html-course.jpg'
+  },
+  {
+    id: 2,
+    title: 'CSSデザイン入門',
+    description: '美しいデザインを作る方法',
+    price: '¥2,980',
+    category: 'design',
+    image: 'images/css-course.jpg'
+  },
+  // ... 他のレッスン
+];
+
+// ページ読み込み時に実行
+document.addEventListener('DOMContentLoaded', () => {
+  renderLessons(lessons);
+  setupFilters();
+});
+
+// レッスンカードを生成
+function renderLessons(lessonsToShow) {
+  const grid = document.querySelector('.lesson-grid');
+  grid.innerHTML = '';
+
+  lessonsToShow.forEach(lesson => {
+    const card = createLessonCard(lesson);
+    grid.appendChild(card);
+  });
+}
+
+// カード要素を作成
+function createLessonCard(lesson) {
+  const card = document.createElement('div');
+  card.className = 'lesson-card';
+  card.innerHTML = `
+    &lt;div class="card-image"&gt;
+      &lt;img src="${lesson.image}" alt="${lesson.title}"&gt;
+      &lt;span class="category-badge"&gt;${getCategoryLabel(lesson.category)}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="card-content"&gt;
+      &lt;h3&gt;${lesson.title}&lt;/h3&gt;
+      &lt;p&gt;${lesson.description}&lt;/p&gt;
+      &lt;div class="card-footer"&gt;
+        &lt;span class="price"&gt;${lesson.price}&lt;/span&gt;
+        &lt;button class="btn-primary" onclick="viewLesson(${lesson.id})"&gt;
+          詳細を見る
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `;
+  return card;
+}
+
+// フィルター機能
+function setupFilters() {
+  const filterButtons = document.querySelectorAll('.filter-chip');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const category = e.target.dataset.category;
+
+      // アクティブ状態を更新
+      filterButtons.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+
+      // フィルタリング
+      if (category === 'all') {
+        renderLessons(lessons);
+      } else {
+        const filtered = lessons.filter(l => l.category === category);
+        renderLessons(filtered);
+      }
+    });
+  });
+}
+
+// カテゴリーラベルを取得
+function getCategoryLabel(category) {
+  const labels = {
+    programming: 'プログラミング',
+    design: 'デザイン',
+    business: 'ビジネス'
+  };
+  return labels[category] || category;
+}
+
+// レッスン詳細ページへ
+function viewLesson(lessonId) {
+  window.location.href = `lesson-detail.html?id=${lessonId}`;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🧪 フェーズ5: テストと調整</h3>
+
+                        <h4>デザイン確認</h4>
+                        <ol>
+                            <li>Stitchのデザインと実装を並べて比較</li>
+                            <li>色・フォント・余白が一致しているか確認</li>
+                            <li>細かい調整が必要な場合はCSSを修正</li>
+                        </ol>
+
+                        <h4>レスポンシブ確認</h4>
+                        <div class="code-block">
+<pre><code># Cursorの内蔵ブラウザで確認
+1. デスクトップ表示（1200px以上）
+   → 3列グリッドになっているか
+
+2. タブレット表示（768px-1199px）
+   → 2列グリッドになっているか
+
+3. スマホ表示（768px未満）
+   → 1列スタックになっているか
+   → ボタンが押しやすいサイズか
+   → テキストが読みやすいか</code></pre>
+                        </div>
+
+                        <h4>機能確認</h4>
+                        <ul>
+                            <li>フィルター機能が動作するか</li>
+                            <li>カードのホバー効果が表示されるか</li>
+                            <li>ボタンクリックで遷移するか</li>
+                            <li>画像が正しく表示されるか</li>
+                        </ul>
+
+                        <h4>ブラウザ互換性確認</h4>
+                        <ul>
+                            <li>Chrome</li>
+                            <li>Firefox</li>
+                            <li>Safari</li>
+                            <li>Edge</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>🚀 フェーズ6: デプロイ</h3>
+
+                        <h4>Git commit & push</h4>
+                        <div class="code-block">
+<pre><code># 変更をコミット
+git add .
+git commit -m "✨ レッスン一覧ページを追加（Stitch生成デザインを使用）"
+
+# リモートにプッシュ
+git push origin feature/lesson-listing</code></pre>
+                        </div>
+
+                        <h4>プルリクエスト作成</h4>
+                        <ol>
+                            <li>GitHubでプルリクエストを作成</li>
+                            <li>説明欄に以下を記載：
+                                <ul>
+                                    <li>実装内容</li>
+                                    <li>Stitchで生成したデザインのスクリーンショット</li>
+                                    <li>実装後のスクリーンショット</li>
+                                    <li>テスト結果</li>
+                                </ul>
+                            </li>
+                            <li>レビュー依頼</li>
+                        </ol>
+
+                        <h4>本番デプロイ</h4>
+                        <p>マージ後、本番環境にデプロイします。</p>
+                        <ul>
+                            <li>Netlify / Vercel の場合：自動デプロイ</li>
+                            <li>GitHub Pages の場合：mainブランチにマージ後自動反映</li>
+                            <li>その他のホスティング：デプロイスクリプト実行</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="advanced-tips">実践的なTips</h2>
+
+                    <div class="card">
+                        <h3>💡 Tip 1: 段階的なプロンプト改善</h3>
+                        <p>一度に完璧なデザインを求めず、段階的に改善していきます。</p>
+
+                        <h4>第1段階：基本構造</h4>
+                        <div class="code-block">
+<pre><code>Create a simple lesson listing page with:
+- Header
+- Grid of lesson cards
+- Clean and minimal design</code></pre>
+                        </div>
+
+                        <h4>第2段階：詳細追加</h4>
+                        <div class="code-block">
+<pre><code>Improve the previous design:
+- Add category filter chips
+- Add images to cards
+- Use blue (#007bff) as primary color
+- Add hover effects</code></pre>
+                        </div>
+
+                        <h4>第3段階：微調整</h4>
+                        <div class="code-block">
+<pre><code>Final adjustments:
+- Increase card padding to 24px
+- Make shadows more subtle
+- Add smooth transitions
+- Improve button prominence</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>💡 Tip 2: 画像からの生成を活用</h3>
+                        <p>テキストプロンプトだけでなく、画像からも生成できます。</p>
+
+                        <h4>使い方</h4>
+                        <ol>
+                            <li><strong>手書きスケッチ</strong>：紙にラフスケッチを描いて撮影</li>
+                            <li><strong>既存サイト</strong>：参考にしたいサイトのスクリーンショット</li>
+                            <li><strong>Figmaモックアップ</strong>：簡単なモックアップをFigmaで作成してエクスポート</li>
+                        </ol>
+
+                        <div class="code-block">
+<pre><code>Based on this sketch/screenshot, create a similar design but with:
+- Different color scheme (use blue #007bff)
+- Modern card-based layout
+- Better spacing and typography
+- Responsive grid layout</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>💡 Tip 3: デザインシステムの活用</h3>
+                        <p>プロジェクト全体で統一感を保つため、デザイントークンをプロンプトに含めます。</p>
+
+                        <div class="code-block">
+<pre><code>Use this design system for all elements:
+
+Colors:
+- Primary: #007bff
+- Secondary: #6c757d
+- Success: #28a745
+- Background: #f8f9fa
+- Text: #212529
+
+Spacing (8px grid):
+- xs: 8px
+- sm: 16px
+- md: 24px
+- lg: 32px
+- xl: 48px
+
+Typography:
+- Font: 'Noto Sans JP'
+- H1: 32px / 700
+- H2: 24px / 600
+- H3: 20px / 600
+- Body: 16px / 400
+
+Border radius: 8px
+Shadows: 0 2px 8px rgba(0,0,0,0.1)</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>💡 Tip 4: コンポーネントごとに生成</h3>
+                        <p>大きなページを一度に作るのではなく、コンポーネント単位で生成します。</p>
+
+                        <ol>
+                            <li><strong>ヘッダー</strong>：ナビゲーションを含むヘッダーコンポーネント</li>
+                            <li><strong>カード</strong>：レッスンカードのデザイン</li>
+                            <li><strong>フィルター</strong>：フィルターバーのデザイン</li>
+                            <li><strong>フッター</strong>：フッターコンポーネント</li>
+                        </ol>
+
+                        <p>各コンポーネントを生成したら、Figmaで組み合わせて全体を確認します。</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>💡 Tip 5: Stitchコードの扱い方</h3>
+                        <p>Stitchが生成するコードは<strong>「叩き台」</strong>として使います。</p>
+
+                        <div class="alert alert-warning">
+                            <strong>注意：</strong> Stitchのコードをそのまま本番に使うのは推奨されません。以下の理由があります：
+                            <ul>
+                                <li>既存プロジェクトの構造に合わない</li>
+                                <li>最適化されていない（重複スタイルなど）</li>
+                                <li>アクセシビリティが不十分な場合がある</li>
+                                <li>SEO対策が含まれていない</li>
+                            </ul>
+                        </div>
+
+                        <h4>推奨される使い方</h4>
+                        <ol>
+                            <li>Stitchのコードから<strong>構造とスタイルのアイデア</strong>を得る</li>
+                            <li>既存プロジェクトの規約に合わせて<strong>再実装</strong></li>
+                            <li>Cursorに「Stitchのこのスタイルを参考に、既存のcss/styles.cssに統合して」と依頼</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="real-example">実例：このサイトにStitchを使う場合</h2>
+
+                    <p>このガイドサイト自体に新しいページを追加する場合の実例を見てみましょう。</p>
+
+                    <div class="card">
+                        <h3>シナリオ：「学習ロードマップ」ページを追加</h3>
+
+                        <h4>ステップ1: 要件定義</h4>
+                        <div class="code-block">
+<pre><code># 要件定義：学習ロードマップページ
+
+## 目的
+初心者が学習の順序を理解できる視覚的なロードマップを提供
+
+## 必要な要素
+1. ステップカード（5段階）
+   - ステップ番号
+   - タイトル
+   - 説明
+   - 所要時間
+   - 詳細ページへのリンク
+
+2. 進捗インジケーター（ステップ間を繋ぐ線）
+
+3. 各ステップの詳細（開閉式アコーディオン）
+
+## デザイン要件
+- 既存サイトと統一感のあるデザイン
+- 縦方向のタイムライン表示
+- モバイルでも見やすい</code></pre>
+                        </div>
+
+                        <h4>ステップ2: Stitchプロンプト</h4>
+                        <div class="code-block">
+<pre><code>Create a learning roadmap page with a vertical timeline design.
+
+Structure:
+- 5 step cards arranged vertically
+- Connected by a vertical line (timeline)
+- Each card has: step number, title, description, duration, link button
+- Expandable accordion sections for detailed content
+
+Design should match this existing site:
+- Primary color: #667eea (purple-blue gradient compatible)
+- Background: white cards on light background
+- Cards: white background, 8px border radius, subtle shadow
+- Typography: Clean sans-serif, hierarchical sizing
+- Spacing: Generous padding and margins
+
+Step Cards:
+- Step number in a circular badge (left side)
+- Title (h3, bold)
+- Short description (2-3 lines)
+- Duration badge (e.g., "2-3 hours")
+- "View Details" button
+
+Timeline:
+- Vertical line connecting all steps
+- Different color for completed/current/upcoming steps
+
+Responsive:
+- Desktop: Full timeline view
+- Mobile: Simplified, compact cards</code></pre>
+                        </div>
+
+                        <h4>ステップ3: Stitchで生成</h4>
+                        <p>上記プロンプトでStitchで生成 → Figmaにエクスポート → スクリーンショット撮影</p>
+
+                        <h4>ステップ4: Cursorで実装</h4>
+                        <div class="code-block">
+<pre><code>このサイトに「学習ロードマップ」ページを追加したい。
+
+## 実装内容
+1. pages/roadmap.html を新規作成
+2. 既存のヘッダー・ナビゲーション・フッターを継承
+3. css/styles.css にロードマップ用のスタイルを追加
+4. 5つのステップを縦に並べたタイムライン表示
+5. JavaScriptでアコーディオン機能を実装
+
+## デザイン
+添付のStitchデザインを参考に実装してください。
+[スクリーンショットまたはStitchコードを添付]
+
+## 既存スタイルとの統合
+- 既存のカードスタイル（.card）を活用
+- 既存の色変数を使用
+- 既存のボタンスタイル（.btn）を使用
+
+実装プランを立ててください。</code></pre>
+                        </div>
+
+                        <h4>ステップ5: 実装結果</h4>
+                        <p>Cursorが以下を自動生成：</p>
+                        <ul>
+                            <li><code>pages/roadmap.html</code> - 新しいページ</li>
+                            <li><code>css/styles.css</code> - ロードマップ用スタイルを追加</li>
+                            <li><code>js/roadmap.js</code> - アコーディオン機能</li>
+                        </ul>
+
+                        <p>ナビゲーションに追加：</p>
+                        <div class="code-block">
+<pre><code>&lt;li&gt;&lt;a href="pages/roadmap.html"&gt;学習ロードマップ&lt;/a&gt;&lt;/li&gt;</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="troubleshooting">よくある問題と対処法</h2>
+
+                    <div class="card">
+                        <h3>❌ 問題1: デザインが要件と違う</h3>
+                        <p><strong>原因：</strong> プロンプトが曖昧、または情報不足</p>
+                        <p><strong>対処法：</strong></p>
+                        <ul>
+                            <li>より具体的なプロンプトに書き直す</li>
+                            <li>色コード、サイズ、余白を数値で指定</li>
+                            <li>参考画像を添付する</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>❌ 問題2: レスポンシブ対応が不十分</h3>
+                        <p><strong>原因：</strong> プロンプトにレスポンシブ要件が不明確</p>
+                        <p><strong>対処法：</strong></p>
+                        <div class="code-block">
+<pre><code>Please update the design to be fully responsive:
+- Desktop (1200px+): [詳細]
+- Tablet (768px-1199px): [詳細]
+- Mobile (<768px): [詳細]
+
+Ensure all interactive elements are touch-friendly on mobile (minimum 44px tap target).</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>❌ 問題3: Stitchのコードが既存プロジェクトで動かない</h3>
+                        <p><strong>原因：</strong> クラス名の衝突、スタイルの優先順位</p>
+                        <p><strong>対処法：</strong></p>
+                        <ul>
+                            <li>Stitchのコードは参考程度に</li>
+                            <li>Cursorに「既存プロジェクトの規約に合わせて再実装」を依頼</li>
+                            <li>既存のCSSクラスを再利用</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>❌ 問題4: Figmaエクスポートが上手くいかない</h3>
+                        <p><strong>原因：</strong> ブラウザの権限、Figmaの設定</p>
+                        <p><strong>対処法：</strong></p>
+                        <ol>
+                            <li>ポップアップブロッカーを無効化</li>
+                            <li>Figmaにログインしているか確認</li>
+                            <li>それでもダメなら「Get Code」でコードを取得</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="best-practices">ベストプラクティスまとめ</h2>
+
+                    <div class="card">
+                        <h3>✅ 推奨される手順</h3>
+                        <ol>
+                            <li><strong>要件定義を最優先</strong>：ChatGPTで要件を明確化</li>
+                            <li><strong>デザインを先に確定</strong>：Stitchでビジュアルを作成</li>
+                            <li><strong>Figmaで仕上げ</strong>：細かい調整はFigmaで</li>
+                            <li><strong>プランモードで計画</strong>：Cursorで実装計画を立てる</li>
+                            <li><strong>段階的に実装</strong>：コンポーネント単位で進める</li>
+                            <li><strong>随時確認</strong>：内蔵ブラウザでデザインと比較</li>
+                        </ol>
+                    </div>
+
+                    <div class="card">
+                        <h3>✅ Stitchプロンプトのコツ</h3>
+                        <ul>
+                            <li>英語で書く（精度が高い）</li>
+                            <li>具体的な数値を含める（色コード、px、余白）</li>
+                            <li>段階的に改善する（一度で完璧を求めない）</li>
+                            <li>参考画像を活用する</li>
+                            <li>デザインシステムを定義する</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>✅ 実装のコツ</h3>
+                        <ul>
+                            <li>Stitchコードは「叩き台」として扱う</li>
+                            <li>既存プロジェクトの規約を優先</li>
+                            <li>CursorにStitchデザインとコードを渡す</li>
+                            <li>コンポーネント単位で実装</li>
+                            <li>アクセシビリティとSEOを忘れない</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 id="conclusion">まとめ</h2>
+
+                    <p>
+                        Google Stitchを使うことで、<strong>「デザイン → 実装」</strong>という正しい順序でWebページを作れるようになります。
+                        特に開発初心者にとって、デザインを先に確定できることは大きなメリットです。
+                    </p>
+
+                    <div class="alert alert-success">
+                        <strong>Stitchを使った開発の利点</strong>
+                        <ul>
+                            <li>✅ デザインを実装前に確認・承認できる</li>
+                            <li>✅ 統一感のあるデザインをAIが提案</li>
+                            <li>✅ レスポンシブ対応が最初から含まれる</li>
+                            <li>✅ 実装の叩き台があるので迷わない</li>
+                            <li>✅ Figmaとの連携で調整も簡単</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        <strong>推奨ワークフロー：</strong>
+                    </p>
+                    <ol class="steps">
+                        <li>ChatGPTで要件整理</li>
+                        <li>Stitchでデザイン生成</li>
+                        <li>Figmaで微調整</li>
+                        <li>Cursorプランモードで実装計画</li>
+                        <li>実装とテスト</li>
+                        <li>デプロイ</li>
+                    </ol>
+
+                    <p>
+                        このワークフローをマスターすれば、品質の高いWebページを効率的に作成できるようになります。
+                    </p>
+                </section>
+
+                <section>
+                    <h2>関連ページ</h2>
+                    <ul>
+                        <li><a href="practice.html">実践編：実際にWebサイトを作成してみよう</a></li>
+                        <li><a href="basics.html">基礎知識編：ツールと技術の理解</a></li>
+                        <li><a href="faq.html">FAQ：よくある質問</a></li>
+                    </ul>
+                </section>
+
+                <div class="alert alert-info">
+                    <p><strong>次のステップ：</strong></p>
+                    <p>実際にStitchを使ってデザインを生成してみましょう！まずは簡単なカードコンポーネントから始めるのがおすすめです。</p>
+                    <a href="https://stitch.withgoogle.com" target="_blank" rel="noopener" class="btn">Stitchを試す →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+        </div>
+    </footer>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/toc.js"></script>
+</body>
+</html>
