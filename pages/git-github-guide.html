@@ -663,6 +663,179 @@ git push</code></pre>
                 </div>
             </section>
 
+            <section id="security" aria-labelledby="security-heading">
+                <h2 id="security-heading">第11話：「GitHubでメールアドレスが公開される？セキュリティ対策」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、GitHubでリポジトリをパブリックにすると、個人情報が公開されたりしませんか？ちょっと心配で...</p>
+
+                    <p><strong>先輩：</strong>いい質問だね！実は気をつけないと<strong>メールアドレスが公開されてしまう</strong>んだ。</p>
+
+                    <p><strong>タロウ：</strong>えっ！そうなんですか！？</p>
+
+                    <h3>📧 コミット履歴にメールアドレスが残る</h3>
+
+                    <p><strong>先輩：</strong>さっき教えたコミットを覚えてる？実はコミットには、<strong>作成者のメールアドレス</strong>も一緒に記録されるんだ。</p>
+
+                    <pre><code># コミット履歴を見てみると...
+git log --format='%an &lt;%ae&gt;'
+
+# 出力例
+John Doe &lt;john@example.com&gt;
+Jane Smith &lt;jane@example.com&gt;</code></pre>
+
+                    <p><strong>タロウ：</strong>本当だ！メールアドレスが丸見えですね...</p>
+
+                    <p><strong>先輩：</strong>リポジトリをパブリックにすると、この履歴も世界中に公開されるんだ。すると：</p>
+                    <ul>
+                        <li>❌ スパムメールの標的になる</li>
+                        <li>❌ フィッシング攻撃のリスク</li>
+                        <li>❌ 個人情報の特定</li>
+                        <li>❌ ソーシャルエンジニアリング攻撃</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>怖い...どうすればいいんですか？</p>
+
+                    <h3>✅ 解決策：GitHubのnoreplyメールアドレスを使う</h3>
+
+                    <p><strong>先輩：</strong>GitHubには<strong>「非公開メールアドレス」</strong>という機能があるんだ！</p>
+
+                    <p><strong>タロウ：</strong>非公開メールアドレス？</p>
+
+                    <p><strong>先輩：</strong>これは、GitHubが提供する特殊なメールアドレスで、こんな形式だよ：</p>
+                    <pre><code>123456789+username@users.noreply.github.com</code></pre>
+
+                    <p><strong>先輩：</strong>このアドレスを使えば、本当のメールアドレスは公開されないんだ！</p>
+
+                    <h3>🔧 設定方法</h3>
+
+                    <p><strong>タロウ：</strong>どうやって設定するんですか？</p>
+
+                    <p><strong>先輩：</strong>簡単だよ！まずGitHubの設定を変更しよう：</p>
+
+                    <ol class="steps">
+                        <li>
+                            <strong>GitHubの設定ページを開く</strong><br>
+                            Settings → Emails
+                        </li>
+                        <li>
+                            <strong>2つの項目にチェック</strong>
+                            <ul>
+                                <li>☑ Keep my email addresses private</li>
+                                <li>☑ Block command line pushes that expose my email</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>noreplyメールアドレスをコピー</strong><br>
+                            ページに表示されている<code>@users.noreply.github.com</code>のアドレスをコピー
+                        </li>
+                    </ol>
+
+                    <p><strong>先輩：</strong>次に、ローカルのGit設定を変更するんだ：</p>
+
+                    <pre><code># プロジェクトごとに設定する場合
+git config user.email "123456789+username@users.noreply.github.com"
+
+# すべてのプロジェクトに適用する場合（おすすめ）
+git config --global user.email "123456789+username@users.noreply.github.com"
+
+# 設定を確認
+git config user.email</code></pre>
+
+                    <p><strong>タロウ：</strong>これで次からのコミットは安全なんですね！</p>
+
+                    <p><strong>先輩：</strong>その通り！でも、<strong>過去のコミット</strong>にはまだ本当のメールアドレスが残ってるかもしれないから、確認しよう：</p>
+
+                    <pre><code># コミット履歴のメールアドレスを確認
+git log --format='%an &lt;%ae&gt;' | sort -u</code></pre>
+
+                    <h3>🔍 その他の公開経路に注意</h3>
+
+                    <p><strong>先輩：</strong>メールアドレスはコミット履歴以外にも公開される可能性があるんだ：</p>
+
+                    <div class="alert alert-warning">
+                        <strong>チェックすべき場所：</strong>
+                        <ul>
+                            <li>📄 <code>package.json</code>の<code>author</code>フィールド</li>
+                            <li>📄 <code>README.md</code>の連絡先情報</li>
+                            <li>📄 <code>LICENSE</code>ファイルの著作権表示</li>
+                            <li>📄 <code>.env.example</code>などの設定例</li>
+                        </ul>
+                        <p>これらのファイルにメールアドレスを書く時は注意しよう！</p>
+                    </div>
+
+                    <p><strong>タロウ：</strong>なるほど...コードの中身も気をつけないといけないんですね。</p>
+
+                    <h3>🛡️ その他のセキュリティベストプラクティス</h3>
+
+                    <p><strong>先輩：</strong>ついでに、他のセキュリティ対策も教えておくね！</p>
+
+                    <h4>1. 秘密情報は絶対にコミットしない</h4>
+                    <div class="alert alert-danger">
+                        <strong>コミットしてはいけないもの：</strong>
+                        <ul>
+                            <li>❌ <code>.env</code> - APIキー、パスワード、トークン</li>
+                            <li>❌ <code>credentials.json</code> - 認証情報</li>
+                            <li>❌ <code>config.secret.js</code> - 秘密の設定</li>
+                            <li>❌ <code>id_rsa</code> - SSH秘密鍵</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>先輩：</strong>これらは<code>.gitignore</code>ファイルに書いて除外しよう：</p>
+
+                    <pre><code># .gitignore ファイルの例
+.env
+.env.local
+*.secret.js
+credentials.json
+node_modules/
+.DS_Store</code></pre>
+
+                    <h4>2. 定期的にセキュリティチェック</h4>
+                    <pre><code># リポジトリ内でメールアドレスを検索
+git grep -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+
+# コミット履歴のメールアドレスを確認
+git log --all --format='%an &lt;%ae&gt;' | sort -u</code></pre>
+
+                    <h4>3. GitHub Pagesでも注意</h4>
+                    <p><strong>先輩：</strong>GitHub Pagesで公開する時も、コミット履歴はそのまま公開されるから、
+                    デプロイ前に必ずメール設定を確認しよう！</p>
+
+                    <h4>4. 間違ってコミットしてしまったら？</h4>
+                    <p><strong>タロウ：</strong>もし秘密情報をコミットしちゃったらどうしたらいいですか？</p>
+
+                    <p><strong>先輩：</strong>すぐに以下の対応を！</p>
+                    <ol class="steps">
+                        <li>
+                            <strong>まだプッシュしてない場合</strong>
+                            <pre><code># 最新のコミットを取り消す
+git reset HEAD~1
+
+# ファイルを修正して、再度コミット</code></pre>
+                        </li>
+                        <li>
+                            <strong>すでにプッシュしてしまった場合</strong>
+                            <ul>
+                                <li>APIキーやパスワードは<strong>すぐに変更・無効化</strong></li>
+                                <li>GitHubのサポートに連絡してキャッシュクリアを依頼</li>
+                                <li>履歴書き換えが必要な場合は慎重に（チームに影響）</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div class="alert alert-info">
+                        <strong>覚えておこう：</strong><br>
+                        GitHubに一度プッシュしたデータは、削除しても検索エンジンやアーカイブに残る可能性があります。
+                        だから<strong>「コミット前に確認」</strong>が最重要！
+                    </div>
+
+                    <p><strong>タロウ：</strong>わかりました！今後は気をつけます！</p>
+
+                    <p><strong>先輩：</strong>うん、最初は意識して確認する習慣をつけておくと、後々安心だよ。</p>
+                </div>
+            </section>
+
             <section id="summary" aria-labelledby="summary-heading">
                 <h2 id="summary-heading">まとめ：これだけは覚えよう！</h2>
 
@@ -704,6 +877,10 @@ git push</code></pre>
                                 <td><strong>ブランチ</strong></td>
                                 <td>並行世界（実験用の分岐）</td>
                             </tr>
+                            <tr>
+                                <td><strong>noreplyメール</strong></td>
+                                <td>GitHubが提供する非公開メールアドレス</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -725,6 +902,8 @@ git push</code></pre>
                         <li>✅ コミットメッセージは未来の自分へのメモ</li>
                         <li>✅ 失敗を恐れずに実験しよう（ブランチを使えば安全）</li>
                         <li>✅ わからなくなったら、<code>git status</code>で現在の状態を確認</li>
+                        <li>🔒 セキュリティ：noreplyメールアドレスを設定してプライバシー保護</li>
+                        <li>🔒 秘密情報（.env、APIキー）は絶対にコミットしない</li>
                     </ul>
                 </div>
 
