@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>AIツール大全：IDE編＆CLI編</h1>
@@ -15,25 +21,26 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav" aria-label="メインナビゲーション">
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="stitch-workflow.html">Stitch活用</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="../index.html">ホーム</a></li>
+                <li role="listitem"><a href="setup.html">準備編</a></li>
+                <li role="listitem"><a href="basics.html">基礎知識編</a></li>
+                <li role="listitem"><a href="practice.html">実践編</a></li>
+                <li role="listitem"><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li role="listitem"><a href="ai-tools.html" class="active" aria-current="page">AIツール大全</a></li>
+                <li role="listitem"><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
             <!-- 目次サイドバー -->
             <aside class="toc-sidebar" id="tocSidebar">
@@ -50,8 +57,8 @@
                 </nav>
             </aside>
 
-            <section id="intro">
-                <h2>このページについて</h2>
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
                 <p>
                     「Cursorは聞いたことあるけど、他にどんなAI IDEがあるの？」「ターミナルで使えるAIツールって何？」
                     そんな疑問に、初心者の<strong>タロウさん</strong>とベテランエンジニアの<strong>先輩</strong>の対話を通じて答えていきます。
@@ -67,8 +74,8 @@
                 </div>
             </section>
 
-            <section id="overview">
-                <h2>第1話：「Cursor以外にも選択肢があるの？」</h2>
+            <section id="overview" aria-labelledby="overview-heading">
+                <h2 id="overview-heading">第1話：「Cursor以外にも選択肢があるの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>先輩、CursorっていうAI IDEを使ってるんですけど、他にも選択肢ってあるんですか？</p>
@@ -115,8 +122,8 @@
                 </div>
             </section>
 
-            <section id="ai-ide">
-                <h2>第2話：AI IDE編 - Cursor以外の選択肢</h2>
+            <section id="ai-ide" aria-labelledby="ai-ide-heading">
+                <h2 id="ai-ide-heading">第2話：AI IDE編 - Cursor以外の選択肢</h2>
 
                 <div class="card">
                     <h3 id="windsurf">🌊 Windsurf - 新進気鋭の対抗馬</h3>
@@ -335,8 +342,8 @@
                 </div>
             </section>
 
-            <section id="ai-cli">
-                <h2>第3話：AI CLI編 - ターミナルで使うAIツール</h2>
+            <section id="ai-cli" aria-labelledby="ai-cli-heading">
+                <h2 id="ai-cli-heading">第3話：AI CLI編 - ターミナルで使うAIツール</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>CLI版って、なんでわざわざターミナルで使うんですか？</p>
@@ -527,8 +534,8 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
                 </div>
             </section>
 
-            <section id="comparison">
-                <h2>第4話：「結局どれを選べばいいの？」</h2>
+            <section id="comparison" aria-labelledby="comparison-heading">
+                <h2 id="comparison-heading">第4話：「結局どれを選べばいいの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>先輩、たくさん教えてもらったんですけど...結局どれを選べばいいんですか？</p>
@@ -699,8 +706,8 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
                 </div>
             </section>
 
-            <section id="choosing">
-                <h2>第5話：「選び方のポイント」</h2>
+            <section id="choosing" aria-labelledby="choosing-heading">
+                <h2 id="choosing-heading">第5話：「選び方のポイント」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>先輩、まだ迷ってるんですけど...どう決めればいいですか？</p>
@@ -803,8 +810,8 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
                 </div>
             </section>
 
-            <section id="future">
-                <h2>第6話：「2025年のAI開発ツールトレンド」</h2>
+            <section id="future" aria-labelledby="future-heading">
+                <h2 id="future-heading">第6話：「2025年のAI開発ツールトレンド」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>今後、AI開発ツールってどうなっていくんですか？</p>
@@ -887,8 +894,8 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
                 </div>
             </section>
 
-            <section id="summary">
-                <h2>まとめ：これだけは覚えよう！</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ：これだけは覚えよう！</h2>
 
                 <div class="card">
                     <h3>🎯 重要ポイント</h3>
@@ -942,8 +949,8 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
                 <p><strong>タロウ：</strong>はい！頑張ります！</p>
             </section>
 
-            <section id="next-steps">
-                <h2>参考リンク</h2>
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">参考リンク</h2>
                 <div class="card">
                     <h3>公式サイト</h3>
                     <ul>

@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>対話で学ぶGit/GitHub入門</h1>
@@ -15,26 +21,26 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav" aria-label="メインナビゲーション">
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="stitch-workflow.html">Stitch活用</a></li>
-                <li><a href="ai-tools.html">AIツール大全</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="../index.html">ホーム</a></li>
+                <li role="listitem"><a href="setup.html">準備編</a></li>
+                <li role="listitem"><a href="basics.html">基礎知識編</a></li>
+                <li role="listitem"><a href="practice.html">実践編</a></li>
+                <li role="listitem"><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li role="listitem"><a href="ai-tools.html">AIツール大全</a></li>
+                <li role="listitem"><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
             <!-- 目次サイドバー -->
             <aside class="toc-sidebar" id="tocSidebar">
@@ -51,8 +57,8 @@
                 </nav>
             </aside>
 
-            <section id="intro">
-                <h2>このページについて</h2>
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
                 <p>
                     「Gitって名前は聞いたことあるけど、実際何なの？」「コミットとプッシュって何が違うの？」
                     そんな疑問に、初心者の<strong>タロウさん</strong>とベテランエンジニアの<strong>先輩</strong>の対話を通じて答えていきます。
@@ -64,8 +70,8 @@
                 </div>
             </section>
 
-            <section id="what-is-git">
-                <h2>第1話：「Gitって何？バージョン管理って何？」</h2>
+            <section id="what-is-git" aria-labelledby="what-is-git-heading">
+                <h2 id="what-is-git-heading">第1話：「Gitって何？バージョン管理って何？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>先輩、Gitって何ですか？よく聞くんですけど、正直よくわからなくて...</p>
@@ -105,8 +111,8 @@
                 </div>
             </section>
 
-            <section id="git-vs-github">
-                <h2>第2話：「GitとGitHubは違うの？」</h2>
+            <section id="git-vs-github" aria-labelledby="git-vs-github-heading">
+                <h2 id="git-vs-github-heading">第2話：「GitとGitHubは違うの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>あれ、でもGitHubっていうのもよく聞くんですけど...GitとGitHubって違うんですか？</p>
@@ -142,8 +148,8 @@
                 </div>
             </section>
 
-            <section id="repository">
-                <h2>第3話：「リポジトリって何？」</h2>
+            <section id="repository" aria-labelledby="repository-heading">
+                <h2 id="repository-heading">第3話：「リポジトリって何？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>Gitの説明でよく「リポジトリ」って言葉が出てくるんですけど、これって何ですか？</p>
@@ -195,8 +201,8 @@
                 </div>
             </section>
 
-            <section id="commit">
-                <h2>第4話：「コミットって何？セーブとは違うの？」</h2>
+            <section id="commit" aria-labelledby="commit-heading">
+                <h2 id="commit-heading">第4話：「コミットって何？セーブとは違うの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>「コミット」っていうのもよく聞くんですけど、これって「保存」のことですよね？</p>
@@ -254,8 +260,8 @@
                 </div>
             </section>
 
-            <section id="staging">
-                <h2>第5話：「ステージング？なんでコミット前にもう一手順あるの？」</h2>
+            <section id="staging" aria-labelledby="staging-heading">
+                <h2 id="staging-heading">第5話：「ステージング？なんでコミット前にもう一手順あるの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>コミットの前に「git add」っていうコマンドを使うって聞いたんですけど、
@@ -318,8 +324,8 @@ git commit -m "トップページと会社概要ページを更新"</code></pre>
                 </div>
             </section>
 
-            <section id="push-pull">
-                <h2>第6話：「プッシュとプル、なにが起きてるの？」</h2>
+            <section id="push-pull" aria-labelledby="push-pull-heading">
+                <h2 id="push-pull-heading">第6話：「プッシュとプル、なにが起きてるの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>コミットまではわかったんですけど、「プッシュ」と「プル」ってのもよく聞きます。
@@ -378,8 +384,8 @@ git pull
                 </div>
             </section>
 
-            <section id="branch">
-                <h2>第7話：「ブランチって何？なんで必要なの？」</h2>
+            <section id="branch" aria-labelledby="branch-heading">
+                <h2 id="branch-heading">第7話：「ブランチって何？なんで必要なの？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>「ブランチ」っていう概念もあるって聞いたんですけど...これは何ですか？</p>
@@ -452,8 +458,8 @@ git merge new-design</code></pre>
                 </div>
             </section>
 
-            <section id="common-mistakes">
-                <h2>第8話：「みんながつまずくポイント」</h2>
+            <section id="common-mistakes" aria-labelledby="common-mistakes-heading">
+                <h2 id="common-mistakes-heading">第8話：「みんながつまずくポイント」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>だいぶわかってきました！でも、実際使う時に気をつけることってありますか？</p>
@@ -511,8 +517,8 @@ git commit -m "レスポンシブ対応のため、CSSを調整"</code></pre>
                 </div>
             </section>
 
-            <section id="workflow">
-                <h2>第9話：「実際の作業の流れをまとめると？」</h2>
+            <section id="workflow" aria-labelledby="workflow-heading">
+                <h2 id="workflow-heading">第9話：「実際の作業の流れをまとめると？」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>色々教えてもらったので、最後に実際の流れをまとめてもらえますか？</p>
@@ -592,8 +598,8 @@ git push</code></pre>
                 </div>
             </section>
 
-            <section id="github-pages">
-                <h2>第10話：「GitHub PagesでWebサイトを公開してみよう！」</h2>
+            <section id="github-pages" aria-labelledby="github-pages-heading">
+                <h2 id="github-pages-heading">第10話：「GitHub PagesでWebサイトを公開してみよう！」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>最後に、GitHubでWebサイトを公開する方法も教えてください！</p>
@@ -648,8 +654,8 @@ git push</code></pre>
                 </div>
             </section>
 
-            <section id="summary">
-                <h2>まとめ：これだけは覚えよう！</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ：これだけは覚えよう！</h2>
 
                 <div class="card">
                     <h3>🎯 重要な概念</h3>
@@ -719,8 +725,8 @@ git push</code></pre>
                 頑張ってね！</p>
             </section>
 
-            <section id="next-steps">
-                <h2>次のステップ</h2>
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">次のステップ</h2>
                 <p>
                     Git/GitHubの基本がわかったら、実際に手を動かしてみましょう！
                 </p>

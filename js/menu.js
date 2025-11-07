@@ -1,14 +1,45 @@
 // ============================================
-// ハンバーガーメニューの制御
+// ハンバーガーメニューの制御（アクセシビリティ対応）
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
     if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
+        // メニューの開閉
+        function toggleMenu() {
+            const isOpen = navMenu.classList.contains('active');
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+
+            // アクセシビリティ: aria-expanded属性を更新
+            hamburger.setAttribute('aria-expanded', !isOpen);
+            hamburger.setAttribute('aria-label', !isOpen ? 'メニューを閉じる' : 'メニューを開く');
+
+            // アクセシビリティ: メニュー開閉をスクリーンリーダーに通知
+            announceToScreenReader(!isOpen ? 'メニューを開きました' : 'メニューを閉じました');
+
+            // メニューを開いた時、最初のリンクにフォーカスを移動
+            if (!isOpen) {
+                const firstLink = navMenu.querySelector('a');
+                if (firstLink) {
+                    setTimeout(() => firstLink.focus(), 100);
+                }
+            }
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // アクセシビリティ: Escキーでメニューを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'メニューを開く');
+                hamburger.focus(); // フォーカスをハンバーガーボタンに戻す
+                announceToScreenReader('メニューを閉じました');
+            }
         });
 
         // メニュー項目をクリックしたらメニューを閉じる
@@ -17,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'メニューを開く');
             });
         });
 
@@ -28,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'メニューを開く');
             }
         });
     }
@@ -58,6 +93,10 @@ class ThemeManager {
         localStorage.setItem('theme', this.theme);
         this.updateToggleButton();
         this.animateTransition();
+
+        // アクセシビリティ: テーマ変更をスクリーンリーダーに通知
+        const themeText = this.theme === 'dark' ? 'ダークモード' : 'ライトモード';
+        announceToScreenReader(`${themeText}に切り替えました`);
     }
 
     animateTransition() {
@@ -70,6 +109,7 @@ class ThemeManager {
     updateToggleButton() {
         const sunIcon = document.querySelector('.sun-icon');
         const moonIcon = document.querySelector('.moon-icon');
+        const themeToggle = document.getElementById('themeToggle');
 
         if (sunIcon && moonIcon) {
             if (this.theme === 'dark') {
@@ -80,6 +120,12 @@ class ThemeManager {
                 moonIcon.style.display = 'block';
             }
         }
+
+        // アクセシビリティ: aria-pressed属性を更新
+        if (themeToggle) {
+            themeToggle.setAttribute('aria-pressed', this.theme === 'dark' ? 'true' : 'false');
+            themeToggle.setAttribute('aria-label', this.theme === 'dark' ? 'ライトモードに切替' : 'ダークモードに切替');
+        }
     }
 }
 
@@ -89,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// スクロールプログレスバー
+// スクロールプログレスバー（アクセシビリティ対応）
 // ============================================
 function updateScrollProgress() {
     const scrollProgress = document.getElementById('scrollProgress');
@@ -100,6 +146,9 @@ function updateScrollProgress() {
     const scrolled = (winScroll / height) * 100;
 
     scrollProgress.style.width = scrolled + '%';
+
+    // アクセシビリティ: aria-valuenow属性を更新
+    scrollProgress.setAttribute('aria-valuenow', Math.round(scrolled));
 }
 
 window.addEventListener('scroll', updateScrollProgress);
@@ -165,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// スムーズスクロール
+// スムーズスクロール（アクセシビリティ対応）
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -183,11 +232,84 @@ document.addEventListener('DOMContentLoaded', function() {
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
+                // prefers-reduced-motionを尊重
+                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
                 window.scrollTo({
                     top: offsetPosition,
-                    behavior: 'smooth'
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
+
+                // アクセシビリティ: ターゲット要素にフォーカスを移動
+                // tabindex="-1"の要素もフォーカス可能にする
+                targetElement.focus();
+
+                // フォーカスできなかった場合の対策
+                if (document.activeElement !== targetElement) {
+                    targetElement.setAttribute('tabindex', '-1');
+                    targetElement.focus();
+                }
             }
         });
+    });
+});
+
+// ============================================
+// アクセシビリティ: ライブリージョンアナウンサー
+// ============================================
+function announceToScreenReader(message) {
+    const announcer = document.getElementById('a11y-announcer');
+    if (!announcer) return;
+
+    // 既存のメッセージをクリア
+    announcer.textContent = '';
+
+    // 少し遅延させてから新しいメッセージを設定（スクリーンリーダーが確実に読み上げるため）
+    setTimeout(() => {
+        announcer.textContent = message;
+    }, 100);
+
+    // メッセージをクリア（次の通知のため）
+    setTimeout(() => {
+        announcer.textContent = '';
+    }, 3000);
+}
+
+// ============================================
+// アクセシビリティ: フォーカス管理
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    // スキップリンクのフォーカス管理
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) {
+        skipLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                target.focus();
+                // フォーカスできなかった場合の対策
+                if (document.activeElement !== target) {
+                    target.setAttribute('tabindex', '-1');
+                    target.focus();
+                }
+            }
+        });
+    }
+
+    // フォーカス可視化の強化（キーボードユーザー向け）
+    let isUsingKeyboard = false;
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            isUsingKeyboard = true;
+            document.body.classList.add('keyboard-nav');
+        }
+    });
+
+    document.addEventListener('mousedown', function() {
+        isUsingKeyboard = false;
+        document.body.classList.remove('keyboard-nav');
     });
 });

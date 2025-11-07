@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>準備編：必要なツールの準備</h1>
@@ -15,29 +21,30 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html" class="active">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="stitch-workflow.html">Stitch活用</a></li>
-                <li><a href="ai-tools.html">AIツール大全</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="../index.html">ホーム</a></li>
+                <li role="listitem"><a href="setup.html" class="active" aria-current="page">準備編</a></li>
+                <li role="listitem"><a href="basics.html">基礎知識編</a></li>
+                <li role="listitem"><a href="practice.html">実践編</a></li>
+                <li role="listitem"><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li role="listitem"><a href="ai-tools.html">AIツール大全</a></li>
+                <li role="listitem"><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
-            <section>
-                <h2>このページで学ぶこと</h2>
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページで学ぶこと</h2>
                 <p>
                     このページでは、Webサイトを作成・修正するために必要な3つのツールを準備します。
                     それぞれのツールの役割と、インストール方法を順番に説明します。
@@ -49,8 +56,8 @@
                 </ul>
             </section>
 
-            <section>
-                <h2>1. GitHubアカウントの作成</h2>
+            <section id="github-setup" aria-labelledby="github-setup-heading">
+                <h2 id="github-setup-heading">1. GitHubアカウントの作成</h2>
                 <p>
                     GitHubは、コードを保存・管理するためのサービスです。
                     無料でアカウントを作成でき、Webサイトのファイルを保存したり、変更履歴を管理したりできます。
@@ -88,8 +95,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>2. Cursorのインストール</h2>
+            <section id="cursor-setup" aria-labelledby="cursor-setup-heading">
+                <h2 id="cursor-setup-heading">2. Cursorのインストール</h2>
                 <p>
                     Cursorは、AI機能が搭載されたコードエディタです。
                     通常のエディタと違い、AIのサポートを受けながらコードを書くことができます。
@@ -138,8 +145,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>3. CodexCLIのインストール</h2>
+            <section id="codexcli-setup" aria-labelledby="codexcli-setup-heading">
+                <h2 id="codexcli-setup-heading">3. CodexCLIのインストール</h2>
                 <p>
                     CodexCLIは、OpenAIが提供するAIコーディングエージェントです。ターミナルから質問すると、コードの提案や修正案、操作手順のガイドをリアルタイムで返してくれます。GitやGitHubの操作専用ツールではなく、あなたの作業全体を支援する頼れる相棒だと考えてください。
                 </p>
@@ -195,8 +202,8 @@ brew install codex</code></pre>
                 </div>
             </section>
 
-            <section>
-                <h2>4. インストール確認</h2>
+            <section id="verification" aria-labelledby="verification-heading">
+                <h2 id="verification-heading">4. インストール確認</h2>
                 <p>
                     すべてのツールが正しくインストールされているか確認しましょう。
                 </p>
@@ -214,8 +221,8 @@ brew install codex</code></pre>
                 </div>
             </section>
 
-            <section>
-                <h2>まとめ</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ</h2>
                 <p>
                     このページでは、以下の3つのツールを準備しました：
                 </p>
@@ -238,11 +245,12 @@ brew install codex</code></pre>
         </div>
     </footer>
     <!-- 検索モーダル -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-overlay" id="searchOverlay"></div>
+    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="search-title" aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-hidden="true"></div>
         <div class="search-modal-content">
+            <h2 id="search-title" class="sr-only">サイト内検索</h2>
             <div class="search-input-wrapper">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                 </svg>
                 <input
@@ -251,21 +259,25 @@ brew install codex</code></pre>
                     placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
                     id="searchInput"
                     autocomplete="off"
+                    aria-label="検索キーワード入力"
+                    role="searchbox"
+                    aria-autocomplete="list"
+                    aria-controls="searchResults"
                 >
-                <kbd class="search-shortcut">ESC</kbd>
+                <kbd class="search-shortcut" aria-label="ESCキーで閉じる">ESC</kbd>
             </div>
 
-            <div class="search-results" id="searchResults">
+            <div class="search-results" id="searchResults" role="listbox" aria-live="polite" aria-atomic="false">
                 <div class="search-empty">
                     <p>キーワードを入力して検索開始</p>
                 </div>
             </div>
 
             <div class="search-footer">
-                <div class="search-tips">
-                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
-                    <span><kbd>Enter</kbd> で選択</span>
-                    <span><kbd>ESC</kbd> で閉じる</span>
+                <div class="search-tips" role="note" aria-label="検索のヒント">
+                    <span><kbd aria-label="上矢印キー">↑</kbd><kbd aria-label="下矢印キー">↓</kbd> で移動</span>
+                    <span><kbd aria-label="エンターキー">Enter</kbd> で選択</span>
+                    <span><kbd aria-label="エスケープキー">ESC</kbd> で閉じる</span>
                 </div>
             </div>
         </div>

@@ -1301,3 +1301,348 @@ video {
     }
 }
 
+/* ============================================
+   Phase 9: アクセシビリティ強化 (WCAG 2.2準拠)
+   ============================================ */
+
+/* スキップリンク - キーボードユーザー向け */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--primary-600);
+    color: white;
+    padding: var(--space-3) var(--space-4);
+    text-decoration: none;
+    z-index: 10000;
+    border-radius: 0 0 var(--radius-md) 0;
+    font-weight: var(--font-semibold);
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--warning-color);
+    outline-offset: 2px;
+}
+
+/* スクリーンリーダー専用テキスト */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* スクリーンリーダー専用だがフォーカス時は表示 */
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* フォーカス可視性の強化 - WCAG 2.2 Focus Visible */
+*:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* ダークモードのフォーカス */
+[data-theme="dark"] *:focus-visible {
+    outline-color: var(--primary-400);
+}
+
+/* ボタンとリンクのフォーカス */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* ナビゲーションリンクのフォーカス改善 */
+nav a:focus-visible {
+    outline: 3px solid var(--primary-700);
+    outline-offset: 2px;
+}
+
+/* カードとボタンのフォーカス時 */
+.card:focus-visible,
+.btn:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 4px;
+    box-shadow: var(--shadow-xl), 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* 検索結果アイテムのフォーカス */
+.search-result-item:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 2px;
+    background: var(--primary-50);
+}
+
+/* 目次リンクのフォーカス */
+.toc-link:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* ハンバーガーメニューのフォーカス */
+.hamburger:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 4px;
+}
+
+/* テーマトグルボタンのフォーカス */
+.theme-toggle:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 3px;
+}
+
+/* 最小ターゲットサイズ - WCAG 2.2 Target Size (2.5.8) */
+/* すべてのインタラクティブ要素は最小 24x24 CSS pixels */
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.btn,
+.hamburger,
+.theme-toggle {
+    min-width: 44px;
+    min-height: 44px;
+}
+
+/* 色のコントラスト比改善 - WCAG 2.2 Level AA (4.5:1) */
+/* 現在の色は既にWCAG 2.2基準を満たしていますが、さらに改善 */
+:root {
+    /* より高いコントラスト比のための代替色 */
+    --link-color: #0d47a1;           /* 背景白とのコントラスト比 8.2:1 */
+    --text-dark: #0a0a0a;            /* 背景白とのコントラスト比 19:1 */
+    --focus-color: var(--primary-700); /* フォーカスインジケータ用 */
+}
+
+/* リンクのコントラスト改善 */
+a:not(.btn):not(.search-result-item):not(.toc-link):not(nav a) {
+    color: var(--link-color);
+}
+
+[data-theme="dark"] a:not(.btn):not(.search-result-item):not(.toc-link):not(nav a) {
+    color: var(--primary-300);
+}
+
+/* アニメーション軽減設定の尊重 - WCAG 2.2 Animation from Interactions */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* フローティングオーブのアニメーション停止 */
+    header::before,
+    header::after {
+        animation: none !important;
+    }
+
+    /* カードのホバーアニメーション無効化 */
+    .card:hover {
+        transform: none;
+    }
+
+    /* ボタンのシャインエフェクト無効化 */
+    .btn::before {
+        display: none;
+    }
+
+    /* スクロールアニメーション無効化 */
+    .fade-up {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ハイコントラストモード対応 */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-color: #000000;
+    }
+
+    [data-theme="dark"] {
+        --border-color: #ffffff;
+        --text-color: #ffffff;
+    }
+
+    /* ボーダーを強調 */
+    .card,
+    button,
+    input,
+    select,
+    textarea {
+        border: 2px solid currentColor;
+    }
+}
+
+/* フォーカストラップ - モーダルとメニュー用 */
+.modal-open,
+.menu-open {
+    overflow: hidden;
+}
+
+.modal-open *:not(.search-modal *),
+.menu-open nav:not(.nav-menu *) {
+    pointer-events: none;
+}
+
+/* キーボードナビゲーション改善 */
+[tabindex="-1"]:focus {
+    outline: 0;
+}
+
+/* ARIA live regions のスタイリング */
+[aria-live] {
+    position: relative;
+}
+
+/* ARIA-hidden要素はキーボードでアクセス不可 */
+[aria-hidden="true"] {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* エラーメッセージのアクセシビリティ */
+.error-message,
+[role="alert"] {
+    color: var(--error-color);
+    font-weight: var(--font-semibold);
+    padding: var(--space-2) var(--space-3);
+    border-left: 4px solid var(--error-color);
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: var(--radius-sm);
+    margin: var(--space-2) 0;
+}
+
+/* 視覚的な装飾のみの要素（スクリーンリーダーで無視） */
+[aria-hidden="true"] {
+    speak: none;
+}
+
+/* テキスト選択の改善 */
+::selection {
+    background-color: var(--primary-200);
+    color: var(--gray-900);
+}
+
+[data-theme="dark"] ::selection {
+    background-color: var(--primary-700);
+    color: var(--gray-100);
+}
+
+/* タッチターゲットの拡大（モバイル） */
+@media (max-width: 768px) {
+    button,
+    a,
+    .btn,
+    nav a,
+    .hamburger,
+    .theme-toggle {
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+/* 印刷時のアクセシビリティ */
+@media print {
+    /* スキップリンクなどのナビゲーション要素を非表示 */
+    .skip-link,
+    nav,
+    .hamburger,
+    .theme-toggle,
+    .search-modal,
+    .toc-sidebar {
+        display: none !important;
+    }
+
+    /* フォーカスアウトラインを非表示 */
+    *:focus {
+        outline: none;
+    }
+
+    /* リンクのURLを表示 */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    /* 内部リンクとメール、電話はURLを表示しない */
+    a[href^="#"]:after,
+    a[href^="/"]:after,
+    a[href^="mailto:"]:after,
+    a[href^="tel:"]:after {
+        content: "";
+    }
+}
+
+/* ============================================
+   アクセシビリティ: ライブリージョン通知
+   ============================================ */
+.a11y-announcer {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* ============================================
+   カスタムフォーカスインジケータ
+   ============================================ */
+.custom-focus-indicator {
+    position: relative;
+}
+
+.custom-focus-indicator::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 3px solid transparent;
+    border-radius: inherit;
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+}
+
+.custom-focus-indicator:focus::after {
+    border-color: var(--primary-500);
+}
+
+/* ============================================
+   コントラストチェック用のデバッグモード（開発時のみ）
+   ============================================ */
+/*
+body.debug-contrast * {
+    outline: 1px solid red;
+}
+
+body.debug-contrast *:focus {
+    outline: 3px solid lime;
+}
+*/
+

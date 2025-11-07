@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>FAQ：よくある質問とトラブルシューティング</h1>
@@ -15,29 +21,29 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav" aria-label="メインナビゲーション">
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="stitch-workflow.html">Stitch活用</a></li>
-                <li><a href="ai-tools.html">AIツール大全</a></li>
-                <li><a href="faq.html" class="active">FAQ</a></li>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="../index.html">ホーム</a></li>
+                <li role="listitem"><a href="setup.html">準備編</a></li>
+                <li role="listitem"><a href="basics.html">基礎知識編</a></li>
+                <li role="listitem"><a href="practice.html">実践編</a></li>
+                <li role="listitem"><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li role="listitem"><a href="ai-tools.html">AIツール大全</a></li>
+                <li role="listitem"><a href="faq.html" class="active" aria-current="page">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
-            <section>
-                <h2>よくある質問（FAQ）</h2>
+            <section id="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading">よくある質問（FAQ）</h2>
                 
                 <div class="card">
                     <h3>Q1. GitHubアカウントを作成するのに費用はかかりますか？</h3>
