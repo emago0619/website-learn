@@ -219,22 +219,16 @@
 
                 <div class="alert alert-info">
                     <strong>プロのTips：</strong> 要件が固まったら、ChatGPTに「この要件をMarkdown形式で保存用にまとめて」と依頼すると、
-                    次のステップ（CodexCLIまたはCursorプランモード）がさらにスムーズになります。
+                    次のステップ（CodexCLIやCursor Composer、Cursorプランモード）がさらにスムーズになります。
                 </div>
             </section>
 
             <section>
-                <h2>パート2：CodexCLIで初期構築（クレジット節約術）</h2>
-                
+                <h2>パート2：CodexCLI（ターミナル）で初期構築</h2>
+
                 <p>
-                    ChatGPTで要件をまとめたら、次の選択肢が2つあります：
-                </p>
-                <ol>
-                    <li><strong>CodexCLIで初期構築</strong>（クレジット節約・推奨）</li>
-                    <li><strong>Cursorプランモードで実装</strong>（次のパートで説明）</li>
-                </ol>
-                <p>
-                    ここでは、<strong>Cursorのクレジットを節約する方法</strong>として、CodexCLIで初期構築する手法を紹介します。
+                    ChatGPTで要件をまとめたら、まずはターミナルから操作する<strong>CodexCLI</strong>で骨組みを作る方法を検討しましょう。
+                    CodexCLIはCursorとは別のコマンドラインツールで、Markdown要件を読み込ませるとHTMLやCSSを一気に生成してくれます。
                 </p>
 
                 <h3>💭 なぜCodexCLIで初期構築するのか？</h3>
@@ -324,35 +318,24 @@
                 <h3>CodexCLIでの初期構築</h3>
                 <ol class="steps">
                     <li>
-                        <strong>Cursorでプロジェクトを開く</strong><br>
-                        プロジェクトフォルダをCursorで開き、<code>requirements.md</code> が含まれていることを確認します
+                        <strong>ターミナルを開く</strong><br>
+                        Cursor内蔵のターミナル、またはお使いのPCのターミナルを開きます
                     </li>
                     <li>
-                        <strong>Cursor Composerを起動</strong><br>
-                        Cmd + I（WindowsはCtrl + I）を押してAIチャットを開き、
-                        「Composer」モードを選択します
+                        <strong>作業フォルダを準備</strong><br>
+                        <code>mkdir my-landing-page &amp;&amp; cd my-landing-page</code>
                     </li>
                     <li>
-                        <strong>要件定義を参照させる</strong><br>
-                        以下のように指示します：
-                        <pre><code>@requirements.md を参照して、このWebサイトの初期構築を行ってください。
-必要なHTMLファイル、CSSファイル、フォルダ構造をすべて作成してください。</code></pre>
+                        <strong>CodexCLIを初期設定</strong><br>
+                        初回は <code>codex login</code> や <code>codex init</code> などのコマンドで認証・設定を済ませます
                     </li>
                     <li>
-                        <strong>生成を待つ</strong><br>
-                        CodexCLI（Cursor Composer）が自動的にファイルを生成します。
-                        数分待つと、プロジェクトの骨組みが完成します
+                        <strong>要件ファイルを指定して生成</strong><br>
+                        例：<code>codex generate --input requirements.md --output ./</code> のように指示すると、必要なHTML/CSSが作成されます
                     </li>
                     <li>
-                        <strong>生成されたファイルを確認</strong><br>
-                        以下のようなファイルが生成されているはずです：
-                        <ul>
-                            <li>index.html</li>
-                            <li>about.html</li>
-                            <li>contact.html</li>
-                            <li>css/styles.css</li>
-                            <li>images/（フォルダ）</li>
-                        </ul>
+                        <strong>生成結果を確認</strong><br>
+                        <code>ls</code> コマンドでファイル構成を確認し、ブラウザで <code>index.html</code> を開いて仕上がりをチェックします
                     </li>
                 </ol>
 
@@ -413,10 +396,10 @@
                 </ol>
 
                 <div class="alert alert-success">
-                    <strong>推奨ワークフロー：</strong>
+                    <strong>推奨ワークフロー（CodexCLI活用例）：</strong>
                     <ol>
                         <li>ChatGPTで要件整理 → <code>requirements.md</code> 作成</li>
-                        <li>CodexCLI（Cursor Composer）で初期構築（80%完成）</li>
+                        <li>CodexCLIで初期構築（80%完成）</li>
                         <li>Cursorで細かい修正（残り20%）</li>
                     </ol>
                     この流れで、<strong>クレジットを節約しながら高品質なWebサイト</strong>が作れます。
@@ -424,16 +407,92 @@
             </section>
 
             <section>
-                <h2>パート3：Cursorプランモードで実装計画を立てる（代替手法）</h2>
-                
+                <h2>パート3：Cursor Composer（アプリ内機能）で初期構築</h2>
+
                 <p>
-                    パート2のCodexCLI手法が使えない場合、または最初から細かい計画を立てたい場合は、
+                    ターミナル操作が不安な場合や、Cursorアプリ内で完結させたい場合は、<strong>Cursor Composer</strong>を使う方法が便利です。
+                    ComposerはCursorのチャット画面から起動でき、会話しながら必要なファイルを自動で作成してくれます。
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>選び方のヒント：</strong><br>
+                    - <strong>クレジット節約・コマンド操作に慣れている</strong> → CodexCLI<br>
+                    - <strong>アプリ内で完結させたい・インストール作業を省きたい</strong> → Cursor Composer
+                </div>
+
+                <h3>Cursor Composerの使い方</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cursorで対象プロジェクトを開く</strong><br>
+                        新規に作りたい場合は空のフォルダを開きます
+                    </li>
+                    <li>
+                        <strong>Composerを起動</strong><br>
+                        画面右下の「Create with Composer」から「New Project」を選ぶか、チャットで「/composer」と入力します
+                    </li>
+                    <li>
+                        <strong>要件を入力</strong><br>
+                        <code>requirements.md</code> の内容を貼り付け、作成したいページやフォルダ構成を具体的に伝えます
+                    </li>
+                    <li>
+                        <strong>提案内容を確認</strong><br>
+                        Composerが示すファイル一覧と内容を確認し、必要なら「この部分を調整して」と追加指示を出します
+                    </li>
+                    <li>
+                        <strong>Createを実行</strong><br>
+                        問題なければ「Create」ボタンを押し、ファイルをプロジェクトに反映します
+                    </li>
+                    <li>
+                        <strong>生成物をレビュー</strong><br>
+                        プレビューで表示を確認し、細かな手直しは通常のCursorチャットやエディタで行います
+                    </li>
+                </ol>
+
+                <h3>CodexCLIとCursor Composerの違い</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>比較ポイント</th>
+                            <th>CodexCLI</th>
+                            <th>Cursor Composer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>操作方法</td>
+                            <td>ターミナルでコマンドを実行</td>
+                            <td>Cursorアプリ内でGUI操作</td>
+                        </tr>
+                        <tr>
+                            <td>クレジット消費</td>
+                            <td>少なめ（無料枠を使いやすい）</td>
+                            <td>Cursorのクレジットを使用</td>
+                        </tr>
+                        <tr>
+                            <td>準備に必要なもの</td>
+                            <td>CLIのインストール・ログイン設定</td>
+                            <td>CursorさえあればOK</td>
+                        </tr>
+                        <tr>
+                            <td>向いているケース</td>
+                            <td>複数案件を効率よく回したい、コマンド操作が得意</td>
+                            <td>まずはざっくり形を作りたい、GUIで進めたい</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>パート4：Cursorプランモードで実装計画を立てる（代替手法）</h2>
+
+                <p>
+                    パート2のCodexCLI手法が使えない場合、またはパート3のComposerではなく計画から始めたい場合は、
                     Cursorのプランモードを使います。
                 </p>
-                
+
                 <div class="alert alert-info">
                     <strong>使い分けのポイント：</strong><br>
-                    - <strong>新規プロジェクト（ゼロから作る）</strong>：CodexCLIで初期構築がおすすめ<br>
+                    - <strong>新規プロジェクト（ゼロから作る）</strong>：CodexCLIまたはCursor Composerで初期構築<br>
                     - <strong>既存プロジェクトの修正</strong>：Cursorプランモードがおすすめ<br>
                     - <strong>複雑な修正</strong>：Cursorプランモードでしっかり計画
                 </div>
