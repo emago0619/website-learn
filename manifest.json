@@ -1,0 +1,15 @@
+{
+  "name": "Web開発学習ガイド - 初心者向け実践ガイド",
+  "short_name": "Web学習ガイド",
+  "description": "Git、GitHub、Cursor、AI開発ツールを使った実践的なWeb開発学習ガイド",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": []
+}
