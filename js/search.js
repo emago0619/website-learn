@@ -1,5 +1,5 @@
 // ============================================
-// 検索機能
+// 検索機能（アクセシビリティ対応）
 // ============================================
 class SearchEngine {
   constructor() {
@@ -9,6 +9,7 @@ class SearchEngine {
     this.input = document.getElementById('searchInput');
     this.results = document.getElementById('searchResults');
     this.selectedIndex = -1;
+    this.lastFocusedElement = null; // モーダルを開く前にフォーカスしていた要素
 
     this.init();
   }
@@ -128,6 +129,14 @@ class SearchEngine {
     }).slice(0, 10);
 
     this.displayResults(results, query);
+
+    // アクセシビリティ: 検索結果の件数をスクリーンリーダーに通知
+    if (typeof announceToScreenReader === 'function') {
+      const message = results.length > 0
+        ? `${results.length}件の検索結果が見つかりました`
+        : '検索結果が見つかりませんでした';
+      announceToScreenReader(message);
+    }
   }
 
   displayEmpty() {
@@ -145,6 +154,8 @@ class SearchEngine {
           <p>「${query}」に一致する結果が見つかりませんでした</p>
         </div>
       `;
+      // アクセシビリティ: aria-activedescendant属性をクリア
+      this.input.removeAttribute('aria-activedescendant');
       return;
     }
 
@@ -154,7 +165,7 @@ class SearchEngine {
       const highlightedExcerpt = this.highlight(excerpt, query);
 
       return `
-        <a href="${result.url}" class="search-result-item" data-index="${index}">
+        <a href="${result.url}" class="search-result-item" data-index="${index}" id="search-result-${index}" role="option" aria-selected="false" tabindex="-1">
           <div class="result-title">${highlightedTitle}</div>
           <div class="result-url">${result.url}</div>
           <div class="result-excerpt">${highlightedExcerpt}</div>
@@ -164,6 +175,9 @@ class SearchEngine {
 
     this.results.innerHTML = html;
     this.selectedIndex = -1;
+
+    // アクセシビリティ: aria-activedescendant属性をクリア
+    this.input.removeAttribute('aria-activedescendant');
   }
 
   highlight(text, query) {
@@ -202,8 +216,18 @@ class SearchEngine {
       if (index === this.selectedIndex) {
         item.classList.add('selected');
         item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+        // アクセシビリティ: aria-selected属性を更新
+        item.setAttribute('aria-selected', 'true');
+
+        // アクセシビリティ: aria-activedescendant属性を更新
+        const itemId = item.getAttribute('id');
+        if (itemId) {
+          this.input.setAttribute('aria-activedescendant', itemId);
+        }
       } else {
         item.classList.remove('selected');
+        item.setAttribute('aria-selected', 'false');
       }
     });
   }
@@ -216,14 +240,82 @@ class SearchEngine {
   }
 
   openModal() {
+    // 現在フォーカスしている要素を記憶
+    this.lastFocusedElement = document.activeElement;
+
     this.modal.classList.add('active');
-    this.input.focus();
+
+    // アクセシビリティ: aria-hidden属性を更新
+    this.modal.setAttribute('aria-hidden', 'false');
+
+    // アクセシビリティ: body要素にmodal-openクラスを追加（フォーカストラップ用）
+    document.body.classList.add('modal-open');
+
+    // フォーカスを検索入力に移動
+    setTimeout(() => {
+      this.input.focus();
+    }, 100);
+
+    // アクセシビリティ: モーダル開閉をスクリーンリーダーに通知
+    if (typeof announceToScreenReader === 'function') {
+      announceToScreenReader('検索モーダルを開きました');
+    }
+
+    // フォーカストラップを設定
+    this.trapFocus();
   }
 
   closeModal() {
     this.modal.classList.remove('active');
+
+    // アクセシビリティ: aria-hidden属性を更新
+    this.modal.setAttribute('aria-hidden', 'true');
+
+    // アクセシビリティ: body要素からmodal-openクラスを削除
+    document.body.classList.remove('modal-open');
+
     this.input.value = '';
     this.displayEmpty();
+
+    // アクセシビリティ: 元の要素にフォーカスを戻す
+    if (this.lastFocusedElement && this.lastFocusedElement.focus) {
+      this.lastFocusedElement.focus();
+    }
+
+    // アクセシビリティ: モーダル開閉をスクリーンリーダーに通知
+    if (typeof announceToScreenReader === 'function') {
+      announceToScreenReader('検索モーダルを閉じました');
+    }
+  }
+
+  // アクセシビリティ: フォーカストラップ
+  trapFocus() {
+    const focusableElements = this.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    if (focusableElements.length === 0) return;
+
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+
+    this.modal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        // Shift + Tab: 最初の要素で戻ったら最後の要素にフォーカス
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable.focus();
+        }
+      } else {
+        // Tab: 最後の要素で進んだら最初の要素にフォーカス
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable.focus();
+        }
+      }
+    });
   }
 }
 

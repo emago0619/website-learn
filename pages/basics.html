@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- Live region announcer for dynamic content -->
+    <div id="announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
     <header>
         <div class="container">
             <h1>基礎知識編：各ツールの基本概念</h1>
@@ -15,9 +21,9 @@
         </div>
     </header>
 
-    <nav>
+    <nav aria-label="メインナビゲーション">
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="ナビゲーションメニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -25,7 +31,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="../index.html">ホーム</a></li>
                 <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html" class="active">基礎知識編</a></li>
+                <li><a href="basics.html" class="active" aria-current="page">基礎知識編</a></li>
                 <li><a href="practice.html">実践編</a></li>
                 <li><a href="stitch-workflow.html">Stitch活用</a></li>
                 <li><a href="ai-tools.html">AIツール大全</a></li>
@@ -34,33 +40,33 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         <div class="container">
             <!-- 目次サイドバー -->
-            <aside class="toc-sidebar" id="tocSidebar">
+            <aside class="toc-sidebar" id="tocSidebar" aria-label="ページ目次">
                 <div class="toc-header">
                     <h3>目次</h3>
-                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ" aria-expanded="true" aria-controls="tocNav">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                         </svg>
                     </button>
                 </div>
-                <nav class="toc-nav" id="tocNav">
+                <nav class="toc-nav" id="tocNav" aria-label="目次リスト">
                     <!-- JavaScriptで自動生成 -->
                 </nav>
             </aside>
 
-            <section id="intro">
-                <h2>このページで学ぶこと</h2>
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページで学ぶこと</h2>
                 <p>
                     このページでは、GitHub、Cursor、CodexCLIの基本的な概念と使い方を説明します。
                     専門用語もわかりやすく解説しているので、初心者の方でも理解できるはずです。
                 </p>
             </section>
 
-            <section>
-                <h2>1. GitとGitHubとは</h2>
+            <section id="git-github" aria-labelledby="git-github-heading">
+                <h2 id="git-github-heading">1. GitとGitHubとは</h2>
 
                 <div class="alert alert-success" style="margin-bottom: 1.5rem;">
                     <strong>🎯 もっと詳しく学びたい方へ：</strong><br>
@@ -138,8 +144,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>2. Cursorとは</h2>
+            <section id="cursor" aria-labelledby="cursor-heading">
+                <h2 id="cursor-heading">2. Cursorとは</h2>
                 
                 <h3>Cursorの特徴</h3>
                 <p>
@@ -199,8 +205,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>3. CodexCLIとは</h2>
+            <section id="codexcli" aria-labelledby="codexcli-heading">
+                <h2 id="codexcli-heading">3. CodexCLIとは</h2>
                 
                 <h3>CodexCLIの役割</h3>
                 <p>
@@ -264,8 +270,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>4. 基本的な用語集</h2>
+            <section id="terminology" aria-labelledby="terminology-heading">
+                <h2 id="terminology-heading">4. 基本的な用語集</h2>
                 
                 <div class="card">
                     <h3>Webサイト関連</h3>
@@ -324,8 +330,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>5. 静的なHPと動的なHPの違い</h2>
+            <section id="static-dynamic" aria-labelledby="static-dynamic-heading">
+                <h2 id="static-dynamic-heading">5. 静的なHPと動的なHPの違い</h2>
                 
                 <h3>静的サイトとは</h3>
                 <p>
@@ -386,8 +392,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>6. PHPについて</h2>
+            <section id="php" aria-labelledby="php-heading">
+                <h2 id="php-heading">6. PHPについて</h2>
                 
                 <h3>PHPとは</h3>
                 <p>
@@ -430,8 +436,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>7. Reactについて</h2>
+            <section id="react" aria-labelledby="react-heading">
+                <h2 id="react-heading">7. Reactについて</h2>
                 
                 <h3>Reactとは</h3>
                 <p>
@@ -494,8 +500,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>8. Next.jsについて</h2>
+            <section id="nextjs" aria-labelledby="nextjs-heading">
+                <h2 id="nextjs-heading">8. Next.jsについて</h2>
                 
                 <h3>Next.jsとは</h3>
                 <p>
@@ -581,8 +587,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>9. Supabaseについて</h2>
+            <section id="supabase" aria-labelledby="supabase-heading">
+                <h2 id="supabase-heading">9. Supabaseについて</h2>
                 
                 <h3>Supabaseとは</h3>
                 <p>
@@ -708,8 +714,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>10. データベースが必要な場面</h2>
+            <section id="database" aria-labelledby="database-heading">
+                <h2 id="database-heading">10. データベースが必要な場面</h2>
                 
                 <h3>データベースとは</h3>
                 <p>
@@ -832,8 +838,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>9. 3つのツールの連携</h2>
+            <section id="tool-integration" aria-labelledby="tool-integration-heading">
+                <h2 id="tool-integration-heading">9. 3つのツールの連携</h2>
                 <p>
                     GitHub、Cursor、CodexCLIは、それぞれ異なる役割を持っていますが、
                     組み合わせて使うことで、効率的にWebサイトを作成・管理できます。
@@ -867,8 +873,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>11. まとめ</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">11. まとめ</h2>
                 <p>
                     このページでは、以下のことを学びました：
                 </p>
@@ -897,11 +903,12 @@ echo "今日は " . date("Y年m月d日") . " です";
         </div>
     </footer>
     <!-- 検索モーダル -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-overlay" id="searchOverlay"></div>
+    <div class="search-modal" id="searchModal" role="dialog" aria-labelledby="search-modal-title" aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-hidden="true"></div>
         <div class="search-modal-content">
+            <h2 id="search-modal-title" class="sr-only">サイト内検索</h2>
             <div class="search-input-wrapper">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                 </svg>
                 <input
@@ -910,18 +917,20 @@ echo "今日は " . date("Y年m月d日") . " です";
                     placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
                     id="searchInput"
                     autocomplete="off"
+                    aria-label="検索キーワード"
+                    aria-controls="searchResults"
                 >
-                <kbd class="search-shortcut">ESC</kbd>
+                <kbd class="search-shortcut" aria-label="閉じる" role="button">ESC</kbd>
             </div>
 
-            <div class="search-results" id="searchResults">
-                <div class="search-empty">
+            <div class="search-results" id="searchResults" role="listbox" aria-label="検索結果">
+                <div class="search-empty" role="status">
                     <p>キーワードを入力して検索開始</p>
                 </div>
             </div>
 
             <div class="search-footer">
-                <div class="search-tips">
+                <div class="search-tips" aria-label="キーボード操作ガイド">
                     <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
                     <span><kbd>Enter</kbd> で選択</span>
                     <span><kbd>ESC</kbd> で閉じる</span>

@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>実践編：実際にWebサイトを作成してみよう</h1>
@@ -15,26 +21,26 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="mainNav" aria-label="メインナビゲーション">
         <div class="container">
-            <button class="hamburger" id="hamburger" aria-label="メニュー">
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html" class="active">実践編</a></li>
-                <li><a href="stitch-workflow.html">Stitch活用</a></li>
-                <li><a href="ai-tools.html">AIツール大全</a></li>
-                <li><a href="faq.html">FAQ</a></li>
+            <ul class="nav-menu" id="navMenu" role="list">
+                <li role="listitem"><a href="../index.html">ホーム</a></li>
+                <li role="listitem"><a href="setup.html">準備編</a></li>
+                <li role="listitem"><a href="basics.html">基礎知識編</a></li>
+                <li role="listitem"><a href="practice.html" class="active" aria-current="page">実践編</a></li>
+                <li role="listitem"><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li role="listitem"><a href="ai-tools.html">AIツール大全</a></li>
+                <li role="listitem"><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
             <!-- 目次サイドバー -->
             <aside class="toc-sidebar" id="tocSidebar">
@@ -51,8 +57,8 @@
                 </nav>
             </aside>
 
-            <section id="intro">
-                <h2>このページで学ぶこと</h2>
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページで学ぶこと</h2>
                 <p>
                     このページでは、<strong>計画重視型の開発ワークフロー</strong>を実践します。
                     「いきなりコードを書く」のではなく、「要件を整理 → 計画を立てる → 実装する」という流れで進めます。
@@ -63,8 +69,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>パート0：開発フロー全体像</h2>
+            <section id="part0" aria-labelledby="part0-heading">
+                <h2 id="part0-heading">パート0：開発フロー全体像</h2>
                 
                 <p>
                     まず、推奨される開発フローの全体像を理解しましょう。
@@ -116,8 +122,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>パート1：ChatGPTで要件を整理する</h2>
+            <section id="part1" aria-labelledby="part1-heading">
+                <h2 id="part1-heading">パート1：ChatGPTで要件を整理する</h2>
                 
                 <p>
                     実装を始める前に、まずChatGPTを使って「何を作るのか」「何を修正するのか」を明確にします。
@@ -223,8 +229,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>パート2：CodexCLI（ターミナル）で初期構築</h2>
+            <section id="part2" aria-labelledby="part2-heading">
+                <h2 id="part2-heading">パート2：CodexCLI（ターミナル）で初期構築</h2>
 
                 <p>
                     ChatGPTで要件をまとめたら、まずはターミナルから操作する<strong>CodexCLI</strong>で骨組みを作る方法を検討しましょう。
@@ -406,8 +412,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>パート3：Cursor Composer（アプリ内機能）で初期構築</h2>
+            <section id="part3" aria-labelledby="part3-heading">
+                <h2 id="part3-heading">パート3：Cursor Composer（アプリ内機能）で初期構築</h2>
 
                 <p>
                     ターミナル操作が不安な場合や、Cursorアプリ内で完結させたい場合は、<strong>Cursor Composer</strong>を使う方法が便利です。
@@ -482,8 +488,8 @@
                 </table>
             </section>
 
-            <section>
-                <h2>パート4：Cursorプランモードで実装計画を立てる（代替手法）</h2>
+            <section id="part4" aria-labelledby="part4-heading">
+                <h2 id="part4-heading">パート4：Cursorプランモードで実装計画を立てる（代替手法）</h2>
 
                 <p>
                     パート2のCodexCLI手法が使えない場合、またはパート3のComposerではなく計画から始めたい場合は、
@@ -616,9 +622,9 @@
                 </div>
             </section>
 
-            <section>
-                <h2>パート4：新規Webサイトの作成</h2>
-                
+            <section id="part5-creation" aria-labelledby="part5-creation-heading">
+                <h2 id="part5-creation-heading">パート5：新規Webサイトの作成</h2>
+
                 <div class="alert alert-info">
                     <strong>補足：</strong> この パート では従来の方法（手動でファイルを作成）を説明しますが、
                     実際の業務では<strong>パート2のCodexCLI手法</strong>を使うことを推奨します。
@@ -779,8 +785,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>パート5：GitHub PagesでWebサイトを公開</h2>
+            <section id="part5-pages" aria-labelledby="part5-pages-heading">
+                <h2 id="part5-pages-heading">パート5：GitHub PagesでWebサイトを公開</h2>
                 
                 <p>
                     GitHub Pagesを使うと、作成したWebサイトを無料でインターネット上に公開できます。
@@ -827,8 +833,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>パート6：既存Webサイトの修正</h2>
+            <section id="part6" aria-labelledby="part6-heading">
+                <h2 id="part6-heading">パート6：既存Webサイトの修正</h2>
                 
                 <p>
                     既に存在するWebサイトを修正する方法を学びます。
@@ -902,8 +908,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>パート7：より高度なWebサイトの作成</h2>
+            <section id="part7" aria-labelledby="part7-heading">
+                <h2 id="part7-heading">パート7：より高度なWebサイトの作成</h2>
                 
                 <p>
                     基本的なWebサイトが作成できたら、より高度な機能を追加してみましょう。
@@ -976,8 +982,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>パート8：様々なデプロイ方法</h2>
+            <section id="part8" aria-labelledby="part8-heading">
+                <h2 id="part8-heading">パート8：様々なデプロイ方法</h2>
                 
                 <p>
                     Webサイトを公開する方法は、GitHub Pages以外にもいくつかあります。
@@ -1176,8 +1182,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>パート9：Cursorの内蔵ブラウザで効率的に修正する</h2>
+            <section id="part9" aria-labelledby="part9-heading">
+                <h2 id="part9-heading">パート9：Cursorの内蔵ブラウザで効率的に修正する</h2>
                 
                 <p>
                     Cursor 2.0には、内蔵ブラウザという革命的な機能があります。
@@ -1330,8 +1336,8 @@ p {
                 </div>
             </section>
 
-            <section>
-                <h2>まとめ</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ</h2>
                 <p>
                     このページでは、以下のことを学びました：
                 </p>
@@ -1362,9 +1368,9 @@ p {
         </div>
     </footer>
     <!-- 検索モーダル -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-overlay" id="searchOverlay"></div>
-        <div class="search-modal-content">
+    <div class="search-modal" id="searchModal" role="dialog" aria-labelledby="search-title" aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-label="モーダルを閉じる"></div>
+        <div class="search-modal-content" role="document">
             <div class="search-input-wrapper">
                 <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
@@ -1375,21 +1381,25 @@ p {
                     placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
                     id="searchInput"
                     autocomplete="off"
+                    aria-label="検索キーワード入力"
+                    aria-describedby="search-help"
+                    aria-controls="searchResults"
+                    aria-expanded="false"
                 >
-                <kbd class="search-shortcut">ESC</kbd>
+                <kbd class="search-shortcut" aria-label="Escキーで検索モーダルを閉じる">ESC</kbd>
             </div>
 
-            <div class="search-results" id="searchResults">
-                <div class="search-empty">
+            <div class="search-results" id="searchResults" role="listbox" aria-label="検索結果">
+                <div class="search-empty" role="status">
                     <p>キーワードを入力して検索開始</p>
                 </div>
             </div>
 
             <div class="search-footer">
-                <div class="search-tips">
-                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
-                    <span><kbd>Enter</kbd> で選択</span>
-                    <span><kbd>ESC</kbd> で閉じる</span>
+                <div class="search-tips" id="search-help" role="complementary" aria-label="検索のキーボードショートカット">
+                    <span aria-label="矢印キー上下で検索結果を移動"><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span aria-label="Enterキーで選択"><kbd>Enter</kbd> で選択</span>
+                    <span aria-label="Escキーでモーダルを閉じる"><kbd>ESC</kbd> で閉じる</span>
                 </div>
             </div>
         </div>

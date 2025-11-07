@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>開発初心者向け Webサイト構築ガイド</h1>
@@ -15,29 +21,29 @@
         </div>
     </header>
 
-    <nav id="mainNav">
-        <div class="scroll-progress" id="scrollProgress"></div>
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html" class="active">ホーム</a></li>
-                    <li><a href="pages/setup.html">準備編</a></li>
-                    <li><a href="pages/basics.html">基礎知識編</a></li>
-                    <li><a href="pages/practice.html">実践編</a></li>
-                    <li><a href="pages/stitch-workflow.html">Stitch活用</a></li>
-                    <li><a href="pages/ai-tools.html">AIツール大全</a></li>
-                    <li><a href="pages/faq.html">FAQ</a></li>
+                <ul class="nav-menu" id="navMenu" role="list">
+                    <li role="listitem"><a href="index.html" class="active" aria-current="page">ホーム</a></li>
+                    <li role="listitem"><a href="pages/setup.html">準備編</a></li>
+                    <li role="listitem"><a href="pages/basics.html">基礎知識編</a></li>
+                    <li role="listitem"><a href="pages/practice.html">実践編</a></li>
+                    <li role="listitem"><a href="pages/stitch-workflow.html">Stitch活用</a></li>
+                    <li role="listitem"><a href="pages/ai-tools.html">AIツール大全</a></li>
+                    <li role="listitem"><a href="pages/faq.html">FAQ</a></li>
                 </ul>
-                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" title="テーマ切替">
-                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
                         <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
                     </svg>
-                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;">
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
                 </button>
@@ -45,10 +51,10 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
-            <section>
-                <h2>このガイドについて</h2>
+            <section id="about" aria-labelledby="about-heading">
+                <h2 id="about-heading">このガイドについて</h2>
                 <p>
                     このガイドは、開発初心者がAIツールを活用して、効率的かつ安全にWebサイトの構築・修正ができるようになることを目指しています。
                 </p>
@@ -59,8 +65,8 @@
                 </p>
             </section>
 
-            <section>
-                <h2>💭 なぜ「計画重視型」なのか？</h2>
+            <section id="why-planning" aria-labelledby="why-planning-heading">
+                <h2 id="why-planning-heading">💭 なぜ「計画重視型」なのか？</h2>
                 <div class="card">
                     <p><strong>Q：「計画を立てるより、直接コードを書いた方が早くない？」</strong></p>
                     <p>
@@ -85,8 +91,8 @@
             </section>
 
             <!-- SVGイラスト -->
-            <div class="hero-illustration">
-                <svg class="browser-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+            <div class="hero-illustration" role="img" aria-label="Webサイトブラウザのアニメーションイラスト">
+                <svg class="browser-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                     <defs>
                         <linearGradient id="browserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
@@ -138,8 +144,8 @@
                 </svg>
             </div>
 
-            <section>
-                <h2>対象読者</h2>
+            <section id="target-audience" aria-labelledby="target-audience-heading">
+                <h2 id="target-audience-heading">対象読者</h2>
                 <p>このガイドは、以下のような方を対象としています：</p>
                 <ul>
                     <li>プログラミング経験が少ないが、Webサイトの作成・修正を担当する方</li>
@@ -153,8 +159,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>このガイドで学べること</h2>
+            <section id="what-you-learn" aria-labelledby="what-you-learn-heading">
+                <h2 id="what-you-learn-heading">このガイドで学べること</h2>
                 <div class="card">
                     <h3>1. 準備編</h3>
                     <p>開発に必要なツールの準備方法を学びます。</p>
@@ -237,8 +243,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>推奨される開発フロー</h2>
+            <section id="development-flow" aria-labelledby="development-flow-heading">
+                <h2 id="development-flow-heading">推奨される開発フロー</h2>
                 <ol class="steps">
                     <li>
                         <strong>要件を整理する（ChatGPT活用）</strong><br>
@@ -271,8 +277,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>💭 実際の作業イメージ</h2>
+            <section id="work-example" aria-labelledby="work-example-heading">
+                <h2 id="work-example-heading">💭 実際の作業イメージ</h2>
                 <div class="card">
                     <p><strong>Q：「具体的にどんな感じで進めるの？」</strong></p>
                     <p>A：例えば、「トップページに新しいセクションを追加したい」という場合：</p>
@@ -306,8 +312,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>必要な環境</h2>
+            <section id="requirements" aria-labelledby="requirements-heading">
+                <h2 id="requirements-heading">必要な環境</h2>
                 <ul>
                     <li>パソコン（Windows、Mac、Linuxのいずれか）</li>
                     <li>インターネット接続</li>
@@ -321,8 +327,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>次のステップ</h2>
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">次のステップ</h2>
                 <p>
                     準備ができたら、<a href="pages/setup.html">準備編</a>から始めましょう。
                     各ページは順番に読み進めることをおすすめしますが、必要に応じて特定のセクションだけを読むこともできます。
@@ -338,11 +344,12 @@
         </div>
     </footer>
     <!-- 検索モーダル -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-overlay" id="searchOverlay"></div>
+    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="search-title" aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-hidden="true"></div>
         <div class="search-modal-content">
+            <h2 id="search-title" class="sr-only">サイト内検索</h2>
             <div class="search-input-wrapper">
-                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                 </svg>
                 <input
@@ -351,21 +358,25 @@
                     placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
                     id="searchInput"
                     autocomplete="off"
+                    aria-label="検索キーワード入力"
+                    role="searchbox"
+                    aria-autocomplete="list"
+                    aria-controls="searchResults"
                 >
-                <kbd class="search-shortcut">ESC</kbd>
+                <kbd class="search-shortcut" aria-label="ESCキーで閉じる">ESC</kbd>
             </div>
 
-            <div class="search-results" id="searchResults">
+            <div class="search-results" id="searchResults" role="listbox" aria-live="polite" aria-atomic="false">
                 <div class="search-empty">
                     <p>キーワードを入力して検索開始</p>
                 </div>
             </div>
 
             <div class="search-footer">
-                <div class="search-tips">
-                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
-                    <span><kbd>Enter</kbd> で選択</span>
-                    <span><kbd>ESC</kbd> で閉じる</span>
+                <div class="search-tips" role="note" aria-label="検索のヒント">
+                    <span><kbd aria-label="上矢印キー">↑</kbd><kbd aria-label="下矢印キー">↓</kbd> で移動</span>
+                    <span><kbd aria-label="エンターキー">Enter</kbd> で選択</span>
+                    <span><kbd aria-label="エスケープキー">ESC</kbd> で閉じる</span>
                 </div>
             </div>
         </div>
