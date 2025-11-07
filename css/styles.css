@@ -1759,3 +1759,167 @@ body.debug-contrast *:focus {
     }
 }
 
+/* ============================================
+   iOS Safariインストールガイドモーダル
+   ============================================ */
+.ios-install-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ios-install-modal.show {
+    opacity: 1;
+}
+
+.ios-install-modal.fade-out {
+    opacity: 0;
+}
+
+.ios-install-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.ios-install-content {
+    position: relative;
+    background: var(--bg-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+[data-theme="dark"] .ios-install-content {
+    background: var(--gray-800);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.ios-install-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.ios-install-content p {
+    margin: 0 0 1.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.ios-install-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.ios-install-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--gray-50);
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--primary-500);
+}
+
+[data-theme="dark"] .ios-install-steps li {
+    background: var(--gray-700);
+}
+
+.step-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.ios-install-steps li span:last-child {
+    flex: 1;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.ios-install-steps strong {
+    color: var(--primary-600);
+    font-weight: 600;
+}
+
+[data-theme="dark"] .ios-install-steps strong {
+    color: var(--primary-400);
+}
+
+.ios-install-close {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-600);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ios-install-close:hover {
+    background: var(--primary-700);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.ios-install-close:active {
+    transform: translateY(0);
+}
+
+.ios-install-close:focus {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .ios-install-content {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+
+    .ios-install-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .ios-install-steps li {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .step-icon {
+        font-size: 1.25rem;
+    }
+}
+
