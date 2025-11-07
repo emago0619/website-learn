@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>対話で学ぶGit/GitHub入門 - 開発初心者向け Webサイト構築ガイド</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>対話で学ぶGit/GitHub入門</h1>
+            <p>初心者がつまずきやすいポイントを、会話形式でわかりやすく解説</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <button class="hamburger" id="hamburger" aria-label="メニュー">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="setup.html">準備編</a></li>
+                <li><a href="basics.html">基礎知識編</a></li>
+                <li><a href="practice.html">実践編</a></li>
+                <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro">
+                <h2>このページについて</h2>
+                <p>
+                    「Gitって名前は聞いたことあるけど、実際何なの？」「コミットとプッシュって何が違うの？」
+                    そんな疑問に、初心者の<strong>タロウさん</strong>とベテランエンジニアの<strong>先輩</strong>の対話を通じて答えていきます。
+                </p>
+                <div class="alert alert-info">
+                    <strong>登場人物：</strong><br>
+                    <strong>タロウ：</strong>プログラミング初心者。Webサイトを作りたいと思っている<br>
+                    <strong>先輩：</strong>優しく教えてくれるベテランエンジニア
+                </div>
+            </section>
+
+            <section id="what-is-git">
+                <h2>第1話：「Gitって何？バージョン管理って何？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、Gitって何ですか？よく聞くんですけど、正直よくわからなくて...</p>
+
+                    <p><strong>先輩：</strong>いい質問だね！Gitは<strong>「ファイルの変更履歴を記録するツール」</strong>なんだ。
+                    例えば、タロウくんがレポートを書いてる時のことを思い出してみて。</p>
+
+                    <p><strong>タロウ：</strong>レポート...ですか？</p>
+
+                    <p><strong>先輩：</strong>こんなファイル名、作ったことない？</p>
+                    <ul>
+                        <li>レポート.docx</li>
+                        <li>レポート_修正版.docx</li>
+                        <li>レポート_修正版2.docx</li>
+                        <li>レポート_最終版.docx</li>
+                        <li>レポート_最終版_ほんとに最終.docx</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>あー！あります！めっちゃあります！（笑）</p>
+
+                    <p><strong>先輩：</strong>でしょ？これって、「前のバージョンに戻せるように」残してるんだよね。
+                    でもファイルがどんどん増えて、どれが最新かわからなくなる...</p>
+
+                    <p><strong>タロウ：</strong>そうなんですよ！で、結局どれが最新かわからなくなって...</p>
+
+                    <p><strong>先輩：</strong>それを解決するのがGit！Gitを使うと：</p>
+                    <ul>
+                        <li>✅ ファイルは1つだけ（レポート.docx）</li>
+                        <li>✅ でも、変更履歴は全部記録される</li>
+                        <li>✅ 過去のバージョンにいつでも戻せる</li>
+                        <li>✅ 「いつ」「誰が」「何を」変更したかがわかる</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>すごい！それなら「最終版_ほんとに最終_今度こそ最終」みたいなファイル作らなくていいんですね！</p>
+
+                    <p><strong>先輩：</strong>その通り！（笑）これが<strong>バージョン管理</strong>なんだ。</p>
+                </div>
+            </section>
+
+            <section id="git-vs-github">
+                <h2>第2話：「GitとGitHubは違うの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>あれ、でもGitHubっていうのもよく聞くんですけど...GitとGitHubって違うんですか？</p>
+
+                    <p><strong>先輩：</strong>おっ、いいところに気づいたね！これ、みんな最初混乱するんだ。
+                    簡単に言うと：</p>
+                    <ul>
+                        <li><strong>Git</strong> = 自分のパソコンで使うツール（ソフトウェア）</li>
+                        <li><strong>GitHub</strong> = インターネット上の保管場所（サービス）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>うーん...まだちょっと...</p>
+
+                    <p><strong>先輩：</strong>じゃあ、写真で例えてみようか。</p>
+                    <ul>
+                        <li><strong>Git</strong> = スマホのカメラアプリ（写真を撮って管理するツール）</li>
+                        <li><strong>GitHub</strong> = Googleフォトやクラウドストレージ（写真をバックアップして、他の人と共有できるサービス）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>あー！わかりました！Gitで変更を記録して、GitHubにアップロードするってことですね！</p>
+
+                    <p><strong>先輩：</strong>完璧！さらにGitHubには便利な機能があるんだ：</p>
+                    <ul>
+                        <li>📤 <strong>バックアップ</strong>：パソコンが壊れても安心</li>
+                        <li>👥 <strong>チームで共有</strong>：複数人で同じコードを編集できる</li>
+                        <li>🌐 <strong>Webサイトの公開</strong>：GitHub Pagesで無料でサイトを公開できる</li>
+                        <li>👀 <strong>コードレビュー</strong>：他の人に変更をチェックしてもらえる</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>へぇ〜！じゃあGit単体でも使えるけど、GitHubと組み合わせるともっと便利ってことですね！</p>
+
+                    <p><strong>先輩：</strong>その理解でOK！実際、個人で使ってても、GitHubにアップしておけば安心だからね。</p>
+                </div>
+            </section>
+
+            <section id="repository">
+                <h2>第3話：「リポジトリって何？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>Gitの説明でよく「リポジトリ」って言葉が出てくるんですけど、これって何ですか？</p>
+
+                    <p><strong>先輩：</strong>リポジトリ（Repository）は、<strong>「プロジェクトのフォルダ」</strong>だと思えばいいよ。
+                    でも、ただのフォルダじゃなくて、「変更履歴も一緒に保存されてるフォルダ」なんだ。</p>
+
+                    <p><strong>タロウ：</strong>変更履歴も一緒に...？</p>
+
+                    <p><strong>先輩：</strong>そう。例えば、「my-website」っていうフォルダがあるとして：</p>
+
+                    <pre><code>my-website/
+├── index.html
+├── style.css
+├── script.js
+└── .git/  ← ここに変更履歴が保存される！</code></pre>
+
+                    <p><strong>先輩：</strong>この<code>.git</code>フォルダに、全ての変更履歴が記録されてるんだ。
+                    だから、このフォルダごと「リポジトリ」って呼ぶんだよ。</p>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあ、普通のフォルダにGitの機能がついたものがリポジトリってことですね！</p>
+
+                    <p><strong>先輩：</strong>完璧！さらに、リポジトリには2種類あるんだ：</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>種類</th>
+                                <th>場所</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ローカルリポジトリ</strong></td>
+                                <td>自分のパソコン</td>
+                                <td>自分だけが見られる、作業用のリポジトリ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>リモートリポジトリ</strong></td>
+                                <td>GitHub（インターネット上）</td>
+                                <td>チームで共有する、公開用のリポジトリ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>タロウ：</strong>ということは、自分のパソコンで作業して、GitHubにアップロードするってことですか？</p>
+
+                    <p><strong>先輩：</strong>そういうこと！これが基本の流れだよ。</p>
+                </div>
+            </section>
+
+            <section id="commit">
+                <h2>第4話：「コミットって何？セーブとは違うの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>「コミット」っていうのもよく聞くんですけど、これって「保存」のことですよね？</p>
+
+                    <p><strong>先輩：</strong>惜しい！でもちょっと違うんだ。まず整理しよう：</p>
+                    <ul>
+                        <li><strong>保存（Save）</strong> = ファイルの内容をディスクに書き込む（Ctrl+S / Cmd+S）</li>
+                        <li><strong>コミット（Commit）</strong> = 変更内容を「変更履歴」として記録する</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>えっと...違いがよくわからないです...</p>
+
+                    <p><strong>先輩：</strong>ゲームで例えてみようか！</p>
+                    <ul>
+                        <li><strong>保存（Save）</strong> = ゲームのオートセーブ（常に最新の状態を上書き）</li>
+                        <li><strong>コミット（Commit）</strong> = セーブポイント（特定のタイミングで記録を残す）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>あー！セーブポイント！</p>
+
+                    <p><strong>先輩：</strong>そう！ゲームで「ボス戦の前」とか「クリアした後」とかでセーブするでしょ？
+                    コミットも同じで、<strong>「意味のある変更をした時」</strong>に記録を残すんだ。</p>
+
+                    <p><strong>タロウ：</strong>じゃあ、ファイルを保存（Ctrl+S）するのは別に、コミットっていう操作が必要なんですね？</p>
+
+                    <p><strong>先輩：</strong>その通り！実際の流れはこうなる：</p>
+                    <ol class="steps">
+                        <li><strong>ファイルを編集する</strong>（例：index.htmlに新しいセクションを追加）</li>
+                        <li><strong>保存する</strong>（Ctrl+S / Cmd+S）← まだコミットじゃない！</li>
+                        <li><strong>コミットする</strong>「新しいセクションを追加しました」というメッセージと一緒に記録</li>
+                    </ol>
+
+                    <p><strong>タロウ：</strong>なるほど！コミットの時にメッセージを書くんですね！</p>
+
+                    <p><strong>先輩：</strong>そう！このメッセージが超重要。後で見返した時に「何をしたか」がわかるからね。</p>
+
+                    <div class="alert alert-success">
+                        <strong>良いコミットメッセージの例：</strong>
+                        <ul>
+                            <li>✅ 「トップページにお客様の声セクションを追加」</li>
+                            <li>✅ 「問い合わせフォームのバリデーションを修正」</li>
+                            <li>✅ 「レスポンシブデザインに対応」</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <strong>悪いコミットメッセージの例：</strong>
+                        <ul>
+                            <li>❌ 「修正」</li>
+                            <li>❌ 「update」</li>
+                            <li>❌ 「test」</li>
+                        </ul>
+                        <p>これだと後で見返した時に何をしたかわからない！</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="staging">
+                <h2>第5話：「ステージング？なんでコミット前にもう一手順あるの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>コミットの前に「git add」っていうコマンドを使うって聞いたんですけど、
+                    なんでコミット前にもう一手順必要なんですか？</p>
+
+                    <p><strong>先輩：</strong>これもみんな最初混乱するところだね！<strong>「ステージング」</strong>っていう仕組みなんだ。
+                    買い物で例えてみようか。</p>
+
+                    <p><strong>タロウ：</strong>買い物...ですか？</p>
+
+                    <p><strong>先輩：</strong>スーパーで買い物する時を思い出して：</p>
+                    <ol class="steps">
+                        <li><strong>商品を手に取る</strong>（ファイルを編集）</li>
+                        <li><strong>買い物カゴに入れる</strong>（git add = ステージング）← ココ！</li>
+                        <li><strong>レジで会計する</strong>（git commit）</li>
+                    </ol>
+
+                    <p><strong>タロウ：</strong>あー！買い物カゴに入れるのがステージングなんですね！</p>
+
+                    <p><strong>先輩：</strong>そういうこと！なんでこれが必要かというと、<strong>「コミットしたいファイルを選べる」</strong>からなんだ。</p>
+
+                    <p><strong>タロウ：</strong>えっと...どういうことですか？</p>
+
+                    <p><strong>先輩：</strong>例えば、同時に3つのファイルを編集したとしよう：</p>
+                    <ul>
+                        <li>index.html - トップページの修正（完成した）</li>
+                        <li>about.html - 会社概要ページの修正（完成した）</li>
+                        <li>test.html - 実験用のファイル（まだ途中）</li>
+                    </ul>
+
+                    <p><strong>先輩：</strong>この時、完成したindex.htmlとabout.htmlだけをコミットして、
+                    test.htmlはまだコミットしたくないよね？</p>
+
+                    <p><strong>タロウ：</strong>確かに！途中のファイルは記録に残したくないです。</p>
+
+                    <p><strong>先輩：</strong>だからこうする：</p>
+                    <pre><code>git add index.html      # index.htmlをステージング（買い物カゴに入れる）
+git add about.html      # about.htmlもステージング
+# test.htmlはaddしない = コミットされない
+git commit -m "トップページと会社概要ページを更新"</code></pre>
+
+                    <p><strong>タロウ：</strong>なるほど！コミットしたいものだけを選んでステージングするんですね！</p>
+
+                    <p><strong>先輩：</strong>完璧！だから流れはこうなる：</p>
+
+                    <div class="alert alert-info">
+                        <strong>Gitの基本的な流れ：</strong>
+                        <pre><code>1. 【作業ディレクトリ】
+   ↓ ファイルを編集・保存
+   ↓
+2. 【ステージングエリア】
+   ↓ git add（コミットするファイルを選ぶ）
+   ↓
+3. 【ローカルリポジトリ】
+   ↓ git commit（変更を記録）
+   ↓
+4. 【リモートリポジトリ】
+   ← git push（GitHubにアップロード）</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="push-pull">
+                <h2>第6話：「プッシュとプル、なにが起きてるの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>コミットまではわかったんですけど、「プッシュ」と「プル」ってのもよく聞きます。
+                    これは何ですか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！これはローカルリポジトリ（自分のパソコン）とリモートリポジトリ（GitHub）のやり取りだよ。</p>
+                    <ul>
+                        <li><strong>プッシュ（Push）</strong> = 自分のパソコン → GitHub（アップロード）</li>
+                        <li><strong>プル（Pull）</strong> = GitHub → 自分のパソコン（ダウンロード）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>あ、シンプルですね！</p>
+
+                    <p><strong>先輩：</strong>でもね、実はちょっと深い意味があるんだ。例を見てみよう：</p>
+
+                    <h4>🔼 プッシュの流れ</h4>
+                    <pre><code># 1. ファイルを編集して保存
+# 2. ステージングエリアに追加
+git add index.html
+
+# 3. ローカルリポジトリにコミット
+git commit -m "ヘッダーのデザインを変更"
+
+# 4. GitHubにプッシュ
+git push
+
+👆 ここで初めてGitHubに反映される！</code></pre>
+
+                    <p><strong>タロウ：</strong>え、コミットしただけじゃGitHubには反映されないんですか？</p>
+
+                    <p><strong>先輩：</strong>そう！これ超重要！</p>
+                    <ul>
+                        <li><strong>コミット</strong> = 自分のパソコン内に記録（まだGitHubには送られてない）</li>
+                        <li><strong>プッシュ</strong> = GitHubに送る（ここで初めて他の人も見られる）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>じゃあ、チームで作業してる時は、プッシュしないと他の人に共有されないんですね！</p>
+
+                    <p><strong>先輩：</strong>その通り！逆に、他の人がプッシュした変更を取り込むのが「プル」なんだ。</p>
+
+                    <h4>🔽 プルの流れ</h4>
+                    <pre><code># チームメイトがGitHubにプッシュした変更を取り込む
+git pull
+
+👆 GitHubの最新版を自分のパソコンにダウンロード</code></pre>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあチームで作業する時は：</p>
+                    <ol>
+                        <li>作業を始める前に<code>git pull</code>で最新版を取得</li>
+                        <li>自分の作業をして<code>git commit</code></li>
+                        <li>完成したら<code>git push</code>で共有</li>
+                    </ol>
+                    <p>っていう流れですね！</p>
+
+                    <p><strong>先輩：</strong>完璧！本当にその通りだよ！</p>
+                </div>
+            </section>
+
+            <section id="branch">
+                <h2>第7話：「ブランチって何？なんで必要なの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>「ブランチ」っていう概念もあるって聞いたんですけど...これは何ですか？</p>
+
+                    <p><strong>先輩：</strong>ブランチは<strong>「並行世界」</strong>みたいなものだよ！</p>
+
+                    <p><strong>タロウ：</strong>並行世界...？？</p>
+
+                    <p><strong>先輩：</strong>例えば、今動いてるWebサイトがあるとして、「新しいデザインを試したい」と思ったとする。
+                    でも、本番のサイトをいきなり変更したら、失敗した時に困るよね？</p>
+
+                    <p><strong>タロウ：</strong>確かに！本番サイトが壊れたら大変です...</p>
+
+                    <p><strong>先輩：</strong>だからブランチを使うんだ！</p>
+
+                    <pre><code>main（本番）
+  │
+  │  ← ここで分岐！
+  ├──→ new-design（実験用）
+  │       │
+  │       ├── 新しいデザインを試す
+  │       ├── 色々実験する
+  │       └── 完成したらmainに合流（マージ）
+  │
+  └──→ mainは安全にそのまま</code></pre>
+
+                    <p><strong>タロウ：</strong>おお！本番を壊さずに実験できるんですね！</p>
+
+                    <p><strong>先輩：</strong>そういうこと！実際の使い方を見てみよう：</p>
+
+                    <pre><code># 新しいブランチを作成
+git branch new-design
+
+# そのブランチに切り替え
+git checkout new-design
+# または、作成と切り替えを同時に：
+git checkout -b new-design
+
+# ここで自由に実験できる！
+# ファイルを編集...
+git add .
+git commit -m "新しいデザインを実装"
+
+# 完成したらmainブランチに戻る
+git checkout main
+
+# new-designブランチの変更をmainに統合（マージ）
+git merge new-design</code></pre>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあ失敗しても、そのブランチを捨てればいいんですね！</p>
+
+                    <p><strong>先輩：</strong>その通り！ブランチのメリットをまとめると：</p>
+                    <ul>
+                        <li>✅ <strong>安全</strong>：本番コードを壊さずに実験できる</li>
+                        <li>✅ <strong>並行作業</strong>：複数の機能を同時に開発できる</li>
+                        <li>✅ <strong>レビュー</strong>：完成してからチームにレビューしてもらえる</li>
+                        <li>✅ <strong>ロールバック</strong>：失敗したらブランチごと削除すればOK</li>
+                    </ul>
+
+                    <div class="alert alert-info">
+                        <strong>実際の開発現場では：</strong>
+                        <ul>
+                            <li><code>main</code>（または<code>master</code>）= 本番環境</li>
+                            <li><code>develop</code> = 開発環境</li>
+                            <li><code>feature/new-header</code> = 新機能開発用</li>
+                            <li><code>bugfix/login-error</code> = バグ修正用</li>
+                        </ul>
+                        <p>こんな感じで、用途ごとにブランチを作るのが一般的だよ！</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="common-mistakes">
+                <h2>第8話：「みんながつまずくポイント」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>だいぶわかってきました！でも、実際使う時に気をつけることってありますか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！みんながよくつまずくポイントをまとめておくね。</p>
+
+                    <h3>❌ よくある間違い1：コミットせずにプッシュしようとする</h3>
+                    <pre><code># ❌ 間違い
+git add index.html
+git push  ← コミットしてないのにプッシュ！
+
+# ✅ 正しい
+git add index.html
+git commit -m "ヘッダーを修正"
+git push</code></pre>
+
+                    <h3>❌ よくある間違い2：プルせずに作業を始める</h3>
+                    <p><strong>先輩：</strong>チームで作業してる時、他の人が変更をプッシュしてることがあるんだ。
+                    だから、作業を始める前には必ず<code>git pull</code>して最新版を取得しよう！</p>
+
+                    <pre><code># ✅ 作業開始前の習慣
+git pull          # 最新版を取得
+# 作業する...
+git add .
+git commit -m "○○を追加"
+git push</code></pre>
+
+                    <h3>❌ よくある間違い3：コミットメッセージが雑</h3>
+                    <pre><code># ❌ 悪い例
+git commit -m "update"
+git commit -m "修正"
+git commit -m "test"
+
+# ✅ 良い例
+git commit -m "トップページのヘッダーデザインを修正"
+git commit -m "お問い合わせフォームのバリデーションを追加"
+git commit -m "レスポンシブ対応のため、CSSを調整"</code></pre>
+
+                    <h3>❌ よくある間違い4：.gitを削除してしまう</h3>
+                    <p><strong>先輩：</strong><code>.git</code>フォルダには全ての変更履歴が入ってるから、これを削除すると全て失われる！
+                    間違っても削除しないように！</p>
+
+                    <h3>❌ よくある間違い5：パスワードやAPIキーをコミットしてしまう</h3>
+                    <p><strong>先輩：</strong>これは超危険！GitHubに公開したら、世界中の人が見られるからね。</p>
+
+                    <div class="alert alert-warning">
+                        <strong>コミットしてはいけないファイル：</strong>
+                        <ul>
+                            <li>❌ <code>.env</code> - 環境変数（パスワードやAPIキー）</li>
+                            <li>❌ <code>config.secret.json</code> - 秘密情報</li>
+                            <li>❌ <code>node_modules/</code> - ライブラリ（容量が大きい）</li>
+                        </ul>
+                        <p>これらは<code>.gitignore</code>ファイルに書いて、除外しよう！</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="workflow">
+                <h2>第9話：「実際の作業の流れをまとめると？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>色々教えてもらったので、最後に実際の流れをまとめてもらえますか？</p>
+
+                    <p><strong>先輩：</strong>OK！実際のWebサイト制作の流れを見てみよう。</p>
+
+                    <h3>📝 ケース1：個人で新しいプロジェクトを始める</h3>
+                    <pre><code># 1. GitHubでリポジトリを作成（ブラウザで操作）
+
+# 2. 自分のパソコンにクローン（コピー）
+git clone https://github.com/username/my-project.git
+cd my-project
+
+# 3. ファイルを作成・編集
+# index.html, style.cssなどを作成...
+
+# 4. 変更をコミット
+git add .
+git commit -m "初回コミット：基本的なHTMLとCSSを追加"
+
+# 5. GitHubにプッシュ
+git push</code></pre>
+
+                    <h3>📝 ケース2：既存プロジェクトに新機能を追加</h3>
+                    <pre><code># 1. 最新版を取得
+git pull
+
+# 2. 新しいブランチを作成
+git checkout -b feature/contact-form
+
+# 3. ファイルを編集
+# お問い合わせフォームを追加...
+
+# 4. 変更をコミット
+git add contact.html
+git commit -m "お問い合わせフォームページを追加"
+
+# 5. GitHubにプッシュ
+git push -u origin feature/contact-form
+
+# 6. GitHubでプルリクエストを作成（ブラウザで操作）
+
+# 7. レビューを受けて、OKならmainにマージ</code></pre>
+
+                    <h3>📝 ケース3：チームで作業する日常</h3>
+                    <pre><code># 朝、作業を始める前
+git pull  # チームメイトの変更を取得
+
+# 自分の作業
+# ファイルを編集...
+git add .
+git commit -m "ヘッダーのナビゲーションを改善"
+
+# 昼休み前にプッシュ（バックアップ）
+git push
+
+# 午後、また作業開始
+git pull  # 念のため最新版を取得
+
+# 作業...
+git add .
+git commit -m "フッターにSNSリンクを追加"
+
+# 終業前にプッシュ
+git push</code></pre>
+
+                    <p><strong>タロウ：</strong>わかりやすい！こうやって見ると、そんなに難しくないですね！</p>
+
+                    <p><strong>先輩：</strong>そうそう！最初は難しく感じるけど、慣れたらこの流れが自然になるよ。
+                    ポイントは：</p>
+                    <ul>
+                        <li>✅ こまめにコミット（1機能ごと）</li>
+                        <li>✅ 作業前に<code>git pull</code></li>
+                        <li>✅ わかりやすいコミットメッセージ</li>
+                        <li>✅ 実験はブランチで</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="github-pages">
+                <h2>第10話：「GitHub PagesでWebサイトを公開してみよう！」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>最後に、GitHubでWebサイトを公開する方法も教えてください！</p>
+
+                    <p><strong>先輩：</strong>おっ、いいね！GitHub Pagesを使えば、静的なWebサイトを無料で公開できるんだ。</p>
+
+                    <h3>🌐 GitHub Pagesでの公開手順</h3>
+                    <ol class="steps">
+                        <li>
+                            <strong>リポジトリを作成</strong><br>
+                            GitHubで新しいリポジトリを作る（例：<code>my-website</code>）
+                        </li>
+                        <li>
+                            <strong>HTMLファイルを配置</strong><br>
+                            <code>index.html</code>をリポジトリのルートに配置
+                        </li>
+                        <li>
+                            <strong>プッシュ</strong><br>
+                            GitHubにファイルをプッシュ
+                        </li>
+                        <li>
+                            <strong>GitHub Pagesを有効化</strong><br>
+                            リポジトリの Settings → Pages → Source を「main」ブランチに設定
+                        </li>
+                        <li>
+                            <strong>公開完了！</strong><br>
+                            <code>https://username.github.io/my-website/</code>でアクセスできる！
+                        </li>
+                    </ol>
+
+                    <p><strong>タロウ：</strong>え！こんなに簡単なんですか！</p>
+
+                    <p><strong>先輩：</strong>そう！しかも：</p>
+                    <ul>
+                        <li>✅ 完全無料</li>
+                        <li>✅ HTTPSで自動的にセキュア</li>
+                        <li>✅ ファイルをプッシュするだけで自動更新</li>
+                        <li>✅ 独自ドメインも設定可能</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>すごい！早速試してみます！</p>
+
+                    <div class="alert alert-success">
+                        <strong>活用例：</strong>
+                        <ul>
+                            <li>個人のポートフォリオサイト</li>
+                            <li>プロジェクトのドキュメント</li>
+                            <li>会社の紹介ページ</li>
+                            <li>イベントのランディングページ</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="summary">
+                <h2>まとめ：これだけは覚えよう！</h2>
+
+                <div class="card">
+                    <h3>🎯 重要な概念</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>用語</th>
+                                <th>一言で言うと</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Git</strong></td>
+                                <td>ファイルの変更履歴を管理するツール</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GitHub</strong></td>
+                                <td>Gitのリポジトリをクラウドで管理するサービス</td>
+                            </tr>
+                            <tr>
+                                <td><strong>リポジトリ</strong></td>
+                                <td>プロジェクトのフォルダ（変更履歴付き）</td>
+                            </tr>
+                            <tr>
+                                <td><strong>コミット</strong></td>
+                                <td>変更を履歴として記録すること</td>
+                            </tr>
+                            <tr>
+                                <td><strong>プッシュ</strong></td>
+                                <td>ローカル → GitHubにアップロード</td>
+                            </tr>
+                            <tr>
+                                <td><strong>プル</strong></td>
+                                <td>GitHub → ローカルにダウンロード</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ブランチ</strong></td>
+                                <td>並行世界（実験用の分岐）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3>🔄 基本的な作業の流れ</h3>
+                    <pre><code>1. git pull          # 最新版を取得
+2. ファイルを編集    # 実際の作業
+3. git add .         # ステージング
+4. git commit -m "メッセージ"  # コミット
+5. git push          # GitHubにアップロード</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>💡 初心者へのアドバイス</h3>
+                    <ul>
+                        <li>✅ 最初は難しく感じるけど、使えば使うほど慣れる</li>
+                        <li>✅ こまめにコミット・プッシュする習慣をつけよう</li>
+                        <li>✅ コミットメッセージは未来の自分へのメモ</li>
+                        <li>✅ 失敗を恐れずに実験しよう（ブランチを使えば安全）</li>
+                        <li>✅ わからなくなったら、<code>git status</code>で現在の状態を確認</li>
+                    </ul>
+                </div>
+
+                <p><strong>タロウ：</strong>先輩、ありがとうございました！Git/GitHubのことがすごくよくわかりました！</p>
+
+                <p><strong>先輩：</strong>どういたしまして！あとは実際に使ってみることが一番の勉強だよ。
+                頑張ってね！</p>
+            </section>
+
+            <section id="next-steps">
+                <h2>次のステップ</h2>
+                <p>
+                    Git/GitHubの基本がわかったら、実際に手を動かしてみましょう！
+                </p>
+                <ul>
+                    <li><a href="setup.html">準備編</a>で、実際にGitとGitHubをセットアップする</li>
+                    <li><a href="practice.html">実践編</a>で、実際にWebサイトを作成・公開する</li>
+                    <li><a href="basics.html">基礎知識編</a>で、その他の技術も学ぶ</li>
+                </ul>
+                <a href="practice.html" class="btn">実践編で手を動かす →</a>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+        </div>
+    </footer>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+</body>
+</html>
