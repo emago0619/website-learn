@@ -1695,7 +1695,7 @@ body.debug-contrast *:focus {
     color: var(--primary-400);
 }
 
-/* レスポンシブ: モバイルではテキストを非表示 */
+/* レスポンシブ: モバイルではテキストを非表示、左側に配置 */
 @media (max-width: 768px) {
     .install-btn span {
         display: none;
@@ -1705,6 +1705,8 @@ body.debug-contrast *:focus {
         padding: 0.5rem;
         min-width: 2.5rem;
         justify-content: center;
+        position: absolute;
+        left: 4rem; /* ハンバーガーメニューの右側 */
     }
 }
 
