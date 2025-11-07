@@ -45,7 +45,7 @@
                 <ul>
                     <li><strong>GitHub</strong>：コードを保存・共有するためのサービス</li>
                     <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
-                    <li><strong>CodexCLI</strong>：コマンドラインで操作するためのツール</li>
+                    <li><strong>CodexCLI</strong>：AIがコード作成や解説を助けてくれるコマンドライン用エージェント</li>
                 </ul>
             </section>
 
@@ -141,63 +141,46 @@
             <section>
                 <h2>3. CodexCLIのインストール</h2>
                 <p>
-                    CodexCLIは、コマンドライン（ターミナル）からGitHubやGitの操作を行うためのツールです。
-                    初心者の方には少し難しいかもしれませんが、このガイドに従えば問題なく使えるようになります。
+                    CodexCLIは、OpenAIが提供するAIコーディングエージェントです。ターミナルから質問すると、コードの提案や修正案、操作手順のガイドをリアルタイムで返してくれます。GitやGitHubの操作専用ツールではなく、あなたの作業全体を支援する頼れる相棒だと考えてください。
                 </p>
 
-                <h3>CodexCLIとは</h3>
+                <h3>CodexCLIでできること</h3>
                 <p>
-                    CodexCLIは、GitHubの操作を簡単にするためのコマンドラインツールです。
-                    ファイルのアップロード、変更の保存、Webサイトの公開など、多くの操作をコマンドで実行できます。
+                    例として、Webページのデザイン変更の相談、エラーメッセージの原因調査、学習教材のコード解説といったサポートをチャット形式で受けられます。詳しくはOpenAI公式のGitHubリポジトリ（<a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer">https://github.com/openai/codex</a>）を参照してください。
                 </p>
 
-                <h3>手順（Mac / Linuxの場合）</h3>
-                <ol class="steps">
-                    <li>
-                        <strong>ターミナルを開く</strong><br>
-                        Macの場合は「ターミナル」アプリ、Linuxの場合は「Terminal」を開きます。
+                <h3>インストール前の前提条件</h3>
+                <ul>
+                    <li>OpenAIアカウント（利用登録がまだの方は <a href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer">https://platform.openai.com/</a> で作成）</li>
+                    <li>ターミナル（Mac / Linux）またはPowerShell（Windows）を開ける環境</li>
+                    <li>以下のいずれかのインストール手段
+                        <ul>
+                            <li><strong>Node.jsとnpm</strong>（<a href="https://nodejs.org/ja" target="_blank" rel="noopener noreferrer">https://nodejs.org/ja</a> からダウンロード可能）</li>
+                            <li><strong>Homebrew</strong>（macOS用パッケージマネージャ。導入方法は <a href="https://brew.sh/index_ja" target="_blank" rel="noopener noreferrer">https://brew.sh/index_ja</a> を参照）</li>
+                        </ul>
                     </li>
-                    <li>
-                        <strong>CodexCLIをインストール</strong><br>
-                        ターミナルに以下のコマンドを入力してEnterキーを押します：
-                        <pre><code>curl -fsSL https://codexcli.com/install.sh | sh</code></pre>
-                    </li>
-                    <li>
-                        <strong>インストール確認</strong><br>
-                        以下のコマンドでインストールが成功したか確認します：
-                        <pre><code>codex --version</code></pre>
-                        バージョン番号が表示されれば成功です。
-                    </li>
-                    <li>
-                        <strong>GitHubアカウントとの連携</strong><br>
-                        以下のコマンドでGitHubアカウントと連携します：
-                        <pre><code>codex auth login</code></pre>
-                        ブラウザが開くので、GitHubアカウントでログインして認証を完了させます。
-                    </li>
-                </ol>
+                </ul>
 
-                <h3>手順（Windowsの場合）</h3>
+                <h3>インストール手順</h3>
                 <ol class="steps">
                     <li>
-                        <strong>PowerShellを開く</strong><br>
-                        Windowsキーを押して「PowerShell」と入力し、PowerShellを開きます。
+                        <strong>ターミナルまたはPowerShellを開く</strong><br>
+                        お使いのOSでコマンドを入力できる画面を表示します。
                     </li>
                     <li>
-                        <strong>CodexCLIをインストール</strong><br>
-                        PowerShellに以下のコマンドを入力してEnterキーを押します：
-                        <pre><code>iwr -useb https://codexcli.com/install.ps1 | iex</code></pre>
+                        <strong>インストール方法を選ぶ</strong><br>
+                        既に環境にあるパッケージマネージャーに合わせて、次のいずれかのコマンドを入力します。
+                        <pre><code># Node.js / npm を利用する場合（Windows・macOS・Linux共通）
+npm install -g @openai/codex
+
+# Homebrew を利用する場合（macOS）
+brew install codex</code></pre>
+                        コマンド実行中は途中で質問が表示されることがあります。内容を確認しながら進めてください。
                     </li>
                     <li>
                         <strong>インストール確認</strong><br>
-                        以下のコマンドでインストールが成功したか確認します：
+                        次のコマンドでバージョン番号が表示されればインストール完了です。
                         <pre><code>codex --version</code></pre>
-                        バージョン番号が表示されれば成功です。
-                    </li>
-                    <li>
-                        <strong>GitHubアカウントとの連携</strong><br>
-                        以下のコマンドでGitHubアカウントと連携します：
-                        <pre><code>codex auth login</code></pre>
-                        ブラウザが開くので、GitHubアカウントでログインして認証を完了させます。
                     </li>
                 </ol>
 
@@ -223,7 +206,6 @@
                     <li>□ GitHubアカウントにログインできる</li>
                     <li>□ Cursorが起動できる</li>
                     <li>□ CodexCLIがインストールされている（<code>codex --version</code>で確認）</li>
-                    <li>□ CodexCLIとGitHubが連携されている（<code>codex auth status</code>で確認）</li>
                 </ul>
 
                 <div class="alert alert-info">
@@ -240,7 +222,7 @@
                 <ol>
                     <li><strong>GitHub</strong>：コードを保存・管理するサービス</li>
                     <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
-                    <li><strong>CodexCLI</strong>：コマンドライン操作ツール</li>
+                    <li><strong>CodexCLI</strong>：AIが会話で支援してくれるコマンドライン用エージェント</li>
                 </ol>
                 <p>
                     準備が整ったら、次は<a href="basics.html">基礎知識編</a>で各ツールの基本的な概念と使い方を学びましょう。
