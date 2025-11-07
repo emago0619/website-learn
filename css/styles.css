@@ -856,6 +856,27 @@ blockquote {
 /* ============================================
    コードブロックの改善
    ============================================ */
+.code-block {
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    margin: var(--space-4) 0;
+    overflow-x: auto;
+}
+
+.code-block h4 {
+    margin-top: 0;
+}
+
+.code-block p {
+    margin-bottom: var(--space-2);
+}
+
+.code-block ul {
+    margin-left: var(--space-6);
+}
+
 pre {
     background: linear-gradient(135deg, var(--code-bg) 0%, var(--gray-200) 100%);
     padding: var(--space-6);
