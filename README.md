@@ -63,7 +63,29 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - **パート8**: 様々なデプロイ方法
    - **パート9**: Cursorの内蔵ブラウザの活用
 
-5. **FAQ（pages/faq.html）**
+5. **Google Stitch活用ガイド（pages/stitch-workflow.html）** 🆕
+   - Google Stitchの概要と使い方
+   - テキストからUI生成
+   - 画像からUI生成
+   - Figmaとの連携
+   - Cursorでの実装方法
+   - 実例で学ぶデザイン→実装の流れ
+
+6. **AIツール大全（pages/ai-tools.html）** 🆕
+   - Cursor以外のAI IDE 14種類の徹底比較
+   - Codex CLI以外のAI CLIツール 10種類の紹介
+   - シーン別おすすめツールの選び方
+   - 無料・有料プランの比較表
+   - 2025年最新トレンドとエージェント型開発
+
+7. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）** 🆕
+   - 会話形式でわかりやすいGit/GitHub解説
+   - 初心者がつまずきやすいポイントを丁寧に説明
+   - コミット、プッシュ、プルの違い
+   - ブランチとマージの基礎
+   - 実践的なワークフロー
+
+8. **FAQ（pages/faq.html）**
    - よくある質問と回答
    - トラブルシューティング
    - エラーメッセージの対処法
@@ -92,16 +114,25 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
 
 ```
 /
-├── index.html          # トップページ
-├── robots.txt          # クローラー対策
+├── index.html                    # トップページ
+├── robots.txt                    # クローラー対策
 ├── css/
-│   └── styles.css     # 統一スタイルシート
+│   └── styles.css               # 統一スタイルシート（Phase 1-3実装済み）
+├── js/
+│   ├── menu.js                  # メニュー制御、ダークモード、スクロール機能
+│   ├── search.js                # 検索機能（Phase 3実装済み）
+│   └── toc.js                   # 目次ナビゲーション（Phase 3実装済み）
 ├── pages/
-│   ├── setup.html     # 準備編
-│   ├── basics.html    # 基礎知識編
-│   ├── practice.html  # 実践編
-│   └── faq.html       # FAQ
-└── README.md          # このファイル
+│   ├── setup.html               # 準備編
+│   ├── basics.html              # 基礎知識編
+│   ├── practice.html            # 実践編
+│   ├── stitch-workflow.html     # Google Stitch活用ガイド 🆕
+│   ├── ai-tools.html            # AIツール大全 🆕
+│   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門 🆕
+│   └── faq.html                 # FAQ
+├── docs/
+│   └── FUTURE_ENHANCEMENTS.md   # 今後の機能拡張ガイド
+└── README.md                    # このファイル
 ```
 
 ## 💡 特徴的な機能
@@ -121,9 +152,13 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 
 ## 🛠 技術仕様
 
-- **HTML5 + CSS3**：セマンティックなマークアップ
+- **HTML5 + CSS3**：セマンティックなマークアップ、モダンなCSS変数システム
 - **レスポンシブデザイン**：スマホ・タブレット対応
-- **純粋な静的サイト**：JavaScriptは最小限
+- **バニラJavaScript**：軽量で高速、フレームワーク不要
+- **ダークモード対応**：LocalStorageで設定を保存
+- **検索機能**：Cmd/Ctrl+Kショートカット対応のモーダル検索
+- **目次ナビゲーション**：自動生成、スクロール追従
+- **アニメーション**：Intersection Observerによるスクロールアニメーション
 - **SEO対策**：robots.txt + noindexメタタグでクローラー制御
 
 ## 🎓 対象読者
@@ -164,10 +199,16 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 
 ## 📅 更新履歴
 
-- **2025年1月**: Phase 3 高優先度機能実装
+- **2025年1月**: Phase 3 高優先度機能実装 + コンテンツ大幅拡充
   - ✅ 検索機能（モーダル検索、Cmd+K/Ctrl+Kショートカット）
   - ✅ 目次ナビゲーション（サイドバーTOC、自動生成、スクロール追従）
   - ✅ SVGイラスト（アニメーション付きブラウザウィンドウ）
+  - ✅ ダークモード切り替え機能
+  - ✅ スクロールプログレスバー
+  - ✅ スクロールアニメーション（Intersection Observer）
+  - 🆕 Google Stitch活用ガイドページを追加
+  - 🆕 AIツール大全ページを追加（AI IDE 14種類、AI CLI 10種類を徹底比較）
+  - 🆕 対話で学ぶGit/GitHub入門ページを追加
 
 - **2024年**: 初版リリース
   - 計画重視型ワークフローの導入
