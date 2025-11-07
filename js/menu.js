@@ -125,8 +125,8 @@ window.addEventListener('scroll', handleNavScroll);
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+        threshold: 0.05,
+        rootMargin: '50px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -141,16 +141,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
     sections.forEach((section, index) => {
         section.classList.add('fade-up');
-        section.style.transitionDelay = `${index * 0.1}s`;
+        section.style.transitionDelay = `${index * 0.05}s`;
         observer.observe(section);
+
+        // すでにビューポート内にある要素は即座に表示
+        if (section.getBoundingClientRect().top < window.innerHeight) {
+            section.classList.add('animate-in');
+        }
     });
 
     // カードにもアニメーションを適用
     const cards = document.querySelectorAll('.card');
     cards.forEach((card, index) => {
         card.classList.add('fade-up');
-        card.style.transitionDelay = `${index * 0.1}s`;
+        card.style.transitionDelay = `${index * 0.05}s`;
         observer.observe(card);
+
+        // すでにビューポート内にある要素は即座に表示
+        if (card.getBoundingClientRect().top < window.innerHeight) {
+            card.classList.add('animate-in');
+        }
     });
 });
 
