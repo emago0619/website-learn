@@ -63,7 +63,24 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - **パート8**: 様々なデプロイ方法
    - **パート9**: Cursorの内蔵ブラウザの活用
 
-5. **Google Stitch活用ガイド（pages/stitch-workflow.html）** 🆕
+5. **デプロイ完全ガイド（pages/deployment-guide.html）** 🆕
+   - デプロイの基礎知識
+   - GitHub Pages完全ガイド
+   - Vercel完全ガイド（環境変数、ドメイン設定、プレビューデプロイ）
+   - Netlify完全ガイド（フォーム機能、サーバーレス関数）
+   - Cloudflare Pages完全ガイド（帯域無制限、高速CDN）
+   - FTP/レンタルサーバーガイド
+   - デプロイサービス徹底比較（2025年版）
+   - トラブルシューティング
+
+6. **非エンジニア向け便利ツール集（pages/non-engineer-tools.html）** 🆕
+   - ノーコードWebサイト作成ツール（STUDIO、Wix、Webflow、ペライチ、WordPress）
+   - Markdown完全ガイド
+   - デザイン・画像編集ツール（Canva、Figma、Photopea）
+   - その他の便利ツール
+   - 学習リソース
+
+7. **Google Stitch活用ガイド（pages/stitch-workflow.html）**
    - Google Stitchの概要と使い方
    - テキストからUI生成
    - 画像からUI生成
@@ -71,21 +88,21 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - Cursorでの実装方法
    - 実例で学ぶデザイン→実装の流れ
 
-6. **AIツール大全（pages/ai-tools.html）** 🆕
+8. **AIツール大全（pages/ai-tools.html）**
    - Cursor以外のAI IDE 14種類の徹底比較
    - Codex CLI以外のAI CLIツール 10種類の紹介
    - シーン別おすすめツールの選び方
    - 無料・有料プランの比較表
    - 2025年最新トレンドとエージェント型開発
 
-7. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）** 🆕
+9. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）**
    - 会話形式でわかりやすいGit/GitHub解説
    - 初心者がつまずきやすいポイントを丁寧に説明
    - コミット、プッシュ、プルの違い
    - ブランチとマージの基礎
    - 実践的なワークフロー
 
-8. **FAQ（pages/faq.html）**
+10. **FAQ（pages/faq.html）**
    - よくある質問と回答
    - トラブルシューティング
    - エラーメッセージの対処法
@@ -126,9 +143,11 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
 │   ├── setup.html               # 準備編
 │   ├── basics.html              # 基礎知識編
 │   ├── practice.html            # 実践編
-│   ├── stitch-workflow.html     # Google Stitch活用ガイド 🆕
-│   ├── ai-tools.html            # AIツール大全 🆕
-│   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門 🆕
+│   ├── deployment-guide.html    # デプロイ完全ガイド 🆕
+│   ├── non-engineer-tools.html  # 非エンジニア向け便利ツール集 🆕
+│   ├── stitch-workflow.html     # Google Stitch活用ガイド
+│   ├── ai-tools.html            # AIツール大全
+│   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門
 │   └── faq.html                 # FAQ
 ├── docs/
 │   └── FUTURE_ENHANCEMENTS.md   # 今後の機能拡張ガイド
@@ -209,6 +228,8 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
   - 🆕 Google Stitch活用ガイドページを追加
   - 🆕 AIツール大全ページを追加（AI IDE 14種類、AI CLI 10種類を徹底比較）
   - 🆕 対話で学ぶGit/GitHub入門ページを追加
+  - 🆕 デプロイ完全ガイドページを追加（Vercel、Cloudflare Pages、Netlify詳細解説）
+  - 🆕 非エンジニア向け便利ツール集ページを追加（ノーコードツール、Markdown完全ガイド）
 
 - **2024年**: 初版リリース
   - 計画重視型ワークフローの導入
