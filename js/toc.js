@@ -32,7 +32,8 @@ class TableOfContents {
     let currentH2 = null;
 
     headings.forEach((heading, index) => {
-      const id = heading.id || `heading-${index}`;
+      // ID衝突を防ぐため、タイムスタンプとインデックスを組み合わせる
+      const id = heading.id || `toc-heading-${Date.now()}-${index}`;
       if (!heading.id) {
         heading.id = id;
       }

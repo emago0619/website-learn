@@ -782,8 +782,11 @@ footer {
         display: none;
     }
 
-    * {
-        -webkit-overflow-scrolling: touch;
+    /* -webkit-overflow-scrolling は iOS 13+ で非推奨のため条件付きで使用 */
+    @supports (-webkit-overflow-scrolling: touch) {
+        * {
+            -webkit-overflow-scrolling: touch;
+        }
     }
 }
 
