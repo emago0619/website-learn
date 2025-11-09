@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isOpen) {
                 const firstLink = navMenu.querySelector('a');
                 if (firstLink) {
+                    // DOM更新とCSSアニメーションの完了を待つため100ms遅延
                     setTimeout(() => firstLink.focus(), 100);
                 }
             }
@@ -264,12 +265,12 @@ function announceToScreenReader(message) {
     // 既存のメッセージをクリア
     announcer.textContent = '';
 
-    // 少し遅延させてから新しいメッセージを設定（スクリーンリーダーが確実に読み上げるため）
+    // スクリーンリーダーが確実に読み上げるため100ms遅延してから新しいメッセージを設定
     setTimeout(() => {
         announcer.textContent = message;
     }, 100);
 
-    // メッセージをクリア（次の通知のため）
+    // 次の通知のため3秒後にメッセージをクリア
     setTimeout(() => {
         announcer.textContent = '';
     }, 3000);

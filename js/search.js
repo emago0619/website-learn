@@ -181,7 +181,9 @@ class SearchEngine {
   }
 
   highlight(text, query) {
-    const regex = new RegExp(`(${query})`, 'gi');
+    // 正規表現の特殊文字をエスケープしてインジェクション攻撃を防ぐ
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
     return text.replace(regex, '<mark>$1</mark>');
   }
 
@@ -252,6 +254,7 @@ class SearchEngine {
     document.body.classList.add('modal-open');
 
     // フォーカスを検索入力に移動
+    // モーダル表示アニメーション完了を待つため100ms遅延
     setTimeout(() => {
       this.input.focus();
     }, 100);

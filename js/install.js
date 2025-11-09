@@ -1,6 +1,8 @@
 /**
  * PWAインストール機能
  * beforeinstallpromptイベントを利用してインストールボタンを表示・管理する
+ *
+ * NOTE: 本番環境では console.log/warn を削除またはビルドプロセスで除去することを推奨
  */
 
 class PWAInstaller {

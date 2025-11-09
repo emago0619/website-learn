@@ -1,5 +1,6 @@
 // Service Worker for Web開発学習ガイド
 // Version: 1.0.0
+// NOTE: 本番環境では console.log を削除またはビルドプロセスで除去することを推奨
 
 const CACHE_NAME = 'web-learn-v1';
 const OFFLINE_URL = '/index.html';
@@ -18,7 +19,9 @@ const PRECACHE_URLS = [
   '/css/styles.css',
   '/js/menu.js',
   '/js/search.js',
-  '/js/toc.js'
+  '/js/toc.js',
+  '/js/install.js',
+  '/manifest.json'
 ];
 
 // インストール時：リソースをキャッシュ
@@ -64,7 +67,8 @@ self.addEventListener('fetch', (event) => {
     caches.match(event.request)
       .then((cachedResponse) => {
         // HTML: Network First（最新コンテンツ優先）
-        if (event.request.headers.get('accept').includes('text/html')) {
+        const acceptHeader = event.request.headers.get('accept');
+        if (acceptHeader && acceptHeader.includes('text/html')) {
           return fetch(event.request)
             .then((networkResponse) => {
               // 成功したら新しいレスポンスをキャッシュ
