@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>チートシート集 - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* 印刷用スタイル */
+        @media print {
+            .cheatsheet-card {
+                page-break-inside: avoid;
+                border: 2px solid #333;
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        .cheatsheet-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+        .cheatsheet-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: var(--space-2);
+        }
+        .command-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-4) 0;
+        }
+        .command-table th,
+        .command-table td {
+            padding: var(--space-3);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .command-table th {
+            background: var(--primary-50);
+            font-weight: var(--font-semibold);
+        }
+        .command-table code {
+            background: var(--bg-code);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-size: var(--text-sm);
+        }
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius-full);
+            font-size: var(--text-base);
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s;
+        }
+        .print-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        .shortcut-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-3);
+            margin: var(--space-4) 0;
+        }
+        .shortcut-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-3);
+            background: var(--bg-color);
+            border-radius: var(--radius-md);
+        }
+        .shortcut-item kbd {
+            background: var(--bg-code);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-code);
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>チートシート集</h1>
+            <p>よく使うコマンドやショートカットを一覧表示 - 印刷してデスクに貼っておこう！</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション" class="no-print">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li><a href="setup.html">準備編</a></li>
+                    <li><a href="basics.html">基礎知識編</a></li>
+                    <li><a href="practice.html">実践編</a></li>
+                    <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                    <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                    <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                    <li><a href="ai-tools.html">AIツール大全</a></li>
+                    <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                    <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                    <li><a href="cheatsheets.html" class="active" aria-current="page">チートシート</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 印刷ボタン -->
+    <button class="print-btn no-print" onclick="window.print()" aria-label="このページを印刷">
+        <span>🖨️ 印刷する</span>
+    </button>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar no-print" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">チートシートの使い方</h2>
+                <div class="alert alert-success">
+                    <strong>💡 活用方法：</strong><br>
+                    ・右下の「印刷する」ボタンでPDF保存または紙に印刷<br>
+                    ・デスクに貼っておくと、作業中にすぐ確認できて便利<br>
+                    ・スマホでブックマークしておくのもおすすめ
+                </div>
+            </section>
+
+            <!-- Gitコマンドチートシート -->
+            <section id="git-commands" aria-labelledby="git-commands-heading">
+                <h2 id="git-commands-heading">Gitコマンドチートシート</h2>
+
+                <div class="cheatsheet-card">
+                    <h3>📦 基本操作</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>コマンド</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>git init</code></td>
+                                <td>新しいGitリポジトリを作成</td>
+                            </tr>
+                            <tr>
+                                <td><code>git clone &lt;URL&gt;</code></td>
+                                <td>リモートリポジトリをクローン</td>
+                            </tr>
+                            <tr>
+                                <td><code>git status</code></td>
+                                <td>現在の状態を確認</td>
+                            </tr>
+                            <tr>
+                                <td><code>git add .</code></td>
+                                <td>すべての変更をステージング</td>
+                            </tr>
+                            <tr>
+                                <td><code>git add &lt;ファイル名&gt;</code></td>
+                                <td>特定のファイルをステージング</td>
+                            </tr>
+                            <tr>
+                                <td><code>git commit -m "メッセージ"</code></td>
+                                <td>変更をコミット</td>
+                            </tr>
+                            <tr>
+                                <td><code>git push origin main</code></td>
+                                <td>リモートにプッシュ（mainブランチ）</td>
+                            </tr>
+                            <tr>
+                                <td><code>git pull origin main</code></td>
+                                <td>リモートから最新を取得</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>🌿 ブランチ操作</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>コマンド</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>git branch</code></td>
+                                <td>ブランチ一覧を表示</td>
+                            </tr>
+                            <tr>
+                                <td><code>git branch &lt;ブランチ名&gt;</code></td>
+                                <td>新しいブランチを作成</td>
+                            </tr>
+                            <tr>
+                                <td><code>git checkout &lt;ブランチ名&gt;</code></td>
+                                <td>ブランチを切り替え</td>
+                            </tr>
+                            <tr>
+                                <td><code>git checkout -b &lt;ブランチ名&gt;</code></td>
+                                <td>ブランチを作成して切り替え</td>
+                            </tr>
+                            <tr>
+                                <td><code>git merge &lt;ブランチ名&gt;</code></td>
+                                <td>指定したブランチを現在のブランチにマージ</td>
+                            </tr>
+                            <tr>
+                                <td><code>git branch -d &lt;ブランチ名&gt;</code></td>
+                                <td>ブランチを削除</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>🔍 確認・履歴</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>コマンド</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>git log</code></td>
+                                <td>コミット履歴を表示</td>
+                            </tr>
+                            <tr>
+                                <td><code>git log --oneline</code></td>
+                                <td>コミット履歴を1行で表示</td>
+                            </tr>
+                            <tr>
+                                <td><code>git diff</code></td>
+                                <td>変更内容を表示</td>
+                            </tr>
+                            <tr>
+                                <td><code>git diff --staged</code></td>
+                                <td>ステージング済みの変更を表示</td>
+                            </tr>
+                            <tr>
+                                <td><code>git show &lt;コミットID&gt;</code></td>
+                                <td>特定のコミットの詳細を表示</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>⚠️ 緊急時のコマンド</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>コマンド</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>git reset HEAD &lt;ファイル名&gt;</code></td>
+                                <td>ステージングを取り消し</td>
+                            </tr>
+                            <tr>
+                                <td><code>git checkout -- &lt;ファイル名&gt;</code></td>
+                                <td>ファイルの変更を取り消し</td>
+                            </tr>
+                            <tr>
+                                <td><code>git reset --soft HEAD~1</code></td>
+                                <td>直前のコミットを取り消し（変更は保持）</td>
+                            </tr>
+                            <tr>
+                                <td><code>git reset --hard HEAD~1</code></td>
+                                <td>直前のコミットを取り消し（変更も削除）</td>
+                            </tr>
+                            <tr>
+                                <td><code>git stash</code></td>
+                                <td>一時的に変更を退避</td>
+                            </tr>
+                            <tr>
+                                <td><code>git stash pop</code></td>
+                                <td>退避した変更を復元</td>
+                            </tr>
+                            <tr>
+                                <td><code>git revert &lt;コミットID&gt;</code></td>
+                                <td>特定のコミットを打ち消すコミットを作成</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Cursorショートカット -->
+            <section id="cursor-shortcuts" aria-labelledby="cursor-shortcuts-heading">
+                <h2 id="cursor-shortcuts-heading">Cursorショートカットチートシート</h2>
+
+                <div class="cheatsheet-card">
+                    <h3>💬 AI機能</h3>
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span>AIチャットを開く</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>L</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>L</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>プランモードを開く</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>K</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>K</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>インラインAIを開く</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>I</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>I</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>コードの説明を生成</span>
+                            <div>
+                                選択して <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>L</kbd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>⌨️ エディタ基本操作</h3>
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span>ファイル検索</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>P</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>P</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>ファイル内検索</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>F</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>F</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>全ファイル検索</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>置換</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>H</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>H</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>コマンドパレット</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>保存</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>S</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>S</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>すべて保存</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>S</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>S</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>ファイルを閉じる</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>W</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>W</kbd> (Win)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>✏️ 編集操作</h3>
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span>行を複製</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>行を削除</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>K</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>行を上下に移動</span>
+                            <div>
+                                <kbd>Option</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> (Mac)<br>
+                                <kbd>Alt</kbd> + <kbd>↑</kbd>/<kbd>↓</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>コメント化</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>/</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>/</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>複数カーソル</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>D</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>D</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>インデント調整</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>[</kbd>/<kbd>]</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>[</kbd>/<kbd>]</kbd> (Win)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>🔧 その他便利機能</h3>
+                    <div class="shortcut-grid">
+                        <div class="shortcut-item">
+                            <span>ターミナルを開く</span>
+                            <div>
+                                <kbd>Ctrl</kbd> + <kbd>`</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>サイドバー表示切替</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>B</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>B</kbd> (Win)
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>エクスプローラー表示</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>E</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>検索表示</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd>
+                            </div>
+                        </div>
+                        <div class="shortcut-item">
+                            <span>設定を開く</span>
+                            <div>
+                                <kbd>Cmd</kbd> + <kbd>,</kbd> (Mac)<br>
+                                <kbd>Ctrl</kbd> + <kbd>,</kbd> (Win)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- マークダウン記法 -->
+            <section id="markdown-syntax" aria-labelledby="markdown-syntax-heading">
+                <h2 id="markdown-syntax-heading">マークダウン記法チートシート</h2>
+
+                <div class="cheatsheet-card">
+                    <h3>📝 基本構文</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>記法</th>
+                                <th>説明</th>
+                                <th>結果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code># 見出し1</code></td>
+                                <td>最大の見出し</td>
+                                <td><strong style="font-size: 1.5em;">見出し1</strong></td>
+                            </tr>
+                            <tr>
+                                <td><code>## 見出し2</code></td>
+                                <td>2番目の見出し</td>
+                                <td><strong style="font-size: 1.3em;">見出し2</strong></td>
+                            </tr>
+                            <tr>
+                                <td><code>**太字**</code></td>
+                                <td>太字にする</td>
+                                <td><strong>太字</strong></td>
+                            </tr>
+                            <tr>
+                                <td><code>*斜体*</code></td>
+                                <td>斜体にする</td>
+                                <td><em>斜体</em></td>
+                            </tr>
+                            <tr>
+                                <td><code>`コード`</code></td>
+                                <td>インラインコード</td>
+                                <td><code>コード</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>[リンク](URL)</code></td>
+                                <td>リンクを作成</td>
+                                <td><a href="#">リンク</a></td>
+                            </tr>
+                            <tr>
+                                <td><code>![画像](URL)</code></td>
+                                <td>画像を挿入</td>
+                                <td>画像が表示される</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>📋 リストと引用</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>記法</th>
+                                <th>説明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>- 項目</code></td>
+                                <td>箇条書きリスト</td>
+                            </tr>
+                            <tr>
+                                <td><code>1. 項目</code></td>
+                                <td>番号付きリスト</td>
+                            </tr>
+                            <tr>
+                                <td><code>&gt; 引用</code></td>
+                                <td>引用ブロック</td>
+                            </tr>
+                            <tr>
+                                <td><code>---</code></td>
+                                <td>水平線</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>💻 コードブロック</h3>
+                    <pre><code>```javascript
+function hello() {
+  console.log('Hello!');
+}
+```</code></pre>
+                    <p>3つのバッククォート（```）で囲むと、コードブロックになります。言語名を指定するとシンタックスハイライトされます。</p>
+                </div>
+            </section>
+
+            <!-- HTML/CSS基本 -->
+            <section id="html-css-basics" aria-labelledby="html-css-basics-heading">
+                <h2 id="html-css-basics-heading">HTML/CSS基本タグ集</h2>
+
+                <div class="cheatsheet-card">
+                    <h3>🏷️ よく使うHTMLタグ</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>タグ</th>
+                                <th>説明</th>
+                                <th>例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>&lt;div&gt;</code></td>
+                                <td>汎用コンテナ</td>
+                                <td><code>&lt;div&gt;内容&lt;/div&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;p&gt;</code></td>
+                                <td>段落</td>
+                                <td><code>&lt;p&gt;テキスト&lt;/p&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;h1&gt;〜&lt;h6&gt;</code></td>
+                                <td>見出し</td>
+                                <td><code>&lt;h1&gt;大見出し&lt;/h1&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;a href=""&gt;</code></td>
+                                <td>リンク</td>
+                                <td><code>&lt;a href="/page"&gt;リンク&lt;/a&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;img src=""&gt;</code></td>
+                                <td>画像</td>
+                                <td><code>&lt;img src="image.jpg" alt="説明"&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;button&gt;</code></td>
+                                <td>ボタン</td>
+                                <td><code>&lt;button&gt;クリック&lt;/button&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;ul&gt;&lt;li&gt;</code></td>
+                                <td>箇条書きリスト</td>
+                                <td><code>&lt;ul&gt;&lt;li&gt;項目&lt;/li&gt;&lt;/ul&gt;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;input&gt;</code></td>
+                                <td>入力フィールド</td>
+                                <td><code>&lt;input type="text"&gt;</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>🎨 よく使うCSSプロパティ</h3>
+                    <table class="command-table">
+                        <thead>
+                            <tr>
+                                <th>プロパティ</th>
+                                <th>説明</th>
+                                <th>例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>color</code></td>
+                                <td>文字色</td>
+                                <td><code>color: #333;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>background</code></td>
+                                <td>背景</td>
+                                <td><code>background: #fff;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>font-size</code></td>
+                                <td>文字サイズ</td>
+                                <td><code>font-size: 16px;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>font-weight</code></td>
+                                <td>文字の太さ</td>
+                                <td><code>font-weight: bold;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>margin</code></td>
+                                <td>外側の余白</td>
+                                <td><code>margin: 10px;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>padding</code></td>
+                                <td>内側の余白</td>
+                                <td><code>padding: 20px;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>border</code></td>
+                                <td>枠線</td>
+                                <td><code>border: 1px solid #ddd;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>display</code></td>
+                                <td>表示方法</td>
+                                <td><code>display: flex;</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>width / height</code></td>
+                                <td>幅・高さ</td>
+                                <td><code>width: 100px;</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cheatsheet-card">
+                    <h3>📐 Flexboxの基本</h3>
+                    <pre><code>/* コンテナに指定 */
+.container {
+  display: flex;
+  justify-content: center;  /* 横方向の配置 */
+  align-items: center;      /* 縦方向の配置 */
+  gap: 20px;                /* 要素間の間隔 */
+}</code></pre>
+                    <p><strong>justify-content の値：</strong> flex-start, center, flex-end, space-between, space-around</p>
+                    <p><strong>align-items の値：</strong> flex-start, center, flex-end, stretch</p>
+                </div>
+            </section>
+
+            <section id="tips" aria-labelledby="tips-heading">
+                <h2 id="tips-heading">チートシート活用のコツ</h2>
+                <div class="card">
+                    <ul>
+                        <li><strong>最初は全部覚えなくてOK：</strong> 必要な時に見返すためのリファレンスとして使いましょう</li>
+                        <li><strong>よく使うものから覚える：</strong> 毎日使うコマンドは自然と覚えていきます</li>
+                        <li><strong>カスタマイズする：</strong> 自分がよく使うコマンドをメモに追加していきましょう</li>
+                        <li><strong>印刷して貼る：</strong> デスクに貼っておくと、調べる時間が短縮されます</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal no-print" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/toc.js" defer></script>
+</body>
+</html>

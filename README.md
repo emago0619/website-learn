@@ -102,7 +102,49 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - ブランチとマージの基礎
    - 実践的なワークフロー
 
-10. **FAQ（pages/faq.html）**
+10. **トラブルシューティング完全ガイド（pages/troubleshooting-guide.html）** 🆕
+   - Cursorでのエラー（API制限、接続エラー、プラン承認の問題）
+   - GitHubでのエラー（pushの失敗、マージコンフリクト、.gitignoreの問題）
+   - デプロイでのエラー（ビルド失敗、404エラー、環境変数の問題）
+   - npm/yarnのエラー（依存関係の競合）
+   - デバッグの基本テクニック
+   - エラーを未然に防ぐ習慣
+
+11. **チートシート集（pages/cheatsheets.html）** 🆕
+   - Gitコマンドチートシート（基本操作、ブランチ、緊急時のコマンド）
+   - Cursorショートカット（AI機能、エディタ操作、編集操作）
+   - マークダウン記法チートシート
+   - HTML/CSS基本タグ集
+   - Flexboxの基本
+   - 印刷用PDF対応
+
+12. **サンプルプロジェクト集（pages/sample-projects.html）** 🆕
+   - ポートフォリオサイト（HTML/CSS/JS）
+   - ブログサイト（静的サイト、Markdown対応）
+   - ランディングページ（CTA最適化）
+   - コーポレートサイト（Next.js、TypeScript、多言語対応）
+   - タスク管理アプリ（Supabase、認証、データベース連携）
+   - 各プロジェクトのセットアップ手順とカスタマイズガイド
+
+13. **ケーススタディ集（pages/case-studies.html）** 🆕
+   - 会社のお知らせページに新機能を追加
+   - ECサイトの商品詳細ページをレスポンシブ対応
+   - 問い合わせフォームにバリデーション追加
+   - 実際の開発フローと問題解決の過程を物語形式で紹介
+
+14. **セキュリティ&ベストプラクティス（pages/security-best-practices.html）** 🆕
+   - 初心者が陥りやすいセキュリティリスク（APIキー漏洩、SQLインジェクション、XSS、CSRF）
+   - 環境変数の管理方法（.env、Vercel/Netlify設定）
+   - コーディングベストプラクティス（命名規則、コメント、エラーハンドリング）
+   - 安全なデプロイとセキュリティツール
+
+15. **チーム開発・コラボレーションガイド（pages/team-collaboration.html）** 🆕
+   - GitHub Flowを使ったブランチ戦略
+   - プルリクエストの作成とレビュー方法
+   - 効果的なコミットメッセージの書き方
+   - チームコミュニケーションとドキュメント管理
+
+16. **FAQ（pages/faq.html）**
    - よくある質問と回答
    - トラブルシューティング
    - エラーメッセージの対処法
@@ -148,6 +190,12 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
 │   ├── stitch-workflow.html     # Google Stitch活用ガイド
 │   ├── ai-tools.html            # AIツール大全
 │   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門
+│   ├── troubleshooting-guide.html  # トラブルシューティング完全ガイド 🆕
+│   ├── cheatsheets.html         # チートシート集 🆕
+│   ├── sample-projects.html     # サンプルプロジェクト集 🆕
+│   ├── case-studies.html        # ケーススタディ集 🆕
+│   ├── security-best-practices.html  # セキュリティ&ベストプラクティス 🆕
+│   ├── team-collaboration.html  # チーム開発・コラボレーションガイド 🆕
 │   └── faq.html                 # FAQ
 ├── docs/
 │   └── FUTURE_ENHANCEMENTS.md   # 今後の機能拡張ガイド
@@ -230,6 +278,12 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
   - 🆕 対話で学ぶGit/GitHub入門ページを追加
   - 🆕 デプロイ完全ガイドページを追加（Vercel、Cloudflare Pages、Netlify詳細解説）
   - 🆕 非エンジニア向け便利ツール集ページを追加（ノーコードツール、Markdown完全ガイド）
+  - 🆕 トラブルシューティング完全ガイドページを追加（エラー解決、デバッグ技術）
+  - 🆕 チートシート集ページを追加（Git、Cursor、Markdown、HTML/CSS）
+  - 🆕 サンプルプロジェクト集ページを追加（5つのテンプレートプロジェクト）
+  - 🆕 ケーススタディ集ページを追加（実際の開発事例3件）
+  - 🆕 セキュリティ&ベストプラクティスページを追加（セキュリティリスク対策、コーディング規約）
+  - 🆕 チーム開発・コラボレーションガイドページを追加（GitHub Flow、PR、コードレビュー）
 
 - **2024年**: 初版リリース
   - 計画重視型ワークフローの導入
