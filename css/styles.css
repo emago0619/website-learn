@@ -697,8 +697,9 @@ footer {
     }
 
     .nav-menu.active {
-        max-height: 500px;
+        max-height: 80vh;
         padding: var(--space-4) 0;
+        overflow-y: auto;
     }
 
     .nav-menu li {
