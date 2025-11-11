@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>セキュリティ&ベストプラクティス - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>セキュリティ&ベストプラクティス</h1>
+            <p>安全で保守しやすいコードを書くための基本原則</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li><a href="setup.html">準備編</a></li>
+                    <li><a href="basics.html">基礎知識編</a></li>
+                    <li><a href="practice.html">実践編</a></li>
+                    <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                    <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                    <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                    <li><a href="ai-tools.html">AIツール大全</a></li>
+                    <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                    <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                    <li><a href="cheatsheets.html">チートシート</a></li>
+                    <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                    <li><a href="case-studies.html">ケーススタディ</a></li>
+                    <li><a href="security-best-practices.html" class="active" aria-current="page">セキュリティ</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav"></nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">なぜセキュリティが重要なのか</h2>
+                <div class="alert alert-warning">
+                    <strong>⚠️ セキュリティの基本：</strong><br>
+                    セキュリティは「後から追加」できるものではありません。開発の最初から意識することが重要です。
+                </div>
+                <p>初心者が陥りやすいセキュリティリスクと、それを防ぐためのベストプラクティスを学びましょう。</p>
+            </section>
+
+            <section id="common-risks" aria-labelledby="common-risks-heading">
+                <h2 id="common-risks-heading">初心者が陥りやすいセキュリティリスク</h2>
+
+                <div class="card">
+                    <h3>🔴 重大リスク1: APIキー・パスワードをGitHubに公開</h3>
+
+                    <h4>❌ NG例</h4>
+                    <pre><code>// config.js
+const API_KEY = 'sk-abc123xyz456...';  // 絶対にダメ！
+const DB_PASSWORD = 'myPassword123';    // 絶対にダメ！</code></pre>
+
+                    <h4>✅ 正しい方法</h4>
+                    <pre><code>// .env ファイル（.gitignoreに追加）
+API_KEY=sk-abc123xyz456...
+DB_PASSWORD=myPassword123
+
+// config.js
+const API_KEY = process.env.API_KEY;
+const DB_PASSWORD = process.env.DB_PASSWORD;</code></pre>
+
+                    <h4>.gitignore に追加</h4>
+                    <pre><code># .gitignore
+.env
+.env.local
+.env.production
+*.key
+credentials.json</code></pre>
+
+                    <div class="alert alert-danger">
+                        <strong>🚨 既にpushしてしまった場合：</strong><br>
+                        1. すぐにAPIキーを無効化・再発行<br>
+                        2. gitのhistoryから削除（専門家に相談推奨）<br>
+                        3. パスワード等を変更
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🔴 重大リスク2: SQLインジェクション</h3>
+
+                    <h4>❌ NG例</h4>
+                    <pre><code>// ユーザー入力を直接SQL文に埋め込む
+const userId = req.query.id;
+const query = `SELECT * FROM users WHERE id = ${userId}`;
+// ハッカーが "1 OR 1=1" を入力すると全データが取得される</code></pre>
+
+                    <h4>✅ 正しい方法</h4>
+                    <pre><code>// プリペアドステートメント（パラメータ化クエリ）を使う
+const userId = req.query.id;
+const query = 'SELECT * FROM users WHERE id = ?';
+db.query(query, [userId]);</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>🟡 中程度リスク: XSS（クロスサイトスクリプティング）</h3>
+
+                    <h4>❌ NG例</h4>
+                    <pre><code>// ユーザー入力をそのままHTMLに埋め込む
+const comment = req.body.comment;
+res.send(`&lt;div&gt;${comment}&lt;/div&gt;`);
+// &lt;script&gt;alert('XSS')&lt;/script&gt; を入力されると実行される</code></pre>
+
+                    <h4>✅ 正しい方法</h4>
+                    <pre><code>// エスケープ処理をする
+const escapeHtml = (text) => {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+const comment = escapeHtml(req.body.comment);
+res.send(`&lt;div&gt;${comment}&lt;/div&gt;`);</code></pre>
+
+                    <p>または、Reactなどのフレームワークを使う（自動でエスケープされる）</p>
+                </div>
+
+                <div class="card">
+                    <h3>🟡 中程度リスク: CSRF（クロスサイトリクエストフォージェリ）</h3>
+
+                    <p>他のサイトから勝手にリクエストを送られる攻撃</p>
+
+                    <h4>✅ 対策</h4>
+                    <ul>
+                        <li>CSRFトークンを使う</li>
+                        <li>SameSite Cookie属性を設定</li>
+                        <li>重要な操作は再認証を求める</li>
+                    </ul>
+
+                    <pre><code>// Express + csurf の例
+const csrf = require('csurf');
+app.use(csrf({ cookie: true }));
+
+// フォームにCSRFトークンを含める
+&lt;input type="hidden" name="_csrf" value="${req.csrfToken()}"&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="env-management" aria-labelledby="env-management-heading">
+                <h2 id="env-management-heading">環境変数の管理方法</h2>
+
+                <div class="card">
+                    <h3>ローカル開発環境</h3>
+
+                    <h4>1. .envファイルを作成</h4>
+                    <pre><code># .env
+DATABASE_URL=postgresql://localhost:5432/mydb
+API_KEY=your-secret-key
+STRIPE_SECRET_KEY=sk_test_xxx</code></pre>
+
+                    <h4>2. .gitignoreに追加</h4>
+                    <pre><code># .gitignore
+.env
+.env.local
+.env.*.local</code></pre>
+
+                    <h4>3. .env.exampleを作成（チーム共有用）</h4>
+                    <pre><code># .env.example
+DATABASE_URL=postgresql://localhost:5432/mydb
+API_KEY=your-api-key-here
+STRIPE_SECRET_KEY=your-stripe-key-here</code></pre>
+
+                    <h4>4. コードで読み込む</h4>
+                    <pre><code>// Next.jsの場合
+console.log(process.env.API_KEY);
+
+// Viteの場合
+console.log(import.meta.env.VITE_API_KEY);</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>本番環境（Vercel/Netlify）</h3>
+
+                    <h4>Vercelの場合</h4>
+                    <ol>
+                        <li>プロジェクト > Settings > Environment Variables</li>
+                        <li>Name（変数名）とValue（値）を入力</li>
+                        <li>Production / Preview / Development を選択</li>
+                        <li>Save</li>
+                        <li>再デプロイ（Deployments > Redeploy）</li>
+                    </ol>
+
+                    <h4>Netlifyの場合</h4>
+                    <ol>
+                        <li>Site settings > Build & deploy > Environment</li>
+                        <li>Edit variables</li>
+                        <li>Key（変数名）とValue（値）を入力</li>
+                        <li>Save</li>
+                        <li>Clear cache and deploy site</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="coding-best-practices" aria-labelledby="coding-best-practices-heading">
+                <h2 id="coding-best-practices-heading">コーディングベストプラクティス</h2>
+
+                <div class="card">
+                    <h3>1. 命名規則</h3>
+
+                    <h4>変数名・関数名</h4>
+                    <pre><code>// ❌ NG
+const d = new Date();
+const x = getUserData();
+function f() { }
+
+// ✅ Good
+const today = new Date();
+const userData = getUserData();
+function calculateTotalPrice() { }</code></pre>
+
+                    <h4>定数</h4>
+                    <pre><code>// 全て大文字 + アンダースコア
+const MAX_RETRY_COUNT = 3;
+const API_BASE_URL = 'https://api.example.com';</code></pre>
+
+                    <h4>クラス名</h4>
+                    <pre><code>// PascalCase（先頭大文字）
+class UserProfile { }
+class ShoppingCart { }</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>2. コメントの書き方</h3>
+
+                    <h4>✅ 良いコメント</h4>
+                    <pre><code>// なぜこうしたか（Whyを説明）
+// HACK: IE11対応のため一時的な回避策
+const isIE11 = navigator.userAgent.indexOf('Trident') !== -1;
+
+// 複雑なロジックの説明
+// ユーザーの最終ログイン日から30日以上経過している場合は非アクティブと判定
+const isInactive = daysSinceLastLogin > 30;</code></pre>
+
+                    <h4>❌ 不要なコメント</h4>
+                    <pre><code>// カウンターをインクリメント（コードを読めば分かる）
+counter++;
+
+// 合計を計算（関数名で分かる）
+function calculateTotal() { }</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>3. エラーハンドリング</h3>
+
+                    <h4>❌ NG</h4>
+                    <pre><code>// エラーを無視
+try {
+  fetchData();
+} catch(err) {
+  // 何もしない
+}</code></pre>
+
+                    <h4>✅ Good</h4>
+                    <pre><code>try {
+  const data = await fetchData();
+  return data;
+} catch (error) {
+  console.error('データ取得エラー:', error);
+  // ユーザーにエラーメッセージを表示
+  showErrorMessage('データの読み込みに失敗しました');
+  // エラー監視サービスに送信（本番環境）
+  if (process.env.NODE_ENV === 'production') {
+    Sentry.captureException(error);
+  }
+  return null;
+}</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>4. コードの整理整頓</h3>
+
+                    <h4>DRY原則（Don't Repeat Yourself）</h4>
+                    <pre><code>// ❌ NG（同じコードを繰り返し）
+if (user.age >= 18) {
+  console.log('成人です');
+}
+if (customer.age >= 18) {
+  console.log('成人です');
+}
+
+// ✅ Good（関数化）
+function isAdult(age) {
+  return age >= 18;
+}
+
+if (isAdult(user.age)) {
+  console.log('成人です');
+}</code></pre>
+
+                    <h4>関数は1つのことだけをする</h4>
+                    <pre><code>// ❌ NG（複数の責務）
+function processUserData(user) {
+  // データ検証
+  if (!user.email) return false;
+  // データ保存
+  database.save(user);
+  // メール送信
+  sendEmail(user.email);
+  // ログ記録
+  logger.info('User processed');
+}
+
+// ✅ Good（責務を分離）
+function validateUser(user) {
+  return user.email !== undefined;
+}
+
+function saveUser(user) {
+  return database.save(user);
+}
+
+function notifyUser(user) {
+  return sendEmail(user.email);
+}
+
+function logUserProcess(user) {
+  logger.info(`User processed: ${user.id}`);
+}</code></pre>
+                </div>
+            </section>
+
+            <section id="safe-deployment" aria-labelledby="safe-deployment-heading">
+                <h2 id="safe-deployment-heading">安全なデプロイ</h2>
+
+                <div class="card">
+                    <h3>デプロイ前チェックリスト</h3>
+
+                    <ul>
+                        <li><input type="checkbox"> 環境変数が正しく設定されているか</li>
+                        <li><input type="checkbox"> .envファイルが.gitignoreに含まれているか</li>
+                        <li><input type="checkbox"> APIキーや秘密鍵がコードに含まれていないか</li>
+                        <li><input type="checkbox"> テストが全て通っているか</li>
+                        <li><input type="checkbox"> 本番環境用の設定になっているか</li>
+                        <li><input type="checkbox"> エラー監視ツールが設定されているか</li>
+                        <li><input type="checkbox"> HTTPS が有効になっているか</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>本番環境と開発環境の分離</h3>
+
+                    <pre><code>// 環境に応じた設定
+const config = {
+  development: {
+    apiUrl: 'http://localhost:3000',
+    debug: true
+  },
+  production: {
+    apiUrl: 'https://api.example.com',
+    debug: false
+  }
+};
+
+const env = process.env.NODE_ENV || 'development';
+export default config[env];</code></pre>
+                </div>
+            </section>
+
+            <section id="security-tools" aria-labelledby="security-tools-heading">
+                <h2 id="security-tools-heading">セキュリティチェックツール</h2>
+
+                <div class="card">
+                    <h3>おすすめツール</h3>
+
+                    <h4>1. npm audit</h4>
+                    <pre><code># 脆弱性をチェック
+npm audit
+
+# 自動修正
+npm audit fix</code></pre>
+
+                    <h4>2. ESLint（セキュリティプラグイン）</h4>
+                    <pre><code>npm install --save-dev eslint-plugin-security</code></pre>
+
+                    <h4>3. GitGuardian（GitHub連携）</h4>
+                    <p>GitHubにpushしたコードをスキャンして、APIキーなどの漏洩を検出</p>
+
+                    <h4>4. Snyk</h4>
+                    <p>依存パッケージの脆弱性を検出・修正</p>
+                </div>
+            </section>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ</h2>
+
+                <div class="card">
+                    <h3>🔒 セキュリティの基本原則</h3>
+                    <ol>
+                        <li><strong>秘密情報は絶対にコードに書かない</strong> - 環境変数を使う</li>
+                        <li><strong>ユーザー入力を信用しない</strong> - 必ずバリデーション・エスケープ</li>
+                        <li><strong>最小権限の原則</strong> - 必要最小限の権限だけを与える</li>
+                        <li><strong>多層防御</strong> - 1つの対策に頼らず、複数の対策を組み合わせる</li>
+                        <li><strong>定期的なアップデート</strong> - 依存パッケージを最新に保つ</li>
+                    </ol>
+
+                    <h3>✨ ベストプラクティスの心得</h3>
+                    <ul>
+                        <li>読みやすいコードは、バグが少ない</li>
+                        <li>コメントは「なぜ」を説明する</li>
+                        <li>エラーは適切に処理する</li>
+                        <li>テストを書く習慣をつける</li>
+                        <li>レビューを受ける・する</li>
+                    </ul>
+
+                    <div class="alert alert-success">
+                        <strong>💡 最後に：</strong><br>
+                        完璧を目指さなくてOK。少しずつ改善していきましょう。<br>
+                        分からないことがあったら、遠慮なく調べる・質問する！
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput" autocomplete="off">
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-empty"><p>キーワードを入力して検索開始</p></div>
+            </div>
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/toc.js" defer></script>
+</body>
+</html>

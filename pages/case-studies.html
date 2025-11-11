@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>ケーススタディ集 - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>ケーススタディ集</h1>
+            <p>実際の開発事例から学ぶ実践的なワークフロー</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="../index.html">ホーム</a></li>
+                    <li><a href="setup.html">準備編</a></li>
+                    <li><a href="basics.html">基礎知識編</a></li>
+                    <li><a href="practice.html">実践編</a></li>
+                    <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                    <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                    <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                    <li><a href="ai-tools.html">AIツール大全</a></li>
+                    <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                    <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                    <li><a href="cheatsheets.html">チートシート</a></li>
+                    <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                    <li><a href="case-studies.html" class="active" aria-current="page">ケーススタディ</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav"></nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
+                <p>実際の開発現場で起こりうるシナリオを基に、要件整理から実装、デプロイまでの一連の流れを物語形式で紹介します。</p>
+                <div class="alert alert-success">
+                    <strong>💡 学べること：</strong><br>
+                    ・ChatGPTでの要件整理の実例<br>
+                    ・Cursorプランモードの活用方法<br>
+                    ・実装中に遭遇する問題と解決策<br>
+                    ・実務に即したワークフロー
+                </div>
+            </section>
+
+            <section id="case1" aria-labelledby="case1-heading">
+                <h2 id="case1-heading">ケース1: 会社のお知らせページに新機能を追加</h2>
+
+                <div class="card">
+                    <h3>📋 依頼内容</h3>
+                    <blockquote>
+                        「お知らせページにカテゴリ絞り込み機能と検索機能を追加してほしい。今は全てのお知らせが表示されているだけで使いづらいという声が多い。」
+                    </blockquote>
+
+                    <h3>1️⃣ ChatGPTで要件整理</h3>
+                    <h4>タロウさんとChatGPTの対話</h4>
+                    <div class="card" style="background: var(--bg-code);">
+                        <p><strong>タロウ：</strong>お知らせページに絞り込み機能を追加したいんですが、どう進めればいいですか？</p>
+                        <p><strong>ChatGPT：</strong>まず現状を確認させてください。</p>
+                        <ul>
+                            <li>お知らせのデータはどこから取得していますか？（HTML直書き？ JSON？ API？）</li>
+                            <li>カテゴリはどんな種類がありますか？</li>
+                            <li>お知らせは何件くらいありますか？</li>
+                        </ul>
+                        <p><strong>タロウ：</strong>HTMLに直接書いてます。カテゴリは「プレスリリース」「イベント」「採用」の3種類で、現在50件くらいあります。</p>
+                        <p><strong>ChatGPT：</strong>わかりました。では以下の要件でまとめましょう：</p>
+                    </div>
+
+                    <h4>整理された要件（requirements.md）</h4>
+                    <pre><code># お知らせページ機能追加
+
+## 目的
+ユーザーが求める情報を素早く見つけられるようにする
+
+## 機能要件
+1. カテゴリ絞り込み
+   - プレスリリース / イベント / 採用 / すべて
+   - ボタンクリックで切り替え
+
+2. キーワード検索
+   - タイトルと本文を検索対象
+   - リアルタイムで結果表示
+
+3. 結果表示
+   - 該当件数を表示
+   - 該当なしの場合メッセージ表示
+
+## 技術方針
+- JavaScriptでクライアントサイド処理
+- 既存デザインに統一
+- レスポンシブ対応</code></pre>
+
+                    <h3>2️⃣ Cursorプランモードで実装計画</h3>
+                    <p><strong>Cursorへの指示：</strong></p>
+                    <pre><code>requirements.mdの内容をもとに、お知らせページに絞り込み・検索機能を追加してください。
+既存のnews.htmlを修正し、filter.jsを新規作成してください。</code></pre>
+
+                    <h4>Cursorの提案内容</h4>
+                    <ol>
+                        <li><strong>news.html</strong> - カテゴリボタンと検索ボックスのUIを追加</li>
+                        <li><strong>filter.js</strong> - 絞り込みと検索のロジックを実装</li>
+                        <li><strong>styles.css</strong> - フィルター用のスタイルを追加</li>
+                    </ol>
+
+                    <h3>3️⃣ 実装</h3>
+                    <p>プランを承認して実装開始。5分ほどで完成。</p>
+
+                    <h3>4️⃣ 発生した問題と解決</h3>
+                    <div class="card">
+                        <h4>問題1: 日本語検索がうまくいかない</h4>
+                        <p><strong>原因：</strong> 大文字小文字を区別していた</p>
+                        <p><strong>解決：</strong> <code>toLowerCase()</code>を追加</p>
+
+                        <h4>問題2: 検索後にカテゴリ切り替えがリセットされる</h4>
+                        <p><strong>原因：</strong> 状態管理が不十分</p>
+                        <p><strong>解決：</strong> 現在の絞り込み状態を変数で保持</p>
+                    </div>
+
+                    <h3>5️⃣ テスト</h3>
+                    <ul>
+                        <li>✅ 各カテゴリボタンで正しく絞り込まれるか</li>
+                        <li>✅ 検索ワードで正しく絞り込まれるか</li>
+                        <li>✅ カテゴリ+検索の組み合わせが動くか</li>
+                        <li>✅ スマホで操作できるか</li>
+                    </ul>
+
+                    <h3>📊 成果</h3>
+                    <ul>
+                        <li><strong>所要時間：</strong> 2時間（要件整理30分、実装30分、テスト・調整1時間）</li>
+                        <li><strong>Cursorクレジット：</strong> 約15回（プラン1回、細かい修正14回）</li>
+                        <li><strong>学んだこと：</strong> 状態管理の重要性、日本語対応の注意点</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="case2" aria-labelledby="case2-heading">
+                <h2 id="case2-heading">ケース2: ECサイトの商品詳細ページをレスポンシブ対応</h2>
+
+                <div class="card">
+                    <h3>📋 依頼内容</h3>
+                    <blockquote>
+                        「商品詳細ページがスマホで見づらい。画像が小さすぎたり、ボタンが押しにくかったりする。スマホ対応してほしい。」
+                    </blockquote>
+
+                    <h3>1️⃣ 現状分析</h3>
+                    <p>ブラウザのDevToolsでスマホ表示を確認：</p>
+                    <ul>
+                        <li>画像が固定幅で小さい</li>
+                        <li>テキストが画面からはみ出す</li>
+                        <li>ボタンが小さくてタップしづらい</li>
+                        <li>横スクロールが発生</li>
+                    </ul>
+
+                    <h3>2️⃣ ChatGPTで要件整理</h3>
+                    <pre><code># レスポンシブ対応
+
+## 修正箇所
+1. 商品画像 - 幅100%、最大600px
+2. 商品説明 - 適切な改行、フォントサイズ調整
+3. 購入ボタン - タップしやすいサイズ（最小44x44px）
+4. レイアウト - モバイルでは1カラム表示
+
+## 対応デバイス
+- スマートフォン（320px〜）
+- タブレット（768px〜）
+- PC（1024px〜）</code></pre>
+
+                    <h3>3️⃣ Cursorでの実装</h3>
+                    <p><strong>指示：</strong></p>
+                    <pre><code>product-detail.htmlをレスポンシブ対応してください。
+メディアクエリを使って、スマホ・タブレット・PCで最適な表示にしてください。</code></pre>
+
+                    <h3>4️⃣ 実装内容</h3>
+                    <pre><code>/* モバイル（デフォルト） */
+.product-image {
+  width: 100%;
+  max-width: 600px;
+}
+
+.buy-button {
+  width: 100%;
+  min-height: 44px;
+  font-size: 18px;
+}
+
+/* タブレット以上 */
+@media (min-width: 768px) {
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+  .product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}</code></pre>
+
+                    <h3>5️⃣ テスト</h3>
+                    <ul>
+                        <li>✅ iPhone SE（小型）で表示確認</li>
+                        <li>✅ iPad（タブレット）で表示確認</li>
+                        <li>✅ PC（デスクトップ）で表示確認</li>
+                        <li>✅ 実機テスト（可能なら）</li>
+                    </ul>
+
+                    <h3>📊 成果</h3>
+                    <ul>
+                        <li><strong>所要時間：</strong> 1.5時間</li>
+                        <li><strong>効果：</strong> スマホでの購入率が20%向上（仮想データ）</li>
+                        <li><strong>学んだこと：</strong> モバイルファーストの重要性</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="case3" aria-labelledby="case3-heading">
+                <h2 id="case3-heading">ケース3: 問い合わせフォームにバリデーション追加</h2>
+
+                <div class="card">
+                    <h3>📋 依頼内容</h3>
+                    <blockquote>
+                        「お問い合わせフォームで空白のまま送信されることが多い。必須項目のチェックと、メールアドレスの形式チェックを追加してほしい。」
+                    </blockquote>
+
+                    <h3>1️⃣ 要件定義</h3>
+                    <ul>
+                        <li>名前、メールアドレス、内容を必須に</li>
+                        <li>メールアドレスの形式をチェック</li>
+                        <li>エラー時は分かりやすいメッセージを表示</li>
+                        <li>送信成功時は完了ページに遷移</li>
+                    </ul>
+
+                    <h3>2️⃣ Cursorでの実装</h3>
+                    <p>HTML5のバリデーション + JavaScriptの組み合わせで実装：</p>
+
+                    <pre><code>&lt;form id="contactForm"&gt;
+  &lt;input type="text" name="name" required&gt;
+  &lt;span class="error" id="nameError"&gt;&lt;/span&gt;
+
+  &lt;input type="email" name="email" required&gt;
+  &lt;span class="error" id="emailError"&gt;&lt;/span&gt;
+
+  &lt;textarea name="message" required&gt;&lt;/textarea&gt;
+  &lt;span class="error" id="messageError"&gt;&lt;/span&gt;
+
+  &lt;button type="submit"&gt;送信&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+                    <h3>3️⃣ 発生した問題</h3>
+                    <div class="card">
+                        <h4>問題: フォーム送信時に画面が遷移してしまう</h4>
+                        <p><strong>原因：</strong> <code>event.preventDefault()</code>を忘れていた</p>
+                        <p><strong>解決：</strong></p>
+                        <pre><code>form.addEventListener('submit', (e) => {
+  e.preventDefault(); // これを追加
+  // バリデーション処理
+});</code></pre>
+                    </div>
+
+                    <h3>📊 成果</h3>
+                    <ul>
+                        <li><strong>所要時間：</strong> 1時間</li>
+                        <li><strong>効果：</strong> 不完全な問い合わせが0件に</li>
+                        <li><strong>学んだこと：</strong> フォームのイベント処理</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="lessons" aria-labelledby="lessons-heading">
+                <h2 id="lessons-heading">全ケースから学ぶ共通のポイント</h2>
+
+                <div class="card">
+                    <h3>✅ 成功のポイント</h3>
+                    <ol>
+                        <li><strong>要件を明確にする</strong> - ChatGPTで対話しながら整理</li>
+                        <li><strong>小さく始める</strong> - 一度に全部やろうとしない</li>
+                        <li><strong>こまめにテスト</strong> - 変更のたびに動作確認</li>
+                        <li><strong>問題は記録する</strong> - 次回に活かせる</li>
+                        <li><strong>コミットは頻繁に</strong> - いつでも戻れるようにする</li>
+                    </ol>
+
+                    <h3>⚠️ よくある失敗</h3>
+                    <ul>
+                        <li>要件が曖昧なまま実装を始める</li>
+                        <li>一度に大量の変更をする</li>
+                        <li>エラーメッセージを読まない</li>
+                        <li>テストを後回しにする</li>
+                        <li>バックアップを取らない</li>
+                    </ul>
+
+                    <h3>🎯 実践のコツ</h3>
+                    <div class="alert alert-success">
+                        <strong>1. 要件整理に時間をかける</strong><br>
+                        実装時間の20-30%は要件整理に使うのが理想。急がば回れ。
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>2. プランモードを活用</strong><br>
+                        実装前に計画を立てることで、見落としを防げる。
+                    </div>
+                    <div class="alert alert-success">
+                        <strong>3. 困ったら休憩</strong><br>
+                        煮詰まったら一度離れる。戻ってきたら解決策が見えることも。
+                    </div>
+                </div>
+            </section>
+
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">さらに学ぶには</h2>
+
+                <div class="card">
+                    <h3>📚 関連ページ</h3>
+                    <ul>
+                        <li><a href="practice.html">実践編</a> - 基本的なワークフローを学ぶ</li>
+                        <li><a href="troubleshooting-guide.html">トラブルシューティング</a> - エラー解決方法</li>
+                        <li><a href="sample-projects.html">サンプルプロジェクト</a> - テンプレートから始める</li>
+                    </ul>
+
+                    <h3>🎓 次のステップ</h3>
+                    <ol>
+                        <li>このケーススタディを参考に、実際のプロジェクトに挑戦</li>
+                        <li>自分のケースを記録して、ナレッジを蓄積</li>
+                        <li>チームで共有して、ベストプラクティスを作る</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput" autocomplete="off">
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-empty"><p>キーワードを入力して検索開始</p></div>
+            </div>
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/toc.js" defer></script>
+</body>
+</html>
