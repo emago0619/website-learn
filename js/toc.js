@@ -82,9 +82,12 @@ class TableOfContents {
           const elementPosition = target.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
+          // アクセシビリティ: prefers-reduced-motionを尊重
+          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
           window.scrollTo({
             top: offsetPosition,
-            behavior: 'smooth'
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
           });
         }
       });
@@ -125,6 +128,11 @@ class TableOfContents {
 
     this.collapseBtn.addEventListener('click', () => {
       this.sidebar.classList.toggle('collapsed');
+
+      // アクセシビリティ: aria-expanded属性を更新
+      const isCollapsed = this.sidebar.classList.contains('collapsed');
+      this.collapseBtn.setAttribute('aria-expanded', (!isCollapsed).toString());
+      this.collapseBtn.setAttribute('aria-label', isCollapsed ? '目次を展開する' : '目次を折りたたむ');
     });
   }
 }

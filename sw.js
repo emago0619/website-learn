@@ -1,6 +1,5 @@
 // Service Worker for Web開発学習ガイド
 // Version: 1.0.0
-// NOTE: 本番環境では console.log を削除またはビルドプロセスで除去することを推奨
 
 const CACHE_NAME = 'web-learn-v1';
 const OFFLINE_URL = '/index.html';
@@ -26,12 +25,9 @@ const PRECACHE_URLS = [
 
 // インストール時：リソースをキャッシュ
 self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Install');
-
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('[Service Worker] Precaching app shell');
         return cache.addAll(PRECACHE_URLS);
       })
       .then(() => self.skipWaiting())
@@ -40,14 +36,11 @@ self.addEventListener('install', (event) => {
 
 // アクティベート時：古いキャッシュを削除
 self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activate');
-
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })

@@ -10,6 +10,7 @@ class SearchEngine {
     this.results = document.getElementById('searchResults');
     this.selectedIndex = -1;
     this.lastFocusedElement = null; // モーダルを開く前にフォーカスしていた要素
+    this.focusTrapHandler = null; // フォーカストラップのイベントハンドラを保持
 
     this.init();
   }
@@ -280,6 +281,12 @@ class SearchEngine {
     this.input.value = '';
     this.displayEmpty();
 
+    // フォーカストラップのイベントリスナーを削除（メモリリーク対策）
+    if (this.focusTrapHandler) {
+      this.modal.removeEventListener('keydown', this.focusTrapHandler);
+      this.focusTrapHandler = null;
+    }
+
     // アクセシビリティ: 元の要素にフォーカスを戻す
     if (this.lastFocusedElement && this.lastFocusedElement.focus) {
       this.lastFocusedElement.focus();
@@ -302,7 +309,13 @@ class SearchEngine {
     const firstFocusable = focusableElements[0];
     const lastFocusable = focusableElements[focusableElements.length - 1];
 
-    this.modal.addEventListener('keydown', (e) => {
+    // 既存のハンドラーがあれば削除（二重登録を防ぐ）
+    if (this.focusTrapHandler) {
+      this.modal.removeEventListener('keydown', this.focusTrapHandler);
+    }
+
+    // ハンドラーを保存して後で削除できるようにする
+    this.focusTrapHandler = (e) => {
       if (e.key !== 'Tab') return;
 
       if (e.shiftKey) {
@@ -318,7 +331,9 @@ class SearchEngine {
           firstFocusable.focus();
         }
       }
-    });
+    };
+
+    this.modal.addEventListener('keydown', this.focusTrapHandler);
   }
 }
 

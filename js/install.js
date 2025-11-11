@@ -1,8 +1,6 @@
 /**
  * PWAインストール機能
  * beforeinstallpromptイベントを利用してインストールボタンを表示・管理する
- *
- * NOTE: 本番環境では console.log/warn を削除またはビルドプロセスで除去することを推奨
  */
 
 class PWAInstaller {
@@ -25,26 +23,22 @@ class PWAInstaller {
         this.installBtn = document.getElementById('installBtn');
 
         if (!this.installBtn) {
-            console.warn('インストールボタンが見つかりません');
             return;
         }
 
         // すでにインストール済みかチェック
         if (this.isInstalled()) {
-            console.log('PWAは既にインストール済みです');
             return;
         }
 
         // iOS Safari対応: beforeinstallpromptが使えない場合
         if (this.isIOSSafari() && !this.isInstalled()) {
-            console.log('iOS Safari環境を検出');
             // iOS Safariでもインストールボタンを表示
             this.showInstallButton();
         }
 
         // beforeinstallpromptイベントをリスンする
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('beforeinstallprompt イベント発火');
             // デフォルトのインストールプロンプトを防止
             e.preventDefault();
             // イベントを保存して後で使用
@@ -60,7 +54,6 @@ class PWAInstaller {
 
         // アプリがインストールされた時のイベント
         window.addEventListener('appinstalled', () => {
-            console.log('PWAがインストールされました');
             this.handleAppInstalled();
         });
     }
@@ -129,7 +122,6 @@ class PWAInstaller {
 
         // 通常のブラウザ: beforeinstallpromptを使用
         if (!this.deferredPrompt) {
-            console.log('インストールプロンプトが利用できません');
             return;
         }
 
@@ -138,15 +130,10 @@ class PWAInstaller {
 
         // ユーザーの選択結果を待つ
         const { outcome } = await this.deferredPrompt.userChoice;
-        console.log(`ユーザーの選択: ${outcome}`);
 
         if (outcome === 'accepted') {
-            console.log('ユーザーがインストールを承認しました');
             // ボタンを非表示にする
             this.hideInstallButton();
-        } else {
-            console.log('ユーザーがインストールを拒否しました');
-            // 拒否された場合もボタンは残しておく（再試行可能）
         }
 
         // プロンプトは一度しか使えないのでクリア

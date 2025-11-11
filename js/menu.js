@@ -12,15 +12,18 @@ document.addEventListener('DOMContentLoaded', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
 
+            // メニューが開いているかを再確認（toggleの後）
+            const isNowOpen = navMenu.classList.contains('active');
+
             // アクセシビリティ: aria-expanded属性を更新
-            hamburger.setAttribute('aria-expanded', !isOpen);
-            hamburger.setAttribute('aria-label', !isOpen ? 'メニューを閉じる' : 'メニューを開く');
+            hamburger.setAttribute('aria-expanded', isNowOpen.toString());
+            hamburger.setAttribute('aria-label', isNowOpen ? 'メニューを閉じる' : 'メニューを開く');
 
             // アクセシビリティ: メニュー開閉をスクリーンリーダーに通知
-            announceToScreenReader(!isOpen ? 'メニューを開きました' : 'メニューを閉じました');
+            announceToScreenReader(isNowOpen ? 'メニューを開きました' : 'メニューを閉じました');
 
             // メニューを開いた時、最初のリンクにフォーカスを移動
-            if (!isOpen) {
+            if (isNowOpen) {
                 const firstLink = navMenu.querySelector('a');
                 if (firstLink) {
                     // DOM更新とCSSアニメーションの完了を待つため100ms遅延
@@ -152,7 +155,17 @@ function updateScrollProgress() {
     scrollProgress.setAttribute('aria-valuenow', Math.round(scrolled));
 }
 
-window.addEventListener('scroll', updateScrollProgress);
+// パフォーマンス最適化: requestAnimationFrameを使用してスクロールイベントを最適化
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+            updateScrollProgress();
+            scrollTicking = false;
+        });
+        scrollTicking = true;
+    }
+});
 
 // ============================================
 // ナビゲーションのスクロール検出
@@ -168,7 +181,17 @@ function handleNavScroll() {
     }
 }
 
-window.addEventListener('scroll', handleNavScroll);
+// パフォーマンス最適化: requestAnimationFrameを使用してスクロールイベントを最適化
+let navScrollTicking = false;
+window.addEventListener('scroll', () => {
+    if (!navScrollTicking) {
+        window.requestAnimationFrame(() => {
+            handleNavScroll();
+            navScrollTicking = false;
+        });
+        navScrollTicking = true;
+    }
+});
 
 // ============================================
 // スクロールアニメーション（Intersection Observer）
