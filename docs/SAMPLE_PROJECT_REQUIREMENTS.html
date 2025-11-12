@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サンプルプロジェクト要件定義集</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        body {
+            background: var(--bg-color, #ffffff);
+            color: var(--text-color, #1a1a1a);
+        }
+        main {
+            padding: var(--space-8, 2rem) 0;
+        }
+        .doc-container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 var(--space-6, 1.5rem);
+        }
+        .doc-card {
+            background: var(--bg-light, #ffffff);
+            border: 1px solid var(--border-color, #e5e7eb);
+            border-radius: var(--radius-lg, 16px);
+            padding: var(--space-6, 1.5rem);
+            margin-bottom: var(--space-6, 1.5rem);
+            box-shadow: var(--shadow-sm, 0 1px 2px rgba(15, 23, 42, 0.04));
+        }
+        h1, h2, h3 {
+            color: var(--heading-color, #111827);
+        }
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2, 0.5rem);
+            margin: var(--space-3, 0.75rem) 0;
+        }
+        .tag {
+            background: var(--primary-100, #eef2ff);
+            color: var(--primary-700, #4338ca);
+            padding: var(--space-1, 0.25rem) var(--space-3, 0.75rem);
+            border-radius: var(--radius-full, 9999px);
+            font-size: var(--text-sm, 0.875rem);
+        }
+        .requirements-list {
+            margin-left: 1.5rem;
+        }
+        .requirements-list li {
+            margin-bottom: 0.4rem;
+        }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--space-4, 1rem);
+        }
+        .meta-table th,
+        .meta-table td {
+            border: 1px solid var(--border-color, #e5e7eb);
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .meta-table th {
+            background: var(--bg-subtle, #f9fafb);
+            width: 24%;
+        }
+        .toc-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc-card a {
+            text-decoration: none;
+            color: var(--primary-color, #6366f1);
+        }
+        .toc-card li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">メインコンテンツへスキップ</a>
+    <header>
+        <div class="container">
+            <h1>サンプルプロジェクト要件定義集</h1>
+            <p>サンプルプロジェクト集で紹介している各プロジェクトの制作範囲と完成ラインを整理しました。</p>
+        </div>
+    </header>
+    <main id="main">
+        <div class="doc-container">
+            <section class="doc-card toc-card" aria-labelledby="toc-heading">
+                <h2 id="toc-heading">目次</h2>
+                <ul>
+                    <li><a href="#static-projects">静的サイトプロジェクト</a>
+                        <ul>
+                            <li><a href="#portfolio">ポートフォリオサイト</a></li>
+                            <li><a href="#blog">ブログサイト</a></li>
+                            <li><a href="#landing">ランディングページ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#dynamic-projects">動的サイトプロジェクト（React/Next.js）</a>
+                        <ul>
+                            <li><a href="#corporate">コーポレートサイト</a></li>
+                            <li><a href="#task-app">タスク管理アプリ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#how-to-use">このドキュメントの使い方</a></li>
+                    <li><a href="#history">更新履歴</a></li>
+                </ul>
+            </section>
+
+            <section id="static-projects" class="doc-card" aria-labelledby="static-heading">
+                <h2 id="static-heading">静的サイトプロジェクト</h2>
+
+                <article id="portfolio" aria-labelledby="portfolio-heading" class="doc-card">
+                    <h3 id="portfolio-heading">ポートフォリオサイト</h3>
+                    <table class="meta-table">
+                        <tr><th>目的</th><td>個人のスキルや実績を整理し、採用担当者やクライアントに魅力を伝える。</td></tr>
+                        <tr><th>想定利用者</th><td>就職・転職活動中のエンジニア／デザイナー、フリーランスのクリエイター。</td></tr>
+                        <tr><th>完成イメージ</th><td>シングルページの静的サイト。ヒーロー、スキル、実績、連絡先の4つの大きなセクションで構成。</td></tr>
+                        <tr><th>技術スタック</th><td>HTML、CSS（またはTailwind CSSなどのユーティリティ系CSS）、軽いJavaScript。</td></tr>
+                        <tr><th>成果物</th><td><code>index.html</code>、<code>/assets</code>配下の画像、<code>styles.css</code>、READMEに環境構築・カスタマイズ手順を記載。</td></tr>
+                    </table>
+                    <h4>必須機能</h4>
+                    <ul class="requirements-list">
+                        <li>自己紹介セクション（プロフィール、肩書き、SNSリンク）</li>
+                        <li>スキル一覧（カテゴリーごとにアイコンやバッジ表示）</li>
+                        <li>代表的な制作実績3件以上（画像＋説明＋詳細ページへの導線）</li>
+                        <li>連絡手段（メールフォーム、またはメールアドレスの記載）</li>
+                        <li>レスポンシブ対応（スマホ幅での崩れ防止）</li>
+                        <li>ダークモード切り替えスイッチ</li>
+                    </ul>
+                    <h4>任意機能（余裕があれば）</h4>
+                    <ul class="requirements-list">
+                        <li>ブログ記事やニュースの最新情報</li>
+                        <li>PDF形式の職務経歴書ダウンロード</li>
+                        <li>Google Analyticsによるアクセス解析</li>
+                    </ul>
+                    <h4>UI/UX要件</h4>
+                    <ul class="requirements-list">
+                        <li>色は落ち着いたメインカラー＋アクセントカラーの2色構成</li>
+                        <li>セクション間の余白を十分に取り、スクロールで読みやすく</li>
+                        <li>ダークモード時は背景色・文字色が適切なコントラスト比になるよう調整</li>
+                    </ul>
+                </article>
+
+                <article id="blog" aria-labelledby="blog-heading" class="doc-card">
+                    <h3 id="blog-heading">ブログサイト</h3>
+                    <table class="meta-table">
+                        <tr><th>目的</th><td>Markdownベースで記事を管理できる小規模な個人ブログを構築し、情報発信をスムーズにする。</td></tr>
+                        <tr><th>想定利用者</th><td>技術ブログを始めたい初学者、情報発信を習慣化したい個人。</td></tr>
+                        <tr><th>完成イメージ</th><td>トップページに記事一覧、記事詳細はMarkdownから生成、カテゴリ・タグで整理できる仕組み。</td></tr>
+                        <tr><th>技術スタック</th><td>静的サイトジェネレーター（Hugo、Astro、11tyなど）またはPure HTML＋静的ビルドスクリプト。</td></tr>
+                        <tr><th>成果物</th><td>記事用Markdownフォルダ、ビルドスクリプト、<code>public/</code>フォルダ、デプロイ手順付きREADME。</td></tr>
+                    </table>
+                    <h4>必須機能</h4>
+                    <ul class="requirements-list">
+                        <li>記事一覧ページ（最新順、カテゴリやタグで絞り込み）</li>
+                        <li>記事詳細ページ（MarkdownをHTMLに変換、目次自動生成）</li>
+                        <li>検索機能（タイトル・本文からの全文検索）</li>
+                        <li>RSSフィード生成（購読用）</li>
+                        <li>コードブロックのシンタックスハイライト</li>
+                        <li>SEO対策（メタタグ、OGP設定）</li>
+                    </ul>
+                    <h4>任意機能（余裕があれば）</h4>
+                    <ul class="requirements-list">
+                        <li>コメント機能（GitHub Issues、Disqusなど外部サービス連携）</li>
+                        <li>記事の関連記事表示</li>
+                        <li>サイトマップXMLの自動生成</li>
+                    </ul>
+                    <h4>UI/UX要件</h4>
+                    <ul class="requirements-list">
+                        <li>トップページでカテゴリ別の色分けバッジを使用</li>
+                        <li>長文記事でも読みやすい余白と行間を確保</li>
+                        <li>検索結果が即座に分かるよう、リアルタイム検索 or 絞り込み後の件数表示</li>
+                    </ul>
+                </article>
+
+                <article id="landing" aria-labelledby="landing-heading" class="doc-card">
+                    <h3 id="landing-heading">ランディングページ</h3>
+                    <table class="meta-table">
+                        <tr><th>目的</th><td>新サービスやキャンペーンを紹介し、資料請求・お問い合わせ・購入ボタンなどの行動を促す。</td></tr>
+                        <tr><th>想定利用者</th><td>プロダクトを短期間で告知したいマーケターや事業担当者。</td></tr>
+                        <tr><th>完成イメージ</th><td>ファーストビューでサービス価値を伝え、中盤で機能・導入実績、最後にFAQとCTAで締める1ページ構成。</td></tr>
+                        <tr><th>技術スタック</th><td>HTML、CSS、軽量JavaScript（アニメーション用にIntersection Observerなど）</td></tr>
+                        <tr><th>成果物</th><td><code>index.html</code>単一ページ、画像アセット、<code>styles.css</code>、<code>scripts.js</code>、CTAの運用方法を記したREADME。</td></tr>
+                    </table>
+                    <h4>必須機能</h4>
+                    <ul class="requirements-list">
+                        <li>ヒーローセクション（キャッチコピー、サブコピー、メインCTAボタン）</li>
+                        <li>特徴／メリット紹介（3～4項目、アイコン付き）</li>
+                        <li>顧客の声（写真＋コメント 3件以上）</li>
+                        <li>料金プラン比較表（ライト／スタンダード／プレミアムなど）</li>
+                        <li>FAQ（5項目以上、アコーディオン表示）</li>
+                        <li>スクロールに合わせたアニメーション（フェードイン等）</li>
+                    </ul>
+                    <h4>任意機能（余裕があれば）</h4>
+                    <ul class="requirements-list">
+                        <li>CTAボタンのA/Bテスト用バリエーション</li>
+                        <li>カウントダウンタイマー（期間限定キャンペーン向け）</li>
+                        <li>ヒートマップ計測スクリプト埋め込み</li>
+                    </ul>
+                    <h4>UI/UX要件</h4>
+                    <ul class="requirements-list">
+                        <li>ファーストビューの背景画像またはグラデーションを活用</li>
+                        <li>CTAボタンは常に視認性の高い色を使用し、スクロール後も追従ボタンを表示</li>
+                        <li>レスポンシブ時のレイアウト崩れを防ぐ（縦長スマホでの可読性重視）</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="dynamic-projects" class="doc-card" aria-labelledby="dynamic-heading">
+                <h2 id="dynamic-heading">動的サイトプロジェクト（React/Next.js）</h2>
+
+                <article id="corporate" aria-labelledby="corporate-heading" class="doc-card">
+                    <h3 id="corporate-heading">コーポレートサイト</h3>
+                    <table class="meta-table">
+                        <tr><th>目的</th><td>Next.jsを使い、更新しやすく表示速度の速い企業サイトを構築する。</td></tr>
+                        <tr><th>想定利用者</th><td>企業のWeb担当者、Next.jsの学習者。</td></tr>
+                        <tr><th>完成イメージ</th><td>トップ／サービス／お知らせ／会社情報／採用／お問い合わせを備えた多ページサイト。</td></tr>
+                        <tr><th>技術スタック</th><td>Next.js 14、TypeScript、Tailwind CSS、<code>next-seo</code>、フォーム送信用に<code>react-hook-form</code>＋<code>@tanstack/react-query</code>。</td></tr>
+                        <tr><th>成果物</th><td>Next.jsプロジェクト一式、CMS連携用の設定例（例: Contentfulのモデル定義JSON）、READMEに環境変数とデプロイ手順を明記。</td></tr>
+                    </table>
+                    <h4>必須機能</h4>
+                    <ul class="requirements-list">
+                        <li>静的生成（SSG）またはISRによる高速表示</li>
+                        <li>お知らせ一覧・詳細ページ（ヘッドレスCMSと連携できる設計）</li>
+                        <li>採用情報一覧（職種別、勤務地、雇用形態のタグ表示）</li>
+                        <li>お問い合わせフォーム（送信後のサンクスページ／メール通知）</li>
+                        <li>多言語対応（日本語・英語切替、<code>next-intl</code>などを利用）</li>
+                        <li>アクセシビリティを意識したナビゲーション（キーボード操作・ARIA対応）</li>
+                    </ul>
+                    <h4>任意機能（余裕があれば）</h4>
+                    <ul class="requirements-list">
+                        <li>サイト内検索（AlgoliaなどのSaaS連携）</li>
+                        <li>事例紹介ページ（CMSの別コンテンツタイプ）</li>
+                        <li>サイトパフォーマンス計測（Lighthouseレポート、Core Web Vitals計測）</li>
+                    </ul>
+                    <h4>UI/UX要件</h4>
+                    <ul class="requirements-list">
+                        <li>ブランドカラーをもとにしたデザインシステム（ボタン、カード、見出しなどのコンポーネント定義）</li>
+                        <li>PC/スマホで共通ヘッダー、フッター、パンくずリストを表示</li>
+                        <li>ナビゲーション固定ヘッダー＋スクロール時の影付与</li>
+                    </ul>
+                </article>
+
+                <article id="task-app" aria-labelledby="task-app-heading" class="doc-card">
+                    <h3 id="task-app-heading">タスク管理アプリ</h3>
+                    <table class="meta-table">
+                        <tr><th>目的</th><td>認証・データベース連携を含むフルスタックなタスク管理ツールを作り、チーム利用を想定した設計を学ぶ。</td></tr>
+                        <tr><th>想定利用者</th><td>チームでタスク共有したい小規模事業者、フルスタック開発を練習したい学習者。</td></tr>
+                        <tr><th>完成イメージ</th><td>Kanban風ボードとリスト表示を切り替えられるダッシュボード型Webアプリ。</td></tr>
+                        <tr><th>技術スタック</th><td>Next.js 14、TypeScript、Supabase、Tailwind CSS、<code>dnd-kit</code>または<code>@hello-pangea/dnd</code>、状態管理は<code>zustand</code>など軽量なもの。</td></tr>
+                        <tr><th>成果物</th><td>Next.jsプロジェクト、Supabaseのテーブル定義SQL、.envテンプレート、主要コンポーネントのStorybook（任意）、READMEにセットアップ手順と運用注意点を記載。</td></tr>
+                    </table>
+                    <h4>必須機能</h4>
+                    <ul class="requirements-list">
+                        <li>Supabaseを利用したユーザー認証（メール＋OAuth）</li>
+                        <li>タスクのCRUD（タイトル、詳細、期限、優先度、担当者、タグ）</li>
+                        <li>カンバンボード（ドラッグ＆ドロップでステータス変更）</li>
+                        <li>チーム共有（組織単位でのタスク閲覧、招待リンク）</li>
+                        <li>リアルタイム更新（チームメンバーの操作を即時反映）</li>
+                        <li>アクティビティログ（タスクの変更履歴を表示）</li>
+                    </ul>
+                    <h4>任意機能（余裕があれば）</h4>
+                    <ul class="requirements-list">
+                        <li>通知機能（期限前リマインドメール、アプリ内通知）</li>
+                        <li>カレンダー表示（月間／週間ビュー）</li>
+                        <li>外部連携（Google Calendar、Slack Webhook）</li>
+                    </ul>
+                    <h4>UI/UX要件</h4>
+                    <ul class="requirements-list">
+                        <li>ダッシュボードレイアウト（サイドバー＋メインコンテンツ）</li>
+                        <li>モーダルでタスク詳細を確認・編集できる</li>
+                        <li>カラーラベルやステータスバッジで状態が直感的に分かる</li>
+                        <li>モバイル時はリスト表示に切り替えるレスポンシブ設計</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section id="how-to-use" class="doc-card" aria-labelledby="how-heading">
+                <h2 id="how-heading">このドキュメントの使い方</h2>
+                <ol class="requirements-list">
+                    <li>作りたいプロジェクトを選び、要件を上から順に満たす形で設計・実装する。</li>
+                    <li>「必須機能」を完了ラインとして定義し、公開や社内共有ができる状態を目指す。</li>
+                    <li>「任意機能」は余裕があるときに追加し、発展課題として活用する。</li>
+                    <li>READMEやNotionなどの管理ツールにこのページのリンクを貼り、進捗管理に役立てる。</li>
+                </ol>
+            </section>
+
+            <section id="history" class="doc-card" aria-labelledby="history-heading">
+                <h2 id="history-heading">更新履歴</h2>
+                <ul class="requirements-list">
+                    <li>2025-02-14: 初版作成。</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
