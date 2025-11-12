@@ -697,10 +697,11 @@ footer {
     }
 
     .nav-menu.active {
-        max-height: 70vh; /* 画面の70%に制限してスクロールを確保 */
+        max-height: 400px; /* 固定高さでスクロールを確保（16項目は約800px必要） */
         padding: var(--space-4) 0;
-        overflow-y: auto;
+        overflow-y: scroll; /* autoではなくscrollで常にスクロール可能に */
         -webkit-overflow-scrolling: touch; /* iOSでのスムーズスクロールを有効化 */
+        overscroll-behavior: contain; /* スクロールの伝播を防ぐ */
     }
 
     .nav-menu li {
