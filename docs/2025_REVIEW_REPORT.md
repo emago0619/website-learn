@@ -333,6 +333,33 @@
 
 ---
 
+## 📝 修正履歴
+
+### 2025年1月 - ナビゲーションメニューの不整合修正
+
+**問題**:
+ページによってナビゲーションメニューの項目数が異なっていることが発覚
+- cheatsheets.html: 12項目（4項目不足）
+- sample-projects.html: 13項目（3項目不足）
+- case-studies.html: 14項目（2項目不足）
+- security-best-practices.html: 15項目（1項目不足）
+
+**原因**:
+新規ページ追加時に、一部のページのナビゲーションメニューが更新されていなかった
+
+**対応**:
+- ✅ cheatsheets.html に4項目追加（サンプルプロジェクト、ケーススタディ、セキュリティ、チーム開発）
+- ✅ sample-projects.html に3項目追加（ケーススタディ、セキュリティ、チーム開発）
+- ✅ case-studies.html に2項目追加（セキュリティ、チーム開発）
+- ✅ security-best-practices.html に1項目追加（チーム開発）
+
+**結果**:
+全16ページで一貫した16項目のナビゲーションメニューを実現
+
+**コミット**: `fix: Ensure all pages have consistent 16-item navigation menu`
+
+---
+
 **レポート作成日**: 2025年1月
 **作成者**: Claude (AI Assistant)
 **検証対象**: website-learn プロジェクト
