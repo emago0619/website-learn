@@ -341,31 +341,146 @@ nav .container {
     transform: rotate(20deg);
 }
 
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+}
+
+.nav-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex: 1;
+    position: relative;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
 .nav-menu {
     list-style: none;
     display: flex;
+    align-items: center;
+    gap: var(--space-4);
     flex-wrap: wrap;
-    gap: var(--space-6);
-    justify-content: center;
     flex: 1;
     margin: 0;
+    padding: 0;
 }
 
-nav a {
+.nav-item {
+    position: relative;
+}
+
+.nav-menu > .nav-item > a,
+.submenu-toggle {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.2s;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-full);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
 }
 
-nav a:hover {
+.submenu-toggle {
+    background: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.submenu-toggle::after {
+    content: '▾';
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.has-submenu.open > .submenu-toggle::after {
+    transform: rotate(180deg);
+}
+
+.nav-menu > .nav-item > a:hover,
+.submenu-toggle:hover,
+.submenu-toggle:focus-visible {
+    background-color: var(--primary-100);
+    color: var(--primary-color);
+}
+
+.nav-menu > .nav-item > a.active {
     background-color: var(--primary-color);
     color: white;
 }
 
-nav a.active {
+.has-active-child > .submenu-toggle {
+    background-color: var(--primary-50);
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .has-active-child > .submenu-toggle {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.has-submenu.open > .submenu-toggle {
+    background-color: var(--primary-100);
+    color: var(--primary-color);
+}
+
+.submenu {
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 0;
+    min-width: 220px;
+    padding: var(--space-3);
+    margin: 0;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    display: none;
+    gap: var(--space-2);
+}
+
+[data-theme="dark"] .submenu {
+    background-color: var(--bg-light);
+}
+
+.has-submenu.open > .submenu,
+.has-submenu:focus-within > .submenu {
+    display: flex;
+    flex-direction: column;
+}
+
+.submenu li {
+    margin: 0;
+}
+
+.submenu a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--text-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.submenu a:hover,
+.submenu a:focus-visible {
+    background-color: var(--primary-100);
+    color: var(--primary-color);
+}
+
+.submenu a.active {
     background-color: var(--primary-color);
     color: white;
 }
@@ -675,14 +790,25 @@ footer {
         display: flex;
     }
 
-    .theme-toggle {
-        position: absolute;
-        right: var(--space-4);
+    .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+    }
+
+    .nav-main {
+        width: 100%;
+    }
+
+    .nav-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: var(--space-3);
     }
 
     .nav-menu {
         position: absolute;
-        top: 100%;
+        top: calc(100% + var(--space-2));
         left: 0;
         right: 0;
         background: rgba(255, 255, 255, 0.95);
@@ -695,6 +821,7 @@ footer {
         transition: max-height 0.3s ease-in-out, padding 0.2s ease-in-out;
         border-bottom: 1px solid var(--border-color);
         box-shadow: var(--shadow-lg);
+        z-index: 20;
     }
 
     [data-theme="dark"] .nav-menu {
@@ -712,14 +839,39 @@ footer {
 
     .nav-menu li {
         width: 100%;
-        text-align: center;
-        padding: var(--space-2) 0;
+        text-align: left;
+        padding: 0;
     }
 
-    nav a {
-        display: block;
+    .nav-menu > .nav-item > a,
+    .submenu-toggle {
+        width: 100%;
+        justify-content: space-between;
         padding: var(--space-3) var(--space-4);
         margin: 0 var(--space-4);
+        border-radius: var(--radius-md);
+    }
+
+    .submenu {
+        position: static;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        display: none;
+    }
+
+    .nav-item.has-submenu.open > .submenu {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: var(--space-2);
+    }
+
+    .submenu a {
+        margin: 0 var(--space-5);
+        padding: var(--space-2) 0;
+        border-radius: 0;
     }
 
     /* メインコンテンツ */
