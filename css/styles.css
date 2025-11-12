@@ -108,6 +108,11 @@
     --leading-normal: 1.5;
     --leading-relaxed: 1.75;
 
+    /* モバイルナビ用のオフセット（ナビの高さ + 余白を想定） */
+    --mobile-nav-offset: 120px;
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+
     /* ライトモード用変数 */
     --primary-color: var(--primary-600);
     --secondary-color: var(--primary-800);
@@ -687,7 +692,7 @@ footer {
         padding: 0;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
+        transition: max-height 0.3s ease-in-out, padding 0.2s ease-in-out;
         border-bottom: 1px solid var(--border-color);
         box-shadow: var(--shadow-lg);
     }
@@ -697,11 +702,12 @@ footer {
     }
 
     .nav-menu.active {
-        max-height: 400px; /* 固定高さでスクロールを確保（16項目は約800px必要） */
-        padding: var(--space-4) 0;
-        overflow-y: scroll; /* autoではなくscrollで常にスクロール可能に */
-        -webkit-overflow-scrolling: touch; /* iOSでのスムーズスクロールを有効化 */
+        max-height: calc(100dvh - var(--mobile-nav-offset));
+        padding: calc(var(--space-4) + var(--safe-area-top)) 0 calc(var(--space-4) + var(--safe-area-bottom));
+        overflow-y: auto;
         overscroll-behavior: contain; /* スクロールの伝播を防ぐ */
+        -webkit-overflow-scrolling: touch; /* iOSでのスムーズスクロールを有効化 */
+        touch-action: pan-y;
     }
 
     .nav-menu li {
