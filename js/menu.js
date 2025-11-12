@@ -6,6 +6,87 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.getElementById('navMenu');
 
     if (hamburger && navMenu) {
+        const submenuToggles = navMenu.querySelectorAll('.submenu-toggle');
+
+        navMenu.querySelectorAll('.submenu a.active').forEach(link => {
+            const parentItem = link.closest('.has-submenu');
+            if (parentItem) {
+                parentItem.classList.add('has-active-child');
+            }
+        });
+
+        function setSubmenuState(item, shouldOpen) {
+            if (!item) return;
+            const toggle = item.querySelector('.submenu-toggle');
+            const submenu = item.querySelector('.submenu');
+
+            if (!toggle || !submenu) return;
+
+            if (shouldOpen) {
+                item.classList.add('open');
+                toggle.setAttribute('aria-expanded', 'true');
+                submenu.hidden = false;
+            } else {
+                item.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                submenu.hidden = true;
+            }
+        }
+
+        function closeAllSubmenus(exceptItem = null, silent = false) {
+            let closedAny = false;
+            submenuToggles.forEach(toggle => {
+                const item = toggle.closest('.has-submenu');
+                if (!item || item === exceptItem) return;
+                if (item.classList.contains('open')) {
+                    setSubmenuState(item, false);
+                    closedAny = true;
+                }
+            });
+
+            if (closedAny && !silent) {
+                announceToScreenReader('サブメニューを閉じました');
+            }
+
+            return closedAny;
+        }
+
+        submenuToggles.forEach(toggle => {
+            const parentItem = toggle.closest('.has-submenu');
+            const submenu = parentItem ? parentItem.querySelector('.submenu') : null;
+            if (submenu) {
+                submenu.hidden = true;
+            }
+
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (!parentItem) return;
+
+                const isOpen = parentItem.classList.contains('open');
+                if (isOpen) {
+                    setSubmenuState(parentItem, false);
+                    announceToScreenReader(`${toggle.textContent.trim()}メニューを閉じました`);
+                } else {
+                    closeAllSubmenus(parentItem, true);
+                    setSubmenuState(parentItem, true);
+                    announceToScreenReader(`${toggle.textContent.trim()}メニューを開きました`);
+                }
+            });
+
+            parentItem?.addEventListener('mouseenter', () => {
+                const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+                if (!supportsHover) return;
+                closeAllSubmenus(parentItem, true);
+                setSubmenuState(parentItem, true);
+            });
+
+            parentItem?.addEventListener('mouseleave', () => {
+                const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+                if (!supportsHover) return;
+                setSubmenuState(parentItem, false);
+            });
+        });
+
         // メニューの開閉
         function toggleMenu() {
             const isOpen = navMenu.classList.contains('active');
@@ -23,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isOpen) {
                 // メニュー内のスクロールを有効にし、body のスクロールを無効にする
                 document.body.style.overflow = 'hidden';
+                closeAllSubmenus(null, true);
 
                 // 最初のリンクにフォーカスを移動
                 const firstLink = navMenu.querySelector('a');
@@ -33,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 // メニューを閉じた時、body のスクロールを戻す
                 document.body.style.overflow = '';
+                closeAllSubmenus(null, true);
             }
         }
 
@@ -40,7 +123,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // アクセシビリティ: Escキーでメニューを閉じる
         document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+            if (event.key !== 'Escape') return;
+
+            const hasClosedSubmenu = closeAllSubmenus(null, true);
+            if (hasClosedSubmenu) {
+                announceToScreenReader('サブメニューを閉じました');
+                return;
+            }
+
+            if (navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
@@ -60,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'メニューを開く');
                 document.body.style.overflow = ''; // bodyのスクロールを戻す
+                closeAllSubmenus(null, true);
             });
         });
 
@@ -74,6 +166,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'メニューを開く');
                 document.body.style.overflow = ''; // bodyのスクロールを戻す
+                closeAllSubmenus(null, true);
+            }
+        });
+
+        navMenu.addEventListener('focusout', function(event) {
+            if (!navMenu.contains(event.relatedTarget)) {
+                closeAllSubmenus(null, true);
+            }
+        });
+
+        navMenu.addEventListener('focusin', function(event) {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) return;
+
+            const parentSubmenu = target.closest('.submenu');
+            if (parentSubmenu) {
+                const parentItem = parentSubmenu.closest('.has-submenu');
+                if (parentItem) {
+                    closeAllSubmenus(parentItem, true);
+                    setSubmenuState(parentItem, true);
+                }
+            } else if (!target.classList.contains('submenu-toggle')) {
+                closeAllSubmenus(null, true);
             }
         });
     }
