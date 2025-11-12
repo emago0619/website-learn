@@ -19,13 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
             // アクセシビリティ: メニュー開閉をスクリーンリーダーに通知
             announceToScreenReader(!isOpen ? 'メニューを開きました' : 'メニューを閉じました');
 
-            // メニューを開いた時、最初のリンクにフォーカスを移動
+            // メニューを開いた時の処理
             if (!isOpen) {
+                // メニュー内のスクロールを有効にし、body のスクロールを無効にする
+                document.body.style.overflow = 'hidden';
+
+                // 最初のリンクにフォーカスを移動
                 const firstLink = navMenu.querySelector('a');
                 if (firstLink) {
                     // DOM更新とCSSアニメーションの完了を待つため100ms遅延
                     setTimeout(() => firstLink.focus(), 100);
                 }
+            } else {
+                // メニューを閉じた時、body のスクロールを戻す
+                document.body.style.overflow = '';
             }
         }
 
@@ -39,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'メニューを開く');
                 hamburger.focus(); // フォーカスをハンバーガーボタンに戻す
+                document.body.style.overflow = ''; // bodyのスクロールを戻す
                 announceToScreenReader('メニューを閉じました');
             }
         });
@@ -51,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'メニューを開く');
+                document.body.style.overflow = ''; // bodyのスクロールを戻す
             });
         });
 
@@ -64,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navMenu.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 hamburger.setAttribute('aria-label', 'メニューを開く');
+                document.body.style.overflow = ''; // bodyのスクロールを戻す
             }
         });
     }
