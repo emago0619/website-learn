@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>FAQ - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <header>
         <div class="container">
             <h1>FAQ：よくある質問とトラブルシューティング</h1>
@@ -17,24 +25,93 @@
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="ai-design.html">AIデザイン</a></li>
-                <li><a href="faq.html" class="active">FAQ</a></li>
-            </ul>
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"
+                    aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html" class="active" aria-current="page">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;"
+                    aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                        focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
-            <section>
-                <h2>よくある質問（FAQ）</h2>
-
+            <section id="faq-section" aria-labelledby="faq-heading">
+                <h2 id="faq-heading">よくある質問（FAQ）</h2>
                 <div class="card">
                     <h3>Q1. GitHubアカウントを作成するのに費用はかかりますか？</h3>
                     <p>
@@ -289,9 +366,58 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
         </div>
     </footer>
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput"
+                    autocomplete="off">
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/install.js"></script>
+
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>

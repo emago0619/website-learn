@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>トラブルシューティング完全ガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>トラブルシューティング完全ガイド</h1>
+            <p>よくあるエラーと解決方法を網羅的に解説</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html" class="active" aria-current="page">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このガイドについて</h2>
+                <p>
+                    開発中に遭遇する様々なエラーや問題を、<strong>原因</strong> → <strong>解決方法</strong> → <strong>予防策</strong>の3ステップで解説します。
+                </p>
+                <div class="alert alert-info">
+                    <strong>使い方のヒント：</strong> エラーメッセージが出たら、このページでCtrl+F（またはCmd+F）でエラーメッセージを検索してみてください。
+                    または、画面右上の検索機能（Ctrl+K / Cmd+K）を使って該当するセクションを見つけることができます。
+                </div>
+                <div class="alert alert-success">
+                    <strong>💡 トラブル解決の基本ステップ：</strong><br>
+                    1. エラーメッセージを正確に読む<br>
+                    2. エラーが発生した場所（ファイル名・行番号）を確認<br>
+                    3. 最後に何を変更したか思い出す<br>
+                    4. 検索エンジンでエラーメッセージを検索<br>
+                    5. 解決したら、何が原因だったかメモする
+                </div>
+            </section>
+
+            <section id="cursor-errors" aria-labelledby="cursor-errors-heading">
+                <h2 id="cursor-errors-heading">Cursorでのエラー</h2>
+
+                <h3>1. API制限エラー（Rate Limit）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>Rate limit exceeded. Please try again later.</code></pre>
+
+                    <h4>原因</h4>
+                    <p>Cursorの無料プランでは、1日あたりのAI使用回数に制限があります。制限を超えるとこのエラーが表示されます。</p>
+
+                    <h4>解決方法</h4>
+                    <ul>
+                        <li><strong>方法1：時間をおいて再試行</strong> - 24時間待てば制限がリセットされます</li>
+                        <li><strong>方法2：有料プランにアップグレード</strong> - Pro版では制限が大幅に緩和されます</li>
+                        <li><strong>方法3：CodexCLIを併用</strong> - Cursorとは別のクレジット体系なので、使い分けることで節約できます</li>
+                    </ul>
+
+                    <h4>予防策</h4>
+                    <ul>
+                        <li>大きな変更は一度に依頼せず、小分けにする</li>
+                        <li>プランモードを使う前に、ChatGPTで要件を整理してから使う</li>
+                        <li>簡単な修正は自分で行い、複雑な部分だけAIに任せる</li>
+                    </ul>
+                </div>
+
+                <h3>2. 接続エラー</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>Failed to connect to the server
+Network error occurred</code></pre>
+
+                    <h4>原因</h4>
+                    <p>インターネット接続の問題、またはCursorのサーバー側の問題です。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li>インターネット接続を確認（ブラウザで他のサイトが開けるか試す）</li>
+                        <li>Cursorを再起動</li>
+                        <li>ファイアウォール設定を確認（Cursorの通信を許可しているか）</li>
+                        <li>VPNを使用している場合は一時的にオフにしてみる</li>
+                        <li>Cursorの公式TwitterやStatusページで障害情報を確認</li>
+                    </ol>
+                </div>
+
+                <h3>3. プラン承認の問題</h3>
+                <div class="card">
+                    <h4>症状</h4>
+                    <p>プランモードでAIが提案を出しても、「承認」ボタンが反応しない、または実装が始まらない。</p>
+
+                    <h4>原因</h4>
+                    <p>Cursorの一時的なバグ、または提案内容が大きすぎる場合。</p>
+
+                    <h4>解決方法</h4>
+                    <ul>
+                        <li><strong>方法1：プランモードを閉じて再度開く</strong></li>
+                        <li><strong>方法2：提案を小さく分割</strong> - 「一度に1つのファイルだけ修正して」と指示</li>
+                        <li><strong>方法3：チャットモードで実装</strong> - プランモードの代わりにチャットで1つずつ実装</li>
+                        <li><strong>方法4：Cursorを再起動</strong></li>
+                    </ul>
+                </div>
+
+                <h3>4. ファイルが見つからない</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>Cannot find file: /path/to/file.js</code></pre>
+
+                    <h4>原因</h4>
+                    <p>Cursorが参照しようとしたファイルが存在しない、またはパスが間違っています。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li>ファイルエクスプローラーで該当ファイルが存在するか確認</li>
+                        <li>ファイル名のスペルミスがないか確認</li>
+                        <li>相対パスと絶対パスが正しいか確認</li>
+                        <li>Cursorのワークスペースを正しいフォルダで開いているか確認</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="github-errors" aria-labelledby="github-errors-heading">
+                <h2 id="github-errors-heading">GitHubでのエラー</h2>
+
+                <h3>1. pushの失敗（Permission denied）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>ERROR: Permission denied (publickey)
+fatal: Could not read from remote repository</code></pre>
+
+                    <h4>原因</h4>
+                    <p>GitHubへの認証が正しく設定されていません。SSHキーまたはアクセストークンの問題です。</p>
+
+                    <h4>解決方法</h4>
+                    <ul>
+                        <li><strong>HTTPS接続の場合：</strong>
+                            <ol>
+                                <li>Personal Access Tokenを再生成（GitHub > Settings > Developer settings > Personal access tokens）</li>
+                                <li>トークンに<code>repo</code>権限があることを確認</li>
+                                <li>pushする際にトークンをパスワードとして入力</li>
+                            </ol>
+                        </li>
+                        <li><strong>SSH接続の場合：</strong>
+                            <ol>
+                                <li>SSHキーが正しく設定されているか確認: <code>ssh -T git@github.com</code></li>
+                                <li>SSHキーをGitHubに登録（GitHub > Settings > SSH and GPG keys）</li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                    <h4>予防策</h4>
+                    <p>Personal Access Tokenは有効期限があるので、定期的に更新し、安全な場所に保存しておく。</p>
+                </div>
+
+                <h3>2. マージコンフリクト（Merge Conflict）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+
+                    <h4>原因</h4>
+                    <p>複数の人が同じファイルの同じ箇所を編集し、Gitが自動でマージできない状態です。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li>コンフリクトしているファイルを開く</li>
+                        <li>以下のようなマーカーを探す：
+                            <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+あなたの変更
+=======
+他の人の変更
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name</code></pre>
+                        </li>
+                        <li>どちらの変更を残すか決めて、マーカーを削除</li>
+                        <li>ファイルを保存</li>
+                        <li><code>git add &lt;ファイル名&gt;</code></li>
+                        <li><code>git commit -m "Resolve merge conflict"</code></li>
+                        <li><code>git push</code></li>
+                    </ol>
+
+                    <h4>予防策</h4>
+                    <ul>
+                        <li>作業前に必ず<code>git pull</code>で最新の状態にする</li>
+                        <li>チームで作業箇所を分担する</li>
+                        <li>こまめにcommit & pushする</li>
+                    </ul>
+                </div>
+
+                <h3>3. pushが拒否される（Updates were rejected）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/...'
+hint: Updates were rejected because the remote contains work that you do not have locally.</code></pre>
+
+                    <h4>原因</h4>
+                    <p>リモートリポジトリに自分のローカルにない変更があります。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li>まず最新の変更を取得: <code>git pull origin main</code></li>
+                        <li>マージコンフリクトがあれば解決（上記参照）</li>
+                        <li>再度push: <code>git push origin main</code></li>
+                    </ol>
+
+                    <h4>緊急回避策（非推奨）</h4>
+                    <pre><code>git push --force</code></pre>
+                    <p><strong>⚠️ 警告：</strong> force pushは他の人の変更を上書きしてしまうので、個人プロジェクト以外では絶対に使わないでください。</p>
+                </div>
+
+                <h3>4. .gitignoreが効かない</h3>
+                <div class="card">
+                    <h4>症状</h4>
+                    <p><code>.gitignore</code>に追加したファイルがcommitされてしまう。</p>
+
+                    <h4>原因</h4>
+                    <p>ファイルが既にGitで追跡されている状態で<code>.gitignore</code>に追加しても、効果がありません。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li>既に追跡されているファイルをGitから削除（ローカルファイルは残す）:
+                            <pre><code>git rm --cached ファイル名
+# またはフォルダごと
+git rm -r --cached フォルダ名/</code></pre>
+                        </li>
+                        <li><code>.gitignore</code>にファイル/フォルダを追加</li>
+                        <li>変更をcommit:
+                            <pre><code>git add .gitignore
+git commit -m "Update .gitignore"
+git push</code></pre>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="deploy-errors" aria-labelledby="deploy-errors-heading">
+                <h2 id="deploy-errors-heading">デプロイでのエラー</h2>
+
+                <h3>1. ビルド失敗（Build Failed）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>Build failed with error:
+Module not found: Error: Can't resolve './components/Header'
+npm ERR! code ELIFECYCLE</code></pre>
+
+                    <h4>原因</h4>
+                    <p>主な原因：
+                        <ul>
+                            <li>依存パッケージがインストールされていない</li>
+                            <li>ファイルパスが間違っている</li>
+                            <li>importのスペルミス</li>
+                            <li>環境変数が設定されていない</li>
+                        </ul>
+                    </p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li><strong>ローカルで再現するか確認：</strong>
+                            <pre><code>npm run build</code></pre>
+                        </li>
+                        <li><strong>依存関係を再インストール：</strong>
+                            <pre><code>rm -rf node_modules package-lock.json
+npm install</code></pre>
+                        </li>
+                        <li><strong>エラーメッセージから該当箇所を特定</strong>してコードを修正</li>
+                        <li><strong>環境変数を確認</strong> - Vercel/Netlifyの管理画面で設定</li>
+                        <li>修正後、再度commit & push</li>
+                    </ol>
+                </div>
+
+                <h3>2. 404エラー（Page Not Found）</h3>
+                <div class="card">
+                    <h4>症状</h4>
+                    <p>デプロイは成功したが、サイトにアクセスすると404エラーが表示される。</p>
+
+                    <h4>原因と解決方法</h4>
+                    <ul>
+                        <li><strong>GitHub Pages：</strong>
+                            <ul>
+                                <li>設定でブランチが正しく指定されているか確認（Settings > Pages）</li>
+                                <li><code>index.html</code>がルートディレクトリにあるか確認</li>
+                                <li>公開に数分かかるので、5-10分待ってから再アクセス</li>
+                            </ul>
+                        </li>
+                        <li><strong>Vercel/Netlify：</strong>
+                            <ul>
+                                <li>Build設定でOutput Directoryが正しいか確認</li>
+                                <li>Next.jsの場合: <code>out</code>または<code>.next</code></li>
+                                <li>Reactの場合: <code>build</code></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <h3>3. 環境変数が読み込まれない</h3>
+                <div class="card">
+                    <h4>症状</h4>
+                    <p>ローカルでは動くが、デプロイ後に環境変数が undefined になる。</p>
+
+                    <h4>原因</h4>
+                    <p>デプロイ先のプラットフォームで環境変数が設定されていない。</p>
+
+                    <h4>解決方法</h4>
+                    <ul>
+                        <li><strong>Vercel：</strong>
+                            <ol>
+                                <li>プロジェクト > Settings > Environment Variables</li>
+                                <li>必要な環境変数を追加（例: <code>NEXT_PUBLIC_API_KEY</code>）</li>
+                                <li>Production / Preview / Development の適用先を選択</li>
+                                <li>再デプロイ（Deployments > 最新のデプロイ > Redeploy）</li>
+                            </ol>
+                        </li>
+                        <li><strong>Netlify：</strong>
+                            <ol>
+                                <li>Site settings > Build & deploy > Environment</li>
+                                <li>環境変数を追加</li>
+                                <li>Deploys > Trigger deploy > Clear cache and deploy site</li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                    <h4>注意点</h4>
+                    <p><strong>⚠️ 重要：</strong> クライアントサイドで使う環境変数は<code>NEXT_PUBLIC_</code>などのプレフィックスが必要です（Next.jsの場合）。</p>
+                </div>
+
+                <h3>4. CSSが反映されない</h3>
+                <div class="card">
+                    <h4>症状</h4>
+                    <p>デプロイ後、スタイルが全く反映されず、テキストだけが表示される。</p>
+
+                    <h4>原因</h4>
+                    <ul>
+                        <li>CSSファイルのパスが間違っている</li>
+                        <li>相対パスの問題</li>
+                        <li>ビルド時にCSSが含まれていない</li>
+                    </ul>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li><strong>パスを確認：</strong>
+                            <pre><code>&lt;!-- ❌ 間違い --&gt;
+&lt;link rel="stylesheet" href="/css/styles.css"&gt;
+
+&lt;!-- ✅ 正しい（相対パス） --&gt;
+&lt;link rel="stylesheet" href="./css/styles.css"&gt;</code></pre>
+                        </li>
+                        <li><strong>ブラウザのDevToolsでネットワークタブを確認</strong> - CSSファイルが404になっていないか</li>
+                        <li><strong>キャッシュをクリア</strong> - Ctrl+Shift+R（Win）/ Cmd+Shift+R（Mac）で強制リロード</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="npm-errors" aria-labelledby="npm-errors-heading">
+                <h2 id="npm-errors-heading">npm/yarnのエラー</h2>
+
+                <h3>1. パッケージのインストール失敗</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>npm ERR! code EACCES
+npm ERR! syscall access
+npm ERR! errno -13</code></pre>
+
+                    <h4>原因</h4>
+                    <p>権限の問題、または依存関係の競合です。</p>
+
+                    <h4>解決方法</h4>
+                    <ol>
+                        <li><strong>キャッシュをクリア：</strong>
+                            <pre><code>npm cache clean --force</code></pre>
+                        </li>
+                        <li><strong>node_modulesを削除して再インストール：</strong>
+                            <pre><code>rm -rf node_modules package-lock.json
+npm install</code></pre>
+                        </li>
+                        <li><strong>Node.jsのバージョンを確認：</strong>
+                            <pre><code>node -v
+npm -v</code></pre>
+                            古すぎる場合は最新版にアップデート
+                        </li>
+                    </ol>
+                </div>
+
+                <h3>2. 依存関係の競合（Peer dependency）</h3>
+                <div class="card">
+                    <h4>エラーメッセージ例</h4>
+                    <pre><code>npm ERR! ERESOLVE unable to resolve dependency tree
+npm ERR! Could not resolve dependency:
+npm ERR! peer react@"^18.0.0" from react-dom@18.2.0</code></pre>
+
+                    <h4>原因</h4>
+                    <p>インストールしようとしているパッケージが、既存のパッケージと互換性がありません。</p>
+
+                    <h4>解決方法</h4>
+                    <ul>
+                        <li><strong>方法1：互換性のあるバージョンを指定：</strong>
+                            <pre><code>npm install パッケージ名@バージョン番号</code></pre>
+                        </li>
+                        <li><strong>方法2：強制インストール（非推奨）：</strong>
+                            <pre><code>npm install --legacy-peer-deps</code></pre>
+                        </li>
+                        <li><strong>方法3：パッケージマネージャーを変更：</strong>
+                            yarnやpnpmを試してみる
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="debug-techniques" aria-labelledby="debug-techniques-heading">
+                <h2 id="debug-techniques-heading">デバッグの基本テクニック</h2>
+
+                <h3>1. ブラウザのDevToolsを使う</h3>
+                <div class="card">
+                    <h4>開き方</h4>
+                    <ul>
+                        <li>Windows/Linux: <kbd>F12</kbd> または <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd></li>
+                        <li>Mac: <kbd>Cmd</kbd> + <kbd>Option</kbd> + <kbd>I</kbd></li>
+                    </ul>
+
+                    <h4>主な機能</h4>
+                    <ul>
+                        <li><strong>Consoleタブ：</strong> JavaScriptのエラーや<code>console.log()</code>の出力を確認</li>
+                        <li><strong>Networkタブ：</strong> 読み込まれたファイルやAPIリクエストを確認</li>
+                        <li><strong>Elementsタブ：</strong> HTML/CSSをリアルタイムで確認・編集</li>
+                        <li><strong>Sourcesタブ：</strong> ブレークポイントを設定してデバッグ</li>
+                    </ul>
+                </div>
+
+                <h3>2. console.logを活用する</h3>
+                <div class="card">
+                    <h4>基本的な使い方</h4>
+                    <pre><code>// 変数の値を確認
+console.log('userの値:', user);
+
+// 複数の値を同時に確認
+console.log('x:', x, 'y:', y);
+
+// オブジェクトの中身を見やすく表示
+console.table(users);
+
+// 警告やエラーとして表示
+console.warn('これは警告です');
+console.error('これはエラーです');</code></pre>
+
+                    <h4>よくあるパターン</h4>
+                    <pre><code>// 関数が実行されているか確認
+function fetchData() {
+  console.log('fetchData が呼ばれました');
+  // ...
+}
+
+// 条件分岐の確認
+if (user.isLoggedIn) {
+  console.log('ログイン済み');
+} else {
+  console.log('未ログイン');
+}</code></pre>
+                </div>
+
+                <h3>3. エラーメッセージの読み方</h3>
+                <div class="card">
+                    <h4>エラーメッセージの構造</h4>
+                    <pre><code>Uncaught TypeError: Cannot read property 'name' of undefined
+    at getUserName (app.js:15:20)
+    at main (app.js:30:5)</code></pre>
+
+                    <ul>
+                        <li><strong>エラーの種類：</strong> <code>TypeError</code> - 型に関するエラー</li>
+                        <li><strong>エラーの内容：</strong> <code>Cannot read property 'name' of undefined</code> - undefinedのプロパティを読もうとした</li>
+                        <li><strong>発生場所：</strong> <code>app.js:15:20</code> - app.jsの15行目、20文字目</li>
+                        <li><strong>呼び出し元：</strong> <code>at main (app.js:30:5)</code> - mainから呼ばれた</li>
+                    </ul>
+
+                    <h4>対処法</h4>
+                    <ol>
+                        <li>エラーが発生している行を確認</li>
+                        <li>その行の変数がundefinedになっていないか確認</li>
+                        <li>undefinedになる原因を遡って調査</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="prevention" aria-labelledby="prevention-heading">
+                <h2 id="prevention-heading">エラーを未然に防ぐ習慣</h2>
+
+                <div class="card">
+                    <h3>1. 小さく変更してすぐ確認</h3>
+                    <p>大きな変更を一度に行うと、エラーの原因を特定しにくくなります。小さく変更して、その都度動作確認しましょう。</p>
+
+                    <h3>2. こまめにcommitする</h3>
+                    <p>動くバージョンをこまめにcommitしておくことで、問題が起きたときに前のバージョンに戻れます。</p>
+                    <pre><code>git commit -m "機能Aを追加"
+# テストして動作確認
+git commit -m "機能Bを追加"</code></pre>
+
+                    <h3>3. コードを書く前に計画する</h3>
+                    <p>ChatGPTで要件を整理し、Cursorのプランモードで計画を立ててから実装することで、大きなミスを防げます。</p>
+
+                    <h3>4. エラーログを読む習慣をつける</h3>
+                    <p>エラーが出たらすぐに直そうとせず、まずエラーメッセージをしっかり読みましょう。多くの場合、エラーメッセージに解決のヒントがあります。</p>
+
+                    <h3>5. バックアップを取る</h3>
+                    <p>大きな変更をする前に、ブランチを作成するか、プロジェクトフォルダ全体をコピーしておきましょう。</p>
+                    <pre><code># 新しいブランチを作成して作業
+git checkout -b feature/new-function</code></pre>
+                </div>
+            </section>
+
+            <section id="when-stuck" aria-labelledby="when-stuck-heading">
+                <h2 id="when-stuck-heading">それでも解決しない時は</h2>
+
+                <div class="card">
+                    <h3>1. 検索エンジンで調べる</h3>
+                    <p>エラーメッセージをそのまま検索エンジンに入力すると、同じエラーに遭遇した人の解決方法が見つかります。</p>
+                    <p><strong>検索のコツ：</strong></p>
+                    <ul>
+                        <li>エラーメッセージの固有の部分（ファイル名など）を除いて検索</li>
+                        <li>英語で検索すると情報が多い</li>
+                        <li>「エラーメッセージ + 言語/フレームワーク名」で検索</li>
+                    </ul>
+
+                    <h3>2. 公式ドキュメントを読む</h3>
+                    <p>使っているツール・ライブラリの公式ドキュメントには、よくあるトラブルシューティングが載っています。</p>
+
+                    <h3>3. コミュニティで質問する</h3>
+                    <ul>
+                        <li><strong>Stack Overflow：</strong> 英語の技術Q&Aサイト</li>
+                        <li><strong>Qiita / Zenn：</strong> 日本語の技術ブログ</li>
+                        <li><strong>GitHub Issues：</strong> ライブラリのバグや問題を報告</li>
+                        <li><strong>Discord / Slack：</strong> 各種コミュニティ</li>
+                    </ul>
+
+                    <h3>4. 休憩を取る</h3>
+                    <p>煮詰まったら一度離れてみましょう。散歩したり、他のことをしたりすると、戻ってきたときに解決策が見えることがあります。</p>
+
+                    <h3>5. ChatGPTに相談する</h3>
+                    <p>エラーメッセージとコードの一部をChatGPTに貼り付けて相談すると、解決策を提案してくれます。</p>
+                    <div class="alert alert-info">
+                        <strong>ChatGPTへの質問例：</strong><br>
+                        「以下のエラーが出ました。原因と解決方法を教えてください。<br>
+                        [エラーメッセージをここに貼り付け]<br>
+                        [関連するコードをここに貼り付け]」
+                    </div>
+                </div>
+            </section>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ</h2>
+                <div class="card">
+                    <p>
+                        エラーは誰にでも起こるものです。大切なのは、<strong>エラーメッセージを読む習慣</strong>と、<strong>原因を論理的に追跡する姿勢</strong>です。
+                    </p>
+                    <p>
+                        このガイドをブックマークして、困ったときにいつでも参照できるようにしておきましょう。
+                    </p>
+                    <div class="alert alert-success">
+                        <strong>💡 覚えておくべき3つのこと：</strong><br>
+                        1. エラーメッセージは敵ではなく、解決へのヒント<br>
+                        2. 小さく変更して、すぐ確認する習慣が大切<br>
+                        3. 困ったらコミュニティやAIに頼るのも立派なスキル
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/toc.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>非エンジニア向け便利ツール集 - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <div id="announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <header>
+        <div class="container">
+            <h1>非エンジニア向け便利ツール集</h1>
+            <p>コードを書かずにWebサイトを作る・運営するための実用ツール集</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html" class="active" aria-current="page">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="container">
+            <aside class="toc-sidebar" id="tocSidebar" aria-label="ページ目次">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ" aria-expanded="true" aria-controls="tocNav">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav" aria-label="目次リスト"></nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
+
+                <p>
+                    このページでは、非エンジニアの方でも使える便利なツールを紹介します。
+                    コードを一切書かずにWebサイトを作れるノーコードツールから、
+                    文書作成に便利なMarkdown、画像編集ツールまで、実務で役立つツールを厳選しました。
+                </p>
+
+                <div class="alert alert-info">
+                    <strong>💡 対象読者：</strong>
+                    <ul>
+                        <li>プログラミング経験がない方</li>
+                        <li>手軽にWebサイトを作りたい方</li>
+                        <li>業務でWebサイト運営を担当している方</li>
+                        <li>効率的なツールを探している方</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="nocode" aria-labelledby="nocode-heading">
+                <h2 id="nocode-heading">ノーコードWebサイト作成ツール</h2>
+
+                <p>
+                    ノーコードツールを使えば、コードを書かずに本格的なWebサイトが作れます。
+                    ドラッグ&amp;ドロップで直感的に操作でき、最短1日で公開可能です。
+                </p>
+
+                <h3>ノーコードツールとは？</h3>
+                <div class="card">
+                    <h4>💭 ノーコードって何？</h4>
+                    <p>
+                        <strong>ノーコード（No-Code）</strong>とは、プログラミングコードを書かずに、
+                        視覚的な操作（ドラッグ&amp;ドロップ、クリック、設定）だけで
+                        アプリケーションやWebサイトを作成できる仕組みのことです。
+                    </p>
+                    <p>
+                        レゴブロックを組み立てるように、パーツを配置していくイメージです。
+                    </p>
+                </div>
+
+                <h3>おすすめノーコードツール（2025年版）</h3>
+
+                <div class="card">
+                    <h3>1. STUDIO（スタジオ）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://studio.design" target="_blank">https://studio.design</a></p>
+                    <p><strong>料金：</strong> 無料〜月980円</p>
+                    <p><strong>おすすめ度：</strong> ★★★★★</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>完全日本語対応</strong> - 国産ツールなので日本語サポートが充実</li>
+                        <li><strong>美しいデザイン</strong> - デザイナー向けに作られたツールで、プロ級のサイトが作れる</li>
+                        <li><strong>レスポンシブ自動調整</strong> - スマホ・タブレット対応が簡単</li>
+                        <li><strong>SEO対策機能</strong> - メタデータ編集、構造化データに対応</li>
+                        <li><strong>CMS機能</strong> - ブログやニュースサイトも簡単に構築</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>日本語で使いたい</li>
+                        <li>デザインにこだわりたい</li>
+                        <li>ポートフォリオサイトやコーポレートサイトを作りたい</li>
+                    </ul>
+
+                    <h4>料金プラン</h4>
+                    <ul>
+                        <li><strong>Free:</strong> 無料（STUDIOのロゴが表示される）</li>
+                        <li><strong>Starter:</strong> 月980円（独自ドメイン使用可能）</li>
+                        <li><strong>CMS:</strong> 月2,480円（ブログ・CMS機能）</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>2. Wix（ウィックス）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://ja.wix.com" target="_blank">https://ja.wix.com</a></p>
+                    <p><strong>料金：</strong> 無料〜月1,800円</p>
+                    <p><strong>おすすめ度：</strong> ★★★★★</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>世界No.1シェア</strong> - 世界中で2億人以上が利用</li>
+                        <li><strong>900種類以上のテンプレート</strong> - あらゆる業種に対応</li>
+                        <li><strong>Wix AI</strong> - AIが自動でサイトをデザイン</li>
+                        <li><strong>アプリマーケット</strong> - 300以上のアプリで機能拡張</li>
+                        <li><strong>Eコマース機能</strong> - ネットショップも簡単に開設</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>豊富なテンプレートから選びたい</li>
+                        <li>ネットショップを開きたい</li>
+                        <li>世界標準のツールを使いたい</li>
+                    </ul>
+
+                    <h4>料金プラン</h4>
+                    <ul>
+                        <li><strong>無料プラン:</strong> Wixの広告が表示される</li>
+                        <li><strong>ベーシック:</strong> 月900円（独自ドメイン、広告非表示）</li>
+                        <li><strong>アドバンス:</strong> 月1,500円（アクセス解析付き）</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>3. Webflow（ウェブフロー）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://webflow.com" target="_blank">https://webflow.com</a></p>
+                    <p><strong>料金：</strong> 無料〜月$14</p>
+                    <p><strong>おすすめ度：</strong> ★★★★☆</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>デザインの自由度が高い</strong> - CSSを視覚的に操作できる</li>
+                        <li><strong>アニメーションが簡単</strong> - 高度なアニメーションをノーコードで実装</li>
+                        <li><strong>エクスポート可能</strong> - HTMLコードをエクスポートして自分でホスティングも可能</li>
+                        <li><strong>CMS機能</strong> - 強力なCMS機能でダイナミックなサイトを構築</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>デザインの細部までこだわりたい</li>
+                        <li>アニメーションを使いたい</li>
+                        <li>プロフェッショナルなサイトを作りたい</li>
+                    </ul>
+
+                    <h4>注意点</h4>
+                    <p>英語のツールなので、日本語情報は少なめ。学習コストは高めです。</p>
+                </div>
+
+                <div class="card">
+                    <h3>4. ペライチ</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://peraichi.com" target="_blank">https://peraichi.com</a></p>
+                    <p><strong>料金：</strong> 無料〜月3,940円</p>
+                    <p><strong>おすすめ度：</strong> ★★★★☆</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>1ページサイトに特化</strong> - LP（ランディングページ）作成に最適</li>
+                        <li><strong>超簡単</strong> - 最短30分でページ作成可能</li>
+                        <li><strong>日本製</strong> - 完全日本語対応、日本のビジネスに最適化</li>
+                        <li><strong>決済機能</strong> - オンライン決済も簡単に導入</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>とにかく簡単に作りたい</li>
+                        <li>1ページのランディングページが欲しい</li>
+                        <li>イベントページや商品紹介ページを作りたい</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>5. WordPress + Elementor</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://wordpress.org" target="_blank">https://wordpress.org</a></p>
+                    <p><strong>料金：</strong> 無料（レンタルサーバー代は別途）</p>
+                    <p><strong>おすすめ度：</strong> ★★★★☆</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>世界No.1 CMS</strong> - Web全体の43%がWordPress製</li>
+                        <li><strong>拡張性が高い</strong> - 60,000種類以上のプラグイン</li>
+                        <li><strong>Elementorでノーコード化</strong> - ドラッグ&amp;ドロップでデザイン可能</li>
+                        <li><strong>SEOに強い</strong> - SEOプラグインが豊富</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>ブログやメディアサイトを作りたい</li>
+                        <li>将来的に複雑な機能を追加したい</li>
+                        <li>世界標準のツールを使いたい</li>
+                    </ul>
+
+                    <h4>注意点</h4>
+                    <p>レンタルサーバーが必要（月500円〜）。セキュリティ管理やアップデートは自分で行う必要があります。</p>
+                </div>
+
+                <h3>ノーコードツール比較表</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ツール</th>
+                            <th>料金</th>
+                            <th>難易度</th>
+                            <th>日本語</th>
+                            <th>おすすめ用途</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>STUDIO</strong></td>
+                            <td>無料〜月980円</td>
+                            <td>★★☆☆☆</td>
+                            <td>◎</td>
+                            <td>コーポレートサイト、ポートフォリオ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wix</strong></td>
+                            <td>無料〜月1,800円</td>
+                            <td>★☆☆☆☆</td>
+                            <td>◎</td>
+                            <td>あらゆるサイト、ネットショップ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Webflow</strong></td>
+                            <td>無料〜$14/月</td>
+                            <td>★★★★☆</td>
+                            <td>△</td>
+                            <td>プロフェッショナルなサイト</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ペライチ</strong></td>
+                            <td>無料〜月3,940円</td>
+                            <td>★☆☆☆☆</td>
+                            <td>◎</td>
+                            <td>ランディングページ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WordPress</strong></td>
+                            <td>無料（サーバー代別）</td>
+                            <td>★★★☆☆</td>
+                            <td>◎</td>
+                            <td>ブログ、メディアサイト</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success">
+                    <strong>💡 選び方のコツ：</strong>
+                    <ul>
+                        <li><strong>とにかく簡単に:</strong> Wix、ペライチ</li>
+                        <li><strong>日本語重視:</strong> STUDIO、ペライチ</li>
+                        <li><strong>デザインこだわり:</strong> STUDIO、Webflow</li>
+                        <li><strong>ブログ・メディア:</strong> WordPress</li>
+                        <li><strong>ネットショップ:</strong> Wix、STUDIO（CMS）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="markdown" aria-labelledby="markdown-heading">
+                <h2 id="markdown-heading">Markdown（マークダウン）完全ガイド</h2>
+
+                <p>
+                    Markdownは、シンプルな記号を使って文書を装飾できる軽量マークアップ言語です。
+                    GitHubのREADME、Qiita、Zennなど、多くのサービスで使われています。
+                </p>
+
+                <h3>Markdownとは？</h3>
+                <div class="card">
+                    <h4>💭 Markdownって何？</h4>
+                    <p>
+                        <strong>Markdown（マークダウン）</strong>は、簡単な記号を使って文書を整形する書き方です。
+                        例えば、<code># 見出し</code> と書くだけで、大きな見出しになります。
+                    </p>
+                    <p>
+                        WordやGoogleドキュメントのように、ボタンをクリックして装飾する代わりに、
+                        テキストで記号を入力するだけで装飾できます。
+                    </p>
+                </div>
+
+                <h3>なぜMarkdownを使うの？</h3>
+                <ul>
+                    <li><strong>シンプル</strong> - 覚えることが少ない</li>
+                    <li><strong>プレーンテキスト</strong> - どのツールでも編集できる</li>
+                    <li><strong>バージョン管理に最適</strong> - Gitとの相性が良い</li>
+                    <li><strong>広く使われている</strong> - GitHub、Qiita、Notion、Slackなど</li>
+                    <li><strong>変換しやすい</strong> - HTML、PDF、Wordに簡単に変換可能</li>
+                </ul>
+
+                <h3>Markdown基本記法</h3>
+
+                <h4>見出し</h4>
+                <pre><code># 見出し1（最も大きい）
+## 見出し2
+### 見出し3
+#### 見出し4
+##### 見出し5
+###### 見出し6（最も小さい）</code></pre>
+
+                <h4>強調・太字・斜体</h4>
+                <pre><code>**太字（Bold）**
+*斜体（Italic）*
+***太字＋斜体***
+~~取り消し線~~</code></pre>
+                <p><strong>表示例：</strong></p>
+                <p><strong>太字（Bold）</strong><br>
+                <em>斜体（Italic）</em><br>
+                <strong><em>太字＋斜体</em></strong></p>
+
+                <h4>リスト</h4>
+                <pre><code>箇条書き（順序なし）:
+- アイテム1
+- アイテム2
+  - サブアイテム2-1
+  - サブアイテム2-2
+- アイテム3
+
+番号付きリスト:
+1. 最初
+2. 次
+3. 最後</code></pre>
+
+                <h4>リンク</h4>
+                <pre><code>[リンクテキスト](https://example.com)
+[Googleへのリンク](https://google.com)</code></pre>
+
+                <h4>画像</h4>
+                <pre><code>![代替テキスト](画像のURL)
+![ロゴ](https://example.com/logo.png)</code></pre>
+
+                <h4>コード</h4>
+                <pre><code>インラインコード: `const x = 10;`
+
+コードブロック:
+```javascript
+function hello() {
+  console.log("Hello, World!");
+}
+```</code></pre>
+
+                <h4>引用</h4>
+                <pre><code>&gt; これは引用です。
+&gt; 複数行にもできます。</code></pre>
+
+                <h4>水平線</h4>
+                <pre><code>---
+または
+***</code></pre>
+
+                <h4>表（テーブル）</h4>
+                <pre><code>| 列1 | 列2 | 列3 |
+|-----|-----|-----|
+| データ1 | データ2 | データ3 |
+| データ4 | データ5 | データ6 |</code></pre>
+
+                <h4>チェックリスト</h4>
+                <pre><code>- [ ] 未完了のタスク
+- [x] 完了したタスク
+- [ ] もう一つのタスク</code></pre>
+
+                <h3>Markdownエディタおすすめ</h3>
+
+                <div class="card">
+                    <h4>1. Obsidian（オブシディアン）</h4>
+                    <p><strong>公式サイト：</strong> <a href="https://obsidian.md" target="_blank">https://obsidian.md</a></p>
+                    <p><strong>料金：</strong> 無料（個人利用）</p>
+                    <p>
+                        <strong>特徴：</strong>
+                        ノート同士をリンクで繋げる「第二の脳」アプリ。プラグインで機能拡張できる。
+                        Markdownで書いたメモを、知識のネットワークとして管理できます。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>2. Notion（ノーション）</h4>
+                    <p><strong>公式サイト：</strong> <a href="https://www.notion.so" target="_blank">https://www.notion.so</a></p>
+                    <p><strong>料金：</strong> 無料〜$8/月</p>
+                    <p>
+                        <strong>特徴：</strong>
+                        オールインワンのワークスペース。Markdownをサポートし、データベースやタスク管理も統合。
+                        チームでの共同作業に最適。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>3. Typora（タイポラ）</h4>
+                    <p><strong>公式サイト：</strong> <a href="https://typora.io" target="_blank">https://typora.io</a></p>
+                    <p><strong>料金：</strong> $14.99（買い切り）</p>
+                    <p>
+                        <strong>特徴：</strong>
+                        書いたそばから整形される「WYSIWYG（ウィジウィグ）」エディタ。
+                        シンプルで美しいデザイン。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>4. VS Code + Markdown Preview</h4>
+                    <p><strong>公式サイト：</strong> <a href="https://code.visualstudio.com" target="_blank">https://code.visualstudio.com</a></p>
+                    <p><strong>料金：</strong> 完全無料</p>
+                    <p>
+                        <strong>特徴：</strong>
+                        開発者に人気のエディタ。Markdown Preview機能が標準搭載。
+                        プログラミングも文書作成も一つのツールで完結。
+                    </p>
+                </div>
+
+                <h3>Markdown活用シーン</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>シーン</th>
+                            <th>活用例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub</strong></td>
+                            <td>README.md、Pull Requestの説明、Issueの報告</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ブログ</strong></td>
+                            <td>Qiita、Zenn、はてなブログなどの技術ブログ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ドキュメント</strong></td>
+                            <td>開発ドキュメント、マニュアル、仕様書</td>
+                        </tr>
+                        <tr>
+                            <td><strong>メモ</strong></td>
+                            <td>Obsidian、Notionでの個人メモ、議事録</td>
+                        </tr>
+                        <tr>
+                            <td><strong>チャット</strong></td>
+                            <td>Slack、Discord、Microsoft Teamsでの整形されたメッセージ</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul>
+                        <li>GitHubのREADME.mdは、プロジェクトの顔です。丁寧に書きましょう</li>
+                        <li>VSCodeなら、<code>Ctrl+Shift+V</code>（Mac: <code>Cmd+Shift+V</code>）でプレビュー表示</li>
+                        <li>Markdownは覚えることが少ないので、まず使ってみることが大事！</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="design-tools" aria-labelledby="design-tools-heading">
+                <h2 id="design-tools-heading">デザイン・画像編集ツール</h2>
+
+                <p>
+                    Webサイトに使う画像の作成・編集に便利なツールを紹介します。
+                </p>
+
+                <div class="card">
+                    <h3>1. Canva（キャンバ）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://www.canva.com" target="_blank">https://www.canva.com</a></p>
+                    <p><strong>料金：</strong> 無料〜月1,500円</p>
+                    <p><strong>おすすめ度：</strong> ★★★★★</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>超簡単</strong> - デザイン初心者でもプロ級のデザインが作れる</li>
+                        <li><strong>豊富なテンプレート</strong> - 100万点以上のテンプレート</li>
+                        <li><strong>日本語フォント豊富</strong> - 商用利用可能なフォントも多数</li>
+                        <li><strong>SNS画像に最適</strong> - Instagram、Twitter、YouTube用のサイズが用意済み</li>
+                        <li><strong>AIデザイン機能</strong> - テキストから画像生成、背景削除など</li>
+                    </ul>
+
+                    <h4>できること</h4>
+                    <ul>
+                        <li>ブログのアイキャッチ画像</li>
+                        <li>SNS投稿用の画像</li>
+                        <li>プレゼン資料</li>
+                        <li>ポスター、チラシ</li>
+                        <li>ロゴデザイン</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>2. Figma（フィグマ）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://www.figma.com" target="_blank">https://www.figma.com</a></p>
+                    <p><strong>料金：</strong> 無料〜$12/月</p>
+                    <p><strong>おすすめ度：</strong> ★★★★★</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>プロ向けデザインツール</strong> - 世界中のデザイナーが使用</li>
+                        <li><strong>ブラウザで動作</strong> - インストール不要</li>
+                        <li><strong>共同編集</strong> - チームでリアルタイムに編集可能</li>
+                        <li><strong>プロトタイプ作成</strong> - インタラクティブなモックアップが作れる</li>
+                        <li><strong>Google Stitch連携</strong> - AIでコード生成（本ガイドの<a href="stitch-workflow.html">Stitch活用</a>で解説）</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>Webサイトのワイヤーフレーム作成</li>
+                        <li>UIデザイン</li>
+                        <li>チームでデザイン共有</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>3. Photopea（フォトピー）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://www.photopea.com" target="_blank">https://www.photopea.com</a></p>
+                    <p><strong>料金：</strong> 無料（広告あり）〜$9/月</p>
+                    <p><strong>おすすめ度：</strong> ★★★★☆</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>Photoshop互換</strong> - PSDファイルも開ける無料ツール</li>
+                        <li><strong>ブラウザで動作</strong> - インストール不要</li>
+                        <li><strong>高機能</strong> - レイヤー、マスク、フィルターなど本格的な画像編集</li>
+                    </ul>
+
+                    <h4>こんな人におすすめ</h4>
+                    <ul>
+                        <li>写真の加工をしたい</li>
+                        <li>背景を削除したい</li>
+                        <li>Photoshopは高いけど、本格的な編集がしたい</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>4. Unsplash / Pexels（フリー写真素材）</h3>
+                    <p><strong>Unsplash：</strong> <a href="https://unsplash.com" target="_blank">https://unsplash.com</a></p>
+                    <p><strong>Pexels：</strong> <a href="https://www.pexels.com" target="_blank">https://www.pexels.com</a></p>
+                    <p><strong>料金：</strong> 完全無料</p>
+                    <p><strong>おすすめ度：</strong> ★★★★★</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>高品質な写真</strong> - プロが撮影した写真が無料</li>
+                        <li><strong>商用利用OK</strong> - クレジット表記不要</li>
+                        <li><strong>豊富なジャンル</strong> - ビジネス、自然、人物、テクノロジーなど</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="productivity" aria-labelledby="productivity-heading">
+                <h2 id="productivity-heading">その他の便利ツール</h2>
+
+                <div class="card">
+                    <h3>1. Notion AI</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://www.notion.so/product/ai" target="_blank">https://www.notion.so/product/ai</a></p>
+                    <p><strong>料金：</strong> $10/月（Notionとは別料金）</p>
+
+                    <h4>できること</h4>
+                    <ul>
+                        <li>文章の要約</li>
+                        <li>翻訳</li>
+                        <li>アイデアのブレインストーミング</li>
+                        <li>文章の改善・推敲</li>
+                        <li>表やリストの自動生成</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>2. Grammarly（グラマリー）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://www.grammarly.com" target="_blank">https://www.grammarly.com</a></p>
+                    <p><strong>料金：</strong> 無料〜$12/月</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>英文添削</strong> - スペル、文法、句読点をチェック</li>
+                        <li><strong>リアルタイム</strong> - 書きながら自動でチェック</li>
+                        <li><strong>トーン調整</strong> - フォーマル/カジュアルなど</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>3. Color Hunt / Coolors（カラーパレット）</h3>
+                    <p><strong>Color Hunt：</strong> <a href="https://colorhunt.co" target="_blank">https://colorhunt.co</a></p>
+                    <p><strong>Coolors：</strong> <a href="https://coolors.co" target="_blank">https://coolors.co</a></p>
+                    <p><strong>料金：</strong> 無料</p>
+
+                    <h4>特徴</h4>
+                    <ul>
+                        <li><strong>配色選びに便利</strong> - 美しい配色パレットを自動生成</li>
+                        <li><strong>エクスポート機能</strong> - CSSやSVGで出力可能</li>
+                        <li><strong>トレンド配色</strong> - 人気の配色をチェックできる</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>4. Google Analytics（アクセス解析）</h3>
+                    <p><strong>公式サイト：</strong> <a href="https://analytics.google.com" target="_blank">https://analytics.google.com</a></p>
+                    <p><strong>料金：</strong> 無料</p>
+
+                    <h4>できること</h4>
+                    <ul>
+                        <li>サイト訪問者数の確認</li>
+                        <li>どのページが人気か分析</li>
+                        <li>どこから来たか（検索エンジン、SNSなど）を確認</li>
+                        <li>ユーザーの行動を可視化</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="learning" aria-labelledby="learning-heading">
+                <h2 id="learning-heading">学習リソース</h2>
+
+                <h3>無料で学べるサイト</h3>
+
+                <div class="card">
+                    <h4>1. Progate（プロゲート）</h4>
+                    <p><strong>URL：</strong> <a href="https://prog-8.com" target="_blank">https://prog-8.com</a></p>
+                    <p>
+                        ブラウザでプログラミングを学習できるサービス。
+                        HTML、CSS、JavaScriptの基礎を無料で学べます。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>2. ドットインストール</h4>
+                    <p><strong>URL：</strong> <a href="https://dotinstall.com" target="_blank">https://dotinstall.com</a></p>
+                    <p>
+                        3分動画でプログラミングを学べる日本のサービス。
+                        初心者向けのレッスンが豊富。
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>3. MDN Web Docs</h4>
+                    <p><strong>URL：</strong> <a href="https://developer.mozilla.org/ja/" target="_blank">https://developer.mozilla.org/ja/</a></p>
+                    <p>
+                        Mozillaが提供する開発者向けドキュメント。
+                        HTML、CSS、JavaScriptのリファレンスとして最高品質。
+                    </p>
+                </div>
+            </section>
+
+            <section id="conclusion" aria-labelledby="conclusion-heading">
+                <h2 id="conclusion-heading">まとめ</h2>
+
+                <p>
+                    このページでは、非エンジニアの方でも使える便利なツールを紹介しました。
+                    ノーコードツールを使えば、コードを書かずに本格的なWebサイトが作れます。
+                    Markdownを覚えれば、効率的に文書作成ができます。
+                </p>
+
+                <div class="alert alert-success">
+                    <strong>🎯 おすすめの学習ステップ：</strong>
+                    <ol>
+                        <li><strong>まずはノーコードツールで作ってみる</strong> - WixやSTUDIOで簡単なサイトを作成</li>
+                        <li><strong>Markdownを使ってみる</strong> - GitHubのREADMEやNotionで実践</li>
+                        <li><strong>Canvaでデザインに慣れる</strong> - 画像作成で視覚的なセンスを磨く</li>
+                        <li><strong>少しずつコードにも触れる</strong> - ProgateやドットインストールでHTML/CSSの基礎を学ぶ</li>
+                        <li><strong>CursorやChatGPTを活用</strong> - AIの力を借りて、より高度なサイトに挑戦</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>💭 最後に</h3>
+                    <p>
+                        ツールはあくまで手段です。大切なのは、<strong>何を伝えたいか</strong>、
+                        <strong>誰に届けたいか</strong>です。
+                    </p>
+                    <p>
+                        最初は完璧を目指さず、まず作ってみる。そして少しずつ改善していく。
+                        その繰り返しが、あなたのスキルを確実に向上させます。
+                    </p>
+                    <p>
+                        このガイドが、あなたのWeb制作の第一歩を後押しできれば幸いです。
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド</p>
+        </div>
+    </footer>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+</body>
+</html>

@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>基礎知識編 - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 
 <body>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- Live region announcer for dynamic content -->
+    <div id="announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
     <header>
         <div class="container">
             <h1>基礎知識編：各ツールの基本概念</h1>
@@ -17,31 +25,125 @@
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="../index.html">ホーム</a></li>
-                <li><a href="setup.html">準備編</a></li>
-                <li><a href="basics.html" class="active">基礎知識編</a></li>
-                <li><a href="practice.html">実践編</a></li>
-                <li><a href="ai-design.html">AIデザイン</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-            </ul>
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"
+                    aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html" class="active" aria-current="page">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;"
+                    aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                        focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         <div class="container">
-            <section>
-                <h2>このページで学ぶこと</h2>
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar" aria-label="ページ目次">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ" aria-expanded="true"
+                        aria-controls="tocNav">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav" aria-label="目次リスト">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページで学ぶこと</h2>
                 <p>
                     このページでは、GitHub、Cursor、CodexCLIの基本的な概念と使い方を説明します。
                     専門用語もわかりやすく解説しているので、初心者の方でも理解できるはずです。
                 </p>
             </section>
 
-            <section>
-                <h2>1. GitとGitHubとは</h2>
+            <section id="git-github" aria-labelledby="git-github-heading">
+                <h2 id="git-github-heading">1. GitとGitHubとは</h2>
+
+                <div class="alert alert-success" style="margin-bottom: 1.5rem;">
+                    <strong>🎯 もっと詳しく学びたい方へ：</strong><br>
+                    GitとGitHubについて、対話形式でさらにわかりやすく解説した<a href="git-github-guide.html"
+                        style="color: #2563eb; font-weight: bold;">「対話で学ぶGit/GitHub入門」</a>もご用意しています！
+                    初心者がつまずきやすい「コミット」「プッシュ」「ブランチ」などを、タロウさんと先輩の会話を通じて楽しく学べます。
+                </div>
 
                 <h3>Gitとは</h3>
                 <p>
@@ -113,9 +215,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>2. AIエディタ（Cursor / Antigravity）とは</h2>
-
+            <section id="cursor" aria-labelledby="cursor-heading">
+                <h2 id="cursor-heading">2. AIエディタ（Cursor / Antigravity）とは</h2>
                 <h3>Cursorの特徴</h3>
                 <p>
                     Cursorは、AI機能が搭載されたコードエディタです。
@@ -222,9 +323,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>3. CodexCLIとは</h2>
-
+            <section id="codexcli" aria-labelledby="codexcli-heading">
+                <h2 id="codexcli-heading">3. CodexCLIとは</h2>
                 <h3>CodexCLIの役割</h3>
                 <p>
                     CodexCLIは、コマンドライン（ターミナル）からGitHubやGitの操作を行うためのツールです。
@@ -287,9 +387,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>4. 基本的な用語集</h2>
-
+            <section id="terminology" aria-labelledby="terminology-heading">
+                <h2 id="terminology-heading">4. 基本的な用語集</h2>
                 <div class="card">
                     <h3>Webサイト関連</h3>
                     <table>
@@ -355,8 +454,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>5. 静的なHPと動的なHPの違い</h2>
+            <section id="static-dynamic" aria-labelledby="static-dynamic-heading">
+                <h2 id="static-dynamic-heading">5. 静的なHPと動的なHPの違い</h2>
 
                 <h3>静的サイトとは</h3>
                 <p>
@@ -417,8 +516,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>6. PHPについて</h2>
+            <section id="php" aria-labelledby="php-heading">
+                <h2 id="php-heading">6. PHPについて</h2>
 
                 <h3>PHPとは</h3>
                 <p>
@@ -456,13 +555,13 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </p>
 
                 <div class="alert alert-info">
-                    <strong>初心者へのアドバイス：</strong> 静的サイトを作る場合は、PHPの知識は不要です。
+                    <strong>初心者へのアドバイス：：</strong> 静的サイトを作る場合は、PHPの知識は不要です。
                     お問い合わせフォームやログイン機能など、より高度な機能が必要になったときに学び始めれば十分です。
                 </div>
             </section>
 
-            <section>
-                <h2>7. Reactについて</h2>
+            <section id="react" aria-labelledby="react-heading">
+                <h2 id="react-heading">7. Reactについて</h2>
 
                 <h3>Reactとは</h3>
                 <p>
@@ -508,239 +607,127 @@ echo "今日は " . date("Y年m月d日") . " です";
         &lt;/div&gt;
     );
 }</code></pre>
-                </div>
-
-                <h3>Reactが使われる場面</h3>
-                <ul>
-                    <li>Facebook、Instagram、Netflix、Airbnbなどの大規模サービス</li>
-                    <li>複雑なUI操作が必要なアプリケーション</li>
-                    <li>シングルページアプリケーション（SPA）</li>
-                    <li>リアルタイムで更新されるダッシュボード</li>
-                </ul>
-
-                <div class="alert alert-info">
-                    <strong>初心者へのアドバイス：</strong> Reactは強力ですが、学習コストが高いです。
-                    まずは基本的なHTML/CSS/JavaScriptをマスターしてから、Reactに挑戦することをおすすめします。
-                    シンプルなWebサイトなら、Reactは不要です。
-                </div>
-            </section>
-
-            <section>
-                <h2>8. Next.jsについて</h2>
-
-                <h3>Next.jsとは</h3>
-                <p>
-                    Next.js（ネクストジェーエス）は、Reactをベースにしたフレームワークです。
-                    Vercel社が開発しており、現代のWeb開発で最も人気のあるフレームワークの一つです。
-                </p>
-
-                <h3>Reactとの違い</h3>
-                <p>
-                    ReactはJavaScriptライブラリですが、Next.jsはReactを使いやすくするための「フレームワーク」です。
-                    車に例えると、Reactがエンジンなら、Next.jsは完成した車のイメージです。
-                </p>
-
-                <h3>Next.jsの主な特徴</h3>
-                <ul>
-                    <li>
-                        <strong>サーバーサイドレンダリング（SSR）</strong><br>
-                        ページをサーバー側で生成してから送るので、SEOに強く、初期表示が速い
-                    </li>
-                    <li>
-                        <strong>静的サイト生成（SSG）</strong><br>
-                        ビルド時にHTMLを生成するので、超高速で表示できる
-                    </li>
-                    <li>
-                        <strong>ファイルベースルーティング</strong><br>
-                        ファイルを作るだけで、自動的にページのURLが決まる
-                    </li>
-                    <li>
-                        <strong>API Routes</strong><br>
-                        バックエンドのAPIも同じプロジェクト内で作れる
-                    </li>
-                    <li>
-                        <strong>画像最適化</strong><br>
-                        画像を自動で最適化してくれる
-                    </li>
-                </ul>
-
-                <h3>Next.jsが使われる場面</h3>
-                <ul>
-                    <li>企業のコーポレートサイト</li>
-                    <li>ECサイト</li>
-                    <li>ブログ・メディアサイト</li>
-                    <li>ダッシュボード・管理画面</li>
-                    <li>SEOが重要なWebアプリケーション</li>
-                </ul>
-
-                <h3>💭 会話形式で理解する</h3>
-                <div class="card">
-                    <p><strong>Q：「Next.jsって、普通のHTMLと何が違うの？」</strong></p>
-                    <p>A：大きく3つの違いがあります：</p>
-                    <ol>
-                        <li>
-                            <strong>動的な内容を表示しやすい</strong><br>
-                            HTMLは固定の内容ですが、Next.jsならデータベースから最新情報を取得して表示できます
-                        </li>
-                        <li>
-                            <strong>ページ遷移が超高速</strong><br>
-                            ページ全体をリロードせずに、必要な部分だけを更新します
-                        </li>
-                        <li>
-                            <strong>開発効率が高い</strong><br>
-                            コンポーネントを再利用できるので、同じコードを何度も書かなくて済みます
-                        </li>
-                    </ol>
-                </div>
-
-                <div class="card">
-                    <p><strong>Q：「いつNext.jsを使うべき？」</strong></p>
-                    <p>A：以下のような場合にNext.jsを検討しましょう：</p>
-                    <ul>
-                        <li>✅ ページ数が多い（10ページ以上）</li>
-                        <li>✅ SEO（検索エンジン最適化）が重要</li>
-                        <li>✅ データベースと連携したい</li>
-                        <li>✅ 会員機能やログインが必要</li>
-                        <li>✅ 将来的に拡張する予定がある</li>
-                    </ul>
-                    <p>逆に、シンプルな会社紹介ページなら、普通のHTMLで十分です。</p>
-                </div>
-
-                <div class="alert alert-info">
-                    <strong>使い分けのポイント：</strong> ランディングページや簡単な紹介ページは静的HTML、
-                    本格的なWebアプリケーションやSEOが重要なサイトはNext.jsを検討しましょう。
-                </div>
-            </section>
-
-            <section>
-                <h2>9. Supabaseについて</h2>
-
-                <h3>Supabaseとは</h3>
-                <p>
-                    Supabase（スーパーベース）は、「オープンソース版Firebase」と呼ばれる、
-                    バックエンドサービス（BaaS: Backend as a Service）です。
-                </p>
-                <p>
-                    簡単に言うと、<strong>「サーバーやデータベースを自分で用意しなくても、
-                        会員登録やデータ保存などの機能が使えるサービス」</strong>です。
-                </p>
-
-                <h3>Supabaseの主な機能</h3>
-                <ul>
-                    <li>
-                        <strong>データベース（PostgreSQL）</strong><br>
-                        データを保存・管理できます。SQLを書かなくても、管理画面から操作できます
-                    </li>
-                    <li>
-                        <strong>認証機能</strong><br>
-                        ユーザー登録、ログイン、パスワードリセットなどが簡単に実装できます
-                    </li>
-                    <li>
-                        <strong>ストレージ</strong><br>
-                        画像やファイルをアップロードして保存できます
-                    </li>
-                    <li>
-                        <strong>リアルタイム機能</strong><br>
-                        データが更新されたら、自動的に画面に反映されます（チャットアプリなどに便利）
-                    </li>
-                    <li>
-                        <strong>API自動生成</strong><br>
-                        データベースのテーブルを作ると、自動的にAPIが生成されます
-                    </li>
-                </ul>
-
-                <h3>なぜSupabaseが人気なのか</h3>
-                <ul>
-                    <li>無料枠が充実している（個人プロジェクトなら無料で十分）</li>
-                    <li>設定が簡単（数分で使い始められる）</li>
-                    <li>PostgreSQLを使っているので、後で移行しやすい</li>
-                    <li>オープンソースなので、自前サーバーでも動かせる</li>
-                </ul>
-
-                <h3>Supabaseが使われる場面</h3>
-                <ul>
-                    <li>会員制サイト（ユーザー登録・ログイン機能）</li>
-                    <li>ブログ・CMS（記事の保存・管理）</li>
-                    <li>SNS・コミュニティサイト</li>
-                    <li>タスク管理アプリ</li>
-                    <li>予約システム</li>
-                </ul>
-
-                <h3>💭 会話形式で理解する</h3>
-                <div class="card">
-                    <p><strong>Q：「Supabaseって何がすごいの？自分でサーバー立てるのと何が違う？」</strong></p>
-                    <p>A：大きな違いは「手間」です：</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>項目</th>
-                                <th>自前サーバー</th>
-                                <th>Supabase</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>初期設定</td>
-                                <td>数日〜数週間</td>
-                                <td>数分</td>
-                            </tr>
-                            <tr>
-                                <td>サーバー管理</td>
-                                <td>自分で管理</td>
-                                <td>不要</td>
-                            </tr>
-                            <tr>
-                                <td>セキュリティ</td>
-                                <td>自分で設定</td>
-                                <td>自動で対応</td>
-                            </tr>
-                            <tr>
-                                <td>スケーリング</td>
-                                <td>手動</td>
-                                <td>自動</td>
-                            </tr>
-                            <tr>
-                                <td>費用</td>
-                                <td>固定費</td>
-                                <td>従量課金（無料枠あり）</td>
-                            </tr>
-                        </tbody>
-                    </table>
                     <p>
-                        つまり、Supabaseを使えば「開発に集中できる」というわけです。
+                        簡単に言うと、<strong>「サーバーやデータベースを自分で用意しなくても、
+                            会員登録やデータ保存などの機能が使えるサービス」</strong>です。
                     </p>
-                </div>
 
-                <div class="card">
-                    <p><strong>Q：「Next.jsとSupabaseを組み合わせると何ができる？」</strong></p>
-                    <p>A：最強の組み合わせです！例えば：</p>
+                    <h3>Supabaseの主な機能</h3>
                     <ul>
                         <li>
-                            <strong>ブログシステム</strong><br>
-                            Next.jsでフロントエンド、Supabaseで記事データを保存
+                            <strong>データベース（PostgreSQL）</strong><br>
+                            データを保存・管理できます。SQLを書かなくても、管理画面から操作できます
                         </li>
                         <li>
-                            <strong>会員制サイト</strong><br>
-                            Supabaseの認証機能で会員管理、Next.jsでページ表示
+                            <strong>認証機能</strong><br>
+                            ユーザー登録、ログイン、パスワードリセットなどが簡単に実装できます
                         </li>
                         <li>
-                            <strong>リアルタイムダッシュボード</strong><br>
-                            データが更新されたら、自動的に画面に反映
+                            <strong>ストレージ</strong><br>
+                            画像やファイルをアップロードして保存できます
+                        </li>
+                        <li>
+                            <strong>リアルタイム機能</strong><br>
+                            データが更新されたら、自動的に画面に反映されます（チャットアプリなどに便利）
+                        </li>
+                        <li>
+                            <strong>API自動生成</strong><br>
+                            データベースのテーブルを作ると、自動的にAPIが生成されます
                         </li>
                     </ul>
-                    <p>
-                        この2つを組み合わせれば、<strong>本格的なWebアプリケーションが短期間で作れます</strong>。
-                    </p>
-                </div>
 
-                <div class="alert alert-success">
-                    <strong>活用例：</strong> 管理画面やWebアプリケーションを作る際に、Next.js + Supabaseの組み合わせは非常に強力です。
-                    開発期間を大幅に短縮できます。
-                </div>
+                    <h3>なぜSupabaseが人気なのか</h3>
+                    <ul>
+                        <li>無料枠が充実している（個人プロジェクトなら無料で十分）</li>
+                        <li>設定が簡単（数分で使い始められる）</li>
+                        <li>PostgreSQLを使っているので、後で移行しやすい</li>
+                        <li>オープンソースなので、自前サーバーでも動かせる</li>
+                    </ul>
+
+                    <h3>Supabaseが使われる場面</h3>
+                    <ul>
+                        <li>会員制サイト（ユーザー登録・ログイン機能）</li>
+                        <li>ブログ・CMS（記事の保存・管理）</li>
+                        <li>SNS・コミュニティサイト</li>
+                        <li>タスク管理アプリ</li>
+                        <li>予約システム</li>
+                    </ul>
+
+                    <h3>💭 会話形式で理解する</h3>
+                    <div class="card">
+                        <p><strong>Q：「Supabaseって何がすごいの？自分でサーバー立てるのと何が違う？」</strong></p>
+                        <p>A：大きな違いは「手間」です：</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>項目</th>
+                                    <th>自前サーバー</th>
+                                    <th>Supabase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>初期設定</td>
+                                    <td>数日〜数週間</td>
+                                    <td>数分</td>
+                                </tr>
+                                <tr>
+                                    <td>サーバー管理</td>
+                                    <td>自分で管理</td>
+                                    <td>不要</td>
+                                </tr>
+                                <tr>
+                                    <td>セキュリティ</td>
+                                    <td>自分で設定</td>
+                                    <td>自動で対応</td>
+                                </tr>
+                                <tr>
+                                    <td>スケーリング</td>
+                                    <td>手動</td>
+                                    <td>自動</td>
+                                </tr>
+                                <tr>
+                                    <td>費用</td>
+                                    <td>固定費</td>
+                                    <td>従量課金（無料枠あり）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            つまり、Supabaseを使えば「開発に集中できる」というわけです。
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <p><strong>Q：「Next.jsとSupabaseを組み合わせると何ができる？」</strong></p>
+                        <p>A：最強の組み合わせです！例えば：</p>
+                        <ul>
+                            <li>
+                                <strong>ブログシステム</strong><br>
+                                Next.jsでフロントエンド、Supabaseで記事データを保存
+                            </li>
+                            <li>
+                                <strong>会員制サイト</strong><br>
+                                Supabaseの認証機能で会員管理、Next.jsでページ表示
+                            </li>
+                            <li>
+                                <strong>リアルタイムダッシュボード</strong><br>
+                                データが更新されたら、自動的に画面に反映
+                            </li>
+                        </ul>
+                        <p>
+                            この2つを組み合わせれば、<strong>本格的なWebアプリケーションが短期間で作れます</strong>。
+                        </p>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>活用例：</strong> 管理画面やWebアプリケーションを作る際に、Next.js + Supabaseの組み合わせは非常に強力です。
+                        開発期間を大幅に短縮できます。
+                    </div>
             </section>
 
-            <section>
-                <h2>10. データベースが必要な場面</h2>
+            <section id="database" aria-labelledby="database-heading">
+                <h2 id="database-heading">10. データベースが必要な場面</h2>
 
                 <h3>データベースとは</h3>
                 <p>
@@ -863,8 +850,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>9. 3つのツールの連携</h2>
+            <section id="tool-integration" aria-labelledby="tool-integration-heading">
+                <h2 id="tool-integration-heading">9. 3つのツールの連携</h2>
                 <p>
                     GitHub、Cursor、CodexCLIは、それぞれ異なる役割を持っていますが、
                     組み合わせて使うことで、効率的にWebサイトを作成・管理できます。
@@ -898,8 +885,8 @@ echo "今日は " . date("Y年m月d日") . " です";
                 </div>
             </section>
 
-            <section>
-                <h2>11. まとめ</h2>
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">11. まとめ</h2>
                 <p>
                     このページでは、以下のことを学びました：
                 </p>
@@ -924,9 +911,61 @@ echo "今日は " . date("Y年m月d日") . " です";
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
         </div>
     </footer>
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal" role="dialog" aria-labelledby="search-modal-title" aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-hidden="true"></div>
+        <div class="search-modal-content">
+            <h2 id="search-modal-title" class="sr-only">サイト内検索</h2>
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput"
+                    autocomplete="off" aria-label="検索キーワード" aria-controls="searchResults">
+                <kbd class="search-shortcut" aria-label="閉じる" role="button">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults" role="listbox" aria-label="検索結果">
+                <div class="search-empty" role="status">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips" aria-label="キーボード操作ガイド">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+    <script src="../js/install.js"></script>
+
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>

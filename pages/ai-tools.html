@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Cursor以外のAI IDE・Codex CLI以外のAI CLIツール完全ガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>AIツール大全：IDE編＆CLI編</h1>
+            <p>Cursor以外のAI IDE、Codex CLI以外のAI CLIツールを徹底解説！</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html" class="active" aria-current="page">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
+                <p>
+                    「Cursorは聞いたことあるけど、他にどんなAI IDEがあるの？」「ターミナルで使えるAIツールって何？」
+                    そんな疑問に、初心者の<strong>タロウさん</strong>とベテランエンジニアの<strong>先輩</strong>の対話を通じて答えていきます。
+                </p>
+                <div class="alert alert-info">
+                    <strong>登場人物：</strong><br>
+                    <strong>タロウ：</strong>プログラミング初心者。AIツールに興味津々<br>
+                    <strong>先輩：</strong>最新のAIツールに詳しいベテランエンジニア
+                </div>
+                <div class="alert alert-success">
+                    <strong>2025年最新情報：</strong> このページは2025年1月時点の最新情報に基づいています。
+                    AIツールは日々進化しているので、公式サイトで最新情報も確認してくださいね！
+                </div>
+            </section>
+
+            <section id="overview" aria-labelledby="overview-heading">
+                <h2 id="overview-heading">第1話：「Cursor以外にも選択肢があるの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、CursorっていうAI IDEを使ってるんですけど、他にも選択肢ってあるんですか？</p>
+
+                    <p><strong>先輩：</strong>おっ、いい質問だね！実は2025年現在、AI IDEの世界は<strong>戦国時代</strong>なんだ。
+                    毎月のように新しいツールが登場したり、既存のツールが大幅にアップデートされたりしてる。</p>
+
+                    <p><strong>タロウ：</strong>戦国時代...！そんなに競争が激しいんですか？</p>
+
+                    <p><strong>先輩：</strong>そうそう！Cursorが火をつけて、今では大きく分けて2つのカテゴリーがあるんだ：</p>
+                    <ul>
+                        <li><strong>📝 AI IDE</strong>：グラフィカルなエディタ（Cursor、Windsurf、GitHub Copilot、Zedなど）</li>
+                        <li><strong>⚡ AI CLI</strong>：ターミナルで使うツール（Claude Code、Aider、Gemini CLIなど）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>へぇ〜！CLI版もあるんですね！どう使い分けるんですか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！こんな感じで使い分けるといいよ：</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>タイプ</th>
+                                <th>向いている人</th>
+                                <th>メリット</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>AI IDE</strong></td>
+                                <td>初心者〜中級者、ビジュアル重視</td>
+                                <td>使いやすい、視覚的、リアルタイムプレビュー</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AI CLI</strong></td>
+                                <td>上級者、ターミナル派、自動化好き</td>
+                                <td>高速、軽量、スクリプト化可能</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあ、それぞれ詳しく教えてください！</p>
+
+                    <p><strong>先輩：</strong>OK！まずはAI IDE編から行こう！</p>
+                </div>
+            </section>
+
+            <section id="ai-ide" aria-labelledby="ai-ide-heading">
+                <h2 id="ai-ide-heading">第2話：AI IDE編 - Cursor以外の選択肢</h2>
+
+                <div class="card">
+                    <h3 id="windsurf">🌊 Windsurf - 新進気鋭の対抗馬</h3>
+
+                    <p><strong>タロウ：</strong>まず最初はどんなツールですか？</p>
+
+                    <p><strong>先輩：</strong>Cursorの最大のライバルと言われてる<strong>Windsurf</strong>だね！
+                    元々Codeiumっていう名前だったんだけど、2024年末にWindsurfとしてリブランドされたんだ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Windsurfの特徴：</strong>
+                        <ul>
+                            <li>✨ <strong>Cascadeフィーチャー</strong>：複数ファイルを横断してコード生成できる強力なエージェント機能</li>
+                            <li>🎨 <strong>洗練されたUI</strong>：CursorよりもApple風の美しいデザイン</li>
+                            <li>🧠 <strong>Claude 3.5 Sonnet搭載</strong>：Cursorと同じAIモデルを使用</li>
+                            <li>🆓 <strong>無料プランあり</strong>：基本機能は無料で使える</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>料金：</strong></p>
+                    <ul>
+                        <li>Free：無料（制限あり）</li>
+                        <li>Pro：$35/月</li>
+                        <li>Enterprise：カスタム価格</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>Cursorとほとんど同じなんですね！</p>
+
+                    <p><strong>先輩：</strong>そう。実は<strong>同じVS Codeベース</strong>で、<strong>同じAIモデル</strong>を使ってるから、
+                    違いは主にUI/UXと独自機能になるんだ。Cascadeは特に評判いいよ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="github-copilot">🐙 GitHub Copilot - 業界標準の安定感</h3>
+
+                    <p><strong>タロウ：</strong>次はどれですか？</p>
+
+                    <p><strong>先輩：</strong>これはもう知ってるかもね。<strong>GitHub Copilot</strong>！
+                    OpenAIとGitHubが作った、最も広く使われているAIコーディングアシスタントだよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>GitHub Copilotの特徴：</strong>
+                        <ul>
+                            <li>📊 <strong>圧倒的なシェア</strong>：最も多くの開発者が使用</li>
+                            <li>🔧 <strong>幅広いIDE対応</strong>：VS Code、Visual Studio、JetBrains、Neovimなど</li>
+                            <li>🤖 <strong>エージェントモード</strong>：複数ステップのタスクを自動実行</li>
+                            <li>💬 <strong>Copilot Chat</strong>：チャット形式でコード相談</li>
+                            <li>🔒 <strong>エンタープライズ対応</strong>：企業向けプランが充実</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>料金：</strong></p>
+                    <ul>
+                        <li>Free：50リクエスト/月、2,000補完/月</li>
+                        <li>Pro：$10/月（無制限）</li>
+                        <li>Pro+：$39/月（Claude Opus 4.1アクセス付き）</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>無料プランがあるのは嬉しいですね！でもCursorより安いのはなぜ？</p>
+
+                    <p><strong>先輩：</strong>良い質問！Copilotは<strong>GitHub/Microsoftのエコシステム</strong>に組み込まれてるから、
+                    囲い込み戦略の一環なんだ。将来的にはCopilotが業界標準になる可能性が高いって言われてるよ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="zed">⚡ Zed - 爆速エディタの革命児</h3>
+
+                    <p><strong>タロウ：</strong>次はどんなツールですか？</p>
+
+                    <p><strong>先輩：</strong>これは面白いよ！<strong>Zed</strong>っていう、<strong>Rustで一から書き直した</strong>超高速エディタなんだ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Zedの特徴：</strong>
+                        <ul>
+                            <li>🚀 <strong>圧倒的な速度</strong>：起動73MB、瞬時に立ち上がる</li>
+                            <li>🦀 <strong>Rust製</strong>：GPUシェーダーまで手作りの最適化</li>
+                            <li>👥 <strong>リアルタイム共同編集</strong>：Google Docs的な協働機能</li>
+                            <li>🤖 <strong>Agentic Editing</strong>：自然言語でコード編集</li>
+                            <li>🆓 <strong>完全オープンソース</strong>：MIT/Apache 2.0ライセンス</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>タロウ：</strong>え、完全無料なんですか！？</p>
+
+                    <p><strong>先輩：</strong>そう！Zed本体は完全無料。ただしAI機能を使うには、各AIプロバイダー（Anthropic、OpenAIなど）の
+                    APIキーが必要で、そっちの料金は別途かかるけどね。</p>
+
+                    <p><strong>先輩：</strong>Zedの魅力は<strong>「スピード」</strong>と<strong>「軽さ」</strong>。
+                    CursorやVS Codeが「重い」「遅い」と感じる人には最高の選択肢だよ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="codeium">🎁 Codeium - 最強の無料ツール</h3>
+
+                    <p><strong>タロウ：</strong>無料のツールってあるんですか？</p>
+
+                    <p><strong>先輩：</strong>あるよ！<strong>Codeium</strong>は、個人開発者向けには<strong>完全無料</strong>なんだ。
+                    実はWindsurfを作ってる会社が、IDE拡張機能として提供してるものだよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Codeiumの特徴：</strong>
+                        <ul>
+                            <li>🆓 <strong>完全無料</strong>：個人開発者は無制限で使える</li>
+                            <li>🌍 <strong>70以上の言語対応</strong>：JavaScript、Python、Java、Go、C++など</li>
+                            <li>🔌 <strong>40以上のIDE対応</strong>：VS Code、JetBrains、Jupyter Notebooksなど</li>
+                            <li>⚡ <strong>高速な補完</strong>：リアルタイムでコード補完</li>
+                            <li>💬 <strong>チャット機能</strong>：コードの説明や生成</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>料金：</strong></p>
+                    <ul>
+                        <li>Individual：完全無料</li>
+                        <li>Teams：カスタム価格</li>
+                        <li>Enterprise：カスタム価格</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>え、完全無料！？何か裏があるんじゃ...？</p>
+
+                    <p><strong>先輩：</strong>（笑）いやいや、ビジネスモデルがちゃんとあるんだ。
+                    個人開発者を無料で囲い込んで、その人が企業で「Codeium使いたい」って言ってくれるのを狙ってるんだよ。
+                    Slackとかと同じ戦略だね。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="tabnine">🔒 Tabnine - プライバシー最優先</h3>
+
+                    <p><strong>先輩：</strong>次は<strong>セキュリティ重視</strong>の企業向けツール、<strong>Tabnine</strong>を紹介するよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Tabnineの特徴：</strong>
+                        <ul>
+                            <li>🔐 <strong>ローカル実行可能</strong>：AIモデルを自分のマシンで動かせる</li>
+                            <li>🏢 <strong>エンタープライズ向け</strong>：金融、医療、政府系に強い</li>
+                            <li>📚 <strong>カスタム学習</strong>：自社のコードベースで学習できる</li>
+                            <li>🔒 <strong>コード漏洩ゼロ</strong>：外部にデータを送信しない</li>
+                            <li>✅ <strong>コンプライアンス対応</strong>：各種規制に準拠</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>料金：</strong></p>
+                    <ul>
+                        <li>Basic：無料（制限あり）</li>
+                        <li>Pro：$9/月</li>
+                        <li>Enterprise：$20/月〜</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>ローカルで動くってすごいですね！でもマシンスペック必要そう...</p>
+
+                    <p><strong>先輩：</strong>その通り！でも<strong>「絶対にコードを外部に送りたくない」</strong>という
+                    企業には必須の機能なんだ。銀行のシステムとか、医療記録を扱うアプリとかね。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="replit-ai">🌐 Replit AI - ブラウザで完結</h3>
+
+                    <p><strong>タロウ：</strong>インストール不要のツールってないんですか？</p>
+
+                    <p><strong>先輩：</strong>あるよ！<strong>Replit AI (Ghostwriter)</strong>は、<strong>ブラウザだけで完結</strong>する
+                    クラウドIDEなんだ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Replit AIの特徴：</strong>
+                        <ul>
+                            <li>☁️ <strong>完全クラウド</strong>：インストール不要、ブラウザだけでOK</li>
+                            <li>🎓 <strong>学習に最適</strong>：コードを書いてすぐ実行できる</li>
+                            <li>🤝 <strong>共有しやすい</strong>：URLだけで他人とシェア</li>
+                            <li>🚀 <strong>デプロイ簡単</strong>：ボタン一つで本番環境へ</li>
+                            <li>📚 <strong>豊富なテンプレート</strong>：すぐに始められる</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>タロウ：</strong>これは初心者に優しそうですね！</p>
+
+                    <p><strong>先輩：</strong>そうなんだ！<strong>「学習」と「実践」を同時にできる</strong>のがReplit最大の魅力。
+                    ただし、本格的な大規模開発にはちょっと力不足かもね。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="other-ides">🎯 その他の注目IDE</h3>
+
+                    <p><strong>先輩：</strong>他にも注目のツールがいくつかあるから、簡単に紹介するね！</p>
+
+                    <h4>💎 Cody by Sourcegraph</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：巨大なコードベース全体を理解できる</li>
+                        <li><strong>料金</strong>：Free / Pro $9/月 / Enterprise $19/月</li>
+                        <li><strong>向いている人</strong>：大規模プロジェクトで作業する人</li>
+                    </ul>
+
+                    <h4>🧪 Qodo (旧Codium)</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：コード品質とテスト生成に特化</li>
+                        <li><strong>料金</strong>：Free / Teams $30/月 / Enterprise $45/月</li>
+                        <li><strong>向いている人</strong>：テスト駆動開発をする人</li>
+                    </ul>
+
+                    <h4>☁️ Amazon Q Developer</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：AWS専門知識を持つAI、25以上の言語対応</li>
+                        <li><strong>料金</strong>：Free / Pro $19/月</li>
+                        <li><strong>向いている人</strong>：AWSをヘビーに使う人</li>
+                    </ul>
+
+                    <h4>🤖 Devin</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：ほぼ自律的に開発できるAIエージェント</li>
+                        <li><strong>料金</strong>：Core $20/月〜</li>
+                        <li><strong>向いている人</strong>：AI主導で開発したい人</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>わぁ、こんなにあるんですね！選ぶの大変そう...</p>
+
+                    <p><strong>先輩：</strong>大丈夫、後で選び方のポイントも教えるから！
+                    まずはCLI版も見てみよう。</p>
+                </div>
+            </section>
+
+            <section id="ai-cli" aria-labelledby="ai-cli-heading">
+                <h2 id="ai-cli-heading">第3話：AI CLI編 - ターミナルで使うAIツール</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>CLI版って、なんでわざわざターミナルで使うんですか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！CLI版には独自のメリットがあるんだ：</p>
+                    <ul>
+                        <li>⚡ <strong>超高速</strong>：GUIのオーバーヘッドがない</li>
+                        <li>🤖 <strong>自動化しやすい</strong>：シェルスクリプトに組み込める</li>
+                        <li>📦 <strong>軽量</strong>：メモリ使用量が少ない</li>
+                        <li>🔧 <strong>パイプライン</strong>：他のUnixコマンドと組み合わせられる</li>
+                        <li>🖥️ <strong>サーバー向き</strong>：GUIのないリモートサーバーで使える</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあ上級者向けって感じですね。</p>
+
+                    <p><strong>先輩：</strong>そうだね。ターミナルに慣れてる人には最高だよ。じゃあ主要なツールを見ていこう！</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="claude-code">🎯 Claude Code - Anthropicの本命</h3>
+
+                    <p><strong>先輩：</strong>まず最初は<strong>Claude Code</strong>！Anthropic（Claudeを作ってる会社）が
+                    2025年に正式リリースした、ターミナル常駐型のAIツールだよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Claude Codeの特徴：</strong>
+                        <ul>
+                            <li>🧠 <strong>Opus 4.1、Sonnet 4.5、Haiku 3.5</strong>：最新Claudeモデルを使用</li>
+                            <li>📁 <strong>プロジェクト全体理解</strong>：コードベース全体を読み込み可能</li>
+                            <li>🔄 <strong>Git統合</strong>：GitHub、GitLabと連携</li>
+                            <li>✏️ <strong>直接編集</strong>：ファイル編集、コマンド実行、コミット作成まで自動化</li>
+                            <li>🌐 <strong>WebSearch/WebFetch</strong>：Web検索や情報取得が可能</li>
+                            <li>💻 <strong>VS Code拡張</strong>：IDE内でも使える</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>使い方の例：</strong></p>
+                    <pre><code># インストール
+npm install -g @anthropic-ai/claude-code
+
+# 使用例
+claude-code "このバグを修正して"
+claude-code "新しい認証機能を追加して"
+claude-code "テストを書いて全部通るようにして"</code></pre>
+
+                    <p><strong>タロウ：</strong>自然言語で指示できるんですね！すごい！</p>
+
+                    <p><strong>先輩：</strong>そう！しかも<strong>500kトークン</strong>（約20万行のコード）まで
+                    コンテキストに含められるから、大規模プロジェクトでも使えるんだ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="aider">🤝 Aider - オープンソースの王道</h3>
+
+                    <p><strong>先輩：</strong>次は<strong>Aider</strong>。これはオープンソースで、
+                    <strong>最も成熟したAI CLIツール</strong>の一つだよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Aiderの特徴：</strong>
+                        <ul>
+                            <li>🆓 <strong>完全オープンソース</strong>：Apache 2.0ライセンス</li>
+                            <li>🧠 <strong>多モデル対応</strong>：Claude、GPT、DeepSeek、ローカルLLMなど</li>
+                            <li>🗺️ <strong>コードベースマップ</strong>：プロジェクト構造を自動理解</li>
+                            <li>🔄 <strong>Git自動コミット</strong>：変更を自動でコミット</li>
+                            <li>🖼️ <strong>画像対応</strong>：スクリーンショットや図も添付可能</li>
+                            <li>🎤 <strong>音声入力</strong>：声で指示を出せる</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>使い方の例：</strong></p>
+                    <pre><code># インストール
+pip install aider-chat
+
+# 使用例
+aider --model claude-3.5-sonnet
+aider --model gpt-4o
+aider --model deepseek/deepseek-chat  # 安価なモデル
+
+# 実際の会話
+> 認証機能を追加して
+> テストも書いて
+> コミットメッセージは英語で書いて</code></pre>
+
+                    <p><strong>タロウ：</strong>色々なモデルを選べるんですね！</p>
+
+                    <p><strong>先輩：</strong>そうなんだ！しかも<strong>ローカルのLLM</strong>（Ollamaなど）も使えるから、
+                    完全オフラインでも動作するんだよ。プライバシー重視の人にはベストな選択肢だね。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="gemini-cli">🔍 Gemini CLI - Googleの無料枠が魅力</h3>
+
+                    <p><strong>先輩：</strong>2025年6月にGoogleが正式発表したのが<strong>Gemini CLI</strong>だよ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Gemini CLIの特徴：</strong>
+                        <ul>
+                            <li>🆓 <strong>驚異の無料枠</strong>：1日1,000リクエスト、1分60リクエストまで無料</li>
+                            <li>🔍 <strong>Google検索統合</strong>：最新情報を直接検索できる</li>
+                            <li>📚 <strong>大容量コンテキスト</strong>：100万トークン以上対応</li>
+                            <li>🆓 <strong>オープンソース</strong>：Apache 2.0ライセンス</li>
+                            <li>⚡ <strong>高速</strong>：Google Cloud基盤で安定</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>使い方の例：</strong></p>
+                    <pre><code># インストール
+npm install -g @google/generative-ai-cli
+
+# または
+pip install google-generativeai-cli
+
+# 使用例
+gemini "この関数を最適化して"
+gemini --search "最新のReact 19の機能は？"</code></pre>
+
+                    <p><strong>タロウ：</strong>1日1,000リクエストも無料！？太っ腹ですね！</p>
+
+                    <p><strong>先輩：</strong>そう！Googleは<strong>Claude CodeやAiderに対抗</strong>するために、
+                    無料枠をかなり大きくしてるんだ。個人開発者なら実質無料で使い放題だよ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="continue">🔄 Continue - IDE拡張がCLIにも</h3>
+
+                    <p><strong>先輩：</strong><strong>Continue</strong>は、元々VS Code拡張として有名だったけど、
+                    CLIモードも提供してるんだ。</p>
+
+                    <div class="alert alert-info">
+                        <strong>Continueの特徴：</strong>
+                        <ul>
+                            <li>🆓 <strong>オープンソース</strong>：Apache 2.0ライセンス</li>
+                            <li>🔌 <strong>IDE⇔CLI両対応</strong>：VS Code、JetBrains、ターミナル全てで使える</li>
+                            <li>🤖 <strong>エージェントモード</strong>：自律的にタスクを実行</li>
+                            <li>🧩 <strong>カスタムブロック</strong>：Jira、Confluenceなど外部データ連携</li>
+                            <li>💬 <strong>セッション記憶</strong>：会話の文脈を保持</li>
+                        </ul>
+                    </div>
+
+                    <p><strong>タロウ：</strong>IDEでもCLIでも使えるって便利ですね！</p>
+
+                    <p><strong>先輩：</strong>そうだね！「普段はVS Codeで開発、でもサーバー上ではCLIで」みたいな
+                    使い分けができるのが強みだよ。</p>
+                </div>
+
+                <div class="card">
+                    <h3 id="other-clis">⚙️ その他の注目CLIツール</h3>
+
+                    <p><strong>先輩：</strong>他にも色々あるから、一気に紹介するね！</p>
+
+                    <h4>🔧 Qodo Command</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：テスト生成とコード品質チェックに特化</li>
+                        <li><strong>料金</strong>：無料 250クレ/月、有料 $30〜/月</li>
+                    </ul>
+
+                    <h4>💬 Shell-GPT (sgpt)</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：シェルコマンド生成に特化</li>
+                        <li><strong>料金</strong>：OpenAI APIの従量課金のみ</li>
+                    </ul>
+
+                    <h4>🦙 Ollama</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：完全ローカルでLLMを実行</li>
+                        <li><strong>料金</strong>：完全無料（自マシンで実行）</li>
+                    </ul>
+
+                    <h4>💬 AIChat</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：複数プロバイダー対応のCLIチャット</li>
+                        <li><strong>料金</strong>：各プロバイダーの料金に依存</li>
+                    </ul>
+
+                    <h4>☁️ Amazon Q Developer CLI</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：AWS専門知識を持つCLIエージェント</li>
+                        <li><strong>料金</strong>：Free / Pro $19/月</li>
+                    </ul>
+
+                    <h4>🚀 Kilo Code CLI</h4>
+                    <ul>
+                        <li><strong>特徴</strong>：専門エージェントを切り替え可能（Architect、Codeなど）</li>
+                        <li><strong>料金</strong>：要確認</li>
+                    </ul>
+
+                    <p><strong>タロウ：</strong>CLIだけでもこんなにあるんですね！</p>
+                </div>
+            </section>
+
+            <section id="comparison" aria-labelledby="comparison-heading">
+                <h2 id="comparison-heading">第4話：「結局どれを選べばいいの？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、たくさん教えてもらったんですけど...結局どれを選べばいいんですか？</p>
+
+                    <p><strong>先輩：</strong>（笑）そうだよね！じゃあ<strong>シーン別のおすすめ</strong>を教えるよ！</p>
+
+                    <h3>🎯 シーン別おすすめツール</h3>
+
+                    <h4>💼 ケース1：企業で使いたい（セキュリティ重視）</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Tabnine</strong>：ローカル実行可能、コード漏洩リスクゼロ</li>
+                            <li>🥈 <strong>GitHub Copilot Enterprise</strong>：エンタープライズ向け機能充実</li>
+                            <li>🥉 <strong>Cody Enterprise</strong>：巨大コードベース対応</li>
+                        </ul>
+                    </div>
+
+                    <h4>💰 ケース2：なるべく無料で使いたい</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Codeium</strong>：完全無料、制限なし</li>
+                            <li>🥈 <strong>Gemini CLI</strong>：1日1,000リクエストまで無料</li>
+                            <li>🥉 <strong>Aider + ローカルLLM</strong>：完全オフライン動作</li>
+                        </ul>
+                    </div>
+
+                    <h4>⚡ ケース3：とにかく速度重視</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Zed</strong>：Rust製、起動73MB、超高速</li>
+                            <li>🥈 <strong>Claude Code</strong>：CLI、軽量高速</li>
+                            <li>🥉 <strong>Windsurf</strong>：最適化されたUI</li>
+                        </ul>
+                    </div>
+
+                    <h4>🎓 ケース4：学習・教育用途</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Replit AI</strong>：ブラウザ完結、すぐ試せる</li>
+                            <li>🥈 <strong>GitHub Copilot Free</strong>：業界標準、学習に最適</li>
+                            <li>🥉 <strong>Codeium</strong>：無料で全機能使える</li>
+                        </ul>
+                    </div>
+
+                    <h4>🛠️ ケース5：自動化・スクリプト重視</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Claude Code</strong>：Git統合、自動コミット</li>
+                            <li>🥈 <strong>Aider</strong>：オープンソース、カスタマイズ自由</li>
+                            <li>🥉 <strong>Continue</strong>：IDE⇔CLI両対応</li>
+                        </ul>
+                    </div>
+
+                    <h4>☁️ ケース6：AWS中心の開発</h4>
+                    <div class="alert alert-success">
+                        <strong>おすすめ：</strong>
+                        <ul>
+                            <li>🥇 <strong>Amazon Q Developer</strong>：AWS専門知識</li>
+                            <li>🥈 <strong>GitHub Copilot</strong>：汎用性も高い</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📊 主要ツール比較表</h3>
+
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ツール</th>
+                                    <th>タイプ</th>
+                                    <th>無料プラン</th>
+                                    <th>有料プラン</th>
+                                    <th>特徴</th>
+                                    <th>向いている人</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Windsurf</strong></td>
+                                    <td>IDE</td>
+                                    <td>⭕ あり</td>
+                                    <td>$35/月</td>
+                                    <td>Cascade、美しいUI</td>
+                                    <td>Cursorから乗り換え検討中の人</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GitHub Copilot</strong></td>
+                                    <td>IDE</td>
+                                    <td>⭕ 制限あり</td>
+                                    <td>$10-39/月</td>
+                                    <td>業界標準、幅広い対応</td>
+                                    <td>万人向け、初心者〜上級者</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Zed</strong></td>
+                                    <td>IDE</td>
+                                    <td>⭕ 完全無料</td>
+                                    <td>API料金のみ</td>
+                                    <td>Rust製、超高速</td>
+                                    <td>速度重視、ミニマリスト</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Codeium</strong></td>
+                                    <td>IDE拡張</td>
+                                    <td>⭕ 完全無料</td>
+                                    <td>企業向け</td>
+                                    <td>70言語、40IDE対応</td>
+                                    <td>無料で試したい人</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tabnine</strong></td>
+                                    <td>IDE拡張</td>
+                                    <td>⭕ あり</td>
+                                    <td>$9-20/月</td>
+                                    <td>ローカル実行、プライバシー</td>
+                                    <td>企業、セキュリティ重視</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Replit AI</strong></td>
+                                    <td>Cloud IDE</td>
+                                    <td>⭕ あり</td>
+                                    <td>要確認</td>
+                                    <td>ブラウザ完結</td>
+                                    <td>学習者、すぐ試したい人</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Claude Code</strong></td>
+                                    <td>CLI</td>
+                                    <td>❌ なし</td>
+                                    <td>API料金</td>
+                                    <td>500kトークン、Git統合</td>
+                                    <td>ターミナル派、自動化好き</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Aider</strong></td>
+                                    <td>CLI</td>
+                                    <td>⭕ 完全無料</td>
+                                    <td>API料金</td>
+                                    <td>オープンソース、多モデル</td>
+                                    <td>カスタマイズ好き、上級者</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gemini CLI</strong></td>
+                                    <td>CLI</td>
+                                    <td>⭕ 1日1000件</td>
+                                    <td>従量課金</td>
+                                    <td>Google検索統合</td>
+                                    <td>無料枠で試したい人</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Continue</strong></td>
+                                    <td>IDE/CLI</td>
+                                    <td>⭕ 完全無料</td>
+                                    <td>API料金</td>
+                                    <td>IDE⇔CLI両対応</td>
+                                    <td>柔軟に使い分けたい人</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section id="choosing" aria-labelledby="choosing-heading">
+                <h2 id="choosing-heading">第5話：「選び方のポイント」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、まだ迷ってるんですけど...どう決めればいいですか？</p>
+
+                    <p><strong>先輩：</strong>OK！じゃあ<strong>フローチャート</strong>で考えてみよう！</p>
+
+                    <h3>🌳 選択フローチャート</h3>
+
+                    <pre><code>質問1: ターミナルは得意？
+├─ YES → CLI系を検討
+│   ├─ 無料がいい？
+│   │   ├─ YES → Gemini CLI または Aider
+│   │   └─ NO  → Claude Code
+│   └─ 自動化したい？
+│       ├─ YES → Aider または Claude Code
+│       └─ NO  → Continue
+│
+└─ NO → IDE系を検討
+    ├─ 予算は？
+    │   ├─ 無料がいい → Codeium または Zed
+    │   ├─ 月$10程度  → GitHub Copilot
+    │   └─ 月$35以上OK → Windsurf または Cursor
+    │
+    ├─ 重視するのは？
+    │   ├─ 速度      → Zed
+    │   ├─ 安定性    → GitHub Copilot
+    │   ├─ 最先端    → Windsurf
+    │   └─ セキュリティ → Tabnine
+    │
+    └─ 用途は？
+        ├─ 学習      → Replit AI または GitHub Copilot Free
+        ├─ 企業開発  → Tabnine または GitHub Copilot Enterprise
+        └─ 個人開発  → Codeium または Windsurf</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>💡 選ぶ時の重要ポイント</h3>
+
+                    <h4>1️⃣ 予算を明確にする</h4>
+                    <ul>
+                        <li><strong>完全無料</strong>：Codeium、Zed、Aider、Gemini CLI</li>
+                        <li><strong>月$10前後</strong>：GitHub Copilot、Tabnine</li>
+                        <li><strong>月$30以上</strong>：Windsurf、Qodo、Amazon Q</li>
+                    </ul>
+
+                    <h4>2️⃣ 使用環境を考える</h4>
+                    <ul>
+                        <li><strong>主にローカルマシン</strong> → IDE系がおすすめ</li>
+                        <li><strong>リモートサーバーが多い</strong> → CLI系がおすすめ</li>
+                        <li><strong>ブラウザだけで完結したい</strong> → Replit AI</li>
+                    </ul>
+
+                    <h4>3️⃣ セキュリティ要件</h4>
+                    <ul>
+                        <li><strong>コード漏洩が絶対NG</strong> → Tabnine（ローカル実行）</li>
+                        <li><strong>企業のポリシーに準拠</strong> → GitHub Copilot Enterprise</li>
+                        <li><strong>個人開発で気にしない</strong> → どれでもOK</li>
+                    </ul>
+
+                    <h4>4️⃣ スキルレベル</h4>
+                    <ul>
+                        <li><strong>初心者</strong> → GitHub Copilot、Codeium、Replit AI</li>
+                        <li><strong>中級者</strong> → Windsurf、Cursor、Zed</li>
+                        <li><strong>上級者</strong> → Claude Code、Aider、Continue</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🚀 先輩のおすすめ組み合わせ</h3>
+
+                    <p><strong>先輩：</strong>実は、<strong>複数のツールを使い分ける</strong>のが一番賢いんだ！</p>
+
+                    <h4>パターン1：バランス型</h4>
+                    <ul>
+                        <li><strong>メイン</strong>：GitHub Copilot（IDE作業）</li>
+                        <li><strong>サブ</strong>：Gemini CLI（サーバー作業）</li>
+                        <li><strong>コスト</strong>：月$10 + 無料</li>
+                    </ul>
+
+                    <h4>パターン2：コスト重視型</h4>
+                    <ul>
+                        <li><strong>メイン</strong>：Codeium（IDE作業）</li>
+                        <li><strong>サブ</strong>：Aider + ローカルLLM（CLI作業）</li>
+                        <li><strong>コスト</strong>：完全無料</li>
+                    </ul>
+
+                    <h4>パターン3：最先端型</h4>
+                    <ul>
+                        <li><strong>メイン</strong>：Windsurf（GUI作業）</li>
+                        <li><strong>サブ</strong>：Claude Code（自動化）</li>
+                        <li><strong>コスト</strong>：月$35 + API料金</li>
+                    </ul>
+
+                    <h4>パターン4：企業向け型</h4>
+                    <ul>
+                        <li><strong>メイン</strong>：Tabnine Enterprise（日常作業）</li>
+                        <li><strong>サブ</strong>：GitHub Copilot Enterprise（チーム共有）</li>
+                        <li><strong>コスト</strong>：要見積もり</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="future" aria-labelledby="future-heading">
+                <h2 id="future-heading">第6話：「2025年のAI開発ツールトレンド」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>今後、AI開発ツールってどうなっていくんですか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！2025年のトレンドを教えるよ。</p>
+
+                    <h3>🔮 2025年の重要トレンド</h3>
+
+                    <h4>1. エージェント型への進化</h4>
+                    <p>従来の「コード補完」から、<strong>「自律的に開発するエージェント」</strong>へ進化中。
+                    抽象的な指示から実装まで、AIが自動で行う<strong>「バイブコーディング」</strong>が新常識に。</p>
+                    <ul>
+                        <li>Windsurfの<strong>Cascade</strong></li>
+                        <li>Claude Codeの<strong>自律エージェント</strong></li>
+                        <li>Continueの<strong>Agent Mode</strong></li>
+                    </ul>
+
+                    <h4>2. マルチモーダル対応</h4>
+                    <p>テキストだけでなく、<strong>画像、音声、動画</strong>も入力として受け付けるように。</p>
+                    <ul>
+                        <li>Aiderの<strong>画像・音声入力</strong></li>
+                        <li>デザインから直接コード生成</li>
+                        <li>スクリーンショットからUI再現</li>
+                    </ul>
+
+                    <h4>3. コスト効率の良いモデル</h4>
+                    <p>2025年7月時点で最もコスパが良いモデル：</p>
+                    <ul>
+                        <li><strong>Claude 4 Sonnet</strong>：品質とコストのバランス◎</li>
+                        <li><strong>GPT-4o</strong>：速度重視</li>
+                        <li><strong>CodeQwen</strong>：超低コスト</li>
+                    </ul>
+
+                    <h4>4. ローカルLLMの台頭</h4>
+                    <p>プライバシー重視の流れで、<strong>ローカルで動くLLM</strong>が人気に。</p>
+                    <ul>
+                        <li>Ollamaによるローカル実行</li>
+                        <li>企業の機密情報保護</li>
+                        <li>オフライン開発環境</li>
+                    </ul>
+
+                    <h4>5. IDE統合の標準化</h4>
+                    <p>VS Code、JetBrains、Neovimなど、<strong>あらゆるIDEでAIが使える</strong>のが当たり前に。</p>
+                </div>
+
+                <div class="card">
+                    <h3>⚠️ 注意すべきポイント</h3>
+
+                    <p><strong>先輩：</strong>AIツールを使う上で、気をつけるべきこともあるから教えておくね。</p>
+
+                    <h4>1. コストの罠</h4>
+                    <div class="alert alert-warning">
+                        <p>特にAPI従量課金のツールは、<strong>使いすぎると高額</strong>になることも。</p>
+                        <ul>
+                            <li>Claude 3.5 Sonnetは高品質だが高コスト</li>
+                            <li>無料枠の制限を確認</li>
+                            <li>予算に合わせたモデル選択を</li>
+                        </ul>
+                    </div>
+
+                    <h4>2. セキュリティリスク</h4>
+                    <div class="alert alert-warning">
+                        <p>コードをクラウドに送信するツールは、<strong>情報漏洩リスク</strong>がある。</p>
+                        <ul>
+                            <li>企業の機密コードは要注意</li>
+                            <li>ローカル実行可能なツールを検討</li>
+                            <li>利用規約を必ず確認</li>
+                        </ul>
+                    </div>
+
+                    <h4>3. 過度な依存</h4>
+                    <div class="alert alert-warning">
+                        <p>AIに頼りすぎると、<strong>基礎力が育たない</strong>リスクも。</p>
+                        <ul>
+                            <li>AIの提案を鵜呑みにしない</li>
+                            <li>生成されたコードを必ずレビュー</li>
+                            <li>基礎的な学習も並行して</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ：これだけは覚えよう！</h2>
+
+                <div class="card">
+                    <h3>🎯 重要ポイント</h3>
+
+                    <h4>AI IDE（Cursor以外）のおすすめTOP 5</h4>
+                    <ol>
+                        <li><strong>GitHub Copilot</strong>：業界標準、安定感抜群、初心者向け</li>
+                        <li><strong>Windsurf</strong>：Cursorの最大ライバル、Cascade機能</li>
+                        <li><strong>Zed</strong>：超高速、Rust製、ミニマリスト向け</li>
+                        <li><strong>Codeium</strong>：完全無料、制限なし、コスパ最強</li>
+                        <li><strong>Tabnine</strong>：セキュリティ重視、企業向け</li>
+                    </ol>
+
+                    <h4>AI CLI（Codex CLI以外）のおすすめTOP 5</h4>
+                    <ol>
+                        <li><strong>Claude Code</strong>：Anthropic製、最先端、Git統合</li>
+                        <li><strong>Aider</strong>：オープンソース、カスタマイズ自由</li>
+                        <li><strong>Gemini CLI</strong>：Google製、無料枠1日1000件</li>
+                        <li><strong>Continue</strong>：IDE⇔CLI両対応、柔軟</li>
+                        <li><strong>Ollama</strong>：完全ローカル、プライバシー保護</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>💡 初心者へのアドバイス</h3>
+                    <ul>
+                        <li>✅ <strong>まずは無料から</strong>：Codeium、GitHub Copilot Free、Gemini CLIで試す</li>
+                        <li>✅ <strong>複数試してみる</strong>：自分に合うツールは人それぞれ</li>
+                        <li>✅ <strong>用途で使い分け</strong>：IDE作業とCLI作業で別ツールもあり</li>
+                        <li>✅ <strong>コストを意識</strong>：従量課金は使いすぎ注意</li>
+                        <li>✅ <strong>AIを盲信しない</strong>：生成されたコードは必ずレビュー</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>🚀 次のステップ</h3>
+                    <p><strong>タロウ：</strong>先輩、ありがとうございました！早速試してみます！</p>
+
+                    <p><strong>先輩：</strong>いいね！まずは以下の順番で試すのがおすすめだよ：</p>
+                    <ol class="steps">
+                        <li><strong>無料で試す</strong>：GitHub Copilot FreeまたはCodeiumをインストール</li>
+                        <li><strong>使い心地を確認</strong>：1週間ほど実際のプロジェクトで使ってみる</li>
+                        <li><strong>CLI版も試す</strong>：Gemini CLIを入れてターミナルで体験</li>
+                        <li><strong>有料版を検討</strong>：本格的に使うなら有料プランへ</li>
+                    </ol>
+
+                    <p><strong>先輩：</strong>大事なのは、<strong>「AIはあくまでツール」</strong>ってこと。
+                    うまく活用して、開発を楽しんでね！</p>
+                </div>
+
+                <p><strong>タロウ：</strong>はい！頑張ります！</p>
+            </section>
+
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">参考リンク</h2>
+                <div class="card">
+                    <h3>公式サイト</h3>
+                    <ul>
+                        <li><a href="https://www.codeium.com/" target="_blank" rel="noopener noreferrer">Windsurf / Codeium 公式サイト</a></li>
+                        <li><a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot 公式サイト</a></li>
+                        <li><a href="https://zed.dev/" target="_blank" rel="noopener noreferrer">Zed 公式サイト</a></li>
+                        <li><a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code 公式サイト</a></li>
+                        <li><a href="https://aider.chat/" target="_blank" rel="noopener noreferrer">Aider 公式サイト</a></li>
+                        <li><a href="https://cloud.google.com/products/gemini-cli" target="_blank" rel="noopener noreferrer">Gemini CLI 公式サイト</a></li>
+                        <li><a href="https://www.continue.dev/" target="_blank" rel="noopener noreferrer">Continue 公式サイト</a></li>
+                    </ul>
+
+                    <h3>関連ページ</h3>
+                    <ul>
+                        <li><a href="../index.html">ホーム</a></li>
+                        <li><a href="setup.html">準備編</a> - 開発環境のセットアップ</li>
+                        <li><a href="basics.html">基礎知識編</a> - 開発の基礎を学ぶ</li>
+                        <li><a href="practice.html">実践編</a> - 実際に開発してみる</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+        </div>
+    </footer>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+    <script src="../js/install.js"></script>
+
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

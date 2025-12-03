@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>デプロイ完全ガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <div id="announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <header>
+        <div class="container">
+            <h1>デプロイ完全ガイド</h1>
+            <p>Webサイトを世界に公開するための全ての方法を徹底解説</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html" class="active" aria-current="page">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <div class="container">
+            <aside class="toc-sidebar" id="tocSidebar" aria-label="ページ目次">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ" aria-expanded="true" aria-controls="tocNav">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav" aria-label="目次リスト"></nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">デプロイとは？</h2>
+
+                <div class="card">
+                    <h3>💭 デプロイって何？</h3>
+                    <p>
+                        <strong>デプロイ</strong>とは、作成したWebサイトやアプリケーションをインターネット上で公開し、
+                        誰でもアクセスできるようにする作業のことです。
+                    </p>
+                    <p>
+                        簡単に言えば、「お店を開店する」ようなイメージです。
+                        商品（Webサイト）を準備して、お店（サーバー）に並べて、お客さん（ユーザー）が来られるようにするのがデプロイです。
+                    </p>
+                </div>
+
+                <h3>デプロイの基本的な流れ</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>開発環境でコードを書く</strong><br>
+                        自分のパソコン（ローカル環境）でWebサイトを作成します。
+                    </li>
+                    <li>
+                        <strong>テストする</strong><br>
+                        ローカルで動作を確認し、問題がないかチェックします。
+                    </li>
+                    <li>
+                        <strong>GitHubにプッシュ</strong><br>
+                        コードをGitHubにアップロードして、バージョン管理します。
+                    </li>
+                    <li>
+                        <strong>デプロイサービスと連携</strong><br>
+                        GitHub Pages、Vercel、Netlify、Cloudflareなどのサービスに接続します。
+                    </li>
+                    <li>
+                        <strong>本番環境にデプロイ</strong><br>
+                        サービスが自動的にビルド＆デプロイを行い、URLが発行されます。
+                    </li>
+                    <li>
+                        <strong>公開完了</strong><br>
+                        発行されたURLにアクセスすれば、世界中の誰でも見られるようになります！
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>💡 重要：</strong>
+                    GitHubにコードをプッシュするだけで自動的にデプロイされる仕組みを
+                    <strong>「CI/CD（継続的インテグレーション/継続的デリバリー）」</strong>と言います。
+                    この仕組みがあると、コードを修正して→プッシュするだけで→自動的にWebサイトが更新されます！
+                </div>
+            </section>
+
+            <section id="comparison" aria-labelledby="comparison-heading">
+                <h2 id="comparison-heading">デプロイサービス徹底比較（2025年版）</h2>
+
+                <p>
+                    2025年現在、初心者にも使いやすい主要なデプロイサービスを徹底比較します。
+                    あなたのプロジェクトに最適なサービスを見つけましょう！
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>サービス</th>
+                            <th>料金</th>
+                            <th>ビルド時間</th>
+                            <th>帯域制限</th>
+                            <th>初心者向け</th>
+                            <th>おすすめ度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub Pages</strong></td>
+                            <td>完全無料</td>
+                            <td>中速</td>
+                            <td>月100GB</td>
+                            <td>★★★★★</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vercel</strong></td>
+                            <td>無料〜$20/月</td>
+                            <td>超高速</td>
+                            <td>無料:100GB<br>Pro:1TB</td>
+                            <td>★★★★★</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Netlify</strong></td>
+                            <td>無料〜$19/月</td>
+                            <td>高速</td>
+                            <td>無料:100GB</td>
+                            <td>★★★★★</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloudflare Pages</strong></td>
+                            <td>完全無料</td>
+                            <td>高速</td>
+                            <td>無制限(!)</td>
+                            <td>★★★★☆</td>
+                            <td>★★★★★</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FTP（レンタルサーバー）</strong></td>
+                            <td>月500円〜</td>
+                            <td>手動</td>
+                            <td>サーバー依存</td>
+                            <td>★★☆☆☆</td>
+                            <td>★★☆☆☆</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>どれを選ぶべき？シーン別おすすめ</h3>
+
+                <div class="card">
+                    <h4>🎯 完全初心者・とりあえず無料で始めたい</h4>
+                    <p><strong>→ GitHub Pages</strong></p>
+                    <p>
+                        理由：GitHubと完全連携、設定が超簡単、完全無料、静的サイトならこれで十分
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>🚀 Next.js / React を使う・最高のパフォーマンスが欲しい</h4>
+                    <p><strong>→ Vercel</strong></p>
+                    <p>
+                        理由：Next.jsの開発元、最速のビルド＆デプロイ、プレビュー環境自動生成、エッジ機能が豊富
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>⚡ 帯域制限を気にせず使いたい・完全無料がいい</h4>
+                    <p><strong>→ Cloudflare Pages</strong></p>
+                    <p>
+                        理由：帯域無制限、完全無料、Cloudflareの高速CDN、月500回のビルドで十分
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>🎨 フォームやサーバーレス関数も使いたい</h4>
+                    <p><strong>→ Netlify</strong></p>
+                    <p>
+                        理由：フォーム機能が無料で使える、Netlify Functionsでサーバーレス関数も簡単
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h4>💼 PHPやWordPress、データベースが必要</h4>
+                    <p><strong>→ レンタルサーバー（FTP）</strong></p>
+                    <p>
+                        理由：静的サイトホスティングではPHPは動かないため、レンタルサーバーが必要
+                    </p>
+                </div>
+            </section>
+
+            <section id="github-pages" aria-labelledby="github-pages-heading">
+                <h2 id="github-pages-heading">GitHub Pages 完全ガイド</h2>
+
+                <p>
+                    GitHub Pagesは、GitHubが提供する無料の静的サイトホスティングサービスです。
+                    初心者に最もおすすめのデプロイ方法です。
+                </p>
+
+                <h3>メリット</h3>
+                <ul>
+                    <li><strong>完全無料</strong> - 個人・商用利用ともに無料</li>
+                    <li><strong>設定が簡単</strong> - 数クリックで公開可能</li>
+                    <li><strong>自動デプロイ</strong> - GitHubにプッシュするだけで自動更新</li>
+                    <li><strong>独自ドメイン対応</strong> - 自分のドメインも設定可能</li>
+                    <li><strong>HTTPS対応</strong> - 無料で自動的にHTTPS化</li>
+                </ul>
+
+                <h3>デメリット</h3>
+                <ul>
+                    <li>静的サイトのみ（PHPやNode.jsサーバーは動かない）</li>
+                    <li>パブリックリポジトリ推奨（プライベートでも可能だが制限あり）</li>
+                    <li>月間100GBの帯域制限</li>
+                </ul>
+
+                <h3>デプロイ手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>リポジトリ作成</strong><br>
+                        GitHubで新しいリポジトリを作成し、コードをプッシュします。
+                    </li>
+                    <li>
+                        <strong>Settings → Pages</strong><br>
+                        リポジトリのSettingsタブから「Pages」を選択します。
+                    </li>
+                    <li>
+                        <strong>ブランチを選択</strong><br>
+                        「Source」で「Deploy from a branch」を選び、「main」ブランチと「/ (root)」を選択。
+                    </li>
+                    <li>
+                        <strong>保存</strong><br>
+                        「Save」をクリックすると、数分で公開されます。
+                    </li>
+                    <li>
+                        <strong>URLを確認</strong><br>
+                        <code>https://[ユーザー名].github.io/[リポジトリ名]</code> にアクセス！
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul>
+                        <li>リポジトリ名を <code>[ユーザー名].github.io</code> にすると、<code>https://[ユーザー名].github.io</code> というシンプルなURLになります</li>
+                        <li>カスタムドメインは「Settings → Pages → Custom domain」で設定</li>
+                        <li>GitHub Actionsと組み合わせることで、より高度なビルドプロセスも可能</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="vercel" aria-labelledby="vercel-heading">
+                <h2 id="vercel-heading">Vercel 完全ガイド</h2>
+
+                <p>
+                    Vercelは、Next.jsの開発元が提供する最高速のデプロイサービスです。
+                    フロントエンドに特化した設計で、プレビューデプロイやエッジ機能が充実しています。
+                </p>
+
+                <h3>Vercelの特徴</h3>
+                <ul>
+                    <li><strong>ゼロコンフィギュレーション</strong> - 設定ファイル不要で自動検出</li>
+                    <li><strong>グローバルCDN</strong> - 世界中で高速にコンテンツ配信</li>
+                    <li><strong>プレビューデプロイ</strong> - Pull Request毎に自動でプレビュー環境生成</li>
+                    <li><strong>環境変数管理</strong> - 環境ごとに変数を簡単に管理</li>
+                    <li><strong>Vercel Functions</strong> - サーバーレス関数を簡単にデプロイ</li>
+                </ul>
+
+                <h3>デプロイ手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Vercelにサインアップ</strong><br>
+                        <a href="https://vercel.com" target="_blank">https://vercel.com</a> にアクセスし、「Sign Up」をクリック。
+                        GitHubアカウントでログインがおすすめ。
+                    </li>
+                    <li>
+                        <strong>Import Project</strong><br>
+                        ダッシュボードから「Add New... → Project」を選択。
+                        GitHubリポジトリを選択します。
+                    </li>
+                    <li>
+                        <strong>設定を確認</strong><br>
+                        Vercelが自動的にフレームワークを検出し、ビルド設定を提案します。
+                        通常はそのままでOK。
+                    </li>
+                    <li>
+                        <strong>Deploy</strong><br>
+                        「Deploy」ボタンをクリック。数秒〜数十秒でデプロイ完了！
+                    </li>
+                    <li>
+                        <strong>URLを確認</strong><br>
+                        <code>https://[プロジェクト名]-[ランダム文字列].vercel.app</code> が発行されます。
+                    </li>
+                </ol>
+
+                <h3>環境変数の設定</h3>
+                <p>
+                    Vercelでは、API キーなどの秘密情報を安全に管理できます。
+                </p>
+                <ol class="steps">
+                    <li>
+                        <strong>Settings → Environment Variables</strong><br>
+                        プロジェクトの「Settings」タブから「Environment Variables」を選択。
+                    </li>
+                    <li>
+                        <strong>変数を追加</strong><br>
+                        「Key」に変数名（例：<code>API_KEY</code>）、「Value」に値を入力。
+                    </li>
+                    <li>
+                        <strong>環境を選択</strong><br>
+                        <ul>
+                            <li><strong>Production</strong> - 本番環境（mainブランチ）</li>
+                            <li><strong>Preview</strong> - プレビュー環境（Pull Request）</li>
+                            <li><strong>Development</strong> - ローカル開発環境</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>再デプロイ</strong><br>
+                        環境変数を追加したら、「Deployments」タブから最新のデプロイを「Redeploy」します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>💡 重要：</strong>
+                    Previewビルドでもアプリケーション内の<code>NODE_ENV</code>は<code>"production"</code>になります！
+                    環境を判別する場合は<code>VERCEL_ENV</code>システム環境変数を使いましょう。
+                </div>
+
+                <h3>カスタムドメインの設定</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Settings → Domains</strong><br>
+                        プロジェクトの「Settings」→「Domains」を開きます。
+                    </li>
+                    <li>
+                        <strong>ドメインを追加</strong><br>
+                        「Add」をクリックし、自分のドメイン（例：<code>example.com</code>）を入力。
+                    </li>
+                    <li>
+                        <strong>DNS設定</strong><br>
+                        Vercelが指示するDNSレコード（AレコードまたはCNAMEレコード）を、
+                        ドメイン管理サービスに設定します。
+                    </li>
+                    <li>
+                        <strong>検証</strong><br>
+                        DNS設定後、数分〜数時間で自動的にHTTPS証明書が発行されます。
+                    </li>
+                </ol>
+
+                <h3>プレビューデプロイの活用</h3>
+                <p>
+                    Vercelの最強機能の一つが<strong>プレビューデプロイ</strong>です。
+                </p>
+                <div class="card">
+                    <h4>プレビューデプロイとは？</h4>
+                    <p>
+                        GitHubでPull Requestを作成すると、Vercelが自動的にそのブランチ専用のプレビュー環境を作成し、
+                        一時的なURLを発行してくれます。
+                    </p>
+                    <p>
+                        これにより、<strong>本番環境に影響を与えずに</strong>、チームメンバーやクライアントに
+                        変更内容を確認してもらえます。
+                    </p>
+                </div>
+
+                <h4>プレビューデプロイの流れ</h4>
+                <ol class="steps">
+                    <li>
+                        <strong>新しいブランチを作成</strong><br>
+                        <pre><code>git checkout -b feature/new-feature</code></pre>
+                    </li>
+                    <li>
+                        <strong>コードを変更してプッシュ</strong><br>
+                        <pre><code>git add .
+git commit -m "Add new feature"
+git push origin feature/new-feature</code></pre>
+                    </li>
+                    <li>
+                        <strong>Pull Requestを作成</strong><br>
+                        GitHubでPull Requestを作成します。
+                    </li>
+                    <li>
+                        <strong>Vercel Botがコメント</strong><br>
+                        数秒後、VercelのBotがPull Requestにコメントを投稿し、プレビューURLを教えてくれます。
+                    </li>
+                    <li>
+                        <strong>プレビューを確認</strong><br>
+                        URLをクリックして、変更内容を確認します。
+                    </li>
+                    <li>
+                        <strong>マージ</strong><br>
+                        問題なければPull Requestをマージ。自動的に本番環境にデプロイされます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul>
+                        <li>Vercel CLIをインストールすると、ローカルから直接デプロイできます：<code>npm i -g vercel</code></li>
+                        <li>環境変数はローカルに取得可能：<code>vercel env pull</code></li>
+                        <li>ビルドログは「Deployments」タブで詳細に確認できます</li>
+                        <li>無料プランでも商用利用OK（個人プロジェクト）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="netlify" aria-labelledby="netlify-heading">
+                <h2 id="netlify-heading">Netlify 完全ガイド</h2>
+
+                <p>
+                    Netlifyは、静的サイトホスティングに特化したサービスで、フォーム機能やサーバーレス関数が使いやすいのが特徴です。
+                </p>
+
+                <h3>Netlifyの特徴</h3>
+                <ul>
+                    <li><strong>超高速デプロイ</strong> - 数秒でビルド＆デプロイ完了</li>
+                    <li><strong>Netlify Forms</strong> - HTMLフォームを自動でバックエンド化</li>
+                    <li><strong>Netlify Functions</strong> - AWS Lambdaベースのサーバーレス関数</li>
+                    <li><strong>Split Testing</strong> - A/Bテストが簡単</li>
+                    <li><strong>リダイレクト＆リライト</strong> - _redirectsファイルで柔軟な設定</li>
+                </ul>
+
+                <h3>デプロイ手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Netlifyにサインアップ</strong><br>
+                        <a href="https://www.netlify.com" target="_blank">https://www.netlify.com</a> にアクセスし、
+                        GitHubアカウントでログインします。
+                    </li>
+                    <li>
+                        <strong>Add new site → Import an existing project</strong><br>
+                        「Sites」タブから「Add new site」→「Import an existing project」を選択。
+                    </li>
+                    <li>
+                        <strong>GitHub連携</strong><br>
+                        「Deploy with GitHub」を選択し、リポジトリを選びます。
+                    </li>
+                    <li>
+                        <strong>ビルド設定</strong><br>
+                        ビルドコマンドと公開ディレクトリを設定します。
+                        <ul>
+                            <li>Next.js: ビルドコマンド <code>npm run build</code>、公開ディレクトリ <code>.next</code></li>
+                            <li>静的HTML: ビルドコマンド不要、公開ディレクトリ <code>/</code> または <code>dist</code></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Deploy site</strong><br>
+                        「Deploy site」をクリック。数秒〜数十秒で完了します。
+                    </li>
+                    <li>
+                        <strong>URLを確認</strong><br>
+                        <code>https://[ランダム名].netlify.app</code> が発行されます。
+                    </li>
+                </ol>
+
+                <h3>Netlify Formsの使い方</h3>
+                <p>
+                    Netlifyの強力な機能の一つが、HTMLフォームを自動でバックエンド化してくれる「Netlify Forms」です。
+                </p>
+
+                <ol class="steps">
+                    <li>
+                        <strong>HTMLにフォームを追加</strong><br>
+                        <pre><code>&lt;form name="contact" method="POST" data-netlify="true"&gt;
+  &lt;input type="hidden" name="form-name" value="contact" /&gt;
+  &lt;p&gt;
+    &lt;label&gt;名前: &lt;input type="text" name="name" required /&gt;&lt;/label&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label&gt;メール: &lt;input type="email" name="email" required /&gt;&lt;/label&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;label&gt;メッセージ: &lt;textarea name="message" required&gt;&lt;/textarea&gt;&lt;/label&gt;
+  &lt;/p&gt;
+  &lt;button type="submit"&gt;送信&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </li>
+                    <li>
+                        <strong>デプロイ</strong><br>
+                        GitHubにプッシュすると、Netlifyが自動的にフォームを検出します。
+                    </li>
+                    <li>
+                        <strong>送信内容を確認</strong><br>
+                        Netlifyダッシュボードの「Forms」タブで、送信されたデータを確認できます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-info">
+                    <strong>💡 ポイント：</strong>
+                    <code>data-netlify="true"</code> を追加するだけで、自動的にバックエンド処理が追加されます。
+                    サーバーを用意する必要がないので、超簡単です！
+                </div>
+
+                <h3>環境変数の設定</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Site settings → Environment variables</strong><br>
+                        サイトの「Site settings」→「Environment variables」を開きます。
+                    </li>
+                    <li>
+                        <strong>Add a variable</strong><br>
+                        「Add a variable」をクリックし、キーと値を入力します。
+                    </li>
+                    <li>
+                        <strong>再デプロイ</strong><br>
+                        「Deploys」タブから「Trigger deploy」→「Deploy site」で再デプロイします。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul>
+                        <li>Netlify CLIで開発サーバーとFunctionsをローカルで動かせます：<code>npm i -g netlify-cli</code></li>
+                        <li><code>netlify.toml</code> でビルド設定やリダイレクトルールを管理できます</li>
+                        <li>無料プランでは月100GBの帯域制限ですが、個人サイトなら十分</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cloudflare" aria-labelledby="cloudflare-heading">
+                <h2 id="cloudflare-heading">Cloudflare Pages 完全ガイド</h2>
+
+                <p>
+                    Cloudflare Pagesは、2021年に正式リリースされた比較的新しいサービスです。
+                    <strong>帯域無制限</strong>という圧倒的なメリットがあります。
+                </p>
+
+                <h3>Cloudflare Pagesの特徴</h3>
+                <ul>
+                    <li><strong>完全無料</strong> - 無料プランで十分な機能</li>
+                    <li><strong>帯域無制限</strong> - トラフィックが多いサイトでも安心</li>
+                    <li><strong>月500回のビルド</strong> - Freeプランでも十分</li>
+                    <li><strong>Cloudflareの高速CDN</strong> - 世界中で高速配信</li>
+                    <li><strong>Workers統合</strong> - エッジコンピューティングと簡単に統合</li>
+                    <li><strong>セキュリティ機能</strong> - DDoS保護、WAFなど充実</li>
+                </ul>
+
+                <h3>デプロイ手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Cloudflareにサインアップ</strong><br>
+                        <a href="https://pages.cloudflare.com" target="_blank">https://pages.cloudflare.com</a> にアクセスし、
+                        メールアドレスで新規登録します。
+                    </li>
+                    <li>
+                        <strong>Workers & Pages → Create application</strong><br>
+                        ダッシュボードから「Workers & Pages」→「Create application」→「Pages」タブを選択。
+                    </li>
+                    <li>
+                        <strong>Connect to Git</strong><br>
+                        「Connect to Git」をクリックし、GitHubを選択してリポジトリを選びます。
+                    </li>
+                    <li>
+                        <strong>ビルド設定</strong><br>
+                        フレームワークを選択すると、自動的にビルドコマンドが設定されます。
+                        <ul>
+                            <li>Next.js: <code>npm run build</code></li>
+                            <li>静的サイト: 設定不要</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Save and Deploy</strong><br>
+                        「Save and Deploy」をクリック。数秒〜数十秒でデプロイ完了。
+                    </li>
+                    <li>
+                        <strong>URLを確認</strong><br>
+                        <code>https://[プロジェクト名].pages.dev</code> が発行されます。
+                    </li>
+                </ol>
+
+                <h3>環境変数の設定</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Settings → Environment variables</strong><br>
+                        プロジェクトの「Settings」→「Environment variables」を開きます。
+                    </li>
+                    <li>
+                        <strong>Add variable</strong><br>
+                        「Add variable」をクリックし、変数名と値を入力します。
+                    </li>
+                    <li>
+                        <strong>環境を選択</strong><br>
+                        Production（本番）とPreview（プレビュー）を選択できます。
+                    </li>
+                    <li>
+                        <strong>再デプロイ</strong><br>
+                        「Deployments」から最新のデプロイを「Retry deployment」で再実行します。
+                    </li>
+                </ol>
+
+                <h3>カスタムドメインの設定</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Custom domains → Set up a custom domain</strong><br>
+                        プロジェクトの「Custom domains」を開きます。
+                    </li>
+                    <li>
+                        <strong>ドメインを追加</strong><br>
+                        自分のドメインを入力します（例：<code>example.com</code>）。
+                    </li>
+                    <li>
+                        <strong>DNS設定</strong><br>
+                        Cloudflareが指示するDNSレコードを設定します。
+                        Cloudflareでドメインを管理している場合は自動で設定されます。
+                    </li>
+                    <li>
+                        <strong>SSL証明書</strong><br>
+                        自動的にSSL証明書が発行され、HTTPS化されます。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>💡 Pro Tips:</strong>
+                    <ul>
+                        <li>Cloudflare C3（<code>npm create cloudflare@latest</code>）を使うと、プロジェクト作成からデプロイまで一気にできます</li>
+                        <li>Cloudflare Workersと連携することで、エッジで動的な処理も可能</li>
+                        <li>帯域無制限なので、画像や動画が多いサイトにも最適</li>
+                        <li>DDoS保護など、セキュリティ機能が標準で付いてくる</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>💭 Cloudflare Pagesはどれくらい速い？</h4>
+                    <p>
+                        実際に使った人の感想では、「初めて触る人でも1時間あればDNS設定までできる」「5分でサイトを公開できた」
+                        という声が多いです。
+                    </p>
+                    <p>
+                        Cloudflareは世界中に300以上のデータセンターを持っているため、どこからアクセスしても高速です。
+                    </p>
+                </div>
+            </section>
+
+            <section id="ftp" aria-labelledby="ftp-heading">
+                <h2 id="ftp-heading">FTP / レンタルサーバー ガイド</h2>
+
+                <p>
+                    FTP（File Transfer Protocol）は、ファイルをサーバーに直接アップロードする従来の方法です。
+                    PHPやWordPress、データベースが必要な場合に使います。
+                </p>
+
+                <h3>いつFTPを使うべき？</h3>
+                <ul>
+                    <li><strong>PHPが必要なとき</strong> - 静的サイトホスティングではPHPは動かない</li>
+                    <li><strong>WordPressを使うとき</strong> - WordPress専用のレンタルサーバーが便利</li>
+                    <li><strong>データベースが必要なとき</strong> - MySQL、PostgreSQLなど</li>
+                    <li><strong>完全なコントロールが欲しいとき</strong> - サーバー設定を自由にカスタマイズしたい</li>
+                </ul>
+
+                <h3>おすすめレンタルサーバー（日本）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>サービス</th>
+                            <th>料金</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>さくらのレンタルサーバ</strong></td>
+                            <td>月128円〜</td>
+                            <td>老舗で安定、初心者向け</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ロリポップ</strong></td>
+                            <td>月99円〜</td>
+                            <td>低価格、WordPress簡単インストール</td>
+                        </tr>
+                        <tr>
+                            <td><strong>エックスサーバー</strong></td>
+                            <td>月990円〜</td>
+                            <td>高速・高性能、人気No.1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ConoHa WING</strong></td>
+                            <td>月678円〜</td>
+                            <td>国内最速、WordPress特化</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>FTPでデプロイする手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>レンタルサーバーを契約</strong><br>
+                        上記のサービスから選び、契約します。
+                    </li>
+                    <li>
+                        <strong>FTP情報を確認</strong><br>
+                        契約後、FTPホスト名、ユーザー名、パスワードが送られてきます。
+                    </li>
+                    <li>
+                        <strong>FTPクライアントをダウンロード</strong><br>
+                        FileZilla（<a href="https://filezilla-project.org" target="_blank">https://filezilla-project.org</a>）や
+                        Cyberduckをダウンロードしてインストールします。
+                    </li>
+                    <li>
+                        <strong>FTP接続</strong><br>
+                        FTPクライアントを開き、ホスト名、ユーザー名、パスワードを入力して「接続」します。
+                    </li>
+                    <li>
+                        <strong>ファイルをアップロード</strong><br>
+                        左側（ローカル）から右側（サーバー）にファイルをドラッグ＆ドロップします。
+                    </li>
+                    <li>
+                        <strong>確認</strong><br>
+                        ブラウザでサーバーのURLを開き、正しく表示されるか確認します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ 注意点：</strong>
+                    <ul>
+                        <li>FTPは暗号化されていないため、SFTP（SSH File Transfer Protocol）を使うことを推奨</li>
+                        <li>WordPressの場合、セキュリティ対策（アップデート、プラグイン管理など）が必要</li>
+                        <li>自動デプロイではないため、変更のたびに手動でアップロードする必要がある</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="troubleshooting" aria-labelledby="troubleshooting-heading">
+                <h2 id="troubleshooting-heading">トラブルシューティング</h2>
+
+                <h3>よくあるエラーと解決方法</h3>
+
+                <div class="card">
+                    <h4>❌ ビルドが失敗する</h4>
+                    <p><strong>原因：</strong></p>
+                    <ul>
+                        <li>ビルドコマンドが間違っている</li>
+                        <li>依存関係がインストールされていない</li>
+                        <li>Node.jsのバージョンが合わない</li>
+                    </ul>
+                    <p><strong>解決方法：</strong></p>
+                    <ol>
+                        <li>ローカルで <code>npm run build</code> が成功するか確認</li>
+                        <li><code>package.json</code> の <code>engines</code> でNode.jsバージョンを指定</li>
+                        <li>デプロイサービスのビルドログを詳細に確認</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>❌ デプロイは成功するが、ページが表示されない</h4>
+                    <p><strong>原因：</strong></p>
+                    <ul>
+                        <li>公開ディレクトリの設定が間違っている</li>
+                        <li>ルーティングの設定が不足している（SPAの場合）</li>
+                    </ul>
+                    <p><strong>解決方法：</strong></p>
+                    <ol>
+                        <li>ビルド後のファイルがどこに出力されるか確認（<code>dist</code>, <code>build</code>, <code>.next</code> など）</li>
+                        <li>SPA（Single Page Application）の場合、リダイレクト設定を追加
+                            <ul>
+                                <li>Netlify: <code>_redirects</code> ファイルに <code>/* /index.html 200</code></li>
+                                <li>Vercel: <code>vercel.json</code> に rewrites 設定</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>❌ 環境変数が反映されない</h4>
+                    <p><strong>原因：</strong></p>
+                    <ul>
+                        <li>環境変数を追加した後、再デプロイしていない</li>
+                        <li>変数名のプレフィックスが間違っている</li>
+                    </ul>
+                    <p><strong>解決方法：</strong></p>
+                    <ol>
+                        <li>環境変数追加後は必ず再デプロイする</li>
+                        <li>Vite: <code>VITE_</code> プレフィックスが必要</li>
+                        <li>Next.js: <code>NEXT_PUBLIC_</code> プレフィックス（クライアントサイドで使う場合）</li>
+                        <li>Create React App: <code>REACT_APP_</code> プレフィックス</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>❌ カスタムドメインが動かない</h4>
+                    <p><strong>原因：</strong></p>
+                    <ul>
+                        <li>DNS設定の反映待ち</li>
+                        <li>DNSレコードの設定が間違っている</li>
+                    </ul>
+                    <p><strong>解決方法：</strong></p>
+                    <ol>
+                        <li>DNS設定は反映まで数時間〜48時間かかる場合があります（待つ）</li>
+                        <li><code>dig</code> コマンドや <a href="https://www.whatsmydns.net/" target="_blank">WhatsMyDNS</a> でDNS伝播を確認</li>
+                        <li>AレコードまたはCNAMEレコードが正しく設定されているか確認</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h4>❌ デプロイが遅い</h4>
+                    <p><strong>原因：</strong></p>
+                    <ul>
+                        <li>依存関係が多すぎる</li>
+                        <li>キャッシュが効いていない</li>
+                    </ul>
+                    <p><strong>解決方法：</strong></p>
+                    <ol>
+                        <li>不要な依存関係を削除</li>
+                        <li><code>node_modules</code> のキャッシュ設定を確認</li>
+                        <li>画像などの静的アセットはCDNを使う</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="advanced" aria-labelledby="advanced-heading">
+                <h2 id="advanced-heading">さらに学ぶために</h2>
+
+                <h3>GitHub Actions で自動デプロイをカスタマイズ</h3>
+                <p>
+                    GitHub Actionsを使うと、デプロイ前にテストを実行したり、複雑なビルドプロセスを自動化できます。
+                </p>
+                <p>
+                    例：テストが通った場合のみデプロイする
+                </p>
+                <pre><code>name: Deploy
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Deploy to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}</code></pre>
+
+                <h3>パフォーマンス最適化</h3>
+                <ul>
+                    <li><strong>画像最適化</strong> - Next.js の <code>&lt;Image&gt;</code> コンポーネント、または <code>sharp</code> で圧縮</li>
+                    <li><strong>コード分割</strong> - Dynamic Import でコードを分割し、初回読み込みを高速化</li>
+                    <li><strong>CDN活用</strong> - 静的アセットはCDNから配信</li>
+                    <li><strong>キャッシュ戦略</strong> - HTTP キャッシュヘッダーを適切に設定</li>
+                </ul>
+
+                <h3>セキュリティ対策</h3>
+                <ul>
+                    <li><strong>環境変数を守る</strong> - <code>.env</code> ファイルは <code>.gitignore</code> に追加</li>
+                    <li><strong>HTTPS必須</strong> - 現代のWebサイトはすべてHTTPS化が必須</li>
+                    <li><strong>CORS設定</strong> - API を公開する場合は適切なCORS設定を</li>
+                    <li><strong>セキュリティヘッダー</strong> - CSP、X-Frame-Options などを設定</li>
+                </ul>
+
+                <div class="alert alert-info">
+                    <strong>📚 参考リンク：</strong>
+                    <ul>
+                        <li><a href="https://vercel.com/docs" target="_blank">Vercel公式ドキュメント</a></li>
+                        <li><a href="https://docs.netlify.com/" target="_blank">Netlify公式ドキュメント</a></li>
+                        <li><a href="https://developers.cloudflare.com/pages/" target="_blank">Cloudflare Pages公式ドキュメント</a></li>
+                        <li><a href="https://docs.github.com/ja/pages" target="_blank">GitHub Pages公式ドキュメント</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="conclusion" aria-labelledby="conclusion-heading">
+                <h2 id="conclusion-heading">まとめ</h2>
+
+                <p>
+                    2025年現在、Webサイトをデプロイする方法は非常に多様化しています。
+                    それぞれのサービスには特徴があり、プロジェクトに応じて最適なものを選びましょう。
+                </p>
+
+                <div class="card">
+                    <h3>初心者におすすめのデプロイサービス（まとめ）</h3>
+                    <ol>
+                        <li><strong>GitHub Pages</strong> - 完全無料、設定簡単、初心者に最適</li>
+                        <li><strong>Vercel</strong> - Next.js/Reactに最強、プレビューデプロイが便利</li>
+                        <li><strong>Cloudflare Pages</strong> - 帯域無制限、完全無料、高速</li>
+                        <li><strong>Netlify</strong> - フォーム機能が便利、サーバーレス関数が使いやすい</li>
+                    </ol>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎉 次のステップ：</strong>
+                    <p>
+                        実際に手を動かして、自分のWebサイトをデプロイしてみましょう！
+                        最初は簡単なHTML+CSSのサイトから始めて、慣れてきたらNext.jsやReactを使った
+                        より高度なサイトに挑戦してみてください。
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド</p>
+        </div>
+    </footer>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+</body>
+</html>

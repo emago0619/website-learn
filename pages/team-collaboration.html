@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>チーム開発・コラボレーションガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>チーム開発・コラボレーションガイド</h1>
+            <p>複数人で効率的に開発するための実践的な方法</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html" class="active" aria-current="page">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav"></nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">チーム開発の基本</h2>
+                <p>個人開発とチーム開発の最大の違いは「コミュニケーション」です。コードを書く技術だけでなく、チームメンバーと協力する方法を学びましょう。</p>
+                <div class="alert alert-success">
+                    <strong>💡 このページで学べること：</strong><br>
+                    ・GitHubを使ったチーム開発の流れ<br>
+                    ・プルリクエストの作成とレビュー<br>
+                    ・効果的なコミュニケーション方法<br>
+                    ・チーム開発のベストプラクティス
+                </div>
+            </section>
+
+            <section id="git-workflow" aria-labelledby="git-workflow-heading">
+                <h2 id="git-workflow-heading">ブランチ戦略</h2>
+
+                <div class="card">
+                    <h3>GitHub Flow（推奨）</h3>
+                    <p>シンプルで初心者にも分かりやすいワークフローです。</p>
+
+                    <h4>基本の流れ</h4>
+                    <ol>
+                        <li><code>main</code>ブランチは常にデプロイ可能な状態を保つ</li>
+                        <li>新しい機能やバグ修正は、<code>main</code>から新しいブランチを作成</li>
+                        <li>作業が完了したらプルリクエストを作成</li>
+                        <li>レビューを受けてマージ</li>
+                        <li><code>main</code>ブランチにマージしたら自動デプロイ</li>
+                    </ol>
+
+                    <h4>ブランチ名の付け方</h4>
+                    <pre><code># 機能追加
+feature/add-search-function
+feature/user-authentication
+
+# バグ修正
+fix/login-button-not-working
+fix/header-layout-issue
+
+# ドキュメント
+docs/update-readme
+docs/add-api-documentation</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>実際の操作手順</h3>
+
+                    <h4>1. 最新の状態を取得</h4>
+                    <pre><code>git checkout main
+git pull origin main</code></pre>
+
+                    <h4>2. 新しいブランチを作成</h4>
+                    <pre><code>git checkout -b feature/add-contact-form</code></pre>
+
+                    <h4>3. 作業してコミット</h4>
+                    <pre><code>git add .
+git commit -m "feat: お問い合わせフォームを追加"</code></pre>
+
+                    <h4>4. リモートにプッシュ</h4>
+                    <pre><code>git push origin feature/add-contact-form</code></pre>
+
+                    <h4>5. GitHub上でプルリクエストを作成</h4>
+                </div>
+            </section>
+
+            <section id="pull-request" aria-labelledby="pull-request-heading">
+                <h2 id="pull-request-heading">プルリクエストの作成</h2>
+
+                <div class="card">
+                    <h3>良いプルリクエストの書き方</h3>
+
+                    <h4>タイトル</h4>
+                    <ul>
+                        <li>何をしたかを明確に</li>
+                        <li>プレフィックスを付ける（feat:, fix:, docs:など）</li>
+                    </ul>
+                    <pre><code>✅ Good
+feat: お問い合わせフォームにバリデーション機能を追加
+fix: ログインボタンが押せない問題を修正
+
+❌ NG
+フォーム修正
+バグ直した</code></pre>
+
+                    <h4>説明文のテンプレート</h4>
+                    <pre><code>## 概要
+お問い合わせフォームに入力チェック機能を追加しました。
+
+## 変更内容
+- 必須項目のバリデーション追加
+- メールアドレスの形式チェック
+- エラーメッセージの表示機能
+
+## スクリーンショット
+（必要に応じて画像を添付）
+
+## テスト
+- [ ] 必須項目を空白で送信できないことを確認
+- [ ] 無効なメールアドレスでエラーが出ることを確認
+- [ ] 正しい入力で送信できることを確認
+- [ ] スマホで正常に動作することを確認
+
+## 関連Issue
+Closes #123</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3>プルリクエスト作成手順</h3>
+
+                    <ol>
+                        <li>GitHubのリポジトリページを開く</li>
+                        <li>「Pull requests」タブをクリック</li>
+                        <li>「New pull request」をクリック</li>
+                        <li>base: main ← compare: あなたのブランチ を選択</li>
+                        <li>タイトルと説明文を記入</li>
+                        <li>レビュワーを指定（Reviewers）</li>
+                        <li>「Create pull request」をクリック</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="code-review" aria-labelledby="code-review-heading">
+                <h2 id="code-review-heading">コードレビュー</h2>
+
+                <div class="card">
+                    <h3>レビューを受ける側</h3>
+
+                    <h4>心構え</h4>
+                    <ul>
+                        <li>レビューは「コードの品質を高めるため」のもの</li>
+                        <li>指摘は個人攻撃ではない</li>
+                        <li>分からない指摘は質問してOK</li>
+                        <li>納得できる説明があれば修正する</li>
+                    </ul>
+
+                    <h4>レビュー依頼時のポイント</h4>
+                    <ul>
+                        <li>変更が大きすぎないか（1PR = 1機能が理想）</li>
+                        <li>説明が十分か</li>
+                        <li>自分でテストしたか</li>
+                        <li>コンフリクトがないか</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>レビューをする側</h3>
+
+                    <h4>レビューの観点</h4>
+                    <ul>
+                        <li><strong>動作：</strong> 意図した通りに動くか</li>
+                        <li><strong>可読性：</strong> コードが読みやすいか</li>
+                        <li><strong>保守性：</strong> 後で修正しやすいか</li>
+                        <li><strong>セキュリティ：</strong> 脆弱性はないか</li>
+                        <li><strong>パフォーマンス：</strong> 無駄な処理はないか</li>
+                    </ul>
+
+                    <h4>コメントの書き方</h4>
+                    <pre><code>❌ NG（攻撃的）
+「この書き方は間違ってる」
+「なんでこんなコード書いたの？」
+
+✅ Good（建設的）
+「〇〇の理由で、△△のように書くとより良いと思います」
+「もし〇〇の場合、この処理は問題ありませんか？」
+「提案：〇〇のように書くとシンプルになりそうです」</code></pre>
+
+                    <h4>承認の種類</h4>
+                    <ul>
+                        <li><strong>Approve：</strong> 問題なし、マージしてOK</li>
+                        <li><strong>Request changes：</strong> 修正が必要</li>
+                        <li><strong>Comment：</strong> コメントだけ（判断は任せる）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="commit-message" aria-labelledby="commit-message-heading">
+                <h2 id="commit-message-heading">コミットメッセージの書き方</h2>
+
+                <div class="card">
+                    <h3>良いコミットメッセージの条件</h3>
+                    <ul>
+                        <li>何をしたかが一目で分かる</li>
+                        <li>なぜその変更をしたかが分かる</li>
+                        <li>後から見返したときに理解できる</li>
+                    </ul>
+
+                    <h4>フォーマット</h4>
+                    <pre><code>type: 変更内容の要約（50文字以内）
+
+詳細な説明（必要に応じて）
+- なぜこの変更が必要だったか
+- どのように実装したか
+- 注意点があれば記載</code></pre>
+
+                    <h4>type の種類</h4>
+                    <ul>
+                        <li><code>feat:</code> 新機能</li>
+                        <li><code>fix:</code> バグ修正</li>
+                        <li><code>docs:</code> ドキュメント</li>
+                        <li><code>style:</code> コードフォーマット</li>
+                        <li><code>refactor:</code> リファクタリング</li>
+                        <li><code>test:</code> テスト追加・修正</li>
+                        <li><code>chore:</code> その他（ビルド、設定ファイルなど）</li>
+                    </ul>
+
+                    <h4>例</h4>
+                    <pre><code>✅ Good
+feat: お問い合わせフォームにバリデーション機能を追加
+
+必須項目（名前、メール、内容）のチェック機能を追加。
+空白で送信できないようにし、メールアドレスの形式も検証する。
+
+fix: ログインボタンが押せない問題を修正
+
+z-indexの競合により、モーダルの背後に隠れていたため、
+z-index値を調整して解決。
+
+❌ NG
+フォーム修正
+バグ直した
+いろいろ変更</code></pre>
+                </div>
+            </section>
+
+            <section id="communication" aria-labelledby="communication-heading">
+                <h2 id="communication-heading">コミュニケーション</h2>
+
+                <div class="card">
+                    <h3>GitHubでのコミュニケーション</h3>
+
+                    <h4>Issue（課題管理）</h4>
+                    <ul>
+                        <li>バグ報告、機能リクエスト、質問などに使う</li>
+                        <li>テンプレートを用意しておくと便利</li>
+                        <li>ラベルを活用（bug, enhancement, question など）</li>
+                    </ul>
+
+                    <h4>Discussion（議論）</h4>
+                    <ul>
+                        <li>設計の相談、アイデアの共有に使う</li>
+                        <li>Issueにするほどではない話題に</li>
+                    </ul>
+
+                    <h4>プルリクエストでのやり取り</h4>
+                    <ul>
+                        <li>コードの特定行にコメントできる</li>
+                        <li>会話をResolveして解決済みにする</li>
+                        <li>絵文字を活用して雰囲気を和やかに👍</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>チャットツール</h3>
+
+                    <h4>Slack / Discord</h4>
+                    <ul>
+                        <li><strong>技術的な質問：</strong> 専用チャンネルを作る</li>
+                        <li><strong>進捗報告：</strong> 毎日決まった時間に報告</li>
+                        <li><strong>雑談：</strong> チーム内のコミュニケーション活性化</li>
+                    </ul>
+
+                    <h4>コミュニケーションのコツ</h4>
+                    <ul>
+                        <li>困ったらすぐに質問（抱え込まない）</li>
+                        <li>質問するときは「何を試したか」も伝える</li>
+                        <li>リアクション絵文字で反応を示す</li>
+                        <li>非同期コミュニケーションを意識（すぐ返信を期待しない）</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>ドキュメント</h3>
+
+                    <h4>README.md</h4>
+                    <pre><code># プロジェクト名
+
+## 概要
+このプロジェクトの説明
+
+## セットアップ
+```bash
+npm install
+npm run dev
+```
+
+## ブランチ戦略
+GitHub Flow を採用
+
+## コミットメッセージ
+Conventional Commitsに従う</code></pre>
+
+                    <h4>CONTRIBUTING.md</h4>
+                    <p>プロジェクトへの貢献方法をまとめたドキュメント</p>
+                    <ul>
+                        <li>開発環境のセットアップ方法</li>
+                        <li>ブランチの命名規則</li>
+                        <li>プルリクエストの作成方法</li>
+                        <li>コードスタイル</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="best-practices" aria-labelledby="best-practices-heading">
+                <h2 id="best-practices-heading">チーム開発のベストプラクティス</h2>
+
+                <div class="card">
+                    <h3>✅ すべきこと</h3>
+                    <ol>
+                        <li><strong>こまめにpull</strong> - 作業前に必ず最新の状態に</li>
+                        <li><strong>小さくcommit</strong> - 1コミット = 1つの論理的な変更</li>
+                        <li><strong>早めにpush</strong> - 1日の終わりには必ずpush</li>
+                        <li><strong>PRは小さく</strong> - 大きな変更は分割する</li>
+                        <li><strong>レビューは迅速に</strong> - 24時間以内に反応する</li>
+                        <li><strong>テストを書く</strong> - 自動テストでバグを防ぐ</li>
+                        <li><strong>ドキュメントを更新</strong> - コードと同時に更新</li>
+                    </ol>
+
+                    <h3>❌ してはいけないこと</h3>
+                    <ol>
+                        <li><strong>mainブランチに直接commit</strong> - 必ずブランチを作る</li>
+                        <li><strong>force push</strong> - チームメンバーの作業を壊す可能性</li>
+                        <li><strong>巨大なPR</strong> - レビューしづらい、バグが潜みやすい</li>
+                        <li><strong>レビューなしでマージ</strong> - 最低1人はレビューを受ける</li>
+                        <li><strong>テストしないでpush</strong> - 必ず動作確認してから</li>
+                        <li><strong>コンフリクトを放置</strong> - 見つけたらすぐに解決</li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>トラブル時の対処</h3>
+
+                    <h4>コンフリクトが発生したら</h4>
+                    <pre><code>1. 最新のmainを取得
+git checkout main
+git pull origin main
+
+2. 自分のブランチにマージ
+git checkout your-branch
+git merge main
+
+3. コンフリクトを解決
+（ファイルを編集）
+
+4. 解決をコミット
+git add .
+git commit -m "Merge main into your-branch"
+git push</code></pre>
+
+                    <h4>間違えてcommitしてしまったら</h4>
+                    <pre><code># pushしていない場合
+git reset HEAD~1  # 1つ前のコミットに戻る
+
+# pushしてしまった場合
+# チームに相談してから対処</code></pre>
+                </div>
+            </section>
+
+            <section id="cursor-team" aria-labelledby="cursor-team-heading">
+                <h2 id="cursor-team-heading">Cursorでのチーム開発</h2>
+
+                <div class="card">
+                    <h3>.cursorrulesの共有</h3>
+                    <p>プロジェクトのルールをCursorに教えることで、チーム全体で一貫した開発ができます。</p>
+
+                    <pre><code># .cursorrules（プロジェクトルートに配置）
+# コーディング規約
+- 変数名はcamelCase
+- 関数名は動詞で始める
+- コメントは日本語で書く
+
+# コミットメッセージ
+- Conventional Commitsに従う
+- 日本語で書く
+
+# PRの作成
+- 変更は200行以内に抑える
+- テストコードも一緒にcommit</code></pre>
+
+                    <p>このファイルをGitにcommitすることで、チーム全員が同じ設定を共有できます。</p>
+                </div>
+            </section>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ</h2>
+
+                <div class="card">
+                    <h3>🤝 チーム開発で大切なこと</h3>
+                    <ul>
+                        <li><strong>コミュニケーション：</strong> 困ったら相談、進捗は共有</li>
+                        <li><strong>尊重：</strong> お互いのコードと意見を尊重</li>
+                        <li><strong>責任：</strong> 自分のコードに責任を持つ</li>
+                        <li><strong>学び：</strong> レビューは学びの機会</li>
+                        <li><strong>改善：</strong> プロセスを継続的に改善</li>
+                    </ul>
+
+                    <div class="alert alert-success">
+                        <strong>💡 最後に：</strong><br>
+                        完璧なチームはありません。失敗しながら学び、少しずつ改善していきましょう。<br>
+                        困ったときは、このガイドを見返してください！
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput" autocomplete="off">
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+            <div class="search-results" id="searchResults">
+                <div class="search-empty"><p>キーワードを入力して検索開始</p></div>
+            </div>
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/toc.js" defer></script>
+</body>
+</html>

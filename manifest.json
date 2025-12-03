@@ -1,0 +1,29 @@
+{
+  "name": "Web開発学習ガイド - 初心者向け実践ガイド",
+  "short_name": "Web学習ガイド",
+  "description": "Git、GitHub、Cursor、AI開発ツールを使った実践的なWeb開発学習ガイド",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "_comment": "アイコン画像を /icons/ ディレクトリに配置してください: icon-192x192.png, icon-512x512.png"
+}

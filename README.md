@@ -63,7 +63,88 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - **パート8**: 様々なデプロイ方法
    - **パート9**: Cursorの内蔵ブラウザの活用
 
-5. **FAQ（pages/faq.html）**
+5. **デプロイ完全ガイド（pages/deployment-guide.html）** 🆕
+   - デプロイの基礎知識
+   - GitHub Pages完全ガイド
+   - Vercel完全ガイド（環境変数、ドメイン設定、プレビューデプロイ）
+   - Netlify完全ガイド（フォーム機能、サーバーレス関数）
+   - Cloudflare Pages完全ガイド（帯域無制限、高速CDN）
+   - FTP/レンタルサーバーガイド
+   - デプロイサービス徹底比較（2025年版）
+   - トラブルシューティング
+
+6. **非エンジニア向け便利ツール集（pages/non-engineer-tools.html）** 🆕
+   - ノーコードWebサイト作成ツール（STUDIO、Wix、Webflow、ペライチ、WordPress）
+   - Markdown完全ガイド
+   - デザイン・画像編集ツール（Canva、Figma、Photopea）
+   - その他の便利ツール
+   - 学習リソース
+
+7. **Google Stitch活用ガイド（pages/stitch-workflow.html）**
+   - Google Stitchの概要と使い方
+   - テキストからUI生成
+   - 画像からUI生成
+   - Figmaとの連携
+   - Cursorでの実装方法
+   - 実例で学ぶデザイン→実装の流れ
+
+8. **AIツール大全（pages/ai-tools.html）**
+   - Cursor以外のAI IDE 14種類の徹底比較
+   - Codex CLI以外のAI CLIツール 10種類の紹介
+   - シーン別おすすめツールの選び方
+   - 無料・有料プランの比較表
+   - 2025年最新トレンドとエージェント型開発
+
+9. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）**
+   - 会話形式でわかりやすいGit/GitHub解説
+   - 初心者がつまずきやすいポイントを丁寧に説明
+   - コミット、プッシュ、プルの違い
+   - ブランチとマージの基礎
+   - 実践的なワークフロー
+
+10. **トラブルシューティング完全ガイド（pages/troubleshooting-guide.html）** 🆕
+   - Cursorでのエラー（API制限、接続エラー、プラン承認の問題）
+   - GitHubでのエラー（pushの失敗、マージコンフリクト、.gitignoreの問題）
+   - デプロイでのエラー（ビルド失敗、404エラー、環境変数の問題）
+   - npm/yarnのエラー（依存関係の競合）
+   - デバッグの基本テクニック
+   - エラーを未然に防ぐ習慣
+
+11. **チートシート集（pages/cheatsheets.html）** 🆕
+   - Gitコマンドチートシート（基本操作、ブランチ、緊急時のコマンド）
+   - Cursorショートカット（AI機能、エディタ操作、編集操作）
+   - マークダウン記法チートシート
+   - HTML/CSS基本タグ集
+   - Flexboxの基本
+   - 印刷用PDF対応
+
+12. **サンプルプロジェクト集（pages/sample-projects.html）** 🆕
+   - ポートフォリオサイト（HTML/CSS/JS）
+   - ブログサイト（静的サイト、Markdown対応）
+   - ランディングページ（CTA最適化）
+   - コーポレートサイト（Next.js、TypeScript、多言語対応）
+   - タスク管理アプリ（Supabase、認証、データベース連携）
+   - 各プロジェクトのセットアップ手順とカスタマイズガイド
+
+13. **ケーススタディ集（pages/case-studies.html）** 🆕
+   - 会社のお知らせページに新機能を追加
+   - ECサイトの商品詳細ページをレスポンシブ対応
+   - 問い合わせフォームにバリデーション追加
+   - 実際の開発フローと問題解決の過程を物語形式で紹介
+
+14. **セキュリティ&ベストプラクティス（pages/security-best-practices.html）** 🆕
+   - 初心者が陥りやすいセキュリティリスク（APIキー漏洩、SQLインジェクション、XSS、CSRF）
+   - 環境変数の管理方法（.env、Vercel/Netlify設定）
+   - コーディングベストプラクティス（命名規則、コメント、エラーハンドリング）
+   - 安全なデプロイとセキュリティツール
+
+15. **チーム開発・コラボレーションガイド（pages/team-collaboration.html）** 🆕
+   - GitHub Flowを使ったブランチ戦略
+   - プルリクエストの作成とレビュー方法
+   - 効果的なコミットメッセージの書き方
+   - チームコミュニケーションとドキュメント管理
+
+16. **FAQ（pages/faq.html）**
    - よくある質問と回答
    - トラブルシューティング
    - エラーメッセージの対処法
@@ -92,16 +173,33 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
 
 ```
 /
-├── index.html          # トップページ
-├── robots.txt          # クローラー対策
+├── index.html                    # トップページ
+├── robots.txt                    # クローラー対策
 ├── css/
-│   └── styles.css     # 統一スタイルシート
+│   └── styles.css               # 統一スタイルシート（Phase 1-3実装済み）
+├── js/
+│   ├── menu.js                  # メニュー制御、ダークモード、スクロール機能
+│   ├── search.js                # 検索機能（Phase 3実装済み）
+│   └── toc.js                   # 目次ナビゲーション（Phase 3実装済み）
 ├── pages/
-│   ├── setup.html     # 準備編
-│   ├── basics.html    # 基礎知識編
-│   ├── practice.html  # 実践編
-│   └── faq.html       # FAQ
-└── README.md          # このファイル
+│   ├── setup.html               # 準備編
+│   ├── basics.html              # 基礎知識編
+│   ├── practice.html            # 実践編
+│   ├── deployment-guide.html    # デプロイ完全ガイド 🆕
+│   ├── non-engineer-tools.html  # 非エンジニア向け便利ツール集 🆕
+│   ├── stitch-workflow.html     # Google Stitch活用ガイド
+│   ├── ai-tools.html            # AIツール大全
+│   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門
+│   ├── troubleshooting-guide.html  # トラブルシューティング完全ガイド 🆕
+│   ├── cheatsheets.html         # チートシート集 🆕
+│   ├── sample-projects.html     # サンプルプロジェクト集 🆕
+│   ├── case-studies.html        # ケーススタディ集 🆕
+│   ├── security-best-practices.html  # セキュリティ&ベストプラクティス 🆕
+│   ├── team-collaboration.html  # チーム開発・コラボレーションガイド 🆕
+│   └── faq.html                 # FAQ
+├── docs/
+│   └── FUTURE_ENHANCEMENTS.md   # 今後の機能拡張ガイド
+└── README.md                    # このファイル
 ```
 
 ## 💡 特徴的な機能
@@ -121,9 +219,13 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 
 ## 🛠 技術仕様
 
-- **HTML5 + CSS3**：セマンティックなマークアップ
+- **HTML5 + CSS3**：セマンティックなマークアップ、モダンなCSS変数システム
 - **レスポンシブデザイン**：スマホ・タブレット対応
-- **純粋な静的サイト**：JavaScriptは最小限
+- **バニラJavaScript**：軽量で高速、フレームワーク不要
+- **ダークモード対応**：LocalStorageで設定を保存
+- **検索機能**：Cmd/Ctrl+Kショートカット対応のモーダル検索
+- **目次ナビゲーション**：自動生成、スクロール追従
+- **アニメーション**：Intersection Observerによるスクロールアニメーション
 - **SEO対策**：robots.txt + noindexメタタグでクローラー制御
 
 ## 🎓 対象読者
@@ -163,6 +265,26 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 - [Supabase公式サイト](https://supabase.com)
 
 ## 📅 更新履歴
+
+- **2025年1月**: Phase 3 高優先度機能実装 + コンテンツ大幅拡充
+  - ✅ 検索機能（モーダル検索、Cmd+K/Ctrl+Kショートカット）
+  - ✅ 目次ナビゲーション（サイドバーTOC、自動生成、スクロール追従）
+  - ✅ SVGイラスト（アニメーション付きブラウザウィンドウ）
+  - ✅ ダークモード切り替え機能
+  - ✅ スクロールプログレスバー
+  - ✅ スクロールアニメーション（Intersection Observer）
+  - 🆕 Google Stitch活用ガイドページを追加
+  - 🆕 AIツール大全ページを追加（AI IDE 14種類、AI CLI 10種類を徹底比較）
+  - 🆕 対話で学ぶGit/GitHub入門ページを追加
+  - 🆕 デプロイ完全ガイドページを追加（Vercel、Cloudflare Pages、Netlify詳細解説）
+  - 🆕 非エンジニア向け便利ツール集ページを追加（ノーコードツール、Markdown完全ガイド）
+  - 🆕 トラブルシューティング完全ガイドページを追加（エラー解決、デバッグ技術）
+  - 🆕 チートシート集ページを追加（Git、Cursor、Markdown、HTML/CSS）
+  - 🆕 サンプルプロジェクト集ページを追加（5つのテンプレートプロジェクト）
+  - 🆕 ケーススタディ集ページを追加（実際の開発事例3件）
+  - 🆕 セキュリティ&ベストプラクティスページを追加（セキュリティリスク対策、コーディング規約）
+  - 🆕 チーム開発・コラボレーションガイドページを追加（GitHub Flow、PR、コードレビュー）
+  - 🐛 ナビゲーションメニューの不整合を修正（全ページで16項目に統一）
 
 - **2024年**: 初版リリース
   - 計画重視型ワークフローの導入

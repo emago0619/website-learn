@@ -6,40 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <header class="hero">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1>開発初心者向け<br>Webサイト構築ガイド</h1>
-                <p>ChatGPT、Cursor、Antigravityを使った<br>計画重視型の開発ワークフロー</p>
-                <a href="#about" class="btn btn-lg">ガイドを読み始める</a>
-            </div>
-            <div class="hero-image">
-                <img src="images/hero-bg.png" alt="Web Development Workspace" width="600" height="400">
-            </div>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>開発初心者向け Webサイト構築ガイド</h1>
+            <p>ChatGPT、Cursor、Antigravityを使った計画重視型の開発ワークフロー</p>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="index.html" class="active">ホーム</a></li>
-                <li><a href="pages/setup.html">準備編</a></li>
-                <li><a href="pages/basics.html">基礎知識編</a></li>
-                <li><a href="pages/practice.html">実践編</a></li>
-                <li><a href="pages/ai-design.html">AIデザイン</a></li>
-                <li><a href="pages/faq.html">FAQ</a></li>
-            </ul>
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0"
+            aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false"
+                    aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="index.html" class="active" aria-current="page">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="pages/setup.html">準備編</a></li>
+                            <li><a href="pages/basics.html">基礎知識編</a></li>
+                            <li><a href="pages/practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="pages/non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="pages/stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="pages/ai-tools.html">AIツール大全</a></li>
+                            <li><a href="pages/git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="pages/deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="pages/troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="pages/security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="pages/team-collaboration.html">チーム開発</a></li>
+                            <li><a href="pages/faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false"
+                            aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="pages/cheatsheets.html">チートシート</a></li>
+                            <li><a href="pages/sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="pages/case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;"
+                    aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                        focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                        style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         <div class="container">
-            <section id="about">
-                <h2>このガイドについて</h2>
+            <section id="about" aria-labelledby="about-heading">
+                <h2 id="about-heading">このガイドについて</h2>
                 <p>
                     このガイドは、開発初心者がAIツールを活用して、効率的かつ安全にWebサイトの構築・修正ができるようになることを目指しています。
                 </p>
@@ -51,8 +123,8 @@
                 </p>
             </section>
 
-            <section>
-                <h2>💭 なぜ「計画重視型」なのか？</h2>
+            <section id="why-planning" aria-labelledby="why-planning-heading">
+                <h2 id="why-planning-heading">💭 なぜ「計画重視型」なのか？</h2>
                 <div class="card">
                     <p><strong>Q：「計画を立てるより、直接コードを書いた方が早くない？」</strong></p>
                     <p>
@@ -76,8 +148,70 @@
                 </div>
             </section>
 
-            <section>
-                <h2>対象読者</h2>
+            <!-- SVGイラスト -->
+            <div class="hero-illustration" role="img" aria-label="Webサイトブラウザのアニメーションイラスト">
+                <svg class="browser-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="browserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                        </linearGradient>
+
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="10" stdDeviation="20" flood-opacity="0.3" />
+                        </filter>
+                    </defs>
+
+                    <!-- ブラウザウィンドウ -->
+                    <g filter="url(#shadow)">
+                        <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" opacity="0.95" />
+                        <rect x="50" y="50" width="700" height="40" rx="10" fill="url(#browserGrad)" />
+
+                        <!-- ドットボタン -->
+                        <circle cx="70" cy="70" r="6" fill="#ff5f57">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="90" cy="70" r="6" fill="#ffbd2e">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="0.5s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="110" cy="70" r="6" fill="#28ca42">
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="1s"
+                                repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- コンテンツ領域 -->
+                        <rect x="70" y="110" width="660" height="30" rx="5" fill="#e0e7ff">
+                            <animate attributeName="width" values="660;600;660" dur="4s" repeatCount="indefinite" />
+                        </rect>
+                        <rect x="70" y="160" width="400" height="15" rx="3" fill="#c7d2fe" />
+                        <rect x="70" y="185" width="500" height="15" rx="3" fill="#c7d2fe" />
+                        <rect x="70" y="210" width="450" height="15" rx="3" fill="#c7d2fe" />
+
+                        <!-- カード -->
+                        <g class="card-group">
+                            <rect x="70" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
+                                stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" repeatCount="indefinite" />
+                            </rect>
+                            <rect x="290" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
+                                stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" begin="0.5s"
+                                    repeatCount="indefinite" />
+                            </rect>
+                            <rect x="510" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
+                                stroke-width="2">
+                                <animate attributeName="y" values="250;240;250" dur="3s" begin="1s"
+                                    repeatCount="indefinite" />
+                            </rect>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+
+            <section id="target-audience" aria-labelledby="target-audience-heading">
+                <h2 id="target-audience-heading">対象読者</h2>
                 <p>このガイドは、以下のような方を対象としています：</p>
                 <ul>
                     <li>プログラミング経験が少ないが、Webサイトの作成・修正を担当する方</li>
@@ -91,8 +225,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>このガイドで学べること</h2>
+            <section id="what-you-learn" aria-labelledby="what-you-learn-heading">
+                <h2 id="what-you-learn-heading">このガイドで学べること</h2>
                 <div class="card">
                     <h3>1. 準備編</h3>
                     <p>開発に必要なツールの準備方法を学びます。</p>
@@ -116,6 +250,11 @@
                         <li>基本的な用語集</li>
                     </ul>
                     <a href="pages/basics.html" class="btn">基礎知識編を読む</a>
+                    <div style="margin-top: 1rem;">
+                        <strong>🎯 特におすすめ：</strong>
+                        <a href="pages/git-github-guide.html">対話で学ぶGit/GitHub入門</a> -
+                        初心者がつまずきやすいポイントを対話形式でわかりやすく解説！
+                    </div>
                 </div>
 
                 <div class="card">
@@ -132,7 +271,59 @@
                 </div>
 
                 <div class="card">
-                    <h3>4. FAQ</h3>
+                    <h3>4. デプロイ完全ガイド 🆕</h3>
+                    <p>Webサイトを世界に公開するための全ての方法を徹底解説！</p>
+                    <ul>
+                        <li>デプロイの基礎知識</li>
+                        <li>GitHub Pages、Vercel、Netlify、Cloudflare Pagesの詳細解説</li>
+                        <li>環境変数、カスタムドメイン、プレビューデプロイの設定方法</li>
+                        <li>シーン別おすすめサービスの選び方</li>
+                        <li>トラブルシューティング</li>
+                    </ul>
+                    <a href="pages/deployment-guide.html" class="btn">デプロイガイドを読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>5. 非エンジニア向け便利ツール集 🆕</h3>
+                    <p>コードを書かずにWebサイトを作る・運営するための実用ツール集。</p>
+                    <ul>
+                        <li>ノーコードWebサイト作成ツール（STUDIO、Wix、Webflow、ペライチ、WordPress）</li>
+                        <li>Markdown（マークダウン）完全ガイド</li>
+                        <li>デザイン・画像編集ツール（Canva、Figma、Photopea）</li>
+                        <li>その他の便利ツール</li>
+                        <li>学習リソース</li>
+                    </ul>
+                    <a href="pages/non-engineer-tools.html" class="btn">便利ツール集を読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>6. Google Stitch活用ガイド</h3>
+                    <p>AIでデザインを生成して実装する実践的ワークフロー。</p>
+                    <ul>
+                        <li>Google Stitchの使い方</li>
+                        <li>テキスト・画像からUI生成</li>
+                        <li>Figmaとの連携</li>
+                        <li>Cursorでの実装方法</li>
+                        <li>実例で学ぶデザイン→実装の流れ</li>
+                    </ul>
+                    <a href="pages/stitch-workflow.html" class="btn">Stitch活用ガイドを読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>7. AIツール大全：IDE編＆CLI編</h3>
+                    <p>Cursor以外のAI IDE、Codex CLI以外のAI CLIツールを徹底解説！</p>
+                    <ul>
+                        <li>AI IDE 14種類の比較（Windsurf、GitHub Copilot、Zed、Codeiumなど）</li>
+                        <li>AI CLIツール 10種類の紹介（Claude Code、Aider、Gemini CLIなど）</li>
+                        <li>シーン別おすすめツールの選び方</li>
+                        <li>無料・有料プランの比較表</li>
+                        <li>2025年最新トレンドとエージェント型開発</li>
+                    </ul>
+                    <a href="pages/ai-tools.html" class="btn">AIツール大全を読む</a>
+                </div>
+
+                <div class="card">
+                    <h3>8. FAQ</h3>
                     <p>よくある質問とトラブルシューティングをまとめています。</p>
                     <ul>
                         <li>プランモード関連のFAQ</li>
@@ -144,8 +335,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>推奨される開発フロー</h2>
+            <section id="development-flow" aria-labelledby="development-flow-heading">
+                <h2 id="development-flow-heading">推奨される開発フロー</h2>
                 <ol class="steps">
                     <li>
                         <strong>要件を整理する（ChatGPT活用）</strong><br>
@@ -178,8 +369,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>💭 実際の作業イメージ</h2>
+            <section id="work-example" aria-labelledby="work-example-heading">
+                <h2 id="work-example-heading">💭 実際の作業イメージ</h2>
                 <div class="card">
                     <p><strong>Q：「具体的にどんな感じで進めるの？」</strong></p>
                     <p>A：例えば、「トップページに新しいセクションを追加したい」という場合：</p>
@@ -213,8 +404,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>必要な環境</h2>
+            <section id="requirements" aria-labelledby="requirements-heading">
+                <h2 id="requirements-heading">必要な環境</h2>
                 <ul>
                     <li>パソコン（Windows、Mac、Linuxのいずれか）</li>
                     <li>インターネット接続</li>
@@ -228,8 +419,8 @@
                 </div>
             </section>
 
-            <section>
-                <h2>次のステップ</h2>
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">次のステップ</h2>
                 <p>
                     準備ができたら、<a href="pages/setup.html">準備編</a>から始めましょう。
                     各ページは順番に読み進めることをおすすめしますが、必要に応じて特定のセクションだけを読むこともできます。
@@ -241,9 +432,62 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
         </div>
     </footer>
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="search-title"
+        aria-hidden="true">
+        <div class="search-modal-overlay" id="searchOverlay" aria-hidden="true"></div>
+        <div class="search-modal-content">
+            <h2 id="search-title" class="sr-only">サイト内検索</h2>
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
+                    aria-hidden="true" focusable="false">
+                    <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)" id="searchInput"
+                    autocomplete="off" aria-label="検索キーワード入力" role="searchbox" aria-autocomplete="list"
+                    aria-controls="searchResults">
+                <kbd class="search-shortcut" aria-label="ESCキーで閉じる">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults" role="listbox" aria-live="polite" aria-atomic="false">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips" role="note" aria-label="検索のヒント">
+                    <span><kbd aria-label="上矢印キー">↑</kbd><kbd aria-label="下矢印キー">↓</kbd> で移動</span>
+                    <span><kbd aria-label="エンターキー">Enter</kbd> で選択</span>
+                    <span><kbd aria-label="エスケープキー">ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/install.js"></script>
+
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
