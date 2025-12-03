@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>準備編 - 開発初心者向け Webサイト構築ガイド</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -22,6 +24,7 @@
                 <li><a href="setup.html" class="active">準備編</a></li>
                 <li><a href="basics.html">基礎知識編</a></li>
                 <li><a href="practice.html">実践編</a></li>
+                <li><a href="ai-design.html">AIデザイン</a></li>
                 <li><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
@@ -37,7 +40,8 @@
                 </p>
                 <ul>
                     <li><strong>GitHub</strong>：コードを保存・共有するためのサービス</li>
-                    <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
+                    <li><strong>Cursor</strong>：AI搭載のコードエディタ（既存のプロジェクト修正に最適）</li>
+                    <li><strong>Antigravity</strong>：Google DeepMind製の自律型AIエージェントIDE（新規開発や複雑なタスクに最適）</li>
                     <li><strong>CodexCLI</strong>：コマンドラインで操作するためのツール</li>
                 </ul>
             </section>
@@ -132,7 +136,41 @@
             </section>
 
             <section>
-                <h2>3. CodexCLIのインストール</h2>
+                <h2>3. Antigravityのインストール（推奨）</h2>
+                <p>
+                    Antigravityは、Google DeepMindが開発した最新のAI IDEです。
+                    Cursorと同様にAIがコードを書いてくれますが、最大の特徴は「自律型エージェント」です。
+                    エージェントが自分で計画を立て、ブラウザを操作してテストまで行ってくれます。
+                </p>
+
+                <h3>手順</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>公式サイトにアクセス</strong><br>
+                        ブラウザで <a href="https://antigravity.google" target="_blank">https://antigravity.google</a> を開きます。
+                    </li>
+                    <li>
+                        <strong>ダウンロード</strong><br>
+                        「Download for Mac/Windows」ボタンをクリックしてインストーラーをダウンロードします。
+                    </li>
+                    <li>
+                        <strong>インストール</strong><br>
+                        ダウンロードしたファイルを実行し、指示に従ってインストールします。
+                    </li>
+                    <li>
+                        <strong>Googleアカウントでログイン</strong><br>
+                        起動後、Googleアカウントでログインします。Gemini 3 Proなどの高性能モデルが利用可能になります。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>ポイント：</strong> Antigravityは「エージェント」という概念を持っています。
+                    「このタスクをやっておいて」と依頼すると、エージェントが自律的に作業を進めてくれるのが大きな特徴です。
+                </div>
+            </section>
+
+            <section>
+                <h2>4. CodexCLIのインストール</h2>
                 <p>
                     CodexCLIは、コマンドライン（ターミナル）からGitHubやGitの操作を行うためのツールです。
                     初心者の方には少し難しいかもしれませんが、このガイドに従えば問題なく使えるようになります。
@@ -214,7 +252,7 @@
                 <h3>確認チェックリスト</h3>
                 <ul>
                     <li>□ GitHubアカウントにログインできる</li>
-                    <li>□ Cursorが起動できる</li>
+                    <li>□ Cursor または Antigravityが起動できる</li>
                     <li>□ CodexCLIがインストールされている（<code>codex --version</code>で確認）</li>
                     <li>□ CodexCLIとGitHubが連携されている（<code>codex auth status</code>で確認）</li>
                 </ul>
@@ -232,7 +270,7 @@
                 </p>
                 <ol>
                     <li><strong>GitHub</strong>：コードを保存・管理するサービス</li>
-                    <li><strong>Cursor</strong>：AI搭載のコードエディタ</li>
+                    <li><strong>Cursor / Antigravity</strong>：AI搭載のコードエディタ</li>
                     <li><strong>CodexCLI</strong>：コマンドライン操作ツール</li>
                 </ol>
                 <p>
@@ -249,5 +287,5 @@
         </div>
     </footer>
 </body>
-</html>
 
+</html>

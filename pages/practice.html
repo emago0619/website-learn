@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>実践編 - 開発初心者向け Webサイト構築ガイド</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -22,6 +24,7 @@
                 <li><a href="setup.html">準備編</a></li>
                 <li><a href="basics.html">基礎知識編</a></li>
                 <li><a href="practice.html" class="active">実践編</a></li>
+                <li><a href="ai-design.html">AIデザイン</a></li>
                 <li><a href="faq.html">FAQ</a></li>
             </ul>
         </div>
@@ -43,7 +46,7 @@
 
             <section>
                 <h2>パート0：開発フロー全体像</h2>
-                
+
                 <p>
                     まず、推奨される開発フローの全体像を理解しましょう。
                 </p>
@@ -55,7 +58,7 @@
                         漠然としたアイデアを、具体的な要件に落とし込みます
                     </li>
                     <li>
-                        <strong>Cursorプランモードで実装計画を立てる</strong><br>
+                        <strong>AI（Cursor/Antigravity）で実装計画を立てる</strong><br>
                         どのファイルをどう修正するかの計画をAIに提案してもらいます
                     </li>
                     <li>
@@ -63,8 +66,8 @@
                         提案された計画が妥当か確認し、必要に応じて調整します
                     </li>
                     <li>
-                        <strong>実装</strong><br>
-                        承認された計画に基づいて実装を進めます
+                        <strong>実装（エージェント活用）</strong><br>
+                        承認された計画に基づいて、AIやエージェントと共に実装を進めます
                     </li>
                     <li>
                         <strong>テスト・デプロイ</strong><br>
@@ -96,7 +99,7 @@
 
             <section>
                 <h2>パート1：ChatGPTで要件を整理する</h2>
-                
+
                 <p>
                     実装を始める前に、まずChatGPTを使って「何を作るのか」「何を修正するのか」を明確にします。
                 </p>
@@ -203,7 +206,7 @@
 
             <section>
                 <h2>パート2：CodexCLIで初期構築（クレジット節約術）</h2>
-                
+
                 <p>
                     ChatGPTで要件をまとめたら、次の選択肢が2つあります：
                 </p>
@@ -403,19 +406,19 @@
 
             <section>
                 <h2>パート3：Cursorプランモードで実装計画を立てる（代替手法）</h2>
-                
+
                 <p>
                     パート2のCodexCLI手法が使えない場合、または最初から細かい計画を立てたい場合は、
                     Cursorのプランモードを使います。
                 </p>
-                
+
                 <div class="alert alert-info">
                     <strong>使い分けのポイント：</strong><br>
                     - <strong>新規プロジェクト（ゼロから作る）</strong>：CodexCLIで初期構築がおすすめ<br>
                     - <strong>既存プロジェクトの修正</strong>：Cursorプランモードがおすすめ<br>
                     - <strong>複雑な修正</strong>：Cursorプランモードでしっかり計画
                 </div>
-                
+
                 <p>
                     要件が整理できたら、次はCursorのプランモードで実装計画を立てます。
                 </p>
@@ -536,14 +539,49 @@
             </section>
 
             <section>
-                <h2>パート4：新規Webサイトの作成</h2>
-                
+                <h2>パート4：Antigravityでエージェントに開発を依頼する</h2>
+
+                <p>
+                    Antigravityを使うと、自分でコードを書くのではなく、<strong>「エージェントに依頼して、やってもらう」</strong>という新しい開発スタイルが可能になります。
+                </p>
+
+                <h3>エージェント開発の流れ</h3>
+                <ol class="steps">
+                    <li>
+                        <strong>Task Boundaryでゴールを設定</strong><br>
+                        「トップページにFAQセクションを追加して」のように、ゴールを明確に伝えます。
+                    </li>
+                    <li>
+                        <strong>エージェントが計画を作成</strong><br>
+                        エージェントが「implementation_plan.md」などの計画書を作成します。
+                        人間はこれを確認し、承認します。
+                    </li>
+                    <li>
+                        <strong>エージェントが実装・テスト</strong><br>
+                        承認後、エージェントがコードを書き、ブラウザを操作して動作確認まで行います。
+                    </li>
+                    <li>
+                        <strong>成果物（Artifact）の確認</strong><br>
+                        作業完了後、エージェントが「walkthrough.md」などのレポートを作成します。
+                        これを見て、正しく実装されたか確認します。
+                    </li>
+                </ol>
+
+                <div class="alert alert-success">
+                    <strong>ポイント：</strong> Antigravityは「部下に仕事を頼む」感覚に近いです。
+                    指示が明確であればあるほど、良い結果が返ってきます。
+                </div>
+            </section>
+
+            <section>
+                <h2>パート5：新規Webサイトの作成</h2>
+
                 <div class="alert alert-info">
                     <strong>補足：</strong> この パート では従来の方法（手動でファイルを作成）を説明しますが、
                     実際の業務では<strong>パート2のCodexCLI手法</strong>を使うことを推奨します。
                     ここでの説明は、基本的な仕組みを理解するための学習用です。
                 </div>
-                
+
                 <h3>ステップ1：プロジェクトフォルダの作成</h3>
                 <ol class="steps">
                     <li>
@@ -699,8 +737,8 @@ p {
             </section>
 
             <section>
-                <h2>パート5：GitHub PagesでWebサイトを公開</h2>
-                
+                <h2>パート6：GitHub PagesでWebサイトを公開</h2>
+
                 <p>
                     GitHub Pagesを使うと、作成したWebサイトを無料でインターネット上に公開できます。
                 </p>
@@ -747,8 +785,8 @@ p {
             </section>
 
             <section>
-                <h2>パート6：既存Webサイトの修正</h2>
-                
+                <h2>パート7：既存Webサイトの修正</h2>
+
                 <p>
                     既に存在するWebサイトを修正する方法を学びます。
                     他の人が作成したWebサイトや、以前に作成したWebサイトを修正する際に使います。
@@ -822,8 +860,8 @@ p {
             </section>
 
             <section>
-                <h2>パート7：より高度なWebサイトの作成</h2>
-                
+                <h2>パート8：より高度なWebサイトの作成</h2>
+
                 <p>
                     基本的なWebサイトが作成できたら、より高度な機能を追加してみましょう。
                 </p>
@@ -896,8 +934,8 @@ p {
             </section>
 
             <section>
-                <h2>パート8：様々なデプロイ方法</h2>
-                
+                <h2>パート9：様々なデプロイ方法</h2>
+
                 <p>
                     Webサイトを公開する方法は、GitHub Pages以外にもいくつかあります。
                     それぞれの特徴を理解して、自分に合った方法を選びましょう。
@@ -1015,7 +1053,8 @@ p {
                 <ol class="steps">
                     <li>
                         <strong>FileZillaをダウンロード</strong><br>
-                        <a href="https://filezilla-project.org" target="_blank">https://filezilla-project.org</a> からダウンロードしてインストールします。
+                        <a href="https://filezilla-project.org" target="_blank">https://filezilla-project.org</a>
+                        からダウンロードしてインストールします。
                     </li>
                     <li>
                         <strong>接続情報を入力</strong><br>
@@ -1096,8 +1135,8 @@ p {
             </section>
 
             <section>
-                <h2>パート9：Cursorの内蔵ブラウザで効率的に修正する</h2>
-                
+                <h2>パート10：Cursorの内蔵ブラウザで効率的に修正する</h2>
+
                 <p>
                     Cursor 2.0には、内蔵ブラウザという革命的な機能があります。
                     この機能を使うと、エディタとブラウザを行き来する手間が大幅に削減され、
@@ -1281,5 +1320,5 @@ p {
         </div>
     </footer>
 </body>
-</html>
 
+</html>

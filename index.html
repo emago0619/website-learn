@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,18 @@
     <title>開発初心者向け Webサイト構築ガイド</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <header>
-        <div class="container">
-            <h1>開発初心者向け Webサイト構築ガイド</h1>
-            <p>ChatGPT、Cursor、GitHubを使った計画重視型の開発ワークフロー</p>
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>開発初心者向け<br>Webサイト構築ガイド</h1>
+                <p>ChatGPT、Cursor、Antigravityを使った<br>計画重視型の開発ワークフロー</p>
+                <a href="#about" class="btn btn-lg">ガイドを読み始める</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-bg.png" alt="Web Development Workspace" width="600" height="400">
+            </div>
         </div>
     </header>
 
@@ -22,6 +30,7 @@
                 <li><a href="pages/setup.html">準備編</a></li>
                 <li><a href="pages/basics.html">基礎知識編</a></li>
                 <li><a href="pages/practice.html">実践編</a></li>
+                <li><a href="pages/ai-design.html">AIデザイン</a></li>
                 <li><a href="pages/faq.html">FAQ</a></li>
             </ul>
         </div>
@@ -29,14 +38,15 @@
 
     <main>
         <div class="container">
-            <section>
+            <section id="about">
                 <h2>このガイドについて</h2>
                 <p>
                     このガイドは、開発初心者がAIツールを活用して、効率的かつ安全にWebサイトの構築・修正ができるようになることを目指しています。
                 </p>
                 <p>
                     <strong>「いきなりコードを書かない」</strong>というのが、私たちの基本方針です。
-                    まず<strong>ChatGPT</strong>で要件を整理し、<strong>Cursorのプランモード</strong>で実装計画を立ててから、実装に入ります。
+                    まず<strong>ChatGPT</strong>で要件を整理し、<strong>Cursor</strong>や<strong>Antigravity</strong>で実装計画を立ててから、実装に入ります。
+                    特にGoogle DeepMindの<strong>Antigravity</strong>を使えば、自律的なエージェントが実装をサポートしてくれます。
                     この流れを習得することで、ミスを減らし、品質の高い成果物を作れるようになります。
                 </p>
             </section>
@@ -71,7 +81,7 @@
                 <p>このガイドは、以下のような方を対象としています：</p>
                 <ul>
                     <li>プログラミング経験が少ないが、Webサイトの作成・修正を担当する方</li>
-                    <li>AIツール（ChatGPT、Cursor）を業務で活用したい方</li>
+                    <li>AIツール（ChatGPT、Cursor、Antigravity）を業務で活用したい方</li>
                     <li>既存のWebサイトを安全に修正したい方</li>
                     <li>チームで開発する際の標準的なワークフローを学びたい方</li>
                 </ul>
@@ -88,7 +98,7 @@
                     <p>開発に必要なツールの準備方法を学びます。</p>
                     <ul>
                         <li>GitHubアカウントの作成</li>
-                        <li>Cursorのインストールと設定</li>
+                        <li>Cursor / Antigravityのインストール</li>
                         <li>ChatGPTの活用準備（オプション）</li>
                         <li>各ツールの初期設定</li>
                     </ul>
@@ -100,7 +110,7 @@
                     <p>各ツールと技術の基本的な概念を理解します。</p>
                     <ul>
                         <li>GitとGitHubの基礎</li>
-                        <li>Cursorの特徴とAI機能</li>
+                        <li>Cursor / Antigravityの特徴とAI機能</li>
                         <li>静的サイト vs 動的サイト</li>
                         <li>Next.js、React、Supabaseなどモダンな技術</li>
                         <li>基本的な用語集</li>
@@ -113,8 +123,8 @@
                     <p><strong>計画重視型</strong>のワークフローを実践します。</p>
                     <ul>
                         <li><strong>ステップ1：</strong> ChatGPTで要件を整理</li>
-                        <li><strong>ステップ2：</strong> Cursorプランモードで実装計画</li>
-                        <li><strong>ステップ3：</strong> プランに基づいて実装</li>
+                        <li><strong>ステップ2：</strong> AI（Cursor/Antigravity）で実装計画</li>
+                        <li><strong>ステップ3：</strong> エージェントと共に実装</li>
                         <li>Cursorの内蔵ブラウザで効率的に修正</li>
                         <li>様々なデプロイ方法</li>
                     </ul>
@@ -143,8 +153,8 @@
                         漠然としたアイデアを、具体的な要件に落とし込みます。
                     </li>
                     <li>
-                        <strong>実装計画を立てる（Cursorプランモード）</strong><br>
-                        Cursorのプランモードで、「どのファイルを」「どう修正するか」の計画を立てます。
+                        <strong>実装計画を立てる（Cursor / Antigravity）</strong><br>
+                        CursorのプランモードやAntigravityのエージェント機能で、「どのファイルを」「どう修正するか」の計画を立てます。
                         AIが提案する計画をレビューし、必要に応じて調整します。
                     </li>
                     <li>
@@ -209,7 +219,7 @@
                     <li>パソコン（Windows、Mac、Linuxのいずれか）</li>
                     <li>インターネット接続</li>
                     <li>GitHubアカウント</li>
-                    <li>Cursorエディタ</li>
+                    <li>Cursor または Antigravityエディタ</li>
                     <li>ChatGPT（無料版でもOK、Plus推奨）</li>
                 </ul>
                 <div class="alert alert-info">
@@ -235,5 +245,5 @@
         </div>
     </footer>
 </body>
-</html>
 
+</html>
