@@ -2163,7 +2163,9 @@ body.debug-contrast *:focus {
 .hero-image {
     flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    /* 右寄せ */
+    align-items: center;
 }
 
 .hero-image img {
