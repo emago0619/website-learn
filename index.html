@@ -18,10 +18,16 @@
     <!-- アクセシビリティ: ライブリージョンアナウンサー -->
     <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
 
-    <header>
-        <div class="container">
-            <h1>開発初心者向け Webサイト構築ガイド</h1>
-            <p>ChatGPT、Cursor、Antigravityを使った計画重視型の開発ワークフロー</p>
+    <header class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>開発初心者向け<br>Webサイト構築ガイド</h1>
+                <p>ChatGPT、Cursor、Antigravityを使った<br>計画重視型の開発ワークフロー</p>
+                <a href="#about" class="btn btn-lg">ガイドを読み始める</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-bg.png" alt="Web Development Workspace" width="600" height="400">
+            </div>
         </div>
     </header>
 
@@ -148,67 +154,7 @@
                 </div>
             </section>
 
-            <!-- SVGイラスト -->
-            <div class="hero-illustration" role="img" aria-label="Webサイトブラウザのアニメーションイラスト">
-                <svg class="browser-illustration" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" focusable="false">
-                    <defs>
-                        <linearGradient id="browserGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                        </linearGradient>
 
-                        <filter id="shadow">
-                            <feDropShadow dx="0" dy="10" stdDeviation="20" flood-opacity="0.3" />
-                        </filter>
-                    </defs>
-
-                    <!-- ブラウザウィンドウ -->
-                    <g filter="url(#shadow)">
-                        <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" opacity="0.95" />
-                        <rect x="50" y="50" width="700" height="40" rx="10" fill="url(#browserGrad)" />
-
-                        <!-- ドットボタン -->
-                        <circle cx="70" cy="70" r="6" fill="#ff5f57">
-                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="90" cy="70" r="6" fill="#ffbd2e">
-                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="0.5s"
-                                repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="110" cy="70" r="6" fill="#28ca42">
-                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="1s"
-                                repeatCount="indefinite" />
-                        </circle>
-
-                        <!-- コンテンツ領域 -->
-                        <rect x="70" y="110" width="660" height="30" rx="5" fill="#e0e7ff">
-                            <animate attributeName="width" values="660;600;660" dur="4s" repeatCount="indefinite" />
-                        </rect>
-                        <rect x="70" y="160" width="400" height="15" rx="3" fill="#c7d2fe" />
-                        <rect x="70" y="185" width="500" height="15" rx="3" fill="#c7d2fe" />
-                        <rect x="70" y="210" width="450" height="15" rx="3" fill="#c7d2fe" />
-
-                        <!-- カード -->
-                        <g class="card-group">
-                            <rect x="70" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
-                                stroke-width="2">
-                                <animate attributeName="y" values="250;240;250" dur="3s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="290" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
-                                stroke-width="2">
-                                <animate attributeName="y" values="250;240;250" dur="3s" begin="0.5s"
-                                    repeatCount="indefinite" />
-                            </rect>
-                            <rect x="510" y="250" width="200" height="150" rx="8" fill="#fff" stroke="#e0e7ff"
-                                stroke-width="2">
-                                <animate attributeName="y" values="250;240;250" dur="3s" begin="1s"
-                                    repeatCount="indefinite" />
-                            </rect>
-                        </g>
-                    </g>
-                </svg>
-            </div>
 
             <section id="target-audience" aria-labelledby="target-audience-heading">
                 <h2 id="target-audience-heading">対象読者</h2>
