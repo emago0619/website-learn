@@ -88,21 +88,30 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - Cursorでの実装方法
    - 実例で学ぶデザイン→実装の流れ
 
-8. **AIツール大全（pages/ai-tools.html）**
+8. **AIツール大全（pages/ai-tools.html）** 🔄
    - Cursor以外のAI IDE 14種類の徹底比較
    - Codex CLI以外のAI CLIツール 10種類の紹介
    - シーン別おすすめツールの選び方
    - 無料・有料プランの比較表
-   - 2025年最新トレンドとエージェント型開発
+   - **2026年最新トレンド**とバイブコーディング
+   - Cursor vs Claude Codeの使い分けガイド
 
-9. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）**
-   - 会話形式でわかりやすいGit/GitHub解説
-   - 初心者がつまずきやすいポイントを丁寧に説明
-   - コミット、プッシュ、プルの違い
-   - ブランチとマージの基礎
-   - 実践的なワークフロー
+9. **Claude Code活用ガイド（pages/claude-code-guide.html）** 🆕
+   - Claude Code v2.1.0の新機能解説
+   - インストールから実践までのステップバイステップガイド
+   - Cursorとの使い分けベストプラクティス
+   - IDE連携（VS Code, Cursor, Windsurf, JetBrains）
+   - スキル・フック機能、Claude in Chrome
+   - 他のCLIツール（Aider, Gemini CLI等）との比較
 
-10. **トラブルシューティング完全ガイド（pages/troubleshooting-guide.html）** 🆕
+10. **対話で学ぶGit/GitHub入門（pages/git-github-guide.html）**
+    - 会話形式でわかりやすいGit/GitHub解説
+    - 初心者がつまずきやすいポイントを丁寧に説明
+    - コミット、プッシュ、プルの違い
+    - ブランチとマージの基礎
+    - 実践的なワークフロー
+
+11. **トラブルシューティング完全ガイド（pages/troubleshooting-guide.html）** 🆕
    - Cursorでのエラー（API制限、接続エラー、プラン承認の問題）
    - GitHubでのエラー（pushの失敗、マージコンフリクト、.gitignoreの問題）
    - デプロイでのエラー（ビルド失敗、404エラー、環境変数の問題）
@@ -110,7 +119,7 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - デバッグの基本テクニック
    - エラーを未然に防ぐ習慣
 
-11. **チートシート集（pages/cheatsheets.html）** 🆕
+12. **チートシート集（pages/cheatsheets.html）** 🆕
    - Gitコマンドチートシート（基本操作、ブランチ、緊急時のコマンド）
    - Cursorショートカット（AI機能、エディタ操作、編集操作）
    - マークダウン記法チートシート
@@ -118,7 +127,7 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - Flexboxの基本
    - 印刷用PDF対応
 
-12. **サンプルプロジェクト集（pages/sample-projects.html）** 🆕
+13. **サンプルプロジェクト集（pages/sample-projects.html）** 🆕
    - ポートフォリオサイト（HTML/CSS/JS）
    - ブログサイト（静的サイト、Markdown対応）
    - ランディングページ（CTA最適化）
@@ -126,25 +135,25 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
    - タスク管理アプリ（Supabase、認証、データベース連携）
    - 各プロジェクトのセットアップ手順とカスタマイズガイド
 
-13. **ケーススタディ集（pages/case-studies.html）** 🆕
+14. **ケーススタディ集（pages/case-studies.html）** 🆕
    - 会社のお知らせページに新機能を追加
    - ECサイトの商品詳細ページをレスポンシブ対応
    - 問い合わせフォームにバリデーション追加
    - 実際の開発フローと問題解決の過程を物語形式で紹介
 
-14. **セキュリティ&ベストプラクティス（pages/security-best-practices.html）** 🆕
+15. **セキュリティ&ベストプラクティス（pages/security-best-practices.html）** 🆕
    - 初心者が陥りやすいセキュリティリスク（APIキー漏洩、SQLインジェクション、XSS、CSRF）
    - 環境変数の管理方法（.env、Vercel/Netlify設定）
    - コーディングベストプラクティス（命名規則、コメント、エラーハンドリング）
    - 安全なデプロイとセキュリティツール
 
-15. **チーム開発・コラボレーションガイド（pages/team-collaboration.html）** 🆕
+16. **チーム開発・コラボレーションガイド（pages/team-collaboration.html）** 🆕
    - GitHub Flowを使ったブランチ戦略
    - プルリクエストの作成とレビュー方法
    - 効果的なコミットメッセージの書き方
    - チームコミュニケーションとドキュメント管理
 
-16. **FAQ（pages/faq.html）**
+17. **FAQ（pages/faq.html）**
    - よくある質問と回答
    - トラブルシューティング
    - エラーメッセージの対処法
@@ -188,7 +197,8 @@ GitHub、Cursor、CodexCLI、ChatGPTを使って、開発初心者でも効率�
 │   ├── deployment-guide.html    # デプロイ完全ガイド 🆕
 │   ├── non-engineer-tools.html  # 非エンジニア向け便利ツール集 🆕
 │   ├── stitch-workflow.html     # Google Stitch活用ガイド
-│   ├── ai-tools.html            # AIツール大全
+│   ├── ai-tools.html            # AIツール大全（2026年版）
+│   ├── claude-code-guide.html   # Claude Code活用ガイド 🆕
 │   ├── git-github-guide.html    # 対話で学ぶGit/GitHub入門
 │   ├── troubleshooting-guide.html  # トラブルシューティング完全ガイド 🆕
 │   ├── cheatsheets.html         # チートシート集 🆕
@@ -227,6 +237,8 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 - **目次ナビゲーション**：自動生成、スクロール追従
 - **アニメーション**：Intersection Observerによるスクロールアニメーション
 - **SEO対策**：robots.txt + noindexメタタグでクローラー制御
+- **CSS新機能（2026年版）**：Container Queries、Cascade Layers、Lazy Loading用スタイル
+- **印刷最適化**：Print CSS完備（ナビ非表示、リンクURL表示、ページブレーク制御）
 
 ## 🎓 対象読者
 
@@ -265,6 +277,14 @@ Cursorのクレジット消費を70-80%削減する方法を紹介：
 - [Supabase公式サイト](https://supabase.com)
 
 ## 📅 更新履歴
+
+- **2026年1月**: 2026年版アップデート
+  - 🆕 Claude Code活用ガイドページを新規追加（v2.1.0対応、対話形式で解説）
+  - 🔄 AIツール大全ページを2026年版に更新（Cursor vs Claude Code使い分け、85%のAIツール利用統計）
+  - ✅ 全ページのフッター年号を2026年に更新
+  - ✅ 全ページのナビゲーションにClaude Code活用ガイドを追加（17ページ構成に）
+  - 🎨 CSS新機能を導入（Container Queries、Cascade Layers）
+  - 🖨️ Print CSS追加（印刷最適化、ナビ非表示、リンクURL表示）
 
 - **2025年1月**: Phase 3 高優先度機能実装 + コンテンツ大幅拡充
   - ✅ 検索機能（モーダル検索、Cmd+K/Ctrl+Kショートカット）

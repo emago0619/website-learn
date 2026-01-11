@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Claude Code活用ガイド - 開発初心者向け Webサイト構築ガイド</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- アクセシビリティ: スキップリンク -->
+    <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+    <!-- アクセシビリティ: ライブリージョンアナウンサー -->
+    <div id="a11y-announcer" class="a11y-announcer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <header>
+        <div class="container">
+            <h1>Claude Code活用ガイド</h1>
+            <p>2026年最も注目されるAIコーディングツールを使いこなそう</p>
+        </div>
+    </header>
+
+    <nav id="mainNav" aria-label="メインナビゲーション">
+        <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="ページスクロール進捗" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="container nav-bar">
+            <div class="nav-main">
+                <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item"><a href="../index.html">ホーム</a></li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-learning">学習ステップ</button>
+                        <ul class="submenu" id="submenu-learning" aria-label="学習ステップ" hidden>
+                            <li><a href="setup.html">準備編</a></li>
+                            <li><a href="basics.html">基礎知識編</a></li>
+                            <li><a href="practice.html">実践編</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-tools">ツール活用</button>
+                        <ul class="submenu" id="submenu-tools" aria-label="ツール活用" hidden>
+                            <li><a href="non-engineer-tools.html">便利ツール集</a></li>
+                            <li><a href="stitch-workflow.html">Stitch活用</a></li>
+                            <li><a href="ai-tools.html">AIツール大全</a></li>
+                            <li><a href="claude-code-guide.html" class="active" aria-current="page">Claude Code活用</a></li>
+                            <li><a href="ai-design.html">Nano Banana Pro</a></li>
+                            <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-support">実務サポート</button>
+                        <ul class="submenu" id="submenu-support" aria-label="実務サポート" hidden>
+                            <li><a href="deployment-guide.html">デプロイガイド</a></li>
+                            <li><a href="troubleshooting-guide.html">トラブルシューティング</a></li>
+                            <li><a href="security-best-practices.html">セキュリティ</a></li>
+                            <li><a href="team-collaboration.html">チーム開発</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-submenu">
+                        <button class="submenu-toggle" type="button" aria-expanded="false" aria-controls="submenu-resources">資料集</button>
+                        <ul class="submenu" id="submenu-resources" aria-label="資料集" hidden>
+                            <li><a href="cheatsheets.html">チートシート</a></li>
+                            <li><a href="sample-projects.html">サンプルプロジェクト</a></li>
+                            <li><a href="case-studies.html">ケーススタディ</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <!-- PWAインストールボタン -->
+                <button class="install-btn" id="installBtn" aria-label="アプリをインストール" style="display: none;" aria-hidden="true" title="アプリをインストール">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span>インストール</span>
+                </button>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切替" aria-pressed="false" title="テーマ切替">
+                    <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" focusable="false">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="display: none;" aria-hidden="true" focusable="false">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content" tabindex="-1">
+        <div class="container">
+            <!-- 目次サイドバー -->
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-collapse" id="tocCollapse" aria-label="目次を折りたたむ">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="toc-nav" id="tocNav">
+                    <!-- JavaScriptで自動生成 -->
+                </nav>
+            </aside>
+
+            <section id="intro" aria-labelledby="intro-heading">
+                <h2 id="intro-heading">このページについて</h2>
+                <p>
+                    「Claude Codeって何？」「CursorとどうClaude Codeを違うの？」「どうやってインストールするの？」
+                    そんな疑問に、初心者の<strong>タロウさん</strong>とベテランエンジニアの<strong>先輩</strong>の対話を通じて答えていきます。
+                </p>
+                <div class="alert alert-info">
+                    <strong>登場人物：</strong><br>
+                    <strong>タロウ：</strong>Cursorを使い始めた初心者。もっと効率的に開発したい<br>
+                    <strong>先輩：</strong>Claude Codeを日常的に使うベテランエンジニア
+                </div>
+                <div class="alert alert-success">
+                    <strong>2026年最新情報：</strong> このページはClaude Code v2.1.0（2025年末リリース）に基づいています。
+                    スキル、フック、IDE連携など最新機能をカバーしています！
+                </div>
+            </section>
+
+            <section id="what-is-claude-code" aria-labelledby="what-is-claude-code-heading">
+                <h2 id="what-is-claude-code-heading">第1話：「Claude Codeって何？」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>先輩、Claude Codeってよく聞くんですけど、Cursorとは何が違うんですか？</p>
+
+                    <p><strong>先輩：</strong>いい質問！簡単に言うと、こんな違いがあるんだ：</p>
+
+                    <div class="alert alert-warning">
+                        <strong>🔥 2026年の定番：「Cursor + Claude Code」の組み合わせ</strong><br>
+                        「CursorはAIが<strong>あなたを速くする</strong>」<br>
+                        「Claude CodeはAIが<strong>あなたの代わりに仕事をする</strong>」
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特徴</th>
+                                <th>Cursor</th>
+                                <th>Claude Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>操作方法</strong></td>
+                                <td>GUI（グラフィカル）</td>
+                                <td>CLI（ターミナル）</td>
+                            </tr>
+                            <tr>
+                                <td><strong>得意なこと</strong></td>
+                                <td>日常的な編集、探索</td>
+                                <td>大規模リファクタ、自動化</td>
+                            </tr>
+                            <tr>
+                                <td><strong>作業スタイル</strong></td>
+                                <td>対話的・リアルタイム</td>
+                                <td>タスクを任せて自律実行</td>
+                            </tr>
+                            <tr>
+                                <td><strong>コードベース理解</strong></td>
+                                <td>開いているファイル中心</td>
+                                <td>プロジェクト全体をスキャン</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>タロウ：</strong>なるほど！じゃあ使い分けるってこと？</p>
+
+                    <p><strong>先輩：</strong>そうそう！2026年は「両方使う」のがベストプラクティスなんだ。
+                    日常的な編集はCursor、重い作業はClaude Codeって感じでね。</p>
+                </div>
+            </section>
+
+            <section id="installation" aria-labelledby="installation-heading">
+                <h2 id="installation-heading">第2話：「インストールしてみよう」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>早速使ってみたいです！どうやってインストールするんですか？</p>
+
+                    <p><strong>先輩：</strong>超簡単だよ！npmかHomebrewで一発！</p>
+
+                    <h3>インストール方法</h3>
+
+                    <h4>方法1: npm（推奨）</h4>
+                    <pre><code># Node.jsがインストールされていれば
+npm install -g @anthropic-ai/claude-code</code></pre>
+
+                    <h4>方法2: Homebrew（Mac）</h4>
+                    <pre><code>brew install claude-code</code></pre>
+
+                    <h4>方法3: Windows Package Manager</h4>
+                    <pre><code>winget install Anthropic.ClaudeCode</code></pre>
+
+                    <h3>初期設定</h3>
+                    <pre><code># インストール確認
+claude --version
+
+# Anthropicアカウントでログイン
+claude login
+
+# プロジェクトで初期化
+cd your-project
+claude</code></pre>
+
+                    <p><strong>タロウ：</strong>え、これだけ？</p>
+
+                    <p><strong>先輩：</strong>うん！Claude Pro（月$20）があれば、ログインするだけで使えるよ。
+                    API従量課金でも使えるけど、Proの方がコスパいいね。</p>
+                </div>
+            </section>
+
+            <section id="basic-usage" aria-labelledby="basic-usage-heading">
+                <h2 id="basic-usage-heading">第3話：「基本的な使い方」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>インストールできました！どう使うんですか？</p>
+
+                    <p><strong>先輩：</strong>基本は「自然言語で指示する」だけ！</p>
+
+                    <h3>基本コマンド</h3>
+                    <pre><code># 対話モードを開始
+claude
+
+# 直接指示を出す
+claude "このバグを修正して"
+claude "認証機能を追加して"
+claude "テストを書いて"
+
+# スラッシュコマンド（v2.1.0新機能）
+claude /commit    # コミットメッセージ自動生成
+claude /review    # コードレビュー
+claude /help      # ヘルプ表示</code></pre>
+
+                    <h3>よく使うパターン</h3>
+
+                    <h4>1. バグ修正</h4>
+                    <pre><code>claude "ログイン時にエラーが出る。調査して修正して"</code></pre>
+
+                    <h4>2. 機能追加</h4>
+                    <pre><code>claude "ユーザープロフィールに画像アップロード機能を追加して"</code></pre>
+
+                    <h4>3. リファクタリング</h4>
+                    <pre><code>claude "この認証ロジックを別ファイルに分離して整理して"</code></pre>
+
+                    <h4>4. ドキュメント生成</h4>
+                    <pre><code>claude "このプロジェクトのREADMEを書いて"</code></pre>
+
+                    <h4>5. テスト作成</h4>
+                    <pre><code>claude "このAPIの単体テストを書いて"</code></pre>
+
+                    <p><strong>タロウ：</strong>自然言語で指示するだけで、勝手にファイルを編集してくれるんですか！？</p>
+
+                    <p><strong>先輩：</strong>そう！しかもGitと連携してるから、変更内容をコミットまで自動でやってくれるんだ。</p>
+                </div>
+            </section>
+
+            <section id="ide-integration" aria-labelledby="ide-integration-heading">
+                <h2 id="ide-integration-heading">第4話：「IDE連携」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>ターミナルだけじゃなくて、IDEでも使えるんですか？</p>
+
+                    <p><strong>先輩：</strong>v2.1.0からネイティブ拡張が出たんだ！</p>
+
+                    <h3>対応IDE</h3>
+                    <ul>
+                        <li><strong>VS Code</strong>：公式拡張機能</li>
+                        <li><strong>Cursor</strong>：Claude Codeと併用可能</li>
+                        <li><strong>Windsurf</strong>：ネイティブ対応</li>
+                        <li><strong>JetBrains系</strong>：IntelliJ、PyCharm、WebStormなど</li>
+                    </ul>
+
+                    <h3>インストール方法（VS Code）</h3>
+                    <pre><code># VS Code拡張機能マーケットプレイスから
+# "Claude Code" で検索してインストール
+
+# または
+code --install-extension anthropic.claude-code</code></pre>
+
+                    <h3>ベストプラクティス：Cursor + Claude Code</h3>
+                    <div class="alert alert-success">
+                        <strong>おすすめワークフロー：</strong>
+                        <ol>
+                            <li><strong>Cursor</strong>で日常的なコード編集・探索</li>
+                            <li>大きな変更が必要になったら<strong>Claude Code</strong>にタスクを投げる</li>
+                            <li>Claude Codeが作業している間、Cursorで別の作業を継続</li>
+                            <li>Claude Codeの成果物を確認・微調整</li>
+                        </ol>
+                    </div>
+
+                    <p><strong>タロウ：</strong>並行して作業できるのがいいですね！</p>
+
+                    <p><strong>先輩：</strong>そうなんだ！Claude Codeは自律的に動くから、重い作業を任せている間に別のことができるんだよ。</p>
+                </div>
+            </section>
+
+            <section id="advanced-features" aria-labelledby="advanced-features-heading">
+                <h2 id="advanced-features-heading">第5話：「v2.1.0の新機能」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>最新バージョンの新機能を教えてください！</p>
+
+                    <p><strong>先輩：</strong>v2.1.0は大型アップデートだったよ！主な新機能を紹介するね。</p>
+
+                    <h3>1. スキル機能</h3>
+                    <p>カスタムワークフローを定義できる。よく使う作業パターンを保存しておける。</p>
+                    <pre><code># スキルの例（~/.claude/skills/に保存）
+# my-commit-style.yaml
+name: my-commit-style
+description: 日本語でコミットメッセージを書く
+instructions: |
+  コミットメッセージは日本語で書いてください。
+  形式: feat: 機能追加の説明</code></pre>
+
+                    <h3>2. フック機能</h3>
+                    <p>ツール実行前後にカスタムロジックを挿入できる。</p>
+                    <pre><code># PreToolUse: ツール実行前
+# PostToolUse: ツール実行後
+# Stop: 処理終了時</code></pre>
+
+                    <h3>3. Claude in Chrome</h3>
+                    <p>ブラウザを直接操作できる！WebスクレイピングやE2Eテストに便利。</p>
+                    <pre><code>claude "Chrome拡張をインストールして、
+       このWebサイトのフォームをテストして"</code></pre>
+
+                    <h3>4. モバイル対応</h3>
+                    <p>スマホからクラウドVMに接続して開発できる。通勤中にコードレビュー！</p>
+
+                    <h3>5. Tool Search Tool</h3>
+                    <p>必要なツールを動的に発見。大量のMCPツールがあっても効率的に動作。</p>
+
+                    <p><strong>タロウ：</strong>ブラウザまで操作できるんですか！すごい！</p>
+
+                    <p><strong>先輩：</strong>そう！E2Eテストの自動化とか、データ収集とか、かなり便利だよ。</p>
+                </div>
+            </section>
+
+            <section id="practical-examples" aria-labelledby="practical-examples-heading">
+                <h2 id="practical-examples-heading">第6話：「実践例」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>実際にどんな場面で使うんですか？</p>
+
+                    <p><strong>先輩：</strong>いくつか実践例を見せるね！</p>
+
+                    <h3>例1: ドキュメント自動生成</h3>
+                    <pre><code>claude "このプロジェクトのAPIドキュメントを生成して。
+       OpenAPI形式でdocs/api.yamlに出力して"</code></pre>
+
+                    <h3>例2: テストスイートの修正</h3>
+                    <pre><code>claude "テストが3件失敗してる。原因を調べて修正して。
+       修正後、全テストが通ることを確認して"</code></pre>
+
+                    <h3>例3: 大規模リファクタリング</h3>
+                    <pre><code>claude "src/legacy/フォルダのコードを、
+       TypeScript + Reactのモダンな構成に書き換えて。
+       既存のテストは維持して"</code></pre>
+
+                    <h3>例4: セキュリティ監査</h3>
+                    <pre><code>claude "このプロジェクトのセキュリティ問題をチェックして。
+       XSS、SQLインジェクション、認証周りを重点的に"</code></pre>
+
+                    <h3>例5: 依存関係の更新</h3>
+                    <pre><code>claude "package.jsonの依存関係を最新バージョンに更新して。
+       破壊的変更があれば対応して、テストを通して"</code></pre>
+
+                    <p><strong>タロウ：</strong>こんなに複雑なタスクも任せられるんですね！</p>
+
+                    <p><strong>先輩：</strong>50万行以上のコードベースでも約75%の成功率って言われてるよ。
+                    もちろん複雑なタスクは途中で確認を求められることもあるけどね。</p>
+                </div>
+            </section>
+
+            <section id="comparison" aria-labelledby="comparison-heading">
+                <h2 id="comparison-heading">第7話：「他のCLIツールとの比較」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>Aiderとか、他のCLIツールもありますよね？違いは？</p>
+
+                    <p><strong>先輩：</strong>いい視点！主要なツールを比較してみよう。</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ツール</th>
+                                <th>特徴</th>
+                                <th>料金</th>
+                                <th>向いている人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Claude Code</strong></td>
+                                <td>Anthropic公式、IDE連携、スキル機能</td>
+                                <td>Claude Pro $20/月</td>
+                                <td>メイン利用、大規模開発</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Aider</strong></td>
+                                <td>OSS、多モデル対応、ローカルLLM可</td>
+                                <td>API従量課金</td>
+                                <td>カスタマイズ好き、コスト重視</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini CLI</strong></td>
+                                <td>Google製、1日1000リクエスト無料</td>
+                                <td>無料枠大</td>
+                                <td>無料で試したい人</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Antigravity</strong></td>
+                                <td>軽量、シンプル</td>
+                                <td>API従量課金</td>
+                                <td>シンプルさ重視</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-info">
+                        <strong>先輩のおすすめ：</strong><br>
+                        メインはClaude Code、コスト節約したい時はAider + ローカルLLM、
+                        無料で試すならGemini CLIって使い分けるといいよ！
+                    </div>
+
+                    <p><strong>タロウ：</strong>なるほど、用途で使い分けるんですね！</p>
+                </div>
+            </section>
+
+            <section id="troubleshooting" aria-labelledby="troubleshooting-heading">
+                <h2 id="troubleshooting-heading">第8話：「トラブルシューティング」</h2>
+
+                <div class="card">
+                    <p><strong>タロウ：</strong>うまくいかない時はどうすればいいですか？</p>
+
+                    <p><strong>先輩：</strong>よくあるトラブルと解決法を教えるね！</p>
+
+                    <h3>Q1: ログインできない</h3>
+                    <pre><code># 再ログイン
+claude logout
+claude login
+
+# ブラウザでAnthropicアカウントを確認
+# Claude Proが有効か確認</code></pre>
+
+                    <h3>Q2: コンテキストが大きすぎるエラー</h3>
+                    <pre><code># .claudeignoreファイルを作成
+echo "node_modules/" >> .claudeignore
+echo "dist/" >> .claudeignore
+echo "*.log" >> .claudeignore</code></pre>
+
+                    <h3>Q3: 変更が意図と違う</h3>
+                    <pre><code># Gitで元に戻す
+git checkout .
+
+# より具体的に指示を出し直す
+claude "修正して"
+↓
+claude "src/auth/login.tsの42行目のnullチェックを追加して"</code></pre>
+
+                    <h3>Q4: 処理が遅い</h3>
+                    <div class="alert alert-info">
+                        <ul>
+                            <li>コードベースが大きすぎる場合は.claudeignoreで除外</li>
+                            <li>タスクを小さく分割して依頼</li>
+                            <li>ネットワーク環境を確認</li>
+                        </ul>
+                    </div>
+
+                    <h3>Q5: エラーメッセージが出た</h3>
+                    <pre><code># バージョン確認
+claude --version
+
+# アップデート
+npm update -g @anthropic-ai/claude-code
+
+# ヘルプ確認
+claude /help</code></pre>
+
+                    <p><strong>タロウ：</strong>これで困っても大丈夫そうです！</p>
+
+                    <p><strong>先輩：</strong>あと、公式のGitHubリポジトリでIssueを報告することもできるよ。
+                    コミュニティも活発だから、困ったら聞いてみるといいね。</p>
+                </div>
+            </section>
+
+            <section id="summary" aria-labelledby="summary-heading">
+                <h2 id="summary-heading">まとめ：これだけは覚えよう！</h2>
+
+                <div class="card">
+                    <h3>🎯 重要ポイント</h3>
+
+                    <ol>
+                        <li><strong>Claude CodeはターミナルベースのAIコーディングツール</strong>
+                            <ul>
+                                <li>自然言語で指示を出すだけで自律的にコードを編集</li>
+                            </ul>
+                        </li>
+                        <li><strong>Cursorとの使い分けが2026年のベストプラクティス</strong>
+                            <ul>
+                                <li>Cursor：日常的な編集、探索</li>
+                                <li>Claude Code：大規模リファクタ、自動化</li>
+                            </ul>
+                        </li>
+                        <li><strong>v2.1.0の新機能をフル活用</strong>
+                            <ul>
+                                <li>スキル、フック、IDE連携、Claude in Chrome</li>
+                            </ul>
+                        </li>
+                        <li><strong>インストールは簡単</strong>
+                            <ul>
+                                <li><code>npm install -g @anthropic-ai/claude-code</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="card">
+                    <h3>🚀 次のステップ</h3>
+                    <p><strong>タロウ：</strong>先輩、ありがとうございました！早速試してみます！</p>
+
+                    <p><strong>先輩：</strong>いいね！まずは以下の順番で試すのがおすすめだよ：</p>
+                    <ol class="steps">
+                        <li><strong>インストール</strong>：npm install -g @anthropic-ai/claude-code</li>
+                        <li><strong>ログイン</strong>：claude login（Claude Proアカウントが必要）</li>
+                        <li><strong>簡単なタスクから</strong>：「READMEを書いて」「このバグを修正して」</li>
+                        <li><strong>複雑なタスクへ</strong>：リファクタ、テスト生成</li>
+                        <li><strong>IDE連携</strong>：VS Code拡張をインストール</li>
+                    </ol>
+
+                    <p><strong>先輩：</strong>大事なのは、<strong>「AIに任せられる作業は任せる」</strong>ってこと。
+                    あなたは設計やレビューに集中できるようになるよ！</p>
+                </div>
+
+                <p><strong>タロウ：</strong>はい！頑張ります！</p>
+            </section>
+
+            <section id="next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading">参考リンク</h2>
+                <div class="card">
+                    <h3>公式サイト</h3>
+                    <ul>
+                        <li><a href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code 公式サイト</a></li>
+                        <li><a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener noreferrer">Claude Code GitHub</a></li>
+                        <li><a href="https://docs.anthropic.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code ドキュメント</a></li>
+                    </ul>
+
+                    <h3>関連ページ</h3>
+                    <ul>
+                        <li><a href="ai-tools.html">AIツール大全</a> - 他のAIツールとの比較</li>
+                        <li><a href="git-github-guide.html">Git/GitHub入門</a> - バージョン管理の基礎</li>
+                        <li><a href="setup.html">準備編</a> - 開発環境のセットアップ</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+        </div>
+    </footer>
+
+    <!-- 検索モーダル -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                </svg>
+                <input
+                    type="text"
+                    class="search-input"
+                    placeholder="検索したいキーワードを入力... (Cmd+K / Ctrl+K)"
+                    id="searchInput"
+                    autocomplete="off"
+                >
+                <kbd class="search-shortcut">ESC</kbd>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-empty">
+                    <p>キーワードを入力して検索開始</p>
+                </div>
+            </div>
+
+            <div class="search-footer">
+                <div class="search-tips">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> で移動</span>
+                    <span><kbd>Enter</kbd> で選択</span>
+                    <span><kbd>ESC</kbd> で閉じる</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/toc.js"></script>
+    <script src="../js/install.js"></script>
+
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

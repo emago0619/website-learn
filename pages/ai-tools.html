@@ -48,6 +48,7 @@
                             <li><a href="non-engineer-tools.html">便利ツール集</a></li>
                             <li><a href="stitch-workflow.html">Stitch活用</a></li>
                             <li><a href="ai-tools.html" class="active" aria-current="page">AIツール大全</a></li>
+                            <li><a href="claude-code-guide.html">Claude Code活用</a></li>
                             <li><a href="git-github-guide.html">Git/GitHub入門</a></li>
                         </ul>
                     </li>
@@ -121,7 +122,8 @@
                     <strong>先輩：</strong>最新のAIツールに詳しいベテランエンジニア
                 </div>
                 <div class="alert alert-success">
-                    <strong>2025年最新情報：</strong> このページは2025年1月時点の最新情報に基づいています。
+                    <strong>2026年最新情報：</strong> このページは2026年1月時点の最新情報に基づいています。
+                    2025年末のClaude Code v2.1.0アップデートなど、最新動向を反映しています。
                     AIツールは日々進化しているので、公式サイトで最新情報も確認してくださいね！
                 </div>
             </section>
@@ -132,12 +134,13 @@
                 <div class="card">
                     <p><strong>タロウ：</strong>先輩、CursorっていうAI IDEを使ってるんですけど、他にも選択肢ってあるんですか？</p>
 
-                    <p><strong>先輩：</strong>おっ、いい質問だね！実は2025年現在、AI IDEの世界は<strong>戦国時代</strong>なんだ。
-                    毎月のように新しいツールが登場したり、既存のツールが大幅にアップデートされたりしてる。</p>
+                    <p><strong>先輩：</strong>おっ、いい質問だね！実は2026年現在、<strong>開発者の85%がAIツールを日常的に使っている</strong>って言われてるんだ。
+                    AI IDEの世界は<strong>成熟期</strong>に入って、明確な勝者が見えてきたよ。</p>
 
-                    <p><strong>タロウ：</strong>戦国時代...！そんなに競争が激しいんですか？</p>
+                    <p><strong>タロウ：</strong>85%も！？もうAIなしでは開発できない時代なんですね！</p>
 
-                    <p><strong>先輩：</strong>そうそう！Cursorが火をつけて、今では大きく分けて2つのカテゴリーがあるんだ：</p>
+                    <p><strong>先輩：</strong>そうなんだ！特に2026年は<strong>「Cursor vs Claude Code」</strong>という構図が話題になってる。
+                    大きく分けて2つのカテゴリーがあるんだ：</p>
                     <ul>
                         <li><strong>📝 AI IDE</strong>：グラフィカルなエディタ（Cursor、Windsurf、GitHub Copilot、Zedなど）</li>
                         <li><strong>⚡ AI CLI</strong>：ターミナルで使うツール（Claude Code、Aider、Gemini CLIなど）</li>
@@ -415,20 +418,29 @@
                 </div>
 
                 <div class="card">
-                    <h3 id="claude-code">🎯 Claude Code - Anthropicの本命</h3>
+                    <h3 id="claude-code">🎯 Claude Code - 2026年最も注目されるAI CLI</h3>
 
-                    <p><strong>先輩：</strong>まず最初は<strong>Claude Code</strong>！Anthropic（Claudeを作ってる会社）が
-                    2025年に正式リリースした、ターミナル常駐型のAIツールだよ。</p>
+                    <p><strong>先輩：</strong>まず最初は<strong>Claude Code</strong>！2026年現在、<strong>最も話題のAIコーディングツール</strong>だよ。
+                    2025年末にv2.1.0がリリースされて、機能が大幅に強化されたんだ。</p>
+
+                    <div class="alert alert-warning">
+                        <strong>🔥 2026年トレンド：Cursor vs Claude Code</strong><br>
+                        「CursorはAIが<strong>あなたを速くする</strong>。Claude CodeはAIが<strong>あなたの代わりに仕事をする</strong>」<br>
+                        この2つを使い分けるのが2026年のベストプラクティスと言われてるよ！
+                    </div>
 
                     <div class="alert alert-info">
-                        <strong>Claude Codeの特徴：</strong>
+                        <strong>Claude Code v2.1.0の特徴：</strong>
                         <ul>
-                            <li>🧠 <strong>Opus 4.1、Sonnet 4.5、Haiku 3.5</strong>：最新Claudeモデルを使用</li>
-                            <li>📁 <strong>プロジェクト全体理解</strong>：コードベース全体を読み込み可能</li>
-                            <li>🔄 <strong>Git統合</strong>：GitHub、GitLabと連携</li>
-                            <li>✏️ <strong>直接編集</strong>：ファイル編集、コマンド実行、コミット作成まで自動化</li>
-                            <li>🌐 <strong>WebSearch/WebFetch</strong>：Web検索や情報取得が可能</li>
-                            <li>💻 <strong>VS Code拡張</strong>：IDE内でも使える</li>
+                            <li>🧠 <strong>Sonnet 4.5搭載</strong>：最新Claudeモデルで長く複雑なタスクも対応</li>
+                            <li>📁 <strong>プロジェクト全体理解</strong>：コードベース全体をスキャン・マッピング</li>
+                            <li>🔄 <strong>Git統合</strong>：GitHub、GitLabと連携、コミット自動作成</li>
+                            <li>✏️ <strong>直接編集</strong>：ファイル編集、コマンド実行まで自動化</li>
+                            <li>🌐 <strong>WebSearch/WebFetch</strong>：Web検索や最新情報取得が可能</li>
+                            <li>💻 <strong>IDE拡張</strong>：VS Code、Cursor、Windsurf、JetBrainsにネイティブ対応</li>
+                            <li>🌍 <strong>Claude in Chrome</strong>：ブラウザを直接操作できる新機能</li>
+                            <li>📱 <strong>モバイル対応</strong>：スマホからクラウドVMで開発可能</li>
+                            <li>🔧 <strong>スキル・フック機能</strong>：カスタムワークフローを定義可能</li>
                         </ul>
                     </div>
 
@@ -436,15 +448,57 @@
                     <pre><code># インストール
 npm install -g @anthropic-ai/claude-code
 
-# 使用例
-claude-code "このバグを修正して"
-claude-code "新しい認証機能を追加して"
-claude-code "テストを書いて全部通るようにして"</code></pre>
+# 基本的な使い方
+claude "このバグを修正して"
+claude "新しい認証機能を追加して"
+claude "テストを書いて全部通るようにして"
 
-                    <p><strong>タロウ：</strong>自然言語で指示できるんですね！すごい！</p>
+# 高度な使い方（v2.1.0新機能）
+claude /commit  # コミットメッセージ自動生成
+claude /review  # コードレビュー実行</code></pre>
 
-                    <p><strong>先輩：</strong>そう！しかも<strong>500kトークン</strong>（約20万行のコード）まで
-                    コンテキストに含められるから、大規模プロジェクトでも使えるんだ。</p>
+                    <h4>🔄 Cursorとの使い分け</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>用途</th>
+                                <th>おすすめツール</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>日常的なコード編集・リアルタイム補助</td>
+                                <td><strong>Cursor</strong></td>
+                            </tr>
+                            <tr>
+                                <td>大規模リファクタリング</td>
+                                <td><strong>Claude Code</strong></td>
+                            </tr>
+                            <tr>
+                                <td>ドキュメント自動生成</td>
+                                <td><strong>Claude Code</strong></td>
+                            </tr>
+                            <tr>
+                                <td>テストスイートの修正</td>
+                                <td><strong>Claude Code</strong></td>
+                            </tr>
+                            <tr>
+                                <td>新機能の探索・プロトタイプ</td>
+                                <td><strong>Cursor</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p><strong>タロウ：</strong>CursorとClaude Codeを両方使う人が多いんですね！</p>
+
+                    <p><strong>先輩：</strong>そうなんだ！「Cursorで日常的な編集、Claude Codeで重い作業」っていう使い分けが2026年の定番。
+                    50万行以上のコードベースでも約75%の成功率で対応できるって言われてるよ。</p>
+
+                    <p><strong>料金：</strong></p>
+                    <ul>
+                        <li>Claude Pro：$20/月（推奨）</li>
+                        <li>API従量課金：使用量に応じて</li>
+                    </ul>
                 </div>
 
                 <div class="card">
@@ -863,50 +917,55 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
             </section>
 
             <section id="future" aria-labelledby="future-heading">
-                <h2 id="future-heading">第6話：「2025年のAI開発ツールトレンド」</h2>
+                <h2 id="future-heading">第6話：「2026年のAI開発ツールトレンド」</h2>
 
                 <div class="card">
                     <p><strong>タロウ：</strong>今後、AI開発ツールってどうなっていくんですか？</p>
 
-                    <p><strong>先輩：</strong>いい質問！2025年のトレンドを教えるよ。</p>
+                    <p><strong>先輩：</strong>いい質問！2026年の最新トレンドを教えるよ。</p>
 
-                    <h3>🔮 2025年の重要トレンド</h3>
+                    <h3>🔮 2026年の重要トレンド</h3>
 
-                    <h4>1. エージェント型への進化</h4>
-                    <p>従来の「コード補完」から、<strong>「自律的に開発するエージェント」</strong>へ進化中。
-                    抽象的な指示から実装まで、AIが自動で行う<strong>「バイブコーディング」</strong>が新常識に。</p>
+                    <h4>1. 「バイブコーディング」の定着</h4>
+                    <p><strong>「自然言語で指示して、AIがコードを書く」</strong>スタイルが完全に定着。
+                    抽象的な指示から実装まで、AIが自動で行うのが当たり前になったよ。</p>
                     <ul>
+                        <li>Claude Codeの<strong>スキル・フック機能</strong></li>
+                        <li>Cursorの<strong>Composer機能</strong></li>
                         <li>Windsurfの<strong>Cascade</strong></li>
-                        <li>Claude Codeの<strong>自律エージェント</strong></li>
-                        <li>Continueの<strong>Agent Mode</strong></li>
                     </ul>
 
-                    <h4>2. マルチモーダル対応</h4>
-                    <p>テキストだけでなく、<strong>画像、音声、動画</strong>も入力として受け付けるように。</p>
+                    <h4>2. IDE連携の完全統合</h4>
+                    <p>Claude Codeがネイティブ拡張をリリースし、<strong>VS Code、Cursor、Windsurf、JetBrains</strong>全てで使えるように。</p>
                     <ul>
-                        <li>Aiderの<strong>画像・音声入力</strong></li>
-                        <li>デザインから直接コード生成</li>
-                        <li>スクリーンショットからUI再現</li>
+                        <li>ターミナルとIDEのシームレスな連携</li>
+                        <li>モバイルからの開発対応</li>
+                        <li>ブラウザ制御（Claude in Chrome）</li>
                     </ul>
 
                     <h4>3. コスト効率の良いモデル</h4>
-                    <p>2025年7月時点で最もコスパが良いモデル：</p>
+                    <p>2026年1月時点で最もコスパが良いモデル：</p>
                     <ul>
-                        <li><strong>Claude 4 Sonnet</strong>：品質とコストのバランス◎</li>
+                        <li><strong>Claude Sonnet 4.5</strong>：品質とコストのバランス◎（推奨）</li>
                         <li><strong>GPT-4o</strong>：速度重視</li>
-                        <li><strong>CodeQwen</strong>：超低コスト</li>
+                        <li><strong>Gemini</strong>：1日1000リクエスト無料</li>
                     </ul>
 
-                    <h4>4. ローカルLLMの台頭</h4>
-                    <p>プライバシー重視の流れで、<strong>ローカルで動くLLM</strong>が人気に。</p>
+                    <h4>4. ローカルLLMの進化</h4>
+                    <p>プライバシー重視の流れで、<strong>ローカルで動くLLM</strong>がさらに高性能に。</p>
                     <ul>
                         <li>Ollamaによるローカル実行</li>
                         <li>企業の機密情報保護</li>
                         <li>オフライン開発環境</li>
                     </ul>
 
-                    <h4>5. IDE統合の標準化</h4>
-                    <p>VS Code、JetBrains、Neovimなど、<strong>あらゆるIDEでAIが使える</strong>のが当たり前に。</p>
+                    <h4>5. エッジ開発の標準化</h4>
+                    <p>エッジコンピューティングがフロントエンド開発の必須スキルに。</p>
+                    <ul>
+                        <li>Cloudflare Workers、Vercel Edgeなど</li>
+                        <li>パフォーマンス最適化が日常的に</li>
+                        <li>TypeScriptが事実上の標準言語に</li>
+                    </ul>
                 </div>
 
                 <div class="card">
@@ -1029,7 +1088,7 @@ gemini --search "最新のReact 19の機能は？"</code></pre>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
+            <p>&copy; 2026 開発初心者向け Webサイト構築ガイド. 学習目的で作成されています。</p>
         </div>
     </footer>
 
